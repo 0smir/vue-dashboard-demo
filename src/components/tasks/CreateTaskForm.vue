@@ -124,6 +124,7 @@ export default {
     addTask() {
       console.log('Task added!');
       let formData = {
+        id: new Date().getTime(),
         title: this.title.value,
         project: this.project.value,
         assignee: this.assignee.value,

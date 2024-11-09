@@ -7,7 +7,7 @@
     </div>
     <p v-if="!columnsToDisplay.length">Choose some filter points to display tasks</p>
     <div v-else class="board">
-      <div class="board_column" v-for="column in columnsToDisplay">
+      <div v-for="column in columnsToDisplay" :class="['board_column', 'board_column--' + column.toLowerCase()]">
         <header>
           <h3>{{ column }}</h3>
         </header>
@@ -100,5 +100,29 @@ export default {
 .board_column {
   flex-direction: column;
   width: max(33%);
+}
+
+.board_column--todo {
+  order: 1;
+}
+
+.board_column--inprogress {
+  order: 2;
+}
+
+.board_column--inreview {
+  order: 3;
+}
+
+.board_column--testing {
+  order: 4;
+}
+
+.board_column--done {
+  order: 5;
+}
+
+.board_column--blocked {
+  order: 6;
 }
 </style>
