@@ -3,7 +3,7 @@ import getters from "./getters";
 import mutations from "./mutations";
 
 export default {
-  namespased: true,
+  namespaced: true,
   state() {
     return {
       people: [
@@ -15,8 +15,9 @@ export default {
           team: 'main'
         }
       ]
-
     }
-  }
-
+  },
+  actions,
+  getters,
+  mutations
 }

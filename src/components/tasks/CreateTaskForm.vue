@@ -13,7 +13,7 @@
     <div class="form-control">
       <label for="assignee">Assignee</label>
       <select name="assignee" id="assignee" v-model="assignee.value">
-        <option value=""></option>
+        <option v-for="person in assigneeList" :value="person.id">{{ person.name + ' ' + person.lastName }}</option>
       </select>
     </div>
     <div class="form-control">
@@ -80,6 +80,9 @@ export default {
     },
     projectsList() {
       return this.$store.getters['projects/getProgects'];
+    },
+    assigneeList() {
+      return this.$store.getters['people/getEmployeeList'];
     }
   },
   methods: {

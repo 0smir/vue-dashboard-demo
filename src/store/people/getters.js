@@ -1,5 +1,6 @@
 export default {
-  getTasksLost() {
-    return this.tasks;
+  getEmployeeList(state) {
+    console.log(state.people);
+    return state.people;
   }
 }

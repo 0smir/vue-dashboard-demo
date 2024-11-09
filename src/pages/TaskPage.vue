@@ -5,9 +5,9 @@
         <span class="task-details--label">Creator: </span>
         <span class="task-details--value"> {{ taskInfo.creator }}</span>
       </div>
-      <div class="task-details__executor">
-        <span class="task-details--label">Executor:</span>
-        <span class="task-details--value"> {{ taskInfo.executor }}</span>
+      <div class="task-details__assignee">
+        <span class="task-details--label">Assignee:</span>
+        <span class="task-details--value"> {{ taskInfo.assignee }}</span>
       </div>
       <div class="task-details__priority">
         <span class="task-details--label">Priority:</span>
