@@ -1,0 +1,81 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --color-text: #fff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+html {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 0;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.flex {
+  display: flex;
+}
+
+.todo {
+  background-color: #04c7e5;
+}
+
+.inprogress {
+  background-color: #ffc405;
+}
+
+.inreview {
+  background-color: #fe7453;
+}
+
+.testing {
+  background-color: #9c27b0;
+}
+
+.done {
+  background-color: #56daa4;
+}
+
+.blocked {
+  background-color: #ff7b7d;
+}
