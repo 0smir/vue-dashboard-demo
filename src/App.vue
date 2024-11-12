@@ -24,22 +24,4 @@ export default {
 }
 </script>
 
-<style>
-.layout {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 15px;
-}
-
-main {
-  height: 100%;
-  min-height: 100vh;
-  background-color: #465370;
-  width: calc(100% - 200px);
-}
-</style>
+<style lang="scss"></style>
