@@ -3,7 +3,9 @@
     <div v-if="show" class="backdrop">
       <dialog open v-if="show">
         <div class="close-btn-wrapper">
-          <BaseButton class="btn-close" @click="closeDialog" text-area="Close">X</BaseButton>
+          <BaseButton class="btn-close" @click="closeDialog" text-area="Close">
+            <SvgIcon name="close" class="icon" />
+          </BaseButton>
         </div>
         <header>
           <slot name="header">
@@ -13,16 +15,16 @@
         <section>
           <slot></slot>
         </section>
-        <div class="btn-wrapper">
-          <BaseButton @click="closeDialog">Close</BaseButton>
-        </div>
+
       </dialog>
 
     </div>
+
   </teleport>
 </template>
 
 <script>
+
 export default {
   emits: ['close'],
   props: {
