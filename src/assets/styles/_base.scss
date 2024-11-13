@@ -69,7 +69,17 @@ a:hover {
 
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  width: auto;
   background-color: #32435d;
+  border: none;
 }
 
 

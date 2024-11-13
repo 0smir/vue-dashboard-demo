@@ -1,45 +1,45 @@
 <template>
   <aside :class="['sidebar', { open: isExpanded, close: !isExpanded }]">
     <div class="sidebar__controls-wrapper">
-      <BaseButton class="btn" :alt="sidebarControlAltText" @click="toggleSidebar">
-        <span class="sidebar-nav__icon">
-          <SvgIcon v-if="!isExpanded" name="chevronLeft" class="icon sidebar__control-icon" />
-          <SvgIcon v-else name="chevronRight" class="icon sidebar__control-icon" />
-        </span>
+      <BaseButton class="btn sidebar__controls-btn" :alt="sidebarControlAltText" @click="toggleSidebar">
+
+        <SvgIcon v-if="!isExpanded" name="chevronLeft" class="icon sidebar__controls-icon" />
+        <SvgIcon v-else name="chevronRight" class="icon sidebar__controls-icon" />
+
       </BaseButton>
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-nav__item">
-        <router-link class="sidebar-nav__link" to="/">
-          <span class="sidebar-nav__icon">
+        <router-link class="sidebar__link" to="/">
+          <span class="sidebar__link-icon">
             <SvgIcon name="board" class="icon" />
           </span>
           <span class="sidebar__link-text">Boards</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar-nav__link" to="/">
-          <span class="sidebar-nav__icon">
+        <router-link class="sidebar__link" to="/">
+          <span class="sidebar__link-icon">
             <SvgIcon name="statistic" class="icon" />
           </span>
           <span class="sidebar__link-text">Statistic</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar-nav__link" to="/">
-          <span class="sidebar-nav__icon">
+        <router-link class="sidebar__link" to="/">
+          <span class="sidebar__link-icon">
             <SvgIcon name="settings" class="icon" />
           </span>
           <span class="sidebar__link-text">Settings</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar-nav__link" to="/tasks">
-          <span class="sidebar-nav__icon">
+        <router-link class="sidebar__link" to="/tasks">
+          <span class="sidebar__link-icon">
             <SvgIcon name="tasks" class="icon" />
           </span>
           <span class="sidebar__link-text">All Tasks</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar-nav__link" to="/tasks/new">
-          <span class="sidebar-nav__icon">
+        <router-link class="sidebar__link" to="/tasks/new">
+          <span class="sidebar__link-icon">
             <SvgIcon name="add" class="icon" />
           </span>
           <span class="sidebar__link-text">Add New Task</span>
@@ -73,13 +73,25 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
+  color: #fff;
   background-color: #273850;
-
   padding: 10px 15px;
 
   &.close {
-    width: 60px;
-    translate: 'width' 0.35s ease;
+    width: 75px;
+    transition: all 0.35s ease;
+
+    .sidebar__controls-wrapper {
+      justify-content: center;
+    }
+
+    .sidebar__link {
+      justify-content: center;
+    }
+
+    .sidebar__link-icon {
+      margin-right: 0;
+    }
 
     .sidebar__link-text {
       display: none;
@@ -88,7 +100,7 @@ export default {
 
   &.open {
     width: 200px;
-    translate: 'width' 0.35s ease;
+    transition: all 0.35s ease;
 
     .sidebar__link-text {
       display: inline;
@@ -96,41 +108,57 @@ export default {
   }
 
   &__controls-wrapper {
+    display: flex;
+    justify-content: flex-end;
     margin-bottom: 25px;
   }
 
-  &__control-icon {
-    // width: 15px;
-    // height: 15px;
+  &__controls-btn {
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    background-color: #273850;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #32435d;
+    }
+  }
+
+  &__controls-icon {
+    padding: 0;
+  }
+
+  &__link {
+    display: flex;
+    padding: 10px 5px;
+    align-items: center;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #32435d;
+      text-decoration: none;
+
+      .sidebar__link-icon {
+        transform: scale(1.25);
+      }
+    }
+  }
+
+  &__link-icon {
+    display: inline-flex;
+    align-self: center;
+    justify-content: center;
+    margin-right: 7px;
   }
 }
-
-
 
 .sidebar-nav {
   list-style: none;
   padding: 0;
   margin: 0;
-
-  &__item {
-    margin-bottom: 10px;
-  }
-
-  &__link {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-  }
-
-  &__link:hover {
-    .sidebar-nav__icon {
-      transform: scale(1.25);
-    }
-  }
-
-  &__icon {
-    margin-right: 7px;
-  }
-
 }
 </style>
