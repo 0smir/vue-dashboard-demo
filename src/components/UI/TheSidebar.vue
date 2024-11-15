@@ -51,11 +51,8 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isExpanded: true
-    }
-  },
+  props: ['isExpanded'],
+  emits: ['toggle-sidebar'],
 
   computed: {
     sidebarControlAltText() {
@@ -64,7 +61,7 @@ export default {
   },
   methods: {
     toggleSidebar() {
-      this.isExpanded = !this.isExpanded;
+      this.$emit('toggle-sidebar');
     }
   }
 
