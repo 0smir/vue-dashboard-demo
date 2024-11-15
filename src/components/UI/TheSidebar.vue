@@ -2,10 +2,8 @@
   <aside :class="['sidebar', { open: isExpanded, close: !isExpanded }]">
     <div class="sidebar__controls-wrapper">
       <BaseButton class="btn sidebar__controls-btn" :alt="sidebarControlAltText" @click="toggleSidebar">
-
         <SvgIcon v-if="!isExpanded" name="chevronLeft" class="icon sidebar__controls-icon" />
         <SvgIcon v-else name="chevronRight" class="icon sidebar__controls-icon" />
-
       </BaseButton>
     </div>
     <ul class="sidebar-nav">

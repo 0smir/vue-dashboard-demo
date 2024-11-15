@@ -2,8 +2,8 @@
   <div class="layout">
     <TheHeader></TheHeader>
     <TheSidebar :isExpanded="isExpanded" @toggle-sidebar="toggleSidebar"></TheSidebar>
-    <main>
-      <router-view></router-view>
+    <main class="main">
+      <router-view :width="ololo"></router-view>
     </main>
     <TheFooter></TheFooter>
   </div>
@@ -35,9 +35,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-main {
-  max-width: 100%;
-  margin: 0 auto;
-}
-</style>
+<style lang="scss"></style>
