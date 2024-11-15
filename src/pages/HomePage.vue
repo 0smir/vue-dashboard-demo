@@ -100,9 +100,6 @@ export default {
 
 <style lang="scss" scoped>
 .page-container {
-  display: flex;
-  flex-direction: column;
-  // min-width: calc(100% - 200px);
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 15px;
