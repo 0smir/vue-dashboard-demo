@@ -33,7 +33,7 @@
             </fieldset>
           </div>
           <div class="filter__btn-wrapper">
-            <BaseButton class="btn btn--medium filter__btn--apply">Apply</BaseButton>
+            <BaseButton class="btn btn--medium filter__btn--apply">Apply Filter</BaseButton>
             <BaseButton class="btn btn--medium btn--light filter__btn--clear" @click="clearFilter">Clear</BaseButton>
           </div>
         </form>

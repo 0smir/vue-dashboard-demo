@@ -46,9 +46,9 @@ $primery-color: #5d6985;
     border-radius: var(--border-radius-medium);
   }
 
-  &--outlined {}
-
-  &--fulfilled {}
+  &--outlined {
+    background-color: transparent;
+  }
 
   &--light {
     border: 2px solid var(--btn-hover);
