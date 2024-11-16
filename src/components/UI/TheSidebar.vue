@@ -68,8 +68,8 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
-  color: #fff;
-  background-color: #273850;
+  color: var(--color-text);
+  background-color: var(--color-primary);
   padding: 10px 15px;
 
   &.close {
@@ -112,11 +112,11 @@ export default {
     padding: 0;
     width: 35px;
     height: 35px;
-    background-color: #273850;
+    background-color: var(--color-primary);
     border-radius: 3px;
 
     &:hover {
-      background-color: #32435d;
+      background-color: var(--color-hover-bg);
     }
   }
 
@@ -134,7 +134,7 @@ export default {
     border-radius: 3px;
 
     &:hover {
-      background-color: #32435d;
+      background-color: var(--color-hover-bg);
       text-decoration: none;
 
       .sidebar__link-icon {
