@@ -3,7 +3,7 @@
     <div v-if="show" class="backdrop">
       <dialog open v-if="show">
         <div class="close-btn-wrapper">
-          <BaseButton class="btn-close" @click="closeDialog" text-area="Close">
+          <BaseButton class="btn-close" @click="closeDialog" aria-label="Close">
             <SvgIcon name="close" class="icon" />
           </BaseButton>
         </div>
