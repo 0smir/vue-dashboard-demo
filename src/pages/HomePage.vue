@@ -1,9 +1,12 @@
 <template>
   <div class="page-container">
     <h1>Main Board</h1>
-    <BoardFilter @save-filter="displayColumns"></BoardFilter>
-    <div>
-      <BaseButton @click="openDialog">+ Create task</BaseButton>
+    <div class="board__controls-wrapper relative">
+      <BaseButton @click="openDialog" class="btn btn--medium btn--light btn__add-task">
+        <SvgIcon name="add" class="icon" />
+        <span>Create task</span>
+      </BaseButton>
+      <BoardFilter @save-filter="displayColumns" />
     </div>
     <p v-if="!columnsToDisplay.length">Choose some filter points to display tasks</p>
     <Board v-else :columnsList="columnsToDisplay" :tasksList="tasks" />
@@ -53,5 +56,15 @@ export default {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+.btn__add-task {
+  position: absolute;
+  right: 0;
+  top: -5px;
+
+  span {
+    margin-left: 7px;
+  }
 }
 </style>
