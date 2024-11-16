@@ -12,24 +12,18 @@
 
         <form @submit.prevent="chooseColumns">
           <div class="form-content">
-            <fieldset>
-              <legend>
-                <p>Columns to display:</p>
-              </legend>
+            <fieldset class="form-content__fieldset form-content__fieldset--columns">
+              <legend> Columns to display:</legend>
               <div class="form-control" v-for="status in taskStatusList">
                 <input type="checkbox" :key="status" :id="status" :value="status" v-model="columns.val">
                 <label class="filter__label" :for="status">{{ status }}</label>
               </div>
             </fieldset>
-            <fieldset>
-              <legend>
-                <p>Name:</p>
-              </legend>
+            <fieldset class="form-content__fieldset form-content__fieldset--person">
+              <legend>Name:</legend>
             </fieldset>
-            <fieldset>
-              <legend>
-                <p>Labels:</p>
-              </legend>
+            <fieldset class="form-content__fieldset form-content__fieldset--labels">
+              <legend>Labels:</legend>
             </fieldset>
           </div>
           <div class="filter__btn-wrapper">
@@ -38,7 +32,6 @@
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </template>
@@ -124,5 +117,21 @@ export default {
 
 .form-content {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &__fieldset {
+    display: flex;
+    // border: none;
+  }
+
+  &__fieldset--columns {
+    width: 100%;
+  }
+
+  &__fieldset--person,
+  &__fieldset--labels {
+    width: calc(50% - 8px);
+  }
 }
 </style>
