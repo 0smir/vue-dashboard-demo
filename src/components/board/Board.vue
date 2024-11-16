@@ -38,15 +38,12 @@ export default {
 .board,
 .board_column {
   display: flex;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .board {
   justify-content: space-between;
-  padding: 0 10px 10px;
   margin: 20px 0;
-  background-color: #46546f;
-
 }
 
 .board_column-header {
