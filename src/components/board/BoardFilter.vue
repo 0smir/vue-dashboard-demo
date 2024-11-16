@@ -6,12 +6,11 @@
         <p>Columns to display:</p>
         <form @submit.prevent="chooseColumns">
           <div class="form-content">
-            <div class="form-control" v-for="status in taskStatuses">
+            <div class="form-control" v-for="status in taskStatusList">
               <input type="checkbox" :key="status" :id="status" :value="status" v-model="columns.val">
               <label class="filter__label" :for="status">{{ status }}</label>
             </div>
           </div>
-
           <BaseButton class="btn btn--save-filter">Display columns</BaseButton>
         </form>
       </div>
@@ -21,10 +20,11 @@
 
 <script>
 export default {
-  inject: ['taskStatuses', 'defaultBoardCollumns'],
   emits: ['save-filter'],
   data() {
     return {
+      taskStatusList: this.$store.getters['tasks/getStatusList'],
+      defaultBoardCollumns: this.$store.getters['boards/getDefaultBoardColumns'],
       columns: {
         val: []
       }
@@ -39,7 +39,6 @@ export default {
     this.columns.val = [...this.defaultBoardCollumns];
     this.chooseColumns();
   }
-
 }
 </script>
 
