@@ -51,11 +51,11 @@ $primery-color: #5d6985;
   }
 
   &--light {
+    background-color: rgba($primery-color, 0.7);
     border: 2px solid var(--btn-hover);
-    background-color: var(--btn-hover);
 
     &:hover {
-      background-color: rgba($primery-color, 0.7);
+      background-color: var(--btn-hover);
       transition: all .35s ease;
     }
   }
