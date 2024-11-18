@@ -3,7 +3,7 @@
     <TheHeader></TheHeader>
     <TheSidebar :isExpanded="isExpanded" @toggle-sidebar="toggleSidebar"></TheSidebar>
     <main class="main">
-      <router-view :width="ololo"></router-view>
+      <router-view></router-view>
     </main>
     <TheFooter></TheFooter>
   </div>
