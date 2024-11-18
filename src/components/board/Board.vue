@@ -7,8 +7,7 @@
       </header>
       <div class="board_column-content">
         <div class="task-wrapper" v-for="task in tasksList">
-          <TaskItem v-if="column === task.status" :key="task.id" :id="task.id" :title="task.title"
-            :description="task.description" :status="task.status" />
+          <TaskItem v-if="column === task.status" :key="task.id" :task="task" />
         </div>
       </div>
     </div>
