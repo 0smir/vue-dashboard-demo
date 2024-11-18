@@ -15,8 +15,15 @@
             <fieldset class="form-content__fieldset form-content__fieldset--columns">
               <legend> Columns to display:</legend>
               <div class="form-control" v-for="status in taskStatusList">
-                <input type="checkbox" :key="status" :id="status" :value="status" v-model="columns.val">
-                <label class="filter__label" :for="status">{{ status }}</label>
+                <label :class="['filter__label', status.toLowerCase()]" :for="status">
+                  <span class="filter__input-indicator">
+                    <input class="filter__input" type="checkbox" :key="status" :id="status" :value="status"
+                      v-model="columns.val">
+                    <SvgIcon name="checkCircle" class="icon" />
+                  </span>
+
+                  <span class="filter__label-text">{{ status }}</span>
+                </label>
               </div>
             </fieldset>
             <fieldset class="form-content__fieldset form-content__fieldset--person">
@@ -77,8 +84,53 @@ export default {
   }
 
   &__label {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 7px;
     margin: 0 15px 0 5px;
+    height: 30px;
+    border-radius: 16px;
+
+    .icon {
+      display: none;
+    }
   }
+
+  &__input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    z-index: 0;
+    cursor: pointer;
+
+    &-indicator {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 19px;
+      height: 19px;
+      margin-right: 5px;
+      background: var(--color-text);
+      border-radius: 16px;
+    }
+  }
+
+  &__input-indicator {
+    &:has(:checked) {
+      background-color: transparent;
+
+      .icon {
+        display: inline-block;
+        transform: scale(1.2);
+      }
+    }
+
+    &:has(:focus) {
+      outline: 2px solid var(--color-secondary);
+    }
+  }
+
 
   &__btn-wrapper {
     display: flex;
