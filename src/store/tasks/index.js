@@ -12,8 +12,12 @@ export default {
           title: 'Task #1 - Be happy',
           description: 'Moust important task. Be happy every day. First of all take ceare about yourself',
           creator: 'Helga Vaal',
-          assignee: '',
-          priority: 'urgent',
+          assignee: {
+            id: '',
+            name: 'Adam Shei',
+            img: ''
+          },
+          priority: 'medium',
           status: 'toDo',
         },
         {
@@ -21,8 +25,12 @@ export default {
           title: 'Task #2',
           description: 'Be healthy',
           creator: 'Helga Vaal',
-          assignee: '',
-          priority: 'urgent',
+          assignee: {
+            id: '',
+            name: 'Adam Shei',
+            img: ''
+          },
+          priority: 'high',
           status: 'inProgress',
         },
         {
@@ -30,30 +38,55 @@ export default {
           title: 'Task #3',
           description: 'Be confident',
           creator: 'Helga Vaal',
-          assignee: '',
+          assignee: {
+            id: '',
+            name: 'Adam Shei',
+            img: ''
+          },
           priority: 'low',
           status: 'toDo',
         },
         {
           id: '004',
-          title: 'Task #4',
+          title: 'Task #4 - Get Help',
           description: 'Get Help of psychotherapist',
           creator: 'Helga Vaal',
-          assignee: '',
-          priority: 'urgent',
+          assignee: {
+            id: '',
+            name: 'Sashi Me',
+            img: ''
+          },
+          priority: 'blocker',
           status: 'inProgress',
         },
         {
           id: '005',
-          title: 'Task #5',
+          title: 'Task #5 Lerning',
           description: 'Pass Vue3 course',
           creator: 'Helga Vaal',
-          assignee: '',
-          priority: 'urgent',
+          assignee: {
+            id: '',
+            name: 'Helga Vaal',
+            img: ''
+          },
+          priority: 'critical',
           status: 'Done',
+        },
+        {
+          id: '006',
+          title: 'Task #6 Personal borders',
+          description: 'Build fluid Personal borders',
+          creator: 'Helga Vaal',
+          assignee: {
+            id: '',
+            name: 'Helga Vaal',
+            img: ''
+          },
+          priority: 'trivial',
+          status: 'Testing',
         }
       ],
-      taskPriorityList: ['blocker', 'critical', 'high', 'medium', 'low', 'trivial'],
+      taskPriorityList: ['blocker', 'critical', 'high', 'medium', 'trivial', 'low'],
       taskStatusList: ['toDo', 'inProgress', 'inReview', 'Testing', 'Done', 'Blocked'],
     }
   },
