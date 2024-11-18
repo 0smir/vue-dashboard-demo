@@ -109,3 +109,65 @@ a:hover {
 .board_column--blocked {
   order: 6;
 }
+
+
+.rounded {
+  border-radius: 50%;
+}
+
+
+.priority {
+  &--blocker {
+    background-color: var(--color-danger);
+  }
+
+  &--critical {
+    background-color: var(--color-violet);
+  }
+
+  &--high {
+    background-color: var(--color-attention);
+  }
+
+  &--low {
+    background-color: var(--color-success-dark);
+  }
+
+  &--medium {
+    background-color: var(--color-everage);
+  }
+
+  &--trivial {
+    background-color: var(--color-success);
+  }
+}
+
+// .task-status--todo {
+//   background-color: #04c7e5;
+//   border-color: #325f7d;
+// }
+
+// .task-status--inprogress {
+//   background-color: #ffc405;
+//   border-color: #5a5d5c;
+// }
+
+// .task-status--inreview {
+//   background-color: #fe7453;
+//   border-color: #5c4d60;
+// }
+
+// .task-status--testing {
+//   background-color: #9c27b0;
+//   border-color: #7d6e77;
+// }
+
+// .task-status--done {
+//   background-color: #56daa4;
+//   border-color: #3e5f72;
+// }
+
+// .task-status--blocked {
+//   background-color: #ff7b7d;
+//   border-color: #5c4d60;
+// }

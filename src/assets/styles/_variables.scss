@@ -4,7 +4,10 @@
   --color-main: #324664;
   --color-column-header: #46546f;
   --color-board-bg: #5d6985;
-  --color-task-bg: #12223d;
+  --color-dark-bg: #12223d;
+
+
+
 
   --color-text: #fff;
   --color-hover-bg: #32435d;
@@ -18,9 +21,17 @@
   --color-done: #56daa4;
   --color-blocked: #ff7b7d;
 
+  --color-success: #62bf3b;
+  --color-success-dark: #01885b;
+  --color-danger: #ff7b7d;
+  --color-attention: #fc9f1f;
+  --color-everage: #44afe6;
+  --color-violet: #8c4de4;
+
   --asside-width-expanded: 200px;
   --asside-width-close: 75px;
 
+  --border-radius-rounded: 16px;
   --border-radius-large: 8px;
   --border-radius-medium: 4px;
   --border-radius-small: 2px;
