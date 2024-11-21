@@ -14,10 +14,10 @@ export default {
       `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${taskInfo.id}.json`,
       {
         method: 'PUT',
-        body: JSON.stringify(data)
+        body: JSON.stringify(taskInfo)
       }
     )
-    context.commit('addTask', data);
+    context.commit('addTask', taskInfo);
   },
 
   async loadTasks(context, data) {

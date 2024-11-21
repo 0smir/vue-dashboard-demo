@@ -1,5 +1,5 @@
 export default {
-  getProgects(state) {
+  getProjects(state) {
     return state.projects;
   }
 }

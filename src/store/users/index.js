@@ -5,12 +5,10 @@ import mutations from "./mutations";
 
 export default {
   namespaced: true,
-  store() {
+  state() {
     return {
-      users: []
-
+      users: [],
     }
-
   },
   mutations: mutations,
   actions: actions,

@@ -12,9 +12,10 @@ export default {
           name: 'Helga',
           lastName: 'Vaal',
           position: 'Front-End',
-          team: 'main'
+          project: ''
         }
-      ]
+      ],
+      positionsList: ['Front-End', 'Back-End', 'QA', 'Manager', 'Product Owner', 'SEO']
     }
   },
   actions,

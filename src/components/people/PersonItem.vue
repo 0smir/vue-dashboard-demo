@@ -1,11 +1,16 @@
 <template>
   <div>
-    USERS!!
+    {{ person.name }}
   </div>
 </template>
 
 <script>
 export default {
+  props: ['person'],
+  created() {
+    console.log(this.person);
+
+  }
 
 }
 </script>

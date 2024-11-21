@@ -82,7 +82,7 @@ export default {
       return this.$store.getters['projects/getProgects'];
     },
     assigneeList() {
-      return this.$store.getters['people/getEmployeeList'];
+      return this.$store.getters['people/getEmployeesList'];
     }
   },
   methods: {

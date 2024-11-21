@@ -36,11 +36,11 @@
           <span class="sidebar__link-text">All Tasks</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/users">
+        <router-link class="sidebar__link" to="/people">
           <span class="sidebar__link-icon">
             <SvgIcon name="users" class="icon" />
           </span>
-          <span class="sidebar__link-text">Users</span></router-link>
+          <span class="sidebar__link-text">People</span></router-link>
       </li>
       <li class="sidebar-nav__item">
         <router-link class="sidebar__link" to="/tasks/new">
