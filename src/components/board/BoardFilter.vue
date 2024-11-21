@@ -27,10 +27,13 @@
               </div>
             </fieldset>
             <fieldset class="form-content__fieldset form-content__fieldset--person">
-              <legend>Name:</legend>
+              <legend>Assigneed to:</legend>
             </fieldset>
             <fieldset class="form-content__fieldset form-content__fieldset--labels">
-              <legend>Labels:</legend>
+              <legend>Task priority:</legend>
+              <select name="priority" id="task-priority">
+                <option v-for="prirityItem in priorityList" :value="prirityItem">{{ prirityItem }}</option>
+              </select>
             </fieldset>
           </div>
           <div class="filter__btn-wrapper">
@@ -48,6 +51,7 @@ export default {
   emits: ['save-filter'],
   data() {
     return {
+      priorityList: this.$store.getters['tasks/getPriorityList'],
       taskStatusList: this.$store.getters['tasks/getStatusList'],
       defaultBoardCollumns: this.$store.getters['boards/getDefaultBoardColumns'],
       isFilterListVisible: false,
