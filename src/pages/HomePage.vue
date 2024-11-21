@@ -20,7 +20,7 @@
 import BoardFilter from '@/components/board/BoardFilter.vue';
 import Board from '@/components/board/Board.vue';
 import CreateTaskForm from '@/components/tasks/CreateTaskForm.vue';
-import { computed } from 'vue';
+
 export default {
   components: {
     BoardFilter,
