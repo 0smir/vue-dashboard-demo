@@ -5,6 +5,7 @@ const NotFound = () => import('@/pages/NotFound.vue');
 const TasksList = () => import('@/pages/AllTasksPage.vue');
 const TaskDetail = () => import('@/pages/TaskPage.vue');
 const NewTask = () => import('@/pages/NewTaskPage.vue');
+const Users = () => import('@/pages/UsersPage.vue');
 
 const router = createRouter({
   history: createWebHistory(),
@@ -25,6 +26,10 @@ const router = createRouter({
     {
       path: '/tasks/new',
       component: NewTask
+    },
+    {
+      path: '/users',
+      component: Users,
     },
     {
       path: '/:notFound(.*)',
