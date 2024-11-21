@@ -122,9 +122,10 @@ export default {
     },
 
     addTask() {
-      console.log('Task added!');
+      let taskID = this.project.value.slice(0, 1).toUpperCase() + '-' + new Date().getTime();
+      console.log(taskID);
       let formData = {
-        id: new Date().getTime(),
+        id: taskID,
         title: this.title.value,
         project: this.project.value,
         assignee: this.assignee.value,

@@ -38,7 +38,6 @@ export default {
 
   methods: {
     displayColumns(columnsList) {
-      console.log(columnsList);
       this.columnsToDisplay = columnsList;
     },
     openDialog() {
@@ -46,7 +45,17 @@ export default {
     },
     closeAddTaskDialog() {
       this.addTaskDialogDisplay = false;
+    },
+    async loadTasks(params) {
+      try {
+        await this.$store.dispatch('tasks/loadTasks');
+      } catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
     }
+  },
+  mounted() {
+    this.loadTasks();
   }
 }
 </script>
