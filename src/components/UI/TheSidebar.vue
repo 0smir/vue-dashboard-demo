@@ -36,6 +36,13 @@
           <span class="sidebar__link-text">All Tasks</span></router-link>
       </li>
       <li class="sidebar-nav__item">
+        <router-link class="sidebar__link" to="/users">
+          <span class="sidebar__link-icon">
+            <SvgIcon name="users" class="icon" />
+          </span>
+          <span class="sidebar__link-text">Users</span></router-link>
+      </li>
+      <li class="sidebar-nav__item">
         <router-link class="sidebar__link" to="/tasks/new">
           <span class="sidebar__link-icon">
             <SvgIcon name="add" class="icon" />
