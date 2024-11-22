@@ -6,7 +6,13 @@ export default {
   namespaced: true,
   state() {
     return {
+      boardColumns: [],
       defaultBoardCollumns: ['toDo', 'inProgress', 'Done'],
+      boardFilter: {
+        boardCollumns: [],
+        assegneeList: [],
+
+      }
     }
   },
   actions,

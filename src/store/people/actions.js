@@ -22,7 +22,7 @@ export default {
       };
       employeesList.push(person);
     }
-    console.log(employeesList);
+    // console.log(employeesList);
     context.commit('setEmployees', ...employeesList);
   },
 

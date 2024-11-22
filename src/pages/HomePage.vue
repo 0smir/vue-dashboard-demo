@@ -8,8 +8,9 @@
       </BaseButton>
       <BoardFilter @save-filter="displayColumns" />
     </div>
-    <p v-if="!columnsToDisplay.length">Choose some filter points to display tasks</p>
-    <Board v-else :columnsList="columnsToDisplay" :tasksList="tasks" />
+
+    <Board v-if="columnsToDisplay.length" :columnsList="columnsToDisplay" :tasksList="tasks" />
+    <p v-else>Choose some filter points to display tasks</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
       <CreateTaskForm></CreateTaskForm>
     </BaseDialog>
