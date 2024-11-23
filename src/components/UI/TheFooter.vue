@@ -15,7 +15,7 @@ export default {
 <style scoped>
 footer {
     width: 100%;
-    background-color: #273850;
+    background-color: var(--color-primary);
     color: #fff;
 }
 </style>

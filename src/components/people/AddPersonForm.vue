@@ -22,7 +22,7 @@
       </select>
     </div>
     <div class="form-control__btn-wrapper">
-      <BaseButton>Add User</BaseButton>
+      <BaseButton class="btn btn--medium btn--dark">Add User</BaseButton>
     </div>
   </form>
 </template>

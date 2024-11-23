@@ -8,11 +8,6 @@ export default {
     return {
       boardColumns: [],
       defaultBoardCollumns: ['toDo', 'inProgress', 'Done'],
-      boardFilter: {
-        boardCollumns: [],
-        assegneeList: [],
-
-      }
     }
   },
   actions,

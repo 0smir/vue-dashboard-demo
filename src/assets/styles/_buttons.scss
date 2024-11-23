@@ -4,7 +4,7 @@ $primery-color: #5d6985;
   --btn-main-bg: var(--color-primary);
   --btn-hover: var(--color-board-bg);
   --btn-border-color: var(--btn-main-bg);
-
+  --btn-dark-bg: var(--color-dark-bg);
 
   display: inline-flex;
   align-items: center;
@@ -57,6 +57,18 @@ $primery-color: #5d6985;
     &:hover {
       background-color: var(--btn-hover);
       transition: all .35s ease;
+    }
+  }
+
+  &--dark {
+    background-color: var(--btn-dark-bg);
+    border: 2px solid var(--btn-dark-bg);
+
+    &:hover {
+      background-color: var(--btn-hover);
+      border: 2px solid var(--btn-dark-bg);
+      color: var(--btn-dark-bg);
+      transition: background-color .35s ease;
     }
   }
 }

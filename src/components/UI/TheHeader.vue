@@ -28,7 +28,7 @@ export default {
 header {
     padding: 15px 0;
     width: 100%;
-    background-color: #273850;
+    background-color: var(--color-primary);
 }
 
 .header-logo {

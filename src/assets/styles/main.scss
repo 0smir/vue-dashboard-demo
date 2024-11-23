@@ -30,7 +30,7 @@ main {
   height: 100%;
   min-height: 100vh;
   flex-grow: 2;
-  background-color: var(--color-main);
+  background-color: var(--color-white);
   max-width: calc(100% - var(--asside-width-expanded));
   transition: max-width 0.35s ease;
 }
