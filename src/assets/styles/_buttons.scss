@@ -1,10 +1,18 @@
-$primery-color: #5d6985;
-
 .btn {
-  --btn-main-bg: var(--color-primary);
-  --btn-hover: var(--color-board-bg);
-  --btn-border-color: var(--btn-main-bg);
-  --btn-dark-bg: var(--color-dark-bg);
+  --btn-primary-bg: var(--color-primary);
+  --btn-primary-bg-hover: var(--color-primary-medium);
+  --btn-disabled: var(--color-secondary-medium);
+
+  --btn-secondary-bg: var(--color-white);
+  --btn-secondary-bg-hover: var(--color-secondary-medium);
+  --btn-secondary-text: var(--color-tetriary);
+  --btn-secondary-border: var(--color-secondary-medium);
+
+
+  --btn-dark-bg: var(--color-secondary);
+  --btn-dark-bg-hover: var(--color-tetriary);
+  --btn-dark-text: var(--color-white);
+
 
   display: inline-flex;
   align-items: center;
@@ -15,14 +23,53 @@ $primery-color: #5d6985;
   cursor: pointer;
   white-space: nowrap;
   width: auto;
-  background-color: var(--btn-main-bg);
-  border: 2px solid var(--btn-border-color);
   transition: all .35s ease;
 
   &:hover {
-    border: 2px solid var(--btn-hover);
-    background-color: var(--btn-hover);
     transition: all .35s ease;
+  }
+
+  &:disabled {
+    background-color: var(--btn-primary-bg-disabled);
+    transition: all .35s ease;
+  }
+
+  &__default {
+    background-color: var(--btn-primary-bg);
+    border: 2px solid var(--btn-primary-bg);
+    transition: all .35s ease;
+
+    &:hover {
+      background-color: var(--btn-primary-bg-hover);
+      border: 2px solid var(--btn-primary-bg-hover);
+      transition: all .35s ease;
+    }
+  }
+
+  &__outlined {
+    background-color: var(--btn-secondary-bg);
+    border: 2px solid var(--btn-secondary-border);
+    color: var(--btn-secondary-text);
+    transition: all .35s ease;
+
+    &:hover {
+      background-color: var(--btn-secondary-bg-hover);
+      border: 2px solid var(--btn-secondary-border);
+      color: var(--btn-secondary-text);
+      transition: all .35s ease;
+    }
+  }
+
+  &__dark {
+    background-color: var(--btn-dark-bg);
+    border: 2px solid var(--btn-dark-bg);
+    color: var(--btn-dark-text);
+
+    &:hover {
+      background-color: var(--btn-dark-bg-hover);
+      border: 2px solid var(--btn-dark-bg-hover);
+      transition: background-color .35s ease;
+    }
   }
 
   &--large {
@@ -44,31 +91,5 @@ $primery-color: #5d6985;
     min-width: 35px;
     min-height: 35px;
     border-radius: var(--border-radius-medium);
-  }
-
-  &--outlined {
-    background-color: transparent;
-  }
-
-  &--light {
-    background-color: rgba($primery-color, 0.7);
-    border: 2px solid var(--btn-hover);
-
-    &:hover {
-      background-color: var(--btn-hover);
-      transition: all .35s ease;
-    }
-  }
-
-  &--dark {
-    background-color: var(--btn-dark-bg);
-    border: 2px solid var(--btn-dark-bg);
-
-    &:hover {
-      background-color: var(--btn-hover);
-      border: 2px solid var(--btn-dark-bg);
-      color: var(--btn-dark-bg);
-      transition: background-color .35s ease;
-    }
   }
 }
