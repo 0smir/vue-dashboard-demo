@@ -90,27 +90,27 @@ a:hover {
   background-color: #12223d;
 }
 
-.board_column--todo {
+.board__column--todo {
   order: 1;
 }
 
-.board_column--inprogress {
+.board__column--inprogress {
   order: 2;
 }
 
-.board_column--inreview {
+.board__column--inreview {
   order: 3;
 }
 
-.board_column--testing {
+.board__column--testing {
   order: 4;
 }
 
-.board_column--done {
+.board__column--done {
   order: 5;
 }
 
-.board_column--blocked {
+.board__column--blocked {
   order: 6;
 }
 
