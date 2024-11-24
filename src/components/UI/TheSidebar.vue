@@ -1,7 +1,8 @@
 <template>
   <aside :class="['sidebar', { open: isExpanded, close: !isExpanded }]">
     <div class="sidebar__controls-wrapper">
-      <BaseButton class="btn sidebar__controls-btn" :alt="sidebarControlAltText" @click="toggleSidebar">
+      <BaseButton class="btn btn__default btn--small sidebar__controls-btn" :alt="sidebarControlAltText"
+        @click="toggleSidebar">
         <SvgIcon v-if="!isExpanded" name="chevronLeft" class="icon sidebar__controls-icon" />
         <SvgIcon v-else name="chevronRight" class="icon sidebar__controls-icon" />
       </BaseButton>
@@ -75,6 +76,8 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
+  --link-hovered: var(--color-primary-medium);
+
   color: var(--color-text);
   background-color: var(--color-primary);
   padding: 10px 15px;
@@ -115,18 +118,6 @@ export default {
     margin-bottom: 25px;
   }
 
-  &__controls-btn {
-    padding: 0;
-    width: 35px;
-    height: 35px;
-    background-color: var(--color-primary);
-    border-radius: 3px;
-
-    &:hover {
-      background-color: var(--color-hover-bg);
-    }
-  }
-
   &__controls-icon {
     padding: 0;
   }
@@ -141,7 +132,7 @@ export default {
     border-radius: 3px;
 
     &:hover {
-      background-color: var(--color-hover-bg);
+      background-color: var(--link-hovered);
       text-decoration: none;
 
       .sidebar__link-icon {
