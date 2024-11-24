@@ -1,7 +1,7 @@
 <template>
   <div class="filter">
     <div class="filter__header">
-      <BaseButton class="btn btn--small btn--board-filter" aria-label="Board filter" title="Boarder filter"
+      <BaseButton class="btn btn__default btn--small btn--board-filter" aria-label="Board filter" title="Boarder filter"
         @click="isFilterListVisible = !isFilterListVisible">
         <SvgIcon name="filterHorizontal" class="icon" />
       </BaseButton>
@@ -78,6 +78,9 @@ export default {
 
 <style lang="scss" scoped>
 .filter {
+  --filter-btn-bg: var(--color-primary-light);
+  --filter-btn-text-color: var(--color-primary);
+
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -170,6 +173,12 @@ export default {
   }
 }
 
+.btn--board-filter {
+  &:hover {
+    color: var(--filter-btn-text-color);
+    background-color: var(--filter-btn-bg);
+  }
+}
 
 .form-content {
   display: flex;
@@ -178,7 +187,6 @@ export default {
 
   &__fieldset {
     display: flex;
-    // border: none;
   }
 
   &__fieldset--columns {

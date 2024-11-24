@@ -1,11 +1,11 @@
 <template>
   <div class="board">
-    <div v-for="column in columnsList" :class="['board_column', 'board_column--' + column.toLowerCase()]"
+    <div v-for="column in columnsList" :class="['board__column', 'board__column--' + column.toLowerCase()]"
       :style="boardColumnWidth">
-      <header class="board_column-header">
-        <h3>{{ column }}</h3>
+      <header class="board__column-header">
+        <h3 class="board__column-title">{{ column }}</h3>
       </header>
-      <div class="board_column-content">
+      <div class="board__column-content">
         <div class="task-wrapper" v-for="task in tasksList">
           <TaskItem v-if="column === task.status" :key="task.id" :task="task" />
         </div>
@@ -34,34 +34,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.board,
-.board_column {
-  display: flex;
-  border-radius: 4px;
-}
-
 .board {
-  justify-content: space-between;
-  margin: 20px 0;
-}
+  --board-header-bg: var(--color-tetriary-light);
+  --board-header-border: var(--color-secondary-light);
+  --board-header-text-color: var(--color-secondary);
+  --board-header-border-radius: var(--border-radius-medium);
 
-.board_column-header {
-  padding: 15px;
-  background-color: #46546f;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 4px;
+  margin: 20px 0;
+
+  &__column {
+    flex-direction: column;
+    width: max(33%);
+  }
+
+  &__column-content {
+    padding: 20px clamp(5px, 10px, 15px);
+  }
+
+  &__column-title {
+    font-size: 20px;
+  }
+
+  &__column-header {
+    padding: 8px 25px;
+    background-color: var(--board-header-bg);
+    border: 2px solid var(--board-header-border);
+    color: var(--board-header-text-color);
+    border-radius: var(--board-header-border-radius);
+  }
 }
 
 .task-wrapper {
   margin-bottom: 10px;
-}
-
-.board_column {
-  flex-direction: column;
-  width: max(33%);
-  background-color: #5c6786;
-}
-
-.board_column-content {
-  padding: 20px clamp(5px, 15px, 15px);
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="page-container">
     <h1>Main Board</h1>
     <div class="board__controls-wrapper relative">
-      <BaseButton @click="openDialog" class="btn btn--medium btn--light btn__add-task">
+      <BaseButton @click="openDialog" class="btn btn__outlined btn--medium btn--light btn__add-task">
         <SvgIcon name="add" class="icon" />
         <span>Create task</span>
       </BaseButton>
