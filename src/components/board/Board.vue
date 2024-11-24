@@ -37,17 +37,30 @@ export default {
 .board {
   --board-header-bg: var(--color-tetriary-light);
   --board-header-border: var(--color-secondary-light);
-  --board-header-text-color: var(--color-secondary);
+  --board-header-border-hovered: var(--color-primary);
   --board-header-border-radius: var(--border-radius-medium);
+  --board-header-text-color: var(--color-secondary);
+
+
+  --column-bg-hover: var(--color-primary-light);
 
   display: flex;
   justify-content: space-between;
-  border-radius: 4px;
+  border-radius: var(--board-header-border-radius);
   margin: 20px 0;
 
   &__column {
     flex-direction: column;
     width: max(33%);
+    border-radius: var(--board-header-border-radius);
+
+    &:hover {
+      background-color: var(--color-primary-light);
+
+      .board__column-header {
+        background-color: var(--board-header-border);
+      }
+    }
   }
 
   &__column-content {
@@ -64,6 +77,11 @@ export default {
     border: 2px solid var(--board-header-border);
     color: var(--board-header-text-color);
     border-radius: var(--board-header-border-radius);
+
+    &:hover {
+      background-color: var(--board-header-border);
+      border: 2px solid var(--board-header-border-hovered);
+    }
   }
 }
 

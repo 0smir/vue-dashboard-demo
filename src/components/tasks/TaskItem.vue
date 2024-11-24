@@ -1,13 +1,13 @@
 <template>
-  <div :class="['task-item', task.status.toLowerCase()]">
-
+  <div :class="['task', 'task__status--' + task.status.toLowerCase()]">
+    <BaseButton class="btn btn__outlined btn--small task__btn-edit" title="edit" aria-label="edit task">
+      <SvgIcon name="edit" class="icon" />
+    </BaseButton>
     <h2 class="task__title">{{ task.title }}</h2>
     <div class="task__description">
       {{ task.description }}
     </div>
-    <BaseButton class="btn btn--small task__btn-edit" title="edit" aria-label="edit task">
-      <SvgIcon name="edit" class="icon" />
-    </BaseButton>
+
     <div class="task__info">
       <span class="task__info-id">
         <span :class="['task__priority', 'priority--' + task.priority]">
@@ -15,7 +15,7 @@
         </span>
         <span class="task-id">{{ task.id }}</span>
       </span>
-      <span v-if="task.assignee" class="task__info-assignee rounded" title="{{ task.assignee.name }}">
+      <span v-if="task.assignee" class="task__info-assignee rounded" :title="task.assignee.name">
         <span v-if="!task.assignee.img">{{ getNameInitials() }}</span>
       </span>
     </div>
@@ -45,17 +45,36 @@ export default {
 
 <style lang="scss" scoped>
 .task {
+  --task-border: var(--color-secondary-medium);
+  --task-text-color: var(--color-secondary);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border: 2px solid var(--task-border);
+  border-left: 4px solid;
+  color: var(--task-text-color);
+  background-color: #fff;
+
+
   &__info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 10px;
     margin-top: 10px;
-    border-top: 1px solid #fff;
+    border-top: 2px solid var(--task-border);
   }
 
   &__title {
-    font-size: 22px;
+    margin-bottom: 12px;
+    padding-right: 40px;
+    font-size: 18px;
+    font-weight: 500;
   }
 
   &__description {
@@ -68,28 +87,36 @@ export default {
   }
 
   &__btn-edit {
-    margin-left: auto;
+    position: absolute;
+    top: 7px;
+    right: 10px;
+
+    &>.icon {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   &__priority {
     display: flex;
     justify-content: center;
-    padding: 2px 1px;
+    padding: 2px;
     margin-right: 4px;
     border-radius: var(--border-radius-small);
+    color: var(--color-white);
   }
 
   &__info-assignee {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 32px;
-    height: 32px;
-    border: 3px solid #fff;
+    width: 34px;
+    height: 34px;
+    border: 2px solid var(--task-border);
     font-size: 18px;
-    background-color: var(--color-testing);
+    background-color: var(--color-primary-light);
     font-weight: 300;
-    padding-top: 1px;
+    padding: 2px;
   }
 
   &__info-id {
@@ -102,39 +129,32 @@ export default {
     }
 
   }
-}
 
-.task-item {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  padding: 5px;
-  border-radius: 8px;
-  border-left: 4px solid;
-  background-color: var(--color-dark-bg);
+  &__status {
 
-  &.todo {
-    border-color: var(--color-todo);
-  }
+    &--todo {
+      border-left-color: var(--color-todo);
+    }
 
-  &.inprogress {
-    border-color: var(--color-inprogress);
-  }
+    &--inprogress {
+      border-left-color: var(--color-inprogress);
+    }
 
-  &.inreview {
-    border-color: var(--color-inreview);
-  }
+    &--inreview {
+      border-left-color: var(--color-inreview);
+    }
 
-  &.testing {
-    border-color: var(--color-testing);
-  }
+    &--testing {
+      border-left-color: var(--color-testing);
+    }
 
-  &.done {
-    border-color: var(--color-done);
-  }
+    &--done {
+      border-left-color: var(--color-done);
+    }
 
-  &.blocked {
-    border-color: var(--color-blocked);
+    &--blocked {
+      border-left-color: var(--color-blocked);
+    }
   }
 }
 </style>
