@@ -1,3 +1,5 @@
+// Notis: was installed dart-sass (npm i dart-sass) to get possibility use (@use @forward etc.) of newly sass Module System
+
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
