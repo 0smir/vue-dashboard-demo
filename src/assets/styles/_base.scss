@@ -11,13 +11,16 @@
 
 html {
   margin: 0;
-  --font-main: 'Roboto', 'Arial', 'Helvetica', sans-serif;
 }
 
 body {
+  --font-main: 'Roboto', 'Arial', 'Helvetica', sans-serif;
+  --color-link-text: var(--color-text);
+  --color-main-text: var(--color-text-dark);
+
   min-height: 100vh;
   padding: 0;
-  color: var(--color-text);
+  color: var(--color-main-text);
   background: var(--color-secondary);
   transition:
     color 0.5s,
@@ -31,7 +34,7 @@ body {
 }
 
 a {
-  color: var(--color-text);
+  color: var(--color-link-text);
   text-decoration: none;
 }
 
@@ -68,27 +71,6 @@ a:hover {
   background-color: var(--color-blocked);
 }
 
-
-
-.header {
-  background-color: #273850;
-}
-
-.main-bg {
-  background-color: #324664;
-}
-
-.column-header {
-  background-color: #46546f;
-}
-
-.board-bg {
-  background-color: #5d6985;
-}
-
-.task-bg {
-  background-color: #12223d;
-}
 
 .board__column--todo {
   order: 1;
@@ -145,33 +127,3 @@ a:hover {
     background-color: var(--color-success);
   }
 }
-
-// .task-status--todo {
-//   background-color: #04c7e5;
-//   border-color: #325f7d;
-// }
-
-// .task-status--inprogress {
-//   background-color: #ffc405;
-//   border-color: #5a5d5c;
-// }
-
-// .task-status--inreview {
-//   background-color: #fe7453;
-//   border-color: #5c4d60;
-// }
-
-// .task-status--testing {
-//   background-color: #9c27b0;
-//   border-color: #7d6e77;
-// }
-
-// .task-status--done {
-//   background-color: #56daa4;
-//   border-color: #3e5f72;
-// }
-
-// .task-status--blocked {
-//   background-color: #ff7b7d;
-//   border-color: #5c4d60;
-// }
