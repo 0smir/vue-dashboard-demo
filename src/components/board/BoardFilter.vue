@@ -13,7 +13,7 @@
         <form @submit.prevent="chooseColumns">
           <div class="form-content">
             <fieldset class="form-content__fieldset form-content__fieldset--columns">
-              <legend> Columns to display:</legend>
+              <legend class="form-content__fieldset-legend"> Columns to display:</legend>
               <div class="form-control" v-for="status in taskStatusList">
                 <label :class="['filter__label', status.toLowerCase()]" :for="status">
                   <span class="filter__input-indicator">
@@ -27,18 +27,19 @@
               </div>
             </fieldset>
             <fieldset class="form-content__fieldset form-content__fieldset--person">
-              <legend>Assigneed to:</legend>
+              <legend class="form-content__fieldset-legend">Assigneed to:</legend>
             </fieldset>
             <fieldset class="form-content__fieldset form-content__fieldset--labels">
-              <legend>Task priority:</legend>
+              <legend class="form-content__fieldset-legend">Task priority:</legend>
               <select name="priority" id="task-priority">
                 <option v-for="prirityItem in priorityList" :value="prirityItem">{{ prirityItem }}</option>
               </select>
             </fieldset>
           </div>
           <div class="filter__btn-wrapper">
-            <BaseButton class="btn btn--medium filter__btn--apply">Apply Filter</BaseButton>
-            <BaseButton class="btn btn--medium btn--light filter__btn--clear" @click="clearFilter">Clear</BaseButton>
+            <BaseButton class="btn btn__default btn--medium filter__btn--apply">Apply Filter</BaseButton>
+            <BaseButton class="btn btn__outlined btn--medium btn--light filter__btn--clear" @click="clearFilter">Clear
+            </BaseButton>
           </div>
         </form>
       </div>
@@ -80,6 +81,7 @@ export default {
 .filter {
   --filter-btn-bg: var(--color-primary-light);
   --filter-btn-text-color: var(--color-primary);
+  --fieldset-legend-text-color: var(--color-secondary);
 
   display: flex;
   flex-direction: column;
@@ -187,6 +189,10 @@ export default {
 
   &__fieldset {
     display: flex;
+  }
+
+  &__fieldset-legend {
+    color: var(--fieldset-legend-text-color);
   }
 
   &__fieldset--columns {
