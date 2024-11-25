@@ -18,7 +18,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        additionalData: `@use "@/assets/styles/_mediaqueries.scss" as *;`,
         api: 'modern-compiler',
+
       }
     }
   }
