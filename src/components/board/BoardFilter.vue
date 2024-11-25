@@ -146,7 +146,7 @@ export default {
     flex-direction: column;
     margin-top: 15px;
 
-    @media (min-width: 769px) {
+    @media (min-width: $md) {
       flex-direction: row;
       justify-content: flex-end;
     }
@@ -157,7 +157,7 @@ export default {
       width: 100%;
       margin-bottom: 10px;
 
-      @media (min-width: 769px) {
+      @media (min-width: $md) {
         width: auto;
         order: 2;
         margin-bottom: 0;
@@ -167,7 +167,7 @@ export default {
     &--clear {
       width: 100%;
 
-      @media (min-width: 769px) {
+      @media (min-width: $md) {
         margin: 0 10px 0 0;
         width: auto;
       }
