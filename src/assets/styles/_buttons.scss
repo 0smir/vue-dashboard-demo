@@ -1,4 +1,6 @@
 .btn {
+  --btn-text: var(--color-white);
+
   --btn-primary-bg: var(--color-primary);
   --btn-primary-bg-hover: var(--color-primary-medium);
   --btn-disabled: var(--color-secondary-medium);
@@ -19,7 +21,7 @@
   justify-content: center;
   font-size: 14px;
   font-weight: 500;
-  color: inherit;
+  color: var(--btn-text);
   cursor: pointer;
   white-space: nowrap;
   width: auto;
