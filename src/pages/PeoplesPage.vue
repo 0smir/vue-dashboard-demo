@@ -25,8 +25,8 @@ export default {
   },
   data() {
     return {
-      activeComponentName: 'AddPersonForm',
-      peopleList: []
+      activeComponentName: 'PersonsList',
+      peopleList: this.$store.getters['people/getEmployeesList']
     }
   },
 
@@ -44,7 +44,10 @@ export default {
   },
 
   mounted() {
-    this.loadUsersList();
+    if (this.activeComponentName === 'PersonsList') {
+      this.loadUsersList();
+    }
+
   }
 
 }

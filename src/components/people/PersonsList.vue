@@ -1,5 +1,4 @@
 <template>
-  <hr />
   <div v-if="!peopleList">
     <p>Users list is empty.</p>
   </div>
@@ -20,4 +19,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.userslist {
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    column-gap: 15px;
+  }
+}
+</style>
