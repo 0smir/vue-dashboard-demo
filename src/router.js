@@ -6,6 +6,7 @@ const TasksList = () => import('@/pages/AllTasksPage.vue');
 const TaskDetail = () => import('@/pages/TaskPage.vue');
 const NewTask = () => import('@/pages/NewTaskPage.vue');
 const Employees = () => import('@/pages/PeoplesPage.vue');
+const Person = () => import('@/pages/PersonPage.vue');
 
 const router = createRouter({
   history: createWebHistory(),
@@ -30,6 +31,11 @@ const router = createRouter({
     {
       path: '/people',
       component: Employees,
+    },
+    {
+      path: '/people/:id',
+      props: true,
+      component: Person,
     },
     {
       path: '/:notFound(.*)',
