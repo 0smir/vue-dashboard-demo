@@ -1,51 +1,53 @@
 <template>
-  <form @submit.prevent="submitForm" class="form">
-    <div class="form-control">
-      <label class="form-control__label" for="title">Title</label>
-      <input class="form-control__input" id="title" type="text" v-model="title.value">
+  <form @submit.prevent="submitForm" :class="['form', 'form-add-task', 'form-' + className, className]">
+    <div class="form__content">
+      <div class="form-control form-control--title">
+        <label class="form-control__label" for="title">Title</label>
+        <input class="form-control__input" id="title" type="text" v-model="title.value">
+      </div>
+      <div class="form-control form-control--project">
+        <label class="form-control__label" for="project">Select Project: </label>
+        <select class="form-control__select" name="project-name" id="project" v-model="project.value">
+          <option v-for="project in projectsList" :value="project.id">{{ project.title }}</option>
+        </select>
+      </div>
+      <div class="form-control form-control--assignee">
+        <label class="form-control__label" for="assignee">Assignee</label>
+        <select class="form-control__select" name="assignee" id="assignee" v-model="assignee.value">
+          <option class="form-control__select-option" v-for="person in assigneeList" :value="person.id">
+            {{ person.name + ' ' + person.lastName }}
+          </option>
+        </select>
+      </div>
+      <div class="form-control form-control--status">
+        <label class="form-control__label" for="status">Status</label>
+        <select class="form-control__select" name="task-status" id="status" v-model="status.value">
+          <option class="form-control__select-option" v-for="status in statusList" :value="status">{{ status }}</option>
+        </select>
+      </div>
+      <div class="form-control form-control--priority">
+        <label class="form-control__label" for="priority">Priority</label>
+        <select class="form-control__select" name="task-priority" id="priority" v-model="priority.value">
+          <option class="form-control__select-option" v-for="priority in priorityList" :value="priority">{{ priority }}
+          </option>
+        </select>
+      </div>
+      <div class="form-control form-control--description">
+        <label class="form-control__label" for="description">Description</label>
+        <textarea class="form-control__textarea" name="task-description" id="description" rows="5"
+          v-model="description.value"></textarea>
+      </div>
+      <div class="form-control form-control--btn-wrapper btn-wrapper">
+        <BaseButton class="btn btn__default btn--medium btn--add" type="submit">Add Task</BaseButton>
+        <BaseButton class="btn btn__outlined btn--medium btn--cencel">Cancel</BaseButton>
+      </div>
     </div>
-    <div class="form-control">
-      <label class="form-control__label" for="project">Select Project: </label>
-      <select class="form-control__select" name="project-name" id="project" v-model="project.value">
-        <option v-for="project in projectsList" :value="project.id">{{ project.title }}</option>
-      </select>
-    </div>
-    <div class="form-control">
-      <label class="form-control__label" for="assignee">Assignee</label>
-      <select class="form-control__select" name="assignee" id="assignee" v-model="assignee.value">
-        <option class="form-control__select-option" v-for="person in assigneeList" :value="person.id">
-          {{ person.name + ' ' + person.lastName }}
-        </option>
-      </select>
-    </div>
-    <div class="form-control">
-      <label class="form-control__label" for="description">Description</label>
-      <textarea class="form-control__textarea" name="task-description" id="description" rows="5"
-        v-model="description.value"></textarea>
-    </div>
-    <div class="form-control">
-      <label class="form-control__label" for="priority">Priority</label>
-      <select class="form-control__select" name="task-priority" id="priority" v-model="priority.value">
-        <option class="form-control__select-option" v-for="priority in priorityList" :value="priority">{{ priority }}
-        </option>
-      </select>
-    </div>
-    <div class="form-control">
-      <label class="form-control__label" for="status">Status</label>
-      <select class="form-control__select" name="task-status" id="status" v-model="status.value">
-        <option class="form-control__select-option" v-for="status in statusList" :value="status">{{ status }}</option>
-      </select>
-    </div>
-    <div class="form-control btn-wrapper">
-      <BaseButton class="btn btn__default btn--medium btn--add" type="submit">Add Task</BaseButton>
-      <BaseButton class="btn btn__outlined btn--medium btn--cencel">Cancel</BaseButton>
-    </div>
-
   </form>
 </template>
 
 <script>
 export default {
+  props: ['className'],
   data() {
     return {
       title: {
@@ -83,7 +85,7 @@ export default {
       return this.$store.getters['tasks/getPriorityList'];
     },
     projectsList() {
-      return this.$store.getters['projects/getProgects'];
+      return this.$store.getters['projects/getProjects'];
     },
     assigneeList() {
       return this.$store.getters['people/getEmployeesList'];
@@ -185,6 +187,48 @@ export default {
     @media (min-width: $md) {
       margin: 0 10px 0 0;
       width: auto;
+    }
+  }
+}
+
+.form__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 760px;
+  margin: 0 auto;
+
+  .form-control {
+    width: calc(50% - 7px);
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    &--title,
+    &--description,
+    &--btn-wrapper {
+      width: 100%;
+    }
+  }
+}
+
+.form-dialog {
+  .form-control {
+    margin-bottom: 15px;
+
+    &__label {
+      margin-bottom: 2px;
+      font-size: 14px;
+    }
+
+    &__input,
+    &__select {
+      padding: 8px;
+    }
+
+    &__textarea {
+      height: 80px;
     }
   }
 }
