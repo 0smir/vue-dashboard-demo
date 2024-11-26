@@ -12,7 +12,7 @@
     <Board v-if="columnsToDisplay.length" :columnsList="columnsToDisplay" :tasksList="tasks" />
     <p v-else>Choose some filter points to display tasks</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
-      <CreateTaskForm></CreateTaskForm>
+      <CreateTaskForm className="dialog"></CreateTaskForm>
     </BaseDialog>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
       tasks: this.$store.getters['tasks/getTasksList'],
       taskPriorityList: this.$store.getters['tasks/getPriorityList'],
       columnsToDisplay: this.$store.getters['boards/getDefaultBoardColumns'],
-      addTaskDialogDisplay: false
+      addTaskDialogDisplay: true
     }
   },
 
