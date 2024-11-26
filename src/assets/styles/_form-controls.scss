@@ -1,5 +1,6 @@
 .form {
   --ColorInputBg: var(--color-white);
+  --ColorInputFocused: var(--color-primary);
   --ColorInputBorder: var(--color-secondary-light);
   --InputBorderRadius: var(--border-radius-medium);
   --ColorInputText: var(--color-text-dark);
@@ -13,29 +14,44 @@
 
   &__label {
     display: block;
+    width: 100%;
     margin-bottom: 10px;
     font-size: 16px;
     color: var(--ColorLabelText);
   }
 
-  &__input {
-    display: inline-block;
-  }
 
   &__input,
   &__textarea {
+    display: inline-block;
+    width: 100%;
     padding: 8px 12px;
     color: var(--ColorInputText);
     background-color: var(--ColorInputBg);
     border: 1px solid var(--ColorInputBorder);
     border-radius: var(--InputBorderRadius);
+
+    &:focus,
+    &:focus-visible {
+      outline-color: var(--ColorInputFocused);
+    }
+  }
+
+  &__textarea {
+    height: 50px;
+
+    &:focus,
+    &:focus-visible {
+      outline-color: var(--ColorInputFocused);
+    }
   }
 
   &__select {
     position: relative;
     display: block;
     padding: 8px 12px;
-    min-width: 250px;
+    min-width: 150px;
+    width: 100%;
     color: var(--ColorInputText);
     background-color: var(--ColorInputBg);
     border: 1px solid var(--ColorInputBorder);
@@ -46,6 +62,11 @@
     background: no-repeat calc(100% - 10px) 50%;
     background-image: url('data:image/svg+xml;utf8,<svg width="14" height="15" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.127L12 18.127L20 10.127H4Z" fill="%235C8AA8"/></svg>');
     cursor: pointer;
+
+    &:focus,
+    &:focus-visible {
+      outline-color: var(--ColorInputFocused);
+    }
   }
 }
 
