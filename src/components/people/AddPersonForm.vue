@@ -1,5 +1,5 @@
 <template>
-  <h2>Add User:</h2>
+  <h2>Add New User</h2>
   <form @submit.prevent="submitForm" class="form">
     <div class="form-control">
       <label for="name" class="form-control__label">Name: </label>
