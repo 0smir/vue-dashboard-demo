@@ -1,40 +1,44 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="submitForm" class="form">
     <div class="form-control">
-      <label for="title">Title</label>
-      <input id="title" type="text" v-model="title.value">
+      <label class="form-control__label" for="title">Title</label>
+      <input class="form-control__input" id="title" type="text" v-model="title.value">
     </div>
     <div class="form-control">
-      <label for="project">Select Project: </label>
-      <select name="project-name" id="project" v-model="project.value">
+      <label class="form-control__label" for="project">Select Project: </label>
+      <select class="form-control__select" name="project-name" id="project" v-model="project.value">
         <option v-for="project in projectsList" :value="project.id">{{ project.title }}</option>
       </select>
     </div>
     <div class="form-control">
-      <label for="assignee">Assignee</label>
-      <select name="assignee" id="assignee" v-model="assignee.value">
-        <option v-for="person in assigneeList" :value="person.id">{{ person.name + ' ' + person.lastName }}</option>
+      <label class="form-control__label" for="assignee">Assignee</label>
+      <select class="form-control__select" name="assignee" id="assignee" v-model="assignee.value">
+        <option class="form-control__select-option" v-for="person in assigneeList" :value="person.id">
+          {{ person.name + ' ' + person.lastName }}
+        </option>
       </select>
     </div>
     <div class="form-control">
-      <label for="description">Description</label>
-      <textarea name="task-description" id="description" rows="5" v-model="description.value"></textarea>
+      <label class="form-control__label" for="description">Description</label>
+      <textarea class="form-control__textarea" name="task-description" id="description" rows="5"
+        v-model="description.value"></textarea>
     </div>
     <div class="form-control">
-      <label for="priority">Priority</label>
-      <select name="task-priority" id="priority" v-model="priority.value">
-        <option v-for="priority in priorityList" :value="priority">{{ priority }}</option>
+      <label class="form-control__label" for="priority">Priority</label>
+      <select class="form-control__select" name="task-priority" id="priority" v-model="priority.value">
+        <option class="form-control__select-option" v-for="priority in priorityList" :value="priority">{{ priority }}
+        </option>
       </select>
     </div>
     <div class="form-control">
-      <label for="status">Status</label>
-      <select name="task-status" id="status" v-model="status.value">
-        <option v-for="status in statusList" :value="status">{{ status }}</option>
+      <label class="form-control__label" for="status">Status</label>
+      <select class="form-control__select" name="task-status" id="status" v-model="status.value">
+        <option class="form-control__select-option" v-for="status in statusList" :value="status">{{ status }}</option>
       </select>
     </div>
     <div class="form-control btn-wrapper">
-      <BaseButton>Cancel</BaseButton>
-      <BaseButton type="submit">Add Task</BaseButton>
+      <BaseButton class="btn btn__default btn--medium btn--add" type="submit">Add Task</BaseButton>
+      <BaseButton class="btn btn__outlined btn--medium btn--cencel">Cancel</BaseButton>
     </div>
 
   </form>
@@ -151,4 +155,37 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.btn {
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+
+    @media (min-width: $md) {
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+  }
+
+  &--add {
+    width: 100%;
+    margin-bottom: 10px;
+
+    @media (min-width: $md) {
+      width: auto;
+      order: 2;
+      margin-bottom: 0;
+    }
+  }
+
+  &--cencel {
+    width: 100%;
+
+    @media (min-width: $md) {
+      margin: 0 10px 0 0;
+      width: auto;
+    }
+  }
+}
+</style>

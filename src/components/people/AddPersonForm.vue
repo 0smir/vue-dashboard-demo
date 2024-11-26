@@ -1,28 +1,34 @@
 <template>
   <h2>Add User:</h2>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="submitForm" class="form">
     <div class="form-control">
-      <label for="name">Name: </label>
-      <input id="name" type="text" v-model="user.name.value">
+      <label for="name" class="form-control__label">Name: </label>
+      <input class="form-control__input" id="name" type="text" v-model="user.name.value">
     </div>
     <div class="form-control">
-      <label for="lastName">Last Name</label>
-      <input id="lastName" type="text" v-model="user.lastName.value">
+      <label for="lastName" class="form-control__label">Last Name:</label>
+      <input class="form-control__input" id="lastName" type="text" v-model="user.lastName.value">
     </div>
     <div class="form-control">
-      <label for="role">Position:</label>
-      <select name="role" id="position" v-model="user.position.value">
-        <option v-for="role in positionsList" :value="role">{{ role }}</option>
+      <label for="role" class="form-control__label">Position:</label>
+      <select class="form-control__select" name="role" id="position" v-model="user.position.value">
+        <option value="" disabled selected>Select your Role</option>
+        <option class="form-control__select-option" v-for="(role) in positionsList" :key="role" :value="role">
+          {{ role }}
+        </option>
       </select>
     </div>
     <div class="form-control">
-      <label for="project">Project</label>
-      <select name="projectName" id="project" v-model="user.project.value">
-        <option v-for="project in projects" :value="project.id">{{ project.title }}</option>
+      <label for="project" class="form-control__label">Project: </label>
+      <select class="form-control__select" name="projectName" id="project" v-model="user.project.value">
+        <option value="" disabled selected>Select Project Name</option>
+        <option class="form-control__select-option" v-for="project in projects" :key="project.id" :value="project.id">
+          {{ project.title }}
+        </option>
       </select>
     </div>
     <div class="form-control__btn-wrapper">
-      <BaseButton class="btn btn--medium btn--dark">Add User</BaseButton>
+      <BaseButton class="btn btn__default btn--medium btn--dark">Add User</BaseButton>
     </div>
   </form>
 </template>

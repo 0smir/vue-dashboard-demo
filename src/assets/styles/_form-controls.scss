@@ -1,0 +1,52 @@
+.form {
+  --ColorInputBg: var(--color-white);
+  --ColorInputBorder: var(--color-secondary-light);
+  --InputBorderRadius: var(--border-radius-medium);
+  --ColorInputText: var(--color-text-dark);
+
+  --ColorLabelText: var(--color-text-dark);
+  --ColorOptionBgHovered: var(--color-secondary-light);
+}
+
+.form-control {
+  margin-bottom: 10px;
+
+  &__label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: var(--ColorLabelText);
+  }
+
+  &__input {
+    display: inline-block;
+  }
+
+  &__input,
+  &__textarea {
+    padding: 8px 12px;
+    color: var(--ColorInputText);
+    background-color: var(--ColorInputBg);
+    border: 1px solid var(--ColorInputBorder);
+    border-radius: var(--InputBorderRadius);
+  }
+
+  &__select {
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    min-width: 250px;
+    color: var(--ColorInputText);
+    background-color: var(--ColorInputBg);
+    border: 1px solid var(--ColorInputBorder);
+    border-radius: var(--InputBorderRadius);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: no-repeat calc(100% - 10px) 50%;
+    background-image: url('data:image/svg+xml;utf8,<svg width="14" height="15" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10.127L12 18.127L20 10.127H4Z" fill="%235C8AA8"/></svg>');
+    cursor: pointer;
+  }
+}
+
+.smart-list-box {}
