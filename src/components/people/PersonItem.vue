@@ -1,5 +1,20 @@
 <template>
   <div class="person">
+    <div class="person__actions-wrapper">
+      <BaseButton class="btn  btn--small person__btn-actions" aria-label="press to get additional functions">
+        <SvgIcon name="ellipsis" class="icon" />
+      </BaseButton>
+      <div class="person__actions-dropdown">
+        <BaseButton class="btn btn__default btn--medium person__btn-delete" aria-label="Press to remove person">
+          <SvgIcon name="delete" class="icon" />
+          Remove
+        </BaseButton>
+        <BaseButton class="btn btn__default btn--medium person__btn-edit" aria-label="Press to edit person">
+          <SvgIcon name="edit" class="icon" />
+          Edit
+        </BaseButton>
+      </div>
+    </div>
     <div class="person__image-wrapper rounded">
       <SvgIcon v-if="!person.img" name="person" class="icon person__svg" />
       <img v-else src="" alt="" class="person__img">
@@ -24,7 +39,6 @@ export default {
   },
   created() {
     console.log(this.person);
-
   }
 
 }
@@ -47,19 +61,77 @@ export default {
 
   --colorItemImgBorder: var(--color-secondary-light);
 
+  position: relative;
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 15px 0 0;
+  padding: 0;
   background-color: var(--colorItemBg);
   border: 2px solid var(--colorItemBorder);
   border-radius: 12px;
+  transition: all .35s ease;
 
   &:hover {
     border-color: var(--colorItemBorderHovered);
+    transition: all .35s ease;
 
     .person__image-wrapper {
       border-color: var(--colorItemBorderHovered);
+    }
+  }
+
+  &__actions-wrapper {
+    position: relative;
+    align-self: flex-end;
+    text-align: right;
+
+    &:hover {
+      .person__actions-dropdown {
+        display: block;
+      }
+
+      .person__btn-actions {
+        background-color: var(--colorItemLinkBg);
+        color: var(--colorItemLinkText);
+      }
+    }
+  }
+
+  &__btn-actions {
+    margin: 3px 10px 5px 0;
+    border: none;
+    background-color: var(--colorItemBg);
+    color: var(--colorItemText);
+
+    &:hover {
+      background-color: var(--colorItemLinkBg);
+      color: var(--colorItemLinkText);
+    }
+  }
+
+  &__actions-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    z-index: 10;
+    max-width: 150px;
+    padding: 10px 5px;
+    border-radius: 4px;
+    background-color: var(--colorItemLinkBg);
+    border: 1px solid var(--colorItemBorder);
+  }
+
+  &__btn-delete {
+    margin-bottom: 10px;
+  }
+
+  &__btn-edit,
+  &__btn-delete {
+    width: 100%;
+
+    .icon {
+      margin-right: 5px;
     }
   }
 
@@ -98,10 +170,12 @@ export default {
     border-bottom-left-radius: var(--colorItemRadius);
     border-bottom-right-radius: var(--colorItemRadius);
     text-decoration: none;
+    transition: all .35s ease;
 
     &:hover {
       background-color: var(--colorItemLinkHoveredBg);
       color: var(--colorItemLinkTextHovered);
+      transition: all .35s ease;
     }
   }
 }
