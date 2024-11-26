@@ -1,0 +1,40 @@
+.tabs {
+  --colorTabsBg: var(--color-white);
+  --colorTabsText: var(--color-secondary);
+  --colorTabsTextHovered: var(--color-primary);
+  --colorTabsBgHovered: var(--color-secondary-light);
+  --colorTabsBgActive: var(--color-primary-light);
+
+  --colorTabsBorder: var(--color-primary);
+  --colorTabsBorderRadius: var(--border-radius-medium);
+
+  &__btn {
+    padding: 12px 15px;
+    margin-right: 8px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-top-right-radius: var(--colorTabsBorderRadius);
+    border-top-left-radius: var(--colorTabsBorderRadius);
+    color: var(--colorTabsText);
+    font-weight: 500;
+    text-transform: uppercase;
+
+    :last-of-type {
+      margin-right: 0;
+    }
+
+    &:hover {
+      background-color: var(--colorTabsBgHovered);
+    }
+
+    &.active {
+      color: var(--colorTabsTextHovered);
+      background-color: var(--colorTabsBgActive);
+      border-bottom-color: var(--colorTabsBorder);
+    }
+  }
+
+  &__content-wrapper {
+    padding: 20px 10px;
+  }
+}
