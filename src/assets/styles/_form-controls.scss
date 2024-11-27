@@ -7,17 +7,28 @@
 
   --ColorLabelText: var(--color-text-dark);
   --ColorOptionBgHovered: var(--color-secondary-light);
+
+  --formItemShadowHovered: -1px 5px 11px var(--color-secondary-light);
 }
 
 .form-control {
   margin-bottom: 10px;
 
   &__label {
-    display: block;
-    width: 100%;
+    display: inline-block;
+    width: auto;
     margin-bottom: 10px;
     font-size: 16px;
     color: var(--ColorLabelText);
+
+    &:hover {
+
+      &~input,
+      &~textarea,
+      &~select {
+        box-shadow: none;
+      }
+    }
   }
 
 
@@ -35,6 +46,11 @@
     &:focus-visible {
       outline-color: var(--ColorInputFocused);
     }
+
+    &:hover {
+      box-shadow: var(--formItemShadowHovered);
+    }
+
   }
 
   &__textarea {
@@ -43,6 +59,10 @@
     &:focus,
     &:focus-visible {
       outline-color: var(--ColorInputFocused);
+    }
+
+    &:hover {
+      box-shadow: var(--formItemShadowHovered);
     }
   }
 
@@ -66,6 +86,10 @@
     &:focus,
     &:focus-visible {
       outline-color: var(--ColorInputFocused);
+    }
+
+    &:hover {
+      box-shadow: var(--formItemShadowHovered);
     }
   }
 }
