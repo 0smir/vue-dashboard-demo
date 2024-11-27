@@ -39,7 +39,7 @@
       </div>
       <div class="form-control form-control--btn-wrapper btn-wrapper">
         <BaseButton class="btn btn__default btn--medium btn--add" type="submit">Add Task</BaseButton>
-        <BaseButton class="btn btn__outlined btn--medium btn--cencel">Cancel</BaseButton>
+        <BaseButton class="btn btn__outlined btn--medium btn--cancel">Cancel</BaseButton>
       </div>
     </div>
   </form>
@@ -181,7 +181,7 @@ export default {
     }
   }
 
-  &--cencel {
+  &--cancel {
     width: 100%;
 
     @media (min-width: $md) {
