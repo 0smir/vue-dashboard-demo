@@ -7,7 +7,6 @@
     <div class="task__description">
       {{ task.description }}
     </div>
-
     <div class="task__info">
       <span class="task__info-id">
         <span :class="['task__priority', 'priority--' + task.priority]">
@@ -59,6 +58,10 @@ export default {
   border-left: 4px solid;
   color: var(--task-text-color);
   background-color: #fff;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
 
   &__info {

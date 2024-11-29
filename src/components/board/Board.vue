@@ -1,35 +1,30 @@
 <template>
   <div class="board">
-    <div v-for="column in columnsList" :class="['board__column', 'board__column--' + column.toLowerCase()]"
+    <BoardColumnItem v-for="column in columnsList" :key="column" :id="column" :column="column" :tasksList="tasksList"
       :style="boardColumnWidth">
-      <header class="board__column-header">
-        <h3 class="board__column-title">{{ column }}</h3>
-      </header>
-      <div class="board__column-content">
-        <div class="task-wrapper" v-for="task in tasksList">
-          <TaskItem v-if="column === task.status" :key="task.id" :task="task" />
-        </div>
-      </div>
-    </div>
+    </BoardColumnItem>
+
   </div>
 </template>
 
 <script>
-import TaskItem from '@/components/tasks/TaskItem.vue';
+import BoardColumnItem from '@/components/board/BoardColumnItem.vue';
 export default {
   props: ['columnsList', 'tasksList'],
+
   components: {
-    TaskItem
+    BoardColumnItem
   },
 
   computed: {
     boardColumnWidth() {
-      let width = (100 / this.columnsList.length) + '%';
-      let colWidth = `width: calc( ${width} - 10px)`;
-      return colWidth;
-    }
-  },
+      let width = (window.innerWidth >= 769) ? (100 / this.columnsList.length) + '%' : 100 + '%';
+      let colWidth = (window.innerWidth >= 769) ? `width: calc( ${width} - 10px)` : `width: calc( ${width})`;
 
+      return colWidth;
+    },
+
+  }
 }
 </script>
 
@@ -41,17 +36,22 @@ export default {
   --board-header-border-radius: var(--border-radius-medium);
   --board-header-text-color: var(--color-secondary);
 
-
   --column-bg-hover: var(--color-primary-light);
 
   display: flex;
   justify-content: space-between;
   border-radius: var(--board-header-border-radius);
   margin: 20px 0;
+  flex-direction: column;
+
+  @media (min-width: $md) {
+    flex-direction: row;
+  }
 
   &__column {
     flex-direction: column;
-    width: max(33%);
+    width: 100%;
+    margin-bottom: 20px;
     border-radius: var(--board-header-border-radius);
 
     &:hover {
@@ -61,31 +61,10 @@ export default {
         background-color: var(--board-header-border);
       }
     }
-  }
 
-  &__column-content {
-    padding: 20px clamp(5px, 10px, 15px);
-  }
-
-  &__column-title {
-    font-size: 20px;
-  }
-
-  &__column-header {
-    padding: 8px 25px;
-    background-color: var(--board-header-bg);
-    border: 2px solid var(--board-header-border);
-    color: var(--board-header-text-color);
-    border-radius: var(--board-header-border-radius);
-
-    &:hover {
-      background-color: var(--board-header-border);
-      border: 2px solid var(--board-header-border-hovered);
+    @media (min-width: $md) {
+      width: max(33%);
     }
   }
-}
-
-.task-wrapper {
-  margin-bottom: 10px;
 }
 </style>
