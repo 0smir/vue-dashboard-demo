@@ -212,6 +212,8 @@ export default {
       width: 100%;
     }
   }
+
+
 }
 
 .form-dialog {
@@ -230,6 +232,28 @@ export default {
 
     &__textarea {
       height: 80px;
+    }
+
+    &--description {
+      margin-bottom: 0;
+    }
+  }
+
+  .btn {
+    &-wrapper {
+      flex-direction: row;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    &--add {
+      margin-bottom: 0;
+      order: 2;
+    }
+
+    &--add,
+    &--cancel {
+      width: auto;
     }
   }
 }
