@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      isExpanded: true
+      isExpanded: false
     }
   },
 
