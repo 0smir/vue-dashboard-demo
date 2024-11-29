@@ -167,6 +167,7 @@ export default {
     @media (min-width: $md) {
       flex-direction: row;
       justify-content: flex-end;
+      margin-top: 45px;
     }
   }
 
