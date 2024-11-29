@@ -67,7 +67,7 @@ export default {
   top: 50%;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 40px);
   max-width: var(--DialogWidth);
   height: 100%;
   max-height: var(--DialogHeight);
@@ -86,7 +86,7 @@ export default {
   &__header {
     background-color: var(--ColorDialogHeaderBG);
     color: var(--ColorDialogHeadeText);
-    width: 100%;
+    // width: 100%;
     padding: 15px;
   }
 
