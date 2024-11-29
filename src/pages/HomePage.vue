@@ -33,7 +33,7 @@ export default {
       tasks: this.$store.getters['tasks/getTasksList'],
       taskPriorityList: this.$store.getters['tasks/getPriorityList'],
       columnsToDisplay: this.$store.getters['boards/getDefaultBoardColumns'],
-      addTaskDialogDisplay: true
+      addTaskDialogDisplay: false
     }
   },
 
