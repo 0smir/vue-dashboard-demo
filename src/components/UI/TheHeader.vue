@@ -24,31 +24,38 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 header {
     padding: 15px 0;
     width: 100%;
     background-color: var(--color-primary);
+
 }
 
 .header-logo {
     font-weight: 700;
 }
 
-nav {
-    margin: 0 auto;
-}
-
 .header-nav {
-    display: flex;
+    display: none;
     list-style: none;
+
+    @media (min-width: 769px) {
+        display: flex;
+    }
+
+    &__item {
+        margin-right: 10px;
+    }
 }
 
-.header-nav__item {
-    margin-right: 10px;
+.search-form-wrapper {
+    display: none;
+
+    @media (min-width: 769px) {
+        display: block;
+    }
 }
-
-
 
 .header-content {
     display: flex;
