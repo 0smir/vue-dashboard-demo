@@ -33,6 +33,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+nav {
+  margin: 0 auto;
+}
+
 a {
   color: var(--color-link-text);
   text-decoration: none;
