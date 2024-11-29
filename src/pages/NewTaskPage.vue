@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Create New Task</h1>
+    <h1 class="title">Create New Task</h1>
     <CreateTaskForm></CreateTaskForm>
   </div>
 </template>
@@ -16,4 +16,10 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.title {
+  margin: 40px 0 40px;
+  text-align: center;
+  text-transform: uppercase;
+}
+</style>

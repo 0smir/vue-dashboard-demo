@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      activeComponentName: 'PersonsList',
+      activeComponentName: 'AddPersonForm',
       peopleList: this.$store.getters['people/getEmployeesList']
     }
   },
