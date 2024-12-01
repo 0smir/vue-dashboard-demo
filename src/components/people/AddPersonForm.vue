@@ -1,6 +1,6 @@
 <template>
   <h2 class="header header--add-person">Add New User</h2>
-  <form @submit.prevent="submitForm" class="form form-add-person">
+  <form @submit.prevent="submitForm" class="form form-add-person" autocomplete="off">
     <div class="form__content form__content--add-person">
       <div class="form-control form-control--name">
         <label for="name" class="form-control__label">Name: </label>
@@ -9,10 +9,6 @@
       <div class="form-control form-control--lastname">
         <label for="lastName" class="form-control__label">Last Name:</label>
         <input class="form-control__input" id="lastName" type="text" v-model="user.lastName.value">
-      </div>
-      <div class="form-control form-control--email">
-        <label for="email" class="form-control__label">Email:</label>
-        <input class="form-control__input" id="email" type="email" v-model="user.email.value">
       </div>
       <div class="form-control form-control--position">
         <label for="role" class="form-control__label">Position:</label>
@@ -31,6 +27,20 @@
             {{ project.title }}
           </option>
         </select>
+      </div>
+      <div class="form-control form-control--email">
+        <label for="email" class="form-control__label">Email:</label>
+        <input class="form-control__input" id="email" autocomplete="off" type="email" v-model="user.email.value">
+      </div>
+      <div class="form-control form-control--password">
+        <label class="form-control__label" for="password">Password:</label>
+        <input class="form-control__input" type="password" id="password" v-model.trim="user.password.value"
+          autocomplete="off" />
+      </div>
+      <div class="form-control form-control--password">
+        <label class="form-control__label" for="confirm_password">Confirm Password:</label>
+        <input class="form-control__input" type="password" name="confirm_password" id="confirm_password"
+          v-model.trim="user.confirm_password.value" @keyup="comparePasswords" autocomplete="off" />
       </div>
       <div class="form-control__btn-wrapper btn-wrapper">
         <BaseButton class="btn btn__default btn--medium btn--add">Add User</BaseButton>
@@ -56,6 +66,14 @@ export default {
           isValid: true
         },
         email: {
+          value: '',
+          isValid: true
+        },
+        password: {
+          value: '',
+          isValid: true
+        },
+        confirm_password: {
           value: '',
           isValid: true
         },
@@ -91,6 +109,33 @@ export default {
         this.user.project.isValid = false;
         this.isFormValid = false;
       }
+      if (
+        this.user.email.value === '' ||
+        !this.user.email.value.includes('@') ||
+        this.user.email.value.length < 4
+      ) {
+        this.user.email.isValid = false;
+        this.isFormValid = false;
+      }
+      if (this.user.password.value.length === '' ||
+        this.user.password.value.length < 5) {
+        this.user.password.isValid = false;
+        this.isFormValid = false;
+      }
+      // if (this.user.confirm_password.value.length !== this.user.confirm_password.value.length) {
+      //   this.user.confirm_password.isValid = false;
+      //   this.isFormValid = false;
+      // }
+    },
+    comparePasswords(e) {
+      let confirmPassVal = e.target.value;
+      console.log(confirmPassVal);
+      if (confirmPassVal !== this.user.password.value) {
+        console.log('error');
+        this.user.confirm_password.isValid = false;
+        this.isFormValid = false;
+      }
+
     },
     submitForm() {
       this.validateForm();
