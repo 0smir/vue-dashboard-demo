@@ -144,7 +144,7 @@ export default {
     },
     comparePasswords(e) {
       let confirmPassVal = e.target.value;
-      console.log(confirmPassVal);
+
       if (confirmPassVal !== this.user.password.value) {
         console.log('error');
         this.user.confirm_password.isValid = false;
@@ -173,21 +173,8 @@ export default {
       this.user.lastName.value = '';
       this.user.position.value = '';
       this.user.project.value = '';
-    },
-
-    togglePassVisibility() {
-
-    },
-    showPassword() {
-      this.passwordIsVisible = true;
-      this.inputType = 'text';
-    },
-    hidePassword() {
-      this.passwordIsVisible = false;
-      this.inputType = this.type === 'password' ? 'password' : 'pass';
-    },
+    }
   }
-
 }
 </script>
 
