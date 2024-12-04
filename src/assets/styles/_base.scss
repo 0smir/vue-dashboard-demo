@@ -6,12 +6,12 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  font-weight: normal;
 }
 
 html {
   margin: 0;
   scrollbar-gutter: stable;
+  font-size: 10px;
 }
 
 body {
@@ -28,7 +28,7 @@ body {
     background-color 0.5s;
   line-height: 1.42;
   font-family: var(--font-main);
-  font-size: 14px;
+  font-size: 1.4rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
