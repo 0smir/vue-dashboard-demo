@@ -38,7 +38,7 @@ export default {
     }
   },
   created() {
-    console.log(this.person);
+    console.log(this.person.name);
   }
 
 }
