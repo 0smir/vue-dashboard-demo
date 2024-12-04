@@ -25,7 +25,6 @@ export default {
     display: grid;
     grid-template-columns: repeat(4, calc(25% - 15px));
     gap: 20px 15px;
-    // background: pink;
   }
 }
 </style>
