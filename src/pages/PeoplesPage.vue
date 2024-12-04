@@ -36,6 +36,7 @@ export default {
     },
     toggleTab(componentName) {
       if (componentName === 'PersonsList') {
+        this.loadUsersList();
         this.peopleList = this.$store.getters['people/getEmployeesList'];
       }
       this.activeComponentName = componentName;
