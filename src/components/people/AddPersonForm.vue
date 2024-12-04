@@ -34,13 +34,26 @@
       </div>
       <div class="form-control form-control--password">
         <label class="form-control__label" for="password">Password:</label>
-        <input class="form-control__input" type="password" id="password" v-model.trim="user.password.value"
-          autocomplete="off" />
+        <div class="form-control__input-wrapper form-control__input-wrapper--password">
+          <input class="form-control__input" :type="showPass ? 'text' : 'password'" id="password"
+            v-model.trim="user.password.value" autocomplete="off" />
+          <span class="password-visibility-wrapper flex" @click="showPass = !showPass">
+            <SvgIcon v-if="showPass" name="eye" class="icon" />
+            <SvgIcon v-else name="eyeSplash" class="icon" />
+          </span>
+        </div>
       </div>
       <div class="form-control form-control--password">
         <label class="form-control__label" for="confirm_password">Confirm Password:</label>
-        <input class="form-control__input" type="password" name="confirm_password" id="confirm_password"
-          v-model.trim="user.confirm_password.value" @keyup="comparePasswords" autocomplete="off" />
+        <div class="form-control__input-wrapper form-control__input-wrapper--password">
+          <input class="form-control__input" :type="showConfirmPass ? 'text' : 'password'" name="confirm_password"
+            id="confirm_password" v-model.trim="user.confirm_password.value" @keyup="comparePasswords"
+            autocomplete="off" />
+          <span class="password-visibility-wrapper" @click="showConfirmPass = !showConfirmPass">
+            <SvgIcon v-if="showConfirmPass" name="eye" class="icon" />
+            <SvgIcon v-else name="eyeSplash" class="icon" />
+          </span>
+        </div>
       </div>
       <div class="form-control__btn-wrapper btn-wrapper">
         <BaseButton class="btn btn__default btn--medium btn--add">Add User</BaseButton>
@@ -56,6 +69,8 @@ export default {
     return {
       positionsList: this.$store.getters['people/getPositionsList'],
       projects: this.$store.getters['projects/getProjects'],
+      showPass: false,
+      showConfirmPass: false,
       user: {
         name: {
           value: '',
@@ -158,7 +173,19 @@ export default {
       this.user.lastName.value = '';
       this.user.position.value = '';
       this.user.project.value = '';
-    }
+    },
+
+    togglePassVisibility() {
+
+    },
+    showPassword() {
+      this.passwordIsVisible = true;
+      this.inputType = 'text';
+    },
+    hidePassword() {
+      this.passwordIsVisible = false;
+      this.inputType = this.type === 'password' ? 'password' : 'pass';
+    },
   }
 
 }

@@ -31,7 +31,6 @@
     }
   }
 
-
   &__input,
   &__textarea {
     display: inline-block;
@@ -50,7 +49,6 @@
     &:hover {
       box-shadow: var(--formItemShadowHovered);
     }
-
   }
 
   &__textarea {
@@ -92,6 +90,26 @@
       box-shadow: var(--formItemShadowHovered);
     }
   }
+
+  &__input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+}
+
+.password-visibility-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px;
+  display: flex;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  z-index: 10;
+  user-select: none;
+  color: var(--color-primary-medium);
 }
 
 .smart-list-box {}
