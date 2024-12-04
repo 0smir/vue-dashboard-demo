@@ -23,8 +23,9 @@ export default {
 .userslist {
   &__wrapper {
     display: grid;
-    grid-template-columns: repeat(4, 200px);
-    column-gap: 15px;
+    grid-template-columns: repeat(4, calc(25% - 15px));
+    gap: 20px 15px;
+    // background: pink;
   }
 }
 </style>

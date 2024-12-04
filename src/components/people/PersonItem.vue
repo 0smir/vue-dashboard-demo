@@ -36,11 +36,7 @@ export default {
     profileLink() {
       return '/people/' + this.person.id;
     }
-  },
-  created() {
-    console.log(this.person.name);
   }
-
 }
 </script>
 
