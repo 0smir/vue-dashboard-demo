@@ -3,6 +3,6 @@ export default {
     state.people.push(payload);
   },
   setEmployees(state, payload) {
-    state.people.push(payload);
+    state.people.push(...payload);
   }
 }
