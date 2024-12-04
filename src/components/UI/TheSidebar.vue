@@ -44,11 +44,11 @@
           <span class="sidebar__link-text">People</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/tasks/new">
+        <router-link class="sidebar__link" to="/create">
           <span class="sidebar__link-icon">
             <SvgIcon name="add" class="icon" />
           </span>
-          <span class="sidebar__link-text">Add New Task</span>
+          <span class="sidebar__link-text">Create</span>
         </router-link>
       </li>
     </ul>
