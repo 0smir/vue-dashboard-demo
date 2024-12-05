@@ -7,7 +7,9 @@ export default {
   namespaced: true,
   state() {
     return {
-      users: [],
+      userID: null,
+      token: null,
+      didAutoLogout: false
     }
   },
   mutations: mutations,
