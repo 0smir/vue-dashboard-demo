@@ -1,64 +1,79 @@
 <template>
-    <header>
-        <div class="container header-content">
-            <router-link to="/" class="header-logo">BoardGo</router-link>
-            <nav>
-                <ul class="header-nav">
-                    <li class="header-nav__item"><router-link to="/">Home</router-link></li>
-                    <li class="header-nav__item"><router-link to="/">About</router-link></li>
-                    <li class="header-nav__item"><router-link to="/">Projects</router-link></li>
-                </ul>
-            </nav>
-
-            <div class="search-form-wrapper">
-                <form><input type="search"> <button>search</button></form>
-            </div>
-        </div>
-
-    </header>
+  <header class="header">
+    <div class="container header__content">
+      <router-link to="/" class="header-logo">
+        <SvgIcon name="logo" class="icon icon--logo header-logo__icon" />
+        <span class="company-name">GlobalBoard</span>
+      </router-link>
+      <nav>
+        <ul class="header__nav">
+          <li class="header__nav-item"><router-link to="/">Home</router-link></li>
+          <li class="header__nav-item"><router-link to="/">About</router-link></li>
+          <li class="header__nav-item"><router-link to="/">Projects</router-link></li>
+        </ul>
+      </nav>
+      <div class="">
+        <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
+        <BaseButton v-else>Logout</BaseButton>
+      </div>
+    </div>
+  </header>
 </template>
 
 <script>
 export default {
-
+  data() {
+    return {
+      isLoggedIn: this.$store.getters['users/isAuthenticated']
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-header {
-    padding: 15px 0;
-    width: 100%;
-    background-color: var(--color-primary);
+.header {
+  padding: 15px 0;
+  width: 100%;
+  background-color: var(--color-primary);
 
-}
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.header-logo {
+  .header-logo {
+    display: flex;
+    align-items: center;
     font-weight: 700;
-}
+    font-size: 26px;
+    text-decoration: none;
 
-.header-nav {
+    &:hover {
+      color: var(--color-primary-light);
+    }
+
+    .company-name {
+      margin-left: 7px;
+    }
+
+    &__icon {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+
+  &__nav {
     display: none;
     list-style: none;
 
     @media (min-width: 769px) {
-        display: flex;
+      display: flex;
     }
 
-    &__item {
-        margin-right: 10px;
+    &-item {
+      margin-right: 10px;
     }
-}
-
-.search-form-wrapper {
-    display: none;
-
-    @media (min-width: 769px) {
-        display: block;
-    }
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
+  }
 }
 </style>
