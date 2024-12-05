@@ -5,12 +5,11 @@
     <BaseButton :class="['tabs__btn', { active: activeComponentName === 'PersonsList' }]"
       @click="toggleTab('PersonsList')">All Employees</BaseButton>
     <div class="tabs__content-wrapper">
-      <KeepAlive>
+      <router-view class="my-divan-content"></router-view>
+      <!-- <KeepAlive>
         <component :is="activeComponentName" :peopleList="peopleList"></component>
-      </KeepAlive>
-
+      </KeepAlive> -->
     </div>
-
   </div>
 </template>
 
@@ -36,8 +35,11 @@ export default {
     },
     toggleTab(componentName) {
       if (componentName === 'PersonsList') {
+        this.$router.push('all');
         this.loadUsersList();
         this.peopleList = this.$store.getters['people/getEmployeesList'];
+      } else {
+        this.$router.push('registration');
       }
       this.activeComponentName = componentName;
     },
