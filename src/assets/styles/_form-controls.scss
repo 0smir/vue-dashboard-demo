@@ -43,7 +43,7 @@
     padding: 8px 12px;
     color: var(--ColorInputText);
     background-color: var(--ColorInputBg);
-    border: 1px solid var(--ColorInputBorder);
+    border: 2px solid var(--ColorInputBorder);
     border-radius: var(--InputBorderRadius);
 
     &:focus,
@@ -77,7 +77,7 @@
     width: 100%;
     color: var(--ColorInputText);
     background-color: var(--ColorInputBg);
-    border: 1px solid var(--ColorInputBorder);
+    border: 2px solid var(--ColorInputBorder);
     border-radius: var(--InputBorderRadius);
     appearance: none;
     -webkit-appearance: none;
@@ -99,6 +99,10 @@
   &__input-wrapper {
     position: relative;
     width: 100%;
+  }
+
+  .error-text {
+    color: var(--color-danger);
   }
 }
 
