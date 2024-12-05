@@ -194,10 +194,14 @@ export default {
 }
 
 .form-control {
-  width: calc(50% - 7px);
+  width: 100%;
 
-  &--email {
-    width: 100%;
+  @media (min-width: $md) {
+    width: calc(50% - 7px);
+
+    &--email {
+      width: 100%;
+    }
   }
 }
 
