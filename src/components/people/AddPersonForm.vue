@@ -108,19 +108,19 @@ export default {
   methods: {
     validateForm() {
       this.isFormValid = true;
-      if (this.user.name.value.length < 2) {
+      if (this.user.name.value === '' || this.user.name.value.length < 2) {
         this.user.name.isValid = false;
         this.isFormValid = false;
       }
-      if (this.user.lastName.value.length < 2) {
+      if (this.user.lastName === '' || this.user.lastName.value.length < 2) {
         this.user.lastName.isValid = false;
         this.isFormValid = false;
       }
-      if (this.user.position.value.length === '') {
+      if (this.user.position.value === '') {
         this.user.position.isValid = false;
         this.isFormValid = false;
       }
-      if (this.user.project.value.length === '') {
+      if (this.user.project.value === '') {
         this.user.project.isValid = false;
         this.isFormValid = false;
       }
@@ -132,15 +132,15 @@ export default {
         this.user.email.isValid = false;
         this.isFormValid = false;
       }
-      if (this.user.password.value.length === '' ||
+      if (this.user.password.value === '' ||
         this.user.password.value.length < 5) {
         this.user.password.isValid = false;
         this.isFormValid = false;
       }
-      // if (this.user.confirm_password.value.length !== this.user.confirm_password.value.length) {
-      //   this.user.confirm_password.isValid = false;
-      //   this.isFormValid = false;
-      // }
+      if (this.user.confirm_password.value === '' || this.user.confirm_password.value !== this.user.confirm_password.value) {
+        this.user.confirm_password.isValid = false;
+        this.isFormValid = false;
+      }
     },
     comparePasswords(e) {
       let confirmPassVal = e.target.value;
@@ -191,19 +191,21 @@ export default {
   justify-content: space-between;
   max-width: 760px;
   margin: 0 auto;
-}
 
-.form-control {
-  width: 100%;
+  .form-control {
+    width: 100%;
 
-  @media (min-width: $md) {
-    width: calc(50% - 7px);
+    @media (min-width: $md) {
+      width: calc(50% - 7px);
 
-    &--email {
-      width: 100%;
+      &--email {
+        width: 100%;
+      }
     }
   }
 }
+
+
 
 .btn {
   &-wrapper {
