@@ -41,5 +41,9 @@ if (props.iconType) {
     object-fit: contain;
   }
 
+  &--logo {
+    transform: rotate(45deg);
+  }
+
 }
 </style>
