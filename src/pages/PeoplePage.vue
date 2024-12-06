@@ -1,14 +1,11 @@
 <template>
   <div class="tabs container">
-    <BaseButton :class="['tabs__btn', { active: activeComponentName === 'AddPersonForm' }]"
-      @click="toggleTab('AddPersonForm')">Add New Employee</BaseButton>
-    <BaseButton :class="['tabs__btn', { active: activeComponentName === 'PersonsList' }]"
-      @click="toggleTab('PersonsList')">All Employees</BaseButton>
+    <RouterLink to="/people/registration" :class="['tabs__btn', { active: activeTab === 'registration' }]"
+      @click="toggleTab('AddPersonForm')">Add New Employee</RouterLink>
+    <RouterLink to="/people/all" :class="['tabs__btn', { active: activeTab === 'all' }]"
+      @click="toggleTab('PersonsList')">All Employees</RouterLink>
     <div class="tabs__content-wrapper">
-      <router-view class="my-divan-content"></router-view>
-      <!-- <KeepAlive>
-        <component :is="activeComponentName" :peopleList="peopleList"></component>
-      </KeepAlive> -->
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -22,37 +19,12 @@ export default {
     AddPersonForm,
     PersonsList
   },
-  data() {
-    return {
-      activeComponentName: 'AddPersonForm',
-      peopleList: this.$store.getters['people/getEmployeesList']
+
+  computed: {
+    activeTab() {
+      return this.$route.name;
     }
-  },
-
-  methods: {
-    async loadUsersList() {
-      this.$store.dispatch('people/loadEmployeesList');
-    },
-    toggleTab(componentName) {
-      if (componentName === 'PersonsList') {
-        this.$router.push('all');
-        this.loadUsersList();
-        this.peopleList = this.$store.getters['people/getEmployeesList'];
-      } else {
-        this.$router.push('registration');
-      }
-      this.activeComponentName = componentName;
-    },
-
-  },
-
-  mounted() {
-    if (this.activeComponentName === 'PersonsList') {
-      this.loadUsersList();
-    }
-
   }
-
 }
 </script>
 
