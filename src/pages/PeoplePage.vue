@@ -1,9 +1,8 @@
 <template>
   <div class="tabs container">
-    <RouterLink to="/people/registration" :class="['tabs__btn', { active: activeTab === 'registration' }]"
-      @click="toggleTab('AddPersonForm')">Add New Employee</RouterLink>
-    <RouterLink to="/people/all" :class="['tabs__btn', { active: activeTab === 'all' }]"
-      @click="toggleTab('PersonsList')">All Employees</RouterLink>
+    <RouterLink to="/people/registration" :class="['tabs__btn', { active: activeTab === 'registration' }]">Registration
+    </RouterLink>
+    <RouterLink to="/people/all" :class="['tabs__btn', { active: activeTab === 'all' }]">See all</RouterLink>
     <div class="tabs__content-wrapper">
       <router-view></router-view>
     </div>
