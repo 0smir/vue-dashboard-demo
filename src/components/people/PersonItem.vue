@@ -136,7 +136,7 @@ export default {
     overflow: hidden;
     margin: 0 auto 20px;
     width: 50%;
-    padding-top: 47%;
+    aspect-ratio: 1;
     border: 3px solid var(--colorItemImgBorder);
     color: var(--colorItemImgBorder);
   }
@@ -160,6 +160,9 @@ export default {
   }
 
   &__link {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
     padding: 15px;
     background-color: var(--colorItemLinkBg);
     color: var(--colorItemLinkText);
