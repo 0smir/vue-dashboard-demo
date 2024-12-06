@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
+  <div class="login-form__wrapper">
     <form class="form from--login" @submit.prevent="submitForm">
       <div class="form__content">
-        <div class="form-control form-control--email">
+        <div :class="['form-control', 'form-control--email', { error: !user.email.isValid }]">
           <label for="email" class="form-control__label">Email</label>
           <input id="email" type="text" autocomplete="off" class="form-control__input" v-model="user.email.value">
           <p v-if="!user.email.isValid" class="error-text"> Please, enter a valid email address</p>
         </div>
-        <div class="form-control form-control--password">
+        <div :class="['form-control', 'form-control--password', { error: !user.password.isValid }]">
           <label class="form-control__label" for="password">Password:</label>
           <div class="form-control__input-wrapper form-control__input-wrapper--password">
             <input class="form-control__input" :type="showPass ? 'text' : 'password'" id="password"
@@ -17,8 +17,10 @@
               <SvgIcon v-else name="eyeSplash" class="icon" />
             </span>
           </div>
+          <p v-if="!user.password.isValid" class="error-text"> Password is required and must be at least 8
+            characters long.</p>
         </div>
-        <div class="form-control__btn-wrapper btn-wrapper">
+        <div class="form-control__btn-wrapper login-form__btn-wrapper">
           <BaseButton class="btn btn__default btn--medium btn--login">Login</BaseButton>
           <RouterLink class="link link--forget-pass" to="/people/registration">Registration</RouterLink>
           <RouterLink class="link link--forget-pass" to="/">Forgot password?</RouterLink>
@@ -49,7 +51,7 @@ export default {
   methods: {
     submitForm() {
       console.log('submitForm');
-
+      this.clearError();
       this.isFormValid = true;
       if (
         this.user.email.value === '' ||
@@ -72,21 +74,31 @@ export default {
         email: this.user.email,
         password: this.user.password
       };
+    },
+    clearFormFields() {
+      this.user.email.value = '';
+      this.user.password.value = '';
+    },
+    clearError() {
+      this.user.email.isValid = true;
+      this.user.password.isValid = true;
     }
-  },
-  clearFormFields() {
-    this.user.email = '';
-    this.user.password = '';
   }
 
 }
 </script>
 
 <style lang="scss" scoped>
-.btn-wrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.login-form {
+  &__wrapper {
+    max-width: 36rem;
+  }
+
+  &__btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 }
 
 .btn--login {
