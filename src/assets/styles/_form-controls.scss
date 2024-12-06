@@ -101,14 +101,27 @@
     width: 100%;
   }
 
+  &.error {
+    .form-control__label {
+      color: var(--color-danger);
+    }
+
+    .form-control__input,
+    .form-control__textarea,
+    .form-control__select {
+      border: 2px solid var(--color-danger);
+    }
+  }
+
   .error-text {
+    font-size: 1.3rem;
     color: var(--color-danger);
   }
 }
 
 .password-visibility-wrapper {
   position: absolute;
-  top: 50%;
+  top: 20px;
   transform: translateY(-50%);
   right: 5px;
   display: flex;
