@@ -25,6 +25,7 @@
 
     &:hover {
       background-color: var(--colorTabsBgHovered);
+      text-decoration: none;
     }
 
     &.active {
