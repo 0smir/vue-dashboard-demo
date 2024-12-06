@@ -1,16 +1,18 @@
 <template>
-  <h2 class="header header--add-person">Add New User</h2>
+  <h2 class="header header--add-person">Registration</h2>
   <form @submit.prevent="submitForm" class="form form-add-person" autocomplete="off">
     <div class="form__content form__content--add-person">
-      <div class="form-control form-control--name">
+      <div :class="['form-control', 'form-control--name', { error: !user.name.isValid }]">
         <label for="name" class="form-control__label">Name: </label>
         <input class="form-control__input" id="name" type="text" v-model="user.name.value">
+        <p class="error-text" v-if="!user.name.isValid">{{ user.name.errorMessage }}</p>
       </div>
-      <div class="form-control form-control--lastname">
+      <div :class="['form-control', 'form-control--lastname', { error: !user.lastName.isValid }]">
         <label for="lastName" class="form-control__label">Last Name:</label>
         <input class="form-control__input" id="lastName" type="text" v-model="user.lastName.value">
+        <p class="error-text" v-if="!user.lastName.isValid">{{ user.lastName.errorMessage }}</p>
       </div>
-      <div class="form-control form-control--position">
+      <div :class="['form-control', 'form-control--position', { error: !user.position.isValid }]">
         <label for="role" class="form-control__label">Position:</label>
         <select class="form-control__select" name="role" id="position" v-model="user.position.value">
           <option value="" disabled selected>Select your Role</option>
@@ -18,8 +20,9 @@
             {{ role }}
           </option>
         </select>
+        <p class="error-text" v-if="!user.position.isValid">{{ user.position.errorMessage }}</p>
       </div>
-      <div class="form-control form-control--project">
+      <div :class="['form-control', 'form-control--project', { error: !user.project.isValid }]">
         <label for="project" class="form-control__label">Project: </label>
         <select class="form-control__select" name="projectName" id="project" v-model="user.project.value">
           <option value="" disabled selected>Select Project</option>
@@ -27,12 +30,14 @@
             {{ project.title }}
           </option>
         </select>
+        <p class="error-text" v-if="!user.project.isValid">{{ user.project.errorMessage }}</p>
       </div>
-      <div class="form-control form-control--email">
+      <div :class="['form-control', 'form-control--email', { error: !user.email.isValid }]">
         <label for="email" class="form-control__label">Email:</label>
         <input class="form-control__input" id="email" autocomplete="off" type="email" v-model="user.email.value">
+        <p class="error-text" v-if="!user.email.isValid">{{ user.email.errorMessage }}</p>
       </div>
-      <div class="form-control form-control--password">
+      <div :class="['form-control', 'form-control--password', { error: !user.password.isValid }]">
         <label class="form-control__label" for="password">Password:</label>
         <div class="form-control__input-wrapper form-control__input-wrapper--password">
           <input class="form-control__input" :type="showPass ? 'text' : 'password'" id="password"
@@ -41,9 +46,10 @@
             <SvgIcon v-if="showPass" name="eye" class="icon" />
             <SvgIcon v-else name="eyeSplash" class="icon" />
           </span>
+          <p class="error-text" v-if="!user.password.isValid">{{ user.password.errorMessage }}</p>
         </div>
       </div>
-      <div class="form-control form-control--password">
+      <div :class="['form-control', 'form-control--password', { error: !user.confirm_password.isValid }]">
         <label class="form-control__label" for="confirm_password">Confirm Password:</label>
         <div class="form-control__input-wrapper form-control__input-wrapper--password">
           <input class="form-control__input" :type="showConfirmPass ? 'text' : 'password'" name="confirm_password"
@@ -53,6 +59,7 @@
             <SvgIcon v-if="showConfirmPass" name="eye" class="icon" />
             <SvgIcon v-else name="eyeSplash" class="icon" />
           </span>
+          <p class="error-text" v-if="!user.confirm_password.isValid">{{ user.confirm_password.errorMessage }}</p>
         </div>
       </div>
       <div class="form-control__btn-wrapper btn-wrapper">
@@ -74,31 +81,38 @@ export default {
       user: {
         name: {
           value: '',
-          isValid: true
+          isValid: true,
+          errorMessage: 'Name is requiered! It must be at least 2 characters long.'
         },
         lastName: {
           value: '',
-          isValid: true
-        },
-        email: {
-          value: '',
-          isValid: true
-        },
-        password: {
-          value: '',
-          isValid: true
-        },
-        confirm_password: {
-          value: '',
-          isValid: true
+          isValid: true,
+          errorMessage: 'Last name is requiered! It must be at least 2 characters long.'
         },
         position: {
           value: '',
-          isValid: true
+          isValid: true,
+          errorMessage: 'Please select your position from the list.'
         },
         project: {
           value: '',
-          isValid: true
+          isValid: true,
+          errorMessage: 'Project assignment is required to proceed.'
+        },
+        email: {
+          value: '',
+          isValid: true,
+          errorMessage: 'Please enter a valid email address (e.g., name@example.com).'
+        },
+        password: {
+          value: '',
+          isValid: true,
+          errorMessage: 'Password must be at least 5 characters long.'
+        },
+        confirm_password: {
+          value: '',
+          isValid: true,
+          errorMessage: 'Passwords do not match. Please try again.'
         }
       },
       isFormValid: true
@@ -107,22 +121,32 @@ export default {
 
   methods: {
     validateForm() {
+      this.clearError();
       this.isFormValid = true;
+
       if (this.user.name.value === '' || this.user.name.value.length < 2) {
         this.user.name.isValid = false;
+        this.user.name.errorMessage = this.user.name.errorMessage;
         this.isFormValid = false;
+        return;
       }
       if (this.user.lastName === '' || this.user.lastName.value.length < 2) {
         this.user.lastName.isValid = false;
+        this.user.name.errorMessage = this.user.lastName.errorMessage;
         this.isFormValid = false;
+        return;
       }
       if (this.user.position.value === '') {
         this.user.position.isValid = false;
+        this.user.position.errorMessage = this.user.position.errorMessage;
         this.isFormValid = false;
+        return;
       }
       if (this.user.project.value === '') {
         this.user.project.isValid = false;
+        this.user.project.errorMessage = this.user.project.errorMessage;
         this.isFormValid = false;
+        return;
       }
       if (
         this.user.email.value === '' ||
@@ -130,16 +154,22 @@ export default {
         this.user.email.value.length < 4
       ) {
         this.user.email.isValid = false;
+        this.user.email.errorMessage = this.user.email.errorMessage;
         this.isFormValid = false;
+        return;
       }
       if (this.user.password.value === '' ||
         this.user.password.value.length < 5) {
         this.user.password.isValid = false;
+        this.user.password.errorMessage = this.user.password.errorMessage;
         this.isFormValid = false;
+        return;
       }
-      if (this.user.confirm_password.value === '' || this.user.confirm_password.value !== this.user.confirm_password.value) {
+      if (this.user.confirm_password.value === '' || this.user.password.value !== this.user.confirm_password.value) {
         this.user.confirm_password.isValid = false;
+        this.user.confirm_password.errorMessage = this.user.confirm_password.errorMessage;
         this.isFormValid = false;
+        return;
       }
     },
     comparePasswords(e) {
@@ -164,7 +194,9 @@ export default {
         name: this.user.name.value,
         lastName: this.user.lastName.value,
         position: this.user.position.value,
-        project: this.user.project.value
+        project: this.user.project.value,
+        email: this.user.email.value,
+        password: this.user.password.value
       }
       this.$store.dispatch('people/addEmployee', userData);
     },
@@ -173,6 +205,16 @@ export default {
       this.user.lastName.value = '';
       this.user.position.value = '';
       this.user.project.value = '';
+      this.user.email.value = '';
+      this.user.password.value = '';
+    },
+    clearError() {
+      this.user.name.isValid = true;
+      this.user.lastName.isValid = true;
+      this.user.position.isValid = true;
+      this.user.project.isValid = true;
+      this.user.email.isValid = true;
+      this.user.password.isValid = true;
     }
   }
 }
