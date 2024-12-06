@@ -5,10 +5,16 @@ const NotFound = () => import('@/pages/NotFound.vue');
 const TasksList = () => import('@/pages/AllTasksPage.vue');
 const TaskDetail = () => import('@/pages/TaskPage.vue');
 const NewTask = () => import('@/pages/NewTaskPage.vue');
-const Employees = () => import('@/pages/PeoplesPage.vue');
+const Employees = () => import('@/pages/PeoplePage.vue');
 const Person = () => import('@/pages/PersonPage.vue');
 const CreatePage = () => import('@/pages/CreatePage.vue');
 const NewBoardPage = () => import('@/pages/NewBoard.vue');
+const LoginPage = () => import('@/pages/LoginPage.vue');
+
+
+const AddPersonForm = () => import('@/components/people/AddPersonForm.vue');
+const PersonsList = () => import('@/components/people/PersonsList.vue');
+
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,6 +26,10 @@ const router = createRouter({
     {
       path: '/create',
       component: CreatePage,
+    },
+    {
+      path: '/login',
+      component: LoginPage
     },
     {
       path: '/tasks',
@@ -37,6 +47,19 @@ const router = createRouter({
     {
       path: '/people',
       component: Employees,
+      redirect: '/people/all', // Redirect to the default tab
+      children: [
+        {
+          path: 'registration',
+          name: 'registration',
+          component: AddPersonForm,
+        },
+        {
+          path: 'all',
+          name: 'all',
+          component: PersonsList,
+        },
+      ]
     },
     {
       path: '/people/:id',
