@@ -32,7 +32,9 @@ export default {
       name: data.name,
       lastName: data.lastName,
       position: data.position,
-      project: data.project
+      project: data.project,
+      email: data.email,
+      password: data.password
     };
     const url = `https://jira-vue-demo-default-rtdb.firebaseio.com/people/${person.id}.json`;
 
