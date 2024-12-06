@@ -11,9 +11,24 @@
 import PersonItem from '@/components/people/PersonItem.vue';
 
 export default {
-  props: ['peopleList'],
   components: {
     PersonItem
+  },
+  data() {
+    return {
+      peopleList: this.$store.getters['people/getEmployeesList']
+    }
+  },
+
+  methods: {
+    async loadUsersList() {
+      this.$store.dispatch('people/loadEmployeesList');
+    },
+  },
+
+  mounted() {
+    this.loadUsersList();
+
   }
 
 }
