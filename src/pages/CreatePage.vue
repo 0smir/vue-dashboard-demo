@@ -9,7 +9,7 @@
         <SvgIcon name="add" class="icon icon--add" />
         <span class="create__link-text">Create Task</span>
       </RouterLink>
-      <RouterLink class="link link-btn" to="/person/new">
+      <RouterLink class="link link-btn" to="/people/registration">
         <SvgIcon name="add" class="icon icon--add" />
         <span class="create__link-text">Add Person</span>
       </RouterLink>
@@ -40,7 +40,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 25rem;
-  padding-top: 90%;
+  aspect-ratio: 1;
   border: 4px solid var(--color-primary);
   border-radius: var(--border-radius-large);
   color: var(--color-primary-medium);
@@ -49,18 +49,6 @@ export default {
   transition: all .35s ease;
   text-decoration: none;
   text-transform: uppercase;
-
-  @media (min-width: $sm) {
-    padding-top: 50%;
-  }
-
-  @media (min-width: $md) {
-    padding-top: 30%;
-  }
-
-  @media (min-width: $tablet) {
-    padding-top: 25%;
-  }
 
   &:hover {
     border: 4px solid var(--color-primary);
@@ -79,8 +67,8 @@ export default {
 
   .create__link-text {
     margin-bottom: 10px;
-    // position: absolute;
-    // bottom: 10px;
+    position: absolute;
+    bottom: 10px;
   }
 }
 </style>
