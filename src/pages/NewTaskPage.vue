@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Create New Task</h1>
+    <h2 class="title">Create New Task</h2>
     <CreateTaskForm></CreateTaskForm>
   </div>
 </template>
@@ -16,10 +16,19 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.container {
+  padding-bottom: 20px;
+}
+
 .title {
-  margin: 40px 0 40px;
+  margin: 20px 0 20px;
   text-align: center;
   text-transform: uppercase;
+  font-size: 26px;
+
+  @media(min-width: $sm) {
+    margin: 40px 0 40px;
+  }
 }
 </style>
