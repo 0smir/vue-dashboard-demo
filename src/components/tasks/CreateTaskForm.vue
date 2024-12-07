@@ -182,7 +182,7 @@ export default {
     flex-direction: column;
     margin-top: 15px;
 
-    @media (min-width: $md) {
+    @media (min-width: $sm) {
       flex-direction: row;
       justify-content: flex-end;
       margin-top: 45px;
@@ -193,7 +193,7 @@ export default {
     width: 100%;
     margin-bottom: 10px;
 
-    @media (min-width: $md) {
+    @media (min-width: $sm) {
       width: auto;
       order: 2;
       margin-bottom: 0;
@@ -203,7 +203,7 @@ export default {
   &--cancel {
     width: 100%;
 
-    @media (min-width: $md) {
+    @media (min-width: $sm) {
       margin: 0 10px 0 0;
       width: auto;
     }
@@ -218,7 +218,11 @@ export default {
   margin: 0 auto;
 
   .form-control {
-    width: calc(50% - 7px);
+    width: 100%;
+
+    @media (min-width: $sm) {
+      width: calc(50% - 7px);
+    }
 
     &:last-of-type {
       margin-bottom: 0;
@@ -230,8 +234,6 @@ export default {
       width: 100%;
     }
   }
-
-
 }
 
 .form-dialog {
@@ -259,19 +261,21 @@ export default {
 
   .btn {
     &-wrapper {
-      flex-direction: row;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
+      justify-content: space-between;
 
-    &--add {
-      margin-bottom: 0;
-      order: 2;
+      @media (min-width: $sm) {
+        flex-direction: row;
+        justify-content: flex-end;
+      }
     }
 
     &--add,
     &--cancel {
-      width: auto;
+      width: 100%;
+
+      @media (min-width: $sm) {
+        width: auto;
+      }
     }
   }
 }
