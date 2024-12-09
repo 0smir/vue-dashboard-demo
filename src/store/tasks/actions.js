@@ -2,12 +2,12 @@ export default {
   async addTask(context, data) {
     const taskInfo = {
       id: data.id,
-      title: data.value,
-      project: data.value,
-      assignee: data.value,
-      description: data.value,
-      priority: data.value,
-      status: data.value
+      title: data.title,
+      project: data.project,
+      assignee: data.assignee,
+      description: data.description,
+      priority: data.priority,
+      status: data.status
     }
 
     const resp = await fetch(
@@ -20,8 +20,8 @@ export default {
     context.commit('addTask', taskInfo);
   },
 
-  async loadTasks(context, data) {
-
+  async loadTasks(context) {
+    console.log('loadTasks');
     const url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList.json`;
     const result = await fetch(url);
     const resultData = await result.json();
@@ -34,7 +34,7 @@ export default {
     let taskList = [];
 
     for (const key in resultData) {
-      const task = {
+      let task = {
         id: key,
         title: resultData[key].title,
         project: resultData[key].project,
@@ -45,8 +45,6 @@ export default {
       };
       taskList.push(task);
     }
-
-    context.commit('addTask', ...taskList);
+    context.commit('setTasks', taskList);
   }
-
 }
