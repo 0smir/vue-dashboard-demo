@@ -22,7 +22,7 @@ export default {
     }
   },
   methods: {
-    async loadTasks(params) {
+    async loadTasks() {
       try {
         await this.$store.dispatch('tasks/loadTasks');
       } catch (error) {
