@@ -1,7 +1,7 @@
 <template>
   <div class="board">
     <BoardColumnItem v-for="column in columnsList" :key="column" :id="column" :column="column" :tasksList="tasksList"
-      :style="boardColumnWidth">
+      :columnsCount="columnsList.length">
     </BoardColumnItem>
 
   </div>
@@ -14,16 +14,6 @@ export default {
 
   components: {
     BoardColumnItem
-  },
-
-  computed: {
-    boardColumnWidth() {
-      let width = (window.innerWidth >= 769) ? (100 / this.columnsList.length) + '%' : 100 + '%';
-      let colWidth = (window.innerWidth >= 769) ? `width: calc( ${width} - 10px)` : `width: calc( ${width})`;
-
-      return colWidth;
-    },
-
   }
 }
 </script>
@@ -50,7 +40,6 @@ export default {
 
   &__column {
     flex-direction: column;
-    width: 100%;
     margin-bottom: 20px;
     border-radius: var(--board-header-border-radius);
 
@@ -60,10 +49,6 @@ export default {
       .board__column-header {
         background-color: var(--board-header-border);
       }
-    }
-
-    @media (min-width: $md) {
-      width: max(33%);
     }
   }
 }

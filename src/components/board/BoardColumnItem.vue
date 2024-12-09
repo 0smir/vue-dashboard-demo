@@ -1,5 +1,6 @@
 <template>
-  <div :class="['board__column', 'board__column--' + column.toLowerCase(), isColumnExpanded ? 'expanded' : 'collapsed']"
+  <div
+    :class="['board__column', 'board__column--' + column.toLowerCase(), isColumnExpanded ? 'expanded' : 'collapsed', 'column-width-' + columnsCount]"
     :aria-expanded="isColumnExpanded ? true : false">
     <header class="board__column-header">
       <h3 class="board__column-title">{{ column }}</h3>
@@ -21,7 +22,7 @@ export default {
     TaskItem
   },
 
-  props: ['column', 'tasksList'],
+  props: ['column', 'tasksList', 'columnsCount'],
 
   data() {
     return {
@@ -73,6 +74,54 @@ export default {
 
   &__column-content {
     padding: 20px clamp(5px, 10px, 15px);
+  }
+}
+
+.column-width-1 {
+  width: 100%;
+
+  @media (min-width: $md) {
+    width: calc((100%/1) - 5px);
+  }
+}
+
+.column-width-2 {
+  width: 100%;
+
+  @media (min-width: $md) {
+    width: calc((100%/2) - 5px);
+  }
+}
+
+.column-width-3 {
+  width: 100%;
+
+  @media (min-width: $md) {
+    width: calc((100%/3) - 5px);
+  }
+}
+
+.column-width-4 {
+  width: 100%;
+
+  @media (min-width: $md) {
+    width: calc((100%/4) - 5px);
+  }
+}
+
+.column-width-5 {
+  width: 100%;
+
+  @media (min-width: $md) {
+    width: calc((100%/5) - 5px);
+  }
+}
+
+.column-width-6 {
+  width: 100%;
+
+  @media (min-width: $md) {
+    width: calc((100%/6) - 5px);
   }
 }
 </style>
