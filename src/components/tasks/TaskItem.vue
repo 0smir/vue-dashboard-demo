@@ -1,12 +1,5 @@
 <template>
   <div :class="['task', 'task__status--' + task.status.toLowerCase()]">
-    <BaseButton class="btn btn__outlined btn--small task__btn-edit" title="edit" aria-label="edit task">
-      <SvgIcon name="edit" class="icon" />
-    </BaseButton>
-    <h2 class="task__title">{{ task.title }}</h2>
-    <div class="task__description">
-      {{ task.description }}
-    </div>
     <div class="task__info">
       <span class="task__info-id">
         <span :class="['task__priority', 'priority--' + task.priority]">
@@ -18,6 +11,14 @@
         <span v-if="!task.assignee.img">{{ getNameInitials() }}</span>
       </span>
     </div>
+
+    <h2 class="task__title">{{ task.title }}</h2>
+    <div class="task__description">
+      {{ task.description }}
+    </div>
+    <BaseButton class="btn btn__outlined btn--small task__btn-edit" title="edit" aria-label="edit task">
+      <SvgIcon name="edit" class="icon" />
+    </BaseButton>
   </div>
 </template>
 
@@ -68,9 +69,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 10px;
-    margin-top: 10px;
-    border-top: 2px solid var(--task-border);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--task-border);
   }
 
   &__title {
@@ -90,9 +91,8 @@ export default {
   }
 
   &__btn-edit {
-    position: absolute;
-    top: 7px;
-    right: 10px;
+    max-width: 35px;
+    margin-left: auto;
 
     &>.icon {
       width: 20px;
