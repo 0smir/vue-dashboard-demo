@@ -16,8 +16,12 @@ export default {
   },
   data() {
     return {
-      peopleList: this.$store.getters['people/getEmployeesList'],
       error: null
+    }
+  },
+  computed: {
+    peopleList() {
+      return this.$store.getters['people/getEmployeesList'];
     }
   },
 
@@ -28,6 +32,9 @@ export default {
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       }
+
+      console.log('Meth', this.$store.getters['people/getEmployeesList']);
+
     },
   },
 
