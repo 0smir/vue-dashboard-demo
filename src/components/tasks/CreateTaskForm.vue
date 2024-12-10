@@ -148,11 +148,12 @@ export default {
 
     addTask() {
       let taskID = this.task.project.value.slice(0, 1).toUpperCase() + '-' + new Date().getTime();
+      let assigneeData = this.assigneeList.filter((item) => item.id === this.task.assignee.value)[0];
       let formData = {
         id: taskID,
         title: this.task.title.value,
         project: this.task.project.value,
-        assignee: this.task.assignee.value,
+        assignee: assigneeData,
         description: this.task.description.value,
         priority: this.task.priority.value,
         status: this.task.status.value
@@ -169,7 +170,17 @@ export default {
       this.task.description.value = '';
       this.task.priority.value = '';
       this.task.status.value = '';
-    }
+    },
+    async loadUsersList() {
+      try {
+        await this.$store.dispatch('people/loadEmployeesList');
+      } catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
+    },
+  },
+  created() {
+    this.loadUsersList();
   }
 }
 </script>
