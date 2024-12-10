@@ -19,6 +19,7 @@ export default {
           },
           priority: 'medium',
           status: 'toDo',
+          comments: []
         },
         {
           id: '002',
@@ -32,6 +33,7 @@ export default {
           },
           priority: 'high',
           status: 'inProgress',
+          comments: []
         },
         {
           id: '003',
@@ -45,6 +47,7 @@ export default {
           },
           priority: 'low',
           status: 'toDo',
+          comments: []
         },
         {
           id: '004',
@@ -58,6 +61,7 @@ export default {
           },
           priority: 'blocker',
           status: 'inProgress',
+          comments: []
         },
         {
           id: '005',
@@ -71,6 +75,7 @@ export default {
           },
           priority: 'critical',
           status: 'Done',
+          comments: []
         },
         {
           id: '006',
@@ -84,6 +89,7 @@ export default {
           },
           priority: 'trivial',
           status: 'Testing',
+          comments: []
         }
       ],
       taskPriorityList: ['blocker', 'critical', 'high', 'medium', 'trivial', 'low'],

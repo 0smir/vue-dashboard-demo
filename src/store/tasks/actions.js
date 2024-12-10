@@ -7,7 +7,8 @@ export default {
       assignee: data.assignee,
       description: data.description,
       priority: data.priority,
-      status: data.status
+      status: data.status,
+      comments: []
     }
 
     const resp = await fetch(
@@ -40,7 +41,8 @@ export default {
         assignee: resultData[key].assignee.value,
         description: resultData[key].description,
         priority: resultData[key].priority,
-        status: resultData[key].status
+        status: resultData[key].status,
+        comments: resultData[key]?.comments
       };
       taskList.push(task);
     }
