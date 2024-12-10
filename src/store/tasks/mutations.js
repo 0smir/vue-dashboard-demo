@@ -3,6 +3,6 @@ export default {
     state.tasks.push(payload);
   },
   setTasks(state, payload) {
-    state.tasks.push(...payload);
+    state.tasks = payload;
   }
 }
