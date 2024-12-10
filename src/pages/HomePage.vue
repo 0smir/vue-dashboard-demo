@@ -30,13 +30,17 @@ export default {
   },
   data() {
     return {
-      tasks: this.$store.getters['tasks/getTasksList'],
       taskPriorityList: this.$store.getters['tasks/getPriorityList'],
       columnsToDisplay: this.$store.getters['boards/getDefaultBoardColumns'],
-      addTaskDialogDisplay: false
+      addTaskDialogDisplay: false,
+      error: null
     }
   },
-
+  computed: {
+    tasks() {
+      return this.$store.getters['tasks/getTasksList'];
+    }
+  },
   methods: {
     displayColumns(columnsList) {
       this.columnsToDisplay = columnsList;
