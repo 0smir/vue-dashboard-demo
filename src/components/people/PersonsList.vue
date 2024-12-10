@@ -16,21 +16,24 @@ export default {
   },
   data() {
     return {
-      peopleList: this.$store.getters['people/getEmployeesList']
+      peopleList: this.$store.getters['people/getEmployeesList'],
+      error: null
     }
   },
 
   methods: {
     async loadUsersList() {
-      this.$store.dispatch('people/loadEmployeesList');
+      try {
+        await this.$store.dispatch('people/loadEmployeesList');
+      } catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
     },
   },
 
-  mounted() {
+  created() {
     this.loadUsersList();
-
   }
-
 }
 </script>
 
