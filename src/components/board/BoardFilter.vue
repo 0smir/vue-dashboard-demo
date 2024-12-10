@@ -21,14 +21,18 @@
                       v-model="columns.val">
                     <SvgIcon name="checkCircle" class="icon" />
                   </span>
-
                   <span class="filter__label-text">{{ status }}</span>
                 </label>
               </div>
             </fieldset>
+
             <fieldset class="form-content__fieldset form-content__fieldset--person">
               <legend class="form-content__fieldset-legend">Assigneed to:</legend>
+              <select name="priority" id="task-priority">
+                <option v-for="person in peopleList" :value="person.id">{{ person.name }}{{ person.lastName }}</option>
+              </select>
             </fieldset>
+
             <fieldset class="form-content__fieldset form-content__fieldset--labels">
               <legend class="form-content__fieldset-legend">Task priority:</legend>
               <select name="priority" id="task-priority">
@@ -61,6 +65,11 @@ export default {
       }
     }
   },
+  computed: {
+    peopleList() {
+      return this.$store.getters['people/getEmployeesList'];
+    }
+  },
   methods: {
     chooseColumns() {
       this.$emit('save-filter', this.columns.val);
@@ -68,7 +77,17 @@ export default {
     clearFilter() {
       this.columns.val = [...this.defaultBoardCollumns];
       this.chooseColumns();
+    },
+    async loadUsersList() {
+      try {
+        await this.$store.dispatch('people/loadEmployeesList');
+      } catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
     }
+  },
+  created() {
+    this.loadUsersList();
   },
   mounted() {
     this.columns.val = [...this.defaultBoardCollumns];
