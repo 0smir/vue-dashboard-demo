@@ -1,24 +1,41 @@
 <template>
   <div class="container">
-    <h2 class="title">All Tasks list</h2>
-    <ul class="tasks-list__wrapper">
+    <TasksFilter :filterItemsList="filterItemsList" :activeItem="activeFilter" @on-filter-change="filterNameChange" />
+    <ul class="tasks-list__wrapper" v-if="tasks.length">
       <li class="tasks-list__item" v-for="task in tasks">
         <TaskItem :task="task" :key="task.id" />
       </li>
     </ul>
-
+    <p v-else> No Items</p>
   </div>
 </template>
 
 <script>
+import TasksFilter from '@/components/tasks/TasksFilter.vue';
 import TaskItem from '@/components/tasks/TaskItem.vue';
 export default {
   components: {
+    TasksFilter,
     TaskItem
   },
   data() {
     return {
-      tasks: this.$store.getters['tasks/getTasksList']
+      activeFilter: 'all',
+      error: null
+    }
+  },
+  computed: {
+    filterItemsList() {
+      return this.$store.getters['tasks/getStatusList'];
+    },
+    tasks() {
+      return this.$store.getters['tasks/getTasksList'].filter((item) => {
+        if (this.activeFilter === 'all') {
+          return item;
+        } else {
+          return item.status === this.activeFilter;
+        }
+      });
     }
   },
   methods: {
@@ -28,6 +45,9 @@ export default {
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       }
+    },
+    filterNameChange(name) {
+      this.activeFilter = name;
     }
   },
   mounted() {
