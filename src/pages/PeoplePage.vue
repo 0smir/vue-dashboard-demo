@@ -10,15 +10,10 @@
 </template>
 
 <script>
-import AddPersonForm from '@/components/people/AddPersonForm.vue';
-import PersonsList from '@/components/people/PersonsList.vue';
+// import AddPersonForm from '@/components/people/AddPersonForm.vue';
+// import PersonsList from '@/components/people/PersonsList.vue';
 
 export default {
-  components: {
-    AddPersonForm,
-    PersonsList
-  },
-
   computed: {
     activeTab() {
       return this.$route.name;
