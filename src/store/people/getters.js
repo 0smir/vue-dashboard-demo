@@ -4,7 +4,6 @@ export default {
     return state.people;
   },
   getPositionsList(state) {
-    // console.log(state.positionsList);
     return state.positionsList;
   }
 }
