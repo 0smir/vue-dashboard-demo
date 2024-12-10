@@ -148,7 +148,6 @@ export default {
 
     addTask() {
       let taskID = this.task.project.value.slice(0, 1).toUpperCase() + '-' + new Date().getTime();
-      console.log(taskID);
       let formData = {
         id: taskID,
         title: this.task.title.value,

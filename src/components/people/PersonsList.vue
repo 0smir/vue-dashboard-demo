@@ -32,9 +32,6 @@ export default {
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       }
-
-      console.log('Meth', this.$store.getters['people/getEmployeesList']);
-
     },
   },
 

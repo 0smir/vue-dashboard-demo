@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log('submitForm');
       this.clearError();
       this.isFormValid = true;
       if (

@@ -21,7 +21,6 @@ export default {
   },
 
   async loadTasks(context) {
-    console.log('loadTasks');
     const url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList.json`;
     const result = await fetch(url);
     const resultData = await result.json();

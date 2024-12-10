@@ -176,11 +176,9 @@ export default {
       let confirmPassVal = e.target.value;
 
       if (confirmPassVal !== this.user.password.value) {
-        console.log('error');
         this.user.confirm_password.isValid = false;
         this.isFormValid = false;
       }
-
     },
     submitForm() {
       this.validateForm();

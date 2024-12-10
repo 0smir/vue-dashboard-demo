@@ -13,7 +13,6 @@ export default {
   emits: ['on-filter-change'],
   methods: {
     updateFilter(name) {
-      console.log(name);
       this.$emit('on-filter-change', name);
     }
   }
