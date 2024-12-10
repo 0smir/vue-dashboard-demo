@@ -41,7 +41,7 @@ export default {
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    column-gap: 10px;
     row-gap: 20px;
     padding: 0;
     list-style: none;
@@ -54,8 +54,17 @@ export default {
     width: 100%;
 
     @media (min-width: $sm) {
-      width: calc(50% - 10px);
+      width: calc(100%/2 - 10px);
     }
+
+    @media (min-width: $md) {
+      width: calc(100%/3 - 10px);
+    }
+
+    @media (min-width: $tablet) {
+      width: calc(100%/4 - 10px);
+    }
+
   }
 }
 </style>
