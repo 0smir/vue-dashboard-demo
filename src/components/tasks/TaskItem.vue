@@ -32,11 +32,7 @@ export default {
   },
   methods: {
     getNameInitials() {
-      let arr = this.task.assignee.name.split(' '),
-        initialsArray = arr.map((item) => item.charAt(0)),
-        initialsStr = initialsArray.join('');
-
-      return initialsStr;
+      return this.task.assignee.name.charAt(0) + this.task.assignee.lastName.charAt(0);
     }
   }
 
