@@ -38,7 +38,7 @@ export default {
         id: key,
         title: resultData[key].title,
         project: resultData[key].project,
-        assignee: resultData[key].assignee.value,
+        assignee: resultData[key].assignee,
         description: resultData[key].description,
         priority: resultData[key].priority,
         status: resultData[key].status,
