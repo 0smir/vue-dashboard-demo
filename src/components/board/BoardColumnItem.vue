@@ -3,7 +3,10 @@
     :class="['board__column', 'board__column--' + column.toLowerCase(), isColumnExpanded ? 'expanded' : 'collapsed', 'column-width-' + columnsCount]"
     :aria-expanded="isColumnExpanded ? true : false">
     <header class="board__column-header">
-      <h3 class="board__column-title">{{ column }}</h3>
+      <h3 class="board__column-title">
+        <span>{{ column }}</span>
+        <span v-if="colTasks.length" class="board__column-task-count">{{ colTasks.length }}</span>
+      </h3>
       <BaseButton class="btn btn__outlined btn--small btn--board-arrow" @click="isColumnExpanded = !isColumnExpanded">
         <SvgIcon v-if="!isColumnExpanded" name="chevron-down" class="icon" />
         <SvgIcon v-else name="chevron-up" class="icon" />
@@ -70,6 +73,11 @@ export default {
       background-color: var(--board-header-border);
       border: 2px solid var(--board-header-border-hovered);
     }
+  }
+
+  &__column-task-count {
+    margin-left: 15px;
+    font-size: 75%;
   }
 
   &__column-content {
