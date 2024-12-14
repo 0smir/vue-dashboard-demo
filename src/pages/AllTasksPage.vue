@@ -3,7 +3,7 @@
     <TasksFilter :filterItemsList="filterItemsList" :activeItem="activeFilter" @on-filter-change="filterNameChange" />
     <ul class="tasks-list__wrapper" v-if="tasks.length">
       <li class="tasks-list__item" v-for="task in tasks">
-        <TaskItem :task="task" :key="task.id" />
+        <TaskItem :task="task" :key="task.id" type="task-link-item" />
       </li>
     </ul>
     <p v-else> No Items</p>

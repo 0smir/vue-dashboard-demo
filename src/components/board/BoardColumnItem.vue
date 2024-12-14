@@ -13,7 +13,7 @@
       </BaseButton>
     </header>
     <div v-show="isColumnExpanded" class="board__column-content">
-      <TaskItem v-for="task in colTasks" :key="task.id" :task="task" />
+      <TaskItem v-for="task in colTasks" :key="task.id" :task="task" type="column-item" />
     </div>
   </div>
 </template>
@@ -78,6 +78,7 @@ export default {
   &__column-task-count {
     margin-left: 15px;
     font-size: 75%;
+    color: var(--);
   }
 
   &__column-content {

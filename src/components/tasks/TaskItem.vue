@@ -16,18 +16,20 @@
     <div class="task__description">
       {{ task.description }}
     </div>
-    <BaseButton class="btn btn__outlined btn--small task__btn-edit" title="edit" aria-label="edit task">
+    <BaseButton v-if="type === 'column-item'" class="btn btn__outlined btn--small task__btn-edit" title="edit"
+      aria-label="edit task">
       <SvgIcon name="edit" class="icon" />
     </BaseButton>
+    <RouterLink v-else :to="TaskLink" class="btn btn__outlined btn--small">See task details</RouterLink>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['task'],
+  props: ['task', 'type'],
   computed: {
-    taskStatusStyle() {
-      return 'task-status--' + this.task.status.toLowerCase();
+    TaskLink() {
+      return this.$route.path + '/' + this.task.id;
     }
   },
   methods: {
