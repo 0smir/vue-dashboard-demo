@@ -2,6 +2,9 @@ export default {
   getTasksList(state) {
     return state.tasks;
   },
+  getTaskInfo(state) {
+    return state.task;
+  },
   getPriorityList(state) {
     return state.taskPriorityList;
   },

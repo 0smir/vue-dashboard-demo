@@ -47,5 +47,19 @@ export default {
       taskList.push(task);
     }
     context.commit('setTasks', taskList);
+  },
+
+  async getTaskData(context, data) {
+    let taskID = data.id,
+      url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${taskID}.json`;
+
+    const resp = await fetch(url);
+    const resultData = await resp.json();
+    if (!resp.ok) {
+      const error = new Error(resultData.message || 'Failed to fetch!');
+      throw error;
+    }
+
+    context.commit('setTask', { ...resultData });
   }
 }

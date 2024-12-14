@@ -1,13 +1,13 @@
 <template>
-  <div class="container task-data">
+  <div v-if="taskInfo" class="container task-data task-data__wrapper">
     <div class="task-details">
       <div class="task-details__creator">
         <span class="task-details--label">Creator: </span>
-        <span class="task-details--value"> {{ taskInfo.creator }}</span>
+        <span class="task-details--value"> {{ taskInfo?.creator }}</span>
       </div>
       <div class="task-details__assignee">
         <span class="task-details--label">Assignee:</span>
-        <span class="task-details--value"> {{ taskInfo.assignee }}</span>
+        <span class="task-details--value"> {{ assigneeFullName }}</span>
       </div>
       <div class="task-details__priority">
         <span class="task-details--label">Priority:</span>
@@ -26,6 +26,7 @@
       </div>
     </div>
   </div>
+  <p v-if="error">Error</p>
 </template>
 
 <script>
@@ -33,23 +34,40 @@ export default {
   props: ['id'],
   data() {
     return {
-      taskInfo: null
+      error: null
     }
   },
+  computed: {
+    taskInfo() {
+      return this.$store.getters['tasks/getTaskInfo'];
+    },
+    assigneeFullName() {
+      let fullName = this.taskInfo.assignee.name + ' ' + this.taskInfo.assignee.lastName
+      return fullName;
+    },
+  },
   methods: {
-    getTaskData() {
-      let taskItem = this.$store.getters['tasks/getTasksList'].filter((task) => task.id === this.id);
-      this.taskInfo = taskItem[0];
+    async getTaskData() {
+      try {
+        this.$store.dispatch('tasks/getTaskData', { id: this.id });
+      } catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
     }
   },
   created() {
     this.getTaskData();
   }
-
 }
 </script>
 
 <style scoped>
+.task-data {
+  &__wrapper {
+    display: flex;
+  }
+}
+
 .task-details {
   margin-top: 40px;
   order: 2;

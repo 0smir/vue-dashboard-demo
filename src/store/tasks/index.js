@@ -7,6 +7,7 @@ export default {
   state() {
     return {
       tasks: [],
+      task: null,
       taskPriorityList: ['blocker', 'critical', 'high', 'medium', 'trivial', 'low'],
       taskStatusList: ['toDo', 'inProgress', 'inReview', 'Testing', 'Done', 'Blocked'],
     }
