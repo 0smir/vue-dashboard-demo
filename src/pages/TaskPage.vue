@@ -1,28 +1,38 @@
 <template>
-  <div v-if="taskInfo" class="container task-data task-data__wrapper">
-    <div class="task-details">
-      <div class="task-details__creator">
-        <span class="task-details--label">Creator: </span>
-        <span class="task-details--value"> {{ taskInfo?.creator }}</span>
+  <div class="task-info task-info__container">
+    <div class="task-info__details">
+      <div class="task-info__actions-wrapper">
+        <BaseButton class="btn btn--medium btn__outlined task-info__btn-action btn-action--status-updata">Status
+        </BaseButton>
+        <BaseButton class="btn btn--medium btn__outlined task-info__btn-action btn-action--action">Actions</BaseButton>
       </div>
-      <div class="task-details__assignee">
-        <span class="task-details--label">Assignee:</span>
-        <span class="task-details--value"> {{ assigneeFullName }}</span>
-      </div>
-      <div class="task-details__priority">
-        <span class="task-details--label">Priority:</span>
-        <span class="task-details--value"> {{ taskInfo.priority }}</span>
-      </div>
-      <div class="task-details__status">
-        <span class="task-details--label">Status:</span>
-        <span class="task-details--value">{{ taskInfo.status }}</span>
+      <div class="task-info__details-wrapper">
+        <div class="task-details task-details--assignee" v-if="assigneeFullName">
+          <span class="task-details__label task-details__label--assignee">Assignee:</span>
+          <span class="task-details__value task-details__value--assignee"> {{ assigneeFullName }}</span>
+        </div>
+        <div class="task-details task-details--priority">
+          <span class="task-details__label task-details__label--priority">Priority:</span>
+          <span class="task-details__value task-details__value--priority"> {{ taskInfo?.priority }}</span>
+        </div>
+        <div class="task-details task-details--creator" v-if="taskInfo?.creator">
+          <span class="task-details__label task-details__label--creator">Reporter: </span>
+          <span class="task-details__value task-details__value--creator"> {{ creatorFullName }}</span>
+        </div>
       </div>
     </div>
-    <div class="task-info">
-      <h1>TaskId-{{ id }}: {{ taskInfo.title }}</h1>
-      <div class="descrioption">
-        <span class="label">Description</span>
-        <p class="text">{{ taskInfo.description }}</p>
+    <div class="task-info__task-data">
+      <div class="task-info__main">
+        <h1 class="task-info__title">{{ id }}: {{ taskInfo?.title }}</h1>
+        <div class="task-info__descrioption-wrapper">
+          <span class="task-info__label task-info__label--description">Description:</span>
+          <div class="task-info__descrioption">
+            <p class="text">{{ taskInfo?.description }}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        comments
       </div>
     </div>
   </div>
@@ -42,9 +52,13 @@ export default {
       return this.$store.getters['tasks/getTaskInfo'];
     },
     assigneeFullName() {
-      let fullName = this.taskInfo.assignee.name + ' ' + this.taskInfo.assignee.lastName
+      let fullName = this?.taskInfo?.assignee.name + ' ' + this?.taskInfo?.assignee.lastName
       return fullName;
     },
+    creatorFullName() {
+      let fullName = this?.taskInfo?.creator.name + ' ' + this?.taskInfo?.creator.lastName
+      return fullName;
+    }
   },
   methods: {
     async getTaskData() {
@@ -61,28 +75,83 @@ export default {
 }
 </script>
 
-<style scoped>
-.task-data {
-  &__wrapper {
+<style lang="scss" scoped>
+.task-info {
+  &__container {
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    max-width: calc(100% - 30px);
+    margin: 30px auto 0;
+  }
+
+  &__details {
+    width: 100%;
+
+    @media (min-width: $md) {
+      order: 5;
+      max-width: calc(30% - 10px);
+      padding: 10px 7px;
+      border-left: 2px solid var(--color-secondary-light);
+    }
+  }
+
+  &__task-data {
+    width: 100%;
+
+    @media (min-width: $md) {
+      padding-top: 25px;
+      order: 1;
+      max-width: calc(70% - 10px);
+    }
+  }
+
+  &__title {
+    font-size: 2.4rem;
+    margin: 0 0 10px;
+
+    @media (min-width: $md) {
+      font-size: 2.8rem;
+      margin: 0 0 20px;
+    }
+  }
+
+  &__descrioption {
+    color: var(--color-tetriary);
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+
+  &__label {
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    @media (min-width: $md) {
+      font-size: 1.5rem;
+      margin: 0 0 20px;
+    }
+  }
+
+  &__actions-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  &__details-wrapper {
+    padding: 10px 5px;
+    border: 1px solid var(--color-secondary-light);
+    border-radius: var(--border-radius-medium);
   }
 }
 
 .task-details {
-  margin-top: 40px;
-  order: 2;
-  width: 220px;
-}
+  margin-bottom: 10px;
 
-.task-info {
-  width: calc(100% - 220px);
-  margin-right: auto;
+  &--label {
+    font-weight: 600;
+    margin-right: 5px;
+  }
 }
-
-.task-details--label {
-  margin-right: 7px;
-  font-weight: 700;
-}
-
-.task-details--value {}
 </style>
