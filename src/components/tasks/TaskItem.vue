@@ -2,9 +2,7 @@
   <div :class="['task', 'task__status--' + task.status.toLowerCase()]">
     <div class="task__info">
       <span class="task__info-id">
-        <span :class="['task__priority', 'priority--' + task.priority]">
-          <SvgIcon :name="task.priority" iconType="priority" class="icon--medium" />
-        </span>
+        <TaskPriorityElement :priority="task.priority" />
         <span class="task-id">{{ task.id }}</span>
       </span>
       <span v-if="task.assignee" class="task__info-assignee rounded" :title="task.assignee.name">
@@ -25,7 +23,11 @@
 </template>
 
 <script>
+import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
 export default {
+  components: {
+    TaskPriorityElement
+  },
   props: ['task', 'type'],
   computed: {
     TaskLink() {
@@ -98,13 +100,8 @@ export default {
     }
   }
 
-  &__priority {
-    display: flex;
-    justify-content: center;
-    padding: 2px;
+  :deep(.priority__wrapper) {
     margin-right: 4px;
-    border-radius: var(--border-radius-small);
-    color: var(--color-white);
   }
 
   &__info-assignee {

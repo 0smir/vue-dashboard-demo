@@ -1,8 +1,9 @@
 <template>
-  <div class="task-info task-info__container">
+  <div v-if="taskInfo" class="task-info task-info__container">
     <div class="task-info__details">
       <div class="task-info__actions-wrapper">
-        <BaseButton class="btn btn--medium btn__outlined task-info__btn-action btn-action--status-updata">Status
+        <BaseButton class="btn btn--medium btn__outlined task-info__btn-action btn-action--status-updata">
+          {{ taskInfo?.status }}
         </BaseButton>
         <BaseButton class="btn btn--medium btn__outlined task-info__btn-action btn-action--action">Actions</BaseButton>
       </div>
@@ -13,7 +14,10 @@
         </div>
         <div class="task-details task-details--priority">
           <span class="task-details__label task-details__label--priority">Priority:</span>
-          <span class="task-details__value task-details__value--priority"> {{ taskInfo?.priority }}</span>
+          <span class="task-details__value task-details__value--priority">
+            <TaskPriorityElement :priority="taskInfo.priority" titleDisplay="true" />
+          </span>
+
         </div>
         <div class="task-details task-details--creator" v-if="taskInfo?.creator">
           <span class="task-details__label task-details__label--creator">Reporter: </span>
@@ -40,7 +44,11 @@
 </template>
 
 <script>
+import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
 export default {
+  components: {
+    TaskPriorityElement
+  },
   props: ['id'],
   data() {
     return {
@@ -80,14 +88,20 @@ export default {
   &__container {
     display: flex;
     flex-wrap: nowrap;
+    flex-direction: column;
     justify-content: space-between;
     width: 100%;
     max-width: calc(100% - 30px);
     margin: 30px auto 0;
+
+    @media (min-width: $md) {
+      flex-direction: row;
+    }
   }
 
   &__details {
     width: 100%;
+    margin-bottom: 15px;
 
     @media (min-width: $md) {
       order: 5;
@@ -135,7 +149,12 @@ export default {
 
   &__actions-wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  &__btn-action {
     margin-bottom: 15px;
   }
 
@@ -149,8 +168,13 @@ export default {
 .task-details {
   margin-bottom: 10px;
 
-  &--label {
+  &__label {
     font-weight: 600;
+    margin-right: 5px;
+  }
+
+  .task__priority {
+    display: inline-flex;
     margin-right: 5px;
   }
 }
