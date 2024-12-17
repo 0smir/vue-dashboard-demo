@@ -15,7 +15,7 @@
         <div class="task-details task-details--priority">
           <span class="task-details__label task-details__label--priority">Priority:</span>
           <span class="task-details__value task-details__value--priority">
-            <TaskPriorityElement :priority="taskInfo.priority" titleDisplay="true" />
+            <TaskPriorityElement :priority="taskInfo.priority" :titleDisplay="true" />
           </span>
 
         </div>
