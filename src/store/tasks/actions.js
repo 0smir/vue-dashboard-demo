@@ -61,5 +61,10 @@ export default {
     }
 
     context.commit('setTask', { ...resultData });
+  },
+
+  setTaskStatus(context, data) {
+    console.log(data);
+    context.commit('updateTask', data);
   }
 }

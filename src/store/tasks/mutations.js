@@ -7,5 +7,8 @@ export default {
   },
   setTask(state, payload) {
     state.task = payload;
+  },
+  updateTask(state, payload) {
+    state.task = { ...state.task, ...payload };
   }
 }
