@@ -2,9 +2,10 @@
   <div v-if="taskInfo" class="task-info task-info__container">
     <div class="task-info__details">
       <div class="task-info__actions-wrapper">
-        <BaseButton class="btn btn--medium btn__outlined task-info__btn-action btn-action--status-updata">
-          {{ taskInfo?.status }}
-        </BaseButton>
+        <SmartBox :list="taskStatusList" :activeItem="taskStatus"
+          :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--status-updata']"
+          @update-status="updateTaskStatus">
+        </SmartBox>
         <BaseButton class="btn btn--medium btn__outlined task-info__btn-action btn-action--action">Actions</BaseButton>
       </div>
       <div class="task-info__details-wrapper">
@@ -17,14 +18,22 @@
           <span class="task-details__value task-details__value--priority">
             <TaskPriorityElement :priority="taskInfo.priority" :titleDisplay="true" />
           </span>
-
+        </div>
+        <div class="task-details task-details--creator" v-if="taskInfo?.project">
+          <span class="task-details__label task-details__label--creator">Project: </span>
+          <span class="task-details__value task-details__value--creator"> {{ taskInfo?.project }}</span>
         </div>
         <div class="task-details task-details--creator" v-if="taskInfo?.creator">
           <span class="task-details__label task-details__label--creator">Reporter: </span>
           <span class="task-details__value task-details__value--creator"> {{ creatorFullName }}</span>
         </div>
+        <div class="task-details task-details--creator" v-if="taskInfo?.estimate">
+          <span class="task-details__label task-details__label--creator">Time tracking: </span>
+          <span class="task-details__value task-details__value--creator"> {{ taskInfo?.estimate }}</span>
+        </div>
       </div>
     </div>
+
     <div class="task-info__task-data">
       <div class="task-info__main">
         <h1 class="task-info__title">{{ id }}: {{ taskInfo?.title }}</h1>
@@ -45,19 +54,25 @@
 
 <script>
 import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
+import SmartBox from '@/components/UI/base-components/SmartBox.vue';
 export default {
   components: {
-    TaskPriorityElement
+    TaskPriorityElement,
+    SmartBox
   },
   props: ['id'],
   data() {
     return {
+      taskStatusList: this.$store.getters['tasks/getStatusList'],
       error: null
     }
   },
   computed: {
     taskInfo() {
       return this.$store.getters['tasks/getTaskInfo'];
+    },
+    taskStatus() {
+      return this.taskInfo.status;
     },
     assigneeFullName() {
       let fullName = this?.taskInfo?.assignee.name + ' ' + this?.taskInfo?.assignee.lastName
@@ -75,6 +90,10 @@ export default {
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       }
+    },
+    updateTaskStatus(newStatus) {
+      console.log('updateTaskStatus: ', newStatus);
+      this.$store.dispatch('tasks/setTaskStatus', { status: newStatus });
     }
   },
   created() {
@@ -83,7 +102,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .task-info {
   &__container {
     display: flex;
@@ -154,10 +173,6 @@ export default {
     margin-bottom: 15px;
   }
 
-  &__btn-action {
-    margin-bottom: 15px;
-  }
-
   &__details-wrapper {
     padding: 10px 5px;
     border: 1px solid var(--color-secondary-light);
@@ -166,6 +181,7 @@ export default {
 }
 
 .task-details {
+  display: flex;
   margin-bottom: 10px;
 
   &__label {
