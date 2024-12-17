@@ -110,6 +110,15 @@ a:hover {
   border-radius: 50%;
 }
 
+.task__priority {
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--border-radius-small);
+  color: var(--color-white);
+}
 
 .priority {
   &--blocker {
