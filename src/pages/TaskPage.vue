@@ -1,13 +1,17 @@
 <template>
   <div v-if="taskInfo" class="task-info task-info__container">
     <div class="task-info__details">
+
       <div class="task-info__actions-wrapper">
-        <SmartBox :list="taskStatusList" :activeItem="taskStatus"
+        <SmartBox :list="taskStatusList" :title="taskStatus" mode="status"
           :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--status-updata']"
           @update-status="updateTaskStatus">
         </SmartBox>
-        <BaseButton class="btn btn--medium btn__outlined task-info__btn-action btn-action--action">Actions</BaseButton>
+        <SmartBox :list="taskActionsList" title="Actions" mode="actions"
+          :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
+        </SmartBox>
       </div>
+
       <div class="task-info__details-wrapper">
         <div class="task-details task-details--assignee" v-if="assigneeFullName">
           <span class="task-details__label task-details__label--assignee">Assignee:</span>
@@ -64,6 +68,7 @@ export default {
   data() {
     return {
       taskStatusList: this.$store.getters['tasks/getStatusList'],
+      taskActionsList: this.$store.getters['tasks/getTaskActionsList'],
       error: null
     }
   },
@@ -92,8 +97,7 @@ export default {
       }
     },
     updateTaskStatus(newStatus) {
-      console.log('updateTaskStatus: ', newStatus);
-      this.$store.dispatch('tasks/setTaskStatus', { status: newStatus });
+      this.$store.dispatch('tasks/setTaskStatus', { ...this.taskInfo, status: newStatus });
     }
   },
   created() {
@@ -124,9 +128,10 @@ export default {
 
     @media (min-width: $md) {
       order: 5;
-      max-width: calc(30% - 10px);
+      max-width: calc(35% - 10px);
       padding: 10px 7px;
       border-left: 2px solid var(--color-secondary-light);
+      min-height: 50vh;
     }
   }
 
@@ -136,7 +141,8 @@ export default {
     @media (min-width: $md) {
       padding-top: 25px;
       order: 1;
-      max-width: calc(70% - 10px);
+      max-width: calc(65% - 10px);
+      min-height: 50vh;
     }
   }
 
