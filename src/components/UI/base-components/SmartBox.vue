@@ -1,12 +1,15 @@
 <template>
-  <div class="smart-box">
-    <BaseButton :class="[classList, 'smart-box__btn']" @click="toggleDropdown">
-      <span>{{ activeItem }}</span>
-      <SvgIcon :class="['icon', { rotated: showSmartList }]" name="chevron-down" />
+  <div class="smart-box" @mouseover="onHover" @mouseleave="onLeave" @touchstart="onHover" @touchend="onLeave">
+    <BaseButton :class="[classList, 'smart-box__btn smart-box__btn-control']">
+      <span>{{ title }}</span>
+      <SvgIcon class="icon smart-box__btn" name="chevron-down" />
     </BaseButton>
+
     <ul class="smart-box__list-wrapper" v-show="showSmartList">
       <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
-        <span>{{ item }}</span>
+        <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
+          <span class="btn-text">{{ item }}</span>
+        </BaseButton>
       </li>
     </ul>
   </div>
@@ -14,7 +17,7 @@
 
 <script>
 export default {
-  props: ['classList', 'list', 'activeItem'],
+  props: ['classList', 'list', 'title', 'mode'],
   emits: ['update-status'],
   data() {
     return {
@@ -24,11 +27,15 @@ export default {
   methods: {
     selectItem(item) {
       this.$emit('update-status', item);
-      this.toggleDropdown();
-    },
-    toggleDropdown() {
       this.showSmartList = !this.showSmartList;
-    }
+    },
+
+    onHover() {
+      this.showSmartList = true;
+    },
+    onLeave() {
+      this.showSmartList = false;
+    },
   }
 }
 </script>
@@ -37,9 +44,17 @@ export default {
 .smart-box {
   position: relative;
 
+  &:hover,
+  &:focus-within {
+    .smart-box__btn-control>.icon {
+      transform: rotate(180deg);
+    }
+  }
+
   &__list-wrapper {
+    z-index: 5;
     position: absolute;
-    top: calc(100% + 5px);
+    top: calc(100% - 4px);
     padding: 5px;
     width: 100%;
     list-style: none;
@@ -58,13 +73,21 @@ export default {
   }
 
   &__btn {
+    text-transform: uppercase;
+  }
+
+  &__btn-control {
+    margin-bottom: 10px;
+
     span {
       margin: 0 auto;
     }
-
-    .icon.rotated {
-      transform: rotate(180deg);
-    }
   }
+
+  &__btn-action {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
 }
 </style>
