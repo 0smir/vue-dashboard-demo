@@ -74,6 +74,12 @@
     }
   }
 
+  &--transparent {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--btn-secondary-text);
+  }
+
   &--large {
     padding: 15px;
     min-width: 175px;
