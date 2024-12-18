@@ -2,8 +2,7 @@
   <div class="smart-box">
     <BaseButton :class="[classList, 'smart-box__btn']" @click="toggleDropdown">
       <span>{{ activeItem }}</span>
-      <SvgIcon v-if="!showSmartList" class="icon" name="chevron-down" />
-      <SvgIcon v-else class="icon" name="chevron-up" />
+      <SvgIcon :class="['icon', { rotated: showSmartList }]" name="chevron-down" />
     </BaseButton>
     <ul class="smart-box__list-wrapper" v-show="showSmartList">
       <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
@@ -61,6 +60,10 @@ export default {
   &__btn {
     span {
       margin: 0 auto;
+    }
+
+    .icon.rotated {
+      transform: rotate(180deg);
     }
   }
 }
