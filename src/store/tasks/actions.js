@@ -63,8 +63,17 @@ export default {
     context.commit('setTask', { ...resultData });
   },
 
-  setTaskStatus(context, data) {
-    console.log(data);
-    context.commit('updateTask', data);
+  async setTaskStatus(context, data) {
+    let { id, status } = data;
+    let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
+
+    const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ status }) });
+    const resultData = await resp.json();
+    if (!resp.ok) {
+      const error = new Error(resultData.message || 'Failed to fetch!');
+      throw error;
+    }
+
+    context.commit('updateTask', { status });
   }
 }

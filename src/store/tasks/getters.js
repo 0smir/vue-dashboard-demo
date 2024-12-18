@@ -10,5 +10,8 @@ export default {
   },
   getStatusList(state) {
     return state.taskStatusList;
+  },
+  getTaskActionsList(state) {
+    return state.taskActions;
   }
 }
