@@ -131,7 +131,7 @@ export default {
       max-width: calc(35% - 10px);
       padding: 10px 7px;
       border-left: 2px solid var(--color-secondary-light);
-      min-height: 50vh;
+      height: 50vh;
     }
   }
 
@@ -142,7 +142,7 @@ export default {
       padding-top: 25px;
       order: 1;
       max-width: calc(65% - 10px);
-      min-height: 50vh;
+      height: 50vh;
     }
   }
 
