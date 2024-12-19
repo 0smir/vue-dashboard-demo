@@ -5,10 +5,24 @@
       <div class="task-info__actions-wrapper">
         <SmartBox :list="taskStatusList" :title="taskStatus" mode="status"
           :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--status-updata']"
-          @update-status="updateTaskStatus">
+          @update-params="updateTaskParams">
+          <template #list-items="{ list, selectItem }">
+            <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
+              <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
+                <span class="btn-text">{{ item }}</span>
+              </BaseButton>
+            </li>
+          </template>
         </SmartBox>
-        <SmartBox :list="taskActionsList" title="Actions" mode="actions"
+        <SmartBox :list="taskActionsList" title="Actions" mode="actions" @task-interaction="actionExecute"
           :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
+          <template #list-items="{ list, selectItem }">
+            <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
+              <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
+                <span class="btn-text">{{ item }}</span>
+              </BaseButton>
+            </li>
+          </template>
         </SmartBox>
       </div>
 
@@ -19,13 +33,31 @@
         </div>
         <div class="task-details task-details--priority">
           <span class="task-details__label task-details__label--priority">Priority:</span>
-          <span class="task-details__value task-details__value--priority">
-            <TaskPriorityElement :priority="taskInfo.priority" :titleDisplay="true" />
-          </span>
+          <div>
+            <SmartBox :list="taskPriorityList" :title="taskInfo.priority" mode="priority"
+              @update-params="updateTaskParams"
+              :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
+              <template #list-items="{ list, selectItem }">
+                <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
+                  <TaskPriorityElement :priority="item" :titleDisplay="true" />
+                </li>
+              </template>
+            </SmartBox>
+          </div>
         </div>
         <div class="task-details task-details--creator" v-if="taskInfo?.project">
           <span class="task-details__label task-details__label--creator">Project: </span>
-          <span class="task-details__value task-details__value--creator"> {{ taskInfo?.project }}</span>
+          <SmartBox :list="projectsList" :title="taskInfo.project" mode="project" @update-params="updateTaskParams"
+            :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
+            <template #list-items="{ list, selectItem }">
+              <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
+                <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
+                  <span class="btn-text">{{ item.title }}</span>
+                </BaseButton>
+              </li>
+            </template>
+          </SmartBox>
+
         </div>
         <div class="task-details task-details--creator" v-if="taskInfo?.creator">
           <span class="task-details__label task-details__label--creator">Reporter: </span>
@@ -67,6 +99,8 @@ export default {
   props: ['id'],
   data() {
     return {
+      projectsList: this.$store.getters['projects/getProjects'],
+      taskPriorityList: this.$store.getters['tasks/getPriorityList'],
       taskStatusList: this.$store.getters['tasks/getStatusList'],
       taskActionsList: this.$store.getters['tasks/getTaskActionsList'],
       error: null
@@ -96,8 +130,25 @@ export default {
         this.error = error.message || 'Smth went wrong!';
       }
     },
-    updateTaskStatus(newStatus) {
-      this.$store.dispatch('tasks/setTaskStatus', { ...this.taskInfo, status: newStatus });
+    updateTaskParams(newParams) {
+      console.log(newParams);
+      let { newVal, mode } = newParams;
+      if (mode === 'status') {
+        this.$store.dispatch('tasks/setTaskStatus', { ...this.taskInfo, status: newVal });
+      }
+      if (mode === 'priority') {
+        this.$store.dispatch('tasks/setTaskPriority', { ...this.taskInfo, priority: newVal });
+      }
+      if (mode === 'project') {
+        this.$store.dispatch('tasks/setTaskProject', { ...this.taskInfo, project: newVal });
+      }
+      if (mode === 'assignee') {
+        this.$store.dispatch('tasks/setTaskAssignee', { ...this.taskInfo, assignee: newVal });
+      }
+
+    },
+    actionExecute(newParams) {
+      console.log(newParams);
     }
   },
   created() {
