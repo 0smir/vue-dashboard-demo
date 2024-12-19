@@ -4,13 +4,8 @@
       <span>{{ title }}</span>
       <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down" />
     </BaseButton>
-
     <ul class="smart-box__list-wrapper" v-show="showSmartList">
-      <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
-        <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
-          <span class="btn-text">{{ item }}</span>
-        </BaseButton>
-      </li>
+      <slot name="list-items" :list="list" :selectItem="selectItem"></slot>
     </ul>
   </div>
 </template>
@@ -18,7 +13,7 @@
 <script>
 export default {
   props: ['classList', 'list', 'title', 'mode'],
-  emits: ['update-status'],
+  emits: ['update-params', 'task-interaction'],
   data() {
     return {
       showSmartList: false
@@ -26,7 +21,17 @@ export default {
   },
   methods: {
     selectItem(item) {
-      this.$emit('update-status', item);
+      let payload = {
+        newVal: item,
+        mode: this.mode
+      }
+
+      if (this.mode !== 'actions') {
+        this.$emit('update-params', payload);
+      } else {
+        this.$emit('task-interaction', payload);
+      }
+
       this.showSmartList = !this.showSmartList;
     },
 
@@ -40,7 +45,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .smart-box {
   position: relative;
 
