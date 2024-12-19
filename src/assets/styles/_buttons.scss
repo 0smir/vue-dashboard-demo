@@ -101,3 +101,14 @@
     border-radius: var(--border-radius-medium);
   }
 }
+
+.smart-box {
+  &__btn {
+    padding: 5px 7px;
+    min-height: auto;
+  }
+
+  &__btn-icon {
+    margin-left: 5px;
+  }
+}
