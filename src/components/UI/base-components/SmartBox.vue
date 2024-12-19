@@ -1,8 +1,8 @@
 <template>
   <div class="smart-box" @mouseover="onHover" @mouseleave="onLeave" @touchstart="onHover" @touchend="onLeave">
-    <BaseButton :class="[classList, 'smart-box__btn smart-box__btn-control']">
+    <BaseButton :class="[classList, 'smart-box__btn', 'smart-box__btn-control']">
       <span>{{ title }}</span>
-      <SvgIcon class="icon smart-box__btn" name="chevron-down" />
+      <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down" />
     </BaseButton>
 
     <ul class="smart-box__list-wrapper" v-show="showSmartList">
