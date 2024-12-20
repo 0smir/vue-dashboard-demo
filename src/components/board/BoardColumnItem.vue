@@ -13,7 +13,7 @@
       </BaseButton>
     </header>
     <div v-show="isColumnExpanded" class="board__column-content">
-      <TaskItem v-for="task in colTasks" :key="task.id" :task="task" type="column-item" />
+      <TaskItem v-for="task in colTasks" :key="task.id" :task="task" type="board-item" />
     </div>
   </div>
 </template>
