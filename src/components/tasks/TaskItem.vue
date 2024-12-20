@@ -1,5 +1,5 @@
 <template>
-  <div :class="['task', 'task__status--' + task.status.toLowerCase()]">
+  <div :class="['task', 'task__status--' + task.status.toLowerCase(), type]">
     <div class="task__info">
       <span class="task__info-id">
         <TaskPriorityElement :priority="task.priority" />
@@ -10,15 +10,22 @@
       </span>
     </div>
 
-    <h2 class="task__title">{{ task.title }}</h2>
+    <h2 :class="['task__title', { cropped: type !== 'board-item' }]">{{ task.title }}</h2>
     <div class="task__description">
       {{ task.description }}
     </div>
-    <BaseButton v-if="type === 'column-item'" class="btn btn__outlined btn--small task__btn-edit" title="edit"
+    <BaseButton v-if="type === 'board-item'" class="btn btn__outlined btn--small task__btn-edit" title="edit"
       aria-label="edit task">
       <SvgIcon name="edit" class="icon" />
     </BaseButton>
-    <RouterLink v-else :to="TaskLink" class="btn btn__outlined btn--small">See task details</RouterLink>
+    <div v-else class="task__actions-wrapper">
+      <BaseButton class="btn btn__outlined btn--small" aria-label="Remove task" title="Remove task">
+        <SvgIcon class="icon" name="remove" />
+      </BaseButton>
+      <RouterLink :to="TaskLink" class="btn btn__outlined btn--small task__link" aria-label="Link to task details">Task
+        details</RouterLink>
+    </div>
+
   </div>
 </template>
 
@@ -46,7 +53,10 @@ export default {
 <style lang="scss" scoped>
 .task {
   --task-border: var(--color-secondary-medium);
+  --task-border-secondary: var(--color-primary);
   --task-text-color: var(--color-secondary);
+  --task-text-description: var(--color-tetriary);
+
 
   position: relative;
   display: flex;
@@ -67,6 +77,7 @@ export default {
 
   &__info {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 10px;
@@ -76,12 +87,13 @@ export default {
 
   &__title {
     margin-bottom: 12px;
-    padding-right: 40px;
     font-size: 18px;
     font-weight: 500;
   }
 
   &__description {
+    margin-bottom: 7px;
+    color: var(--task-text-description);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -110,11 +122,12 @@ export default {
     align-items: center;
     width: 34px;
     height: 34px;
-    border: 2px solid var(--task-border);
-    font-size: 18px;
+    border: 2px solid var(--task-border-secondary);
+    font-size: 16px;
     background-color: var(--color-primary-light);
-    font-weight: 300;
+    font-weight: 400;
     padding: 2px;
+    margin-left: auto;
   }
 
   &__info-id {
@@ -125,7 +138,6 @@ export default {
       margin-top: 4px;
       font-size: 14px;
     }
-
   }
 
   &__status {
@@ -153,6 +165,28 @@ export default {
     &--blocked {
       border-left-color: var(--color-blocked);
     }
+  }
+
+  &__actions-wrapper {
+    display: flex;
+  }
+
+  &__link {
+    margin-left: auto;
+    text-decoration: none;
+  }
+}
+
+// .task.board-item {}
+
+.task.grid-item {
+  .task__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 }
 </style>
