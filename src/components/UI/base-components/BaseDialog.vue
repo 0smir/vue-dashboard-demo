@@ -1,6 +1,6 @@
 <template>
   <teleport to="body">
-    <div v-if="show" class="backdrop">
+    <div v-if="show" class="backdrop" @click.self="closeDialog">
       <dialog open v-if="show" class="dialog">
         <BaseButton class="btn btn--small btn__default dialog__btn-close" @click="closeDialog" aria-label="Close">
           <SvgIcon name="close" class="icon" />
