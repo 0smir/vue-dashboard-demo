@@ -1,9 +1,11 @@
 <template>
-  <div class="smart-box" @mouseover="onHover" @mouseleave="onLeave" @touchstart="onHover" @touchend="onLeave">
-    <BaseButton :class="[classList, 'smart-box__btn', 'smart-box__btn-control']">
-      <span>{{ title }}</span>
-      <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down" />
-    </BaseButton>
+  <div :class="['smart-box', { active: showSmartList }]" @click="toggleSmartList" v-click-outside="closeDropdown">
+    <slot name="active-item">
+      <BaseButton :class="[classList, 'smart-box__btn', 'smart-box__btn-control']">
+        <span>{{ title }}</span>
+        <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down" />
+      </BaseButton>
+    </slot>
     <ul class="smart-box__list-wrapper" v-show="showSmartList">
       <slot name="list-items" :list="list" :selectItem="selectItem"></slot>
     </ul>
@@ -31,14 +33,13 @@ export default {
       } else {
         this.$emit('task-interaction', payload);
       }
+      this.toggleSmartList();
+    },
 
+    toggleSmartList() {
       this.showSmartList = !this.showSmartList;
     },
-
-    onHover() {
-      this.showSmartList = true;
-    },
-    onLeave() {
+    closeDropdown() {
       this.showSmartList = false;
     },
   }
@@ -49,8 +50,7 @@ export default {
 .smart-box {
   position: relative;
 
-  &:hover,
-  &:focus-within {
+  &.active {
     .smart-box__btn-control>.icon {
       transform: rotate(180deg);
     }
