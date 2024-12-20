@@ -7,7 +7,7 @@
           :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--status-updata']"
           @update-params="updateTaskParams">
           <template #list-items="{ list, selectItem }">
-            <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
+            <li class="smart-box__list-item" v-for="item in list" :key="item" @click.stop="selectItem(item)">
               <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
                 <span class="btn-text">{{ item }}</span>
               </BaseButton>
@@ -17,7 +17,7 @@
         <SmartBox :list="taskActionsList" title="Actions" mode="actions" @task-interaction="actionExecute"
           :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
           <template #list-items="{ list, selectItem }">
-            <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
+            <li class="smart-box__list-item" v-for="item in list" :key="item" @click.stop="selectItem(item)">
               <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
                 <span class="btn-text">{{ item }}</span>
               </BaseButton>
@@ -33,13 +33,17 @@
         </div>
         <div class="task-details task-details--priority">
           <span class="task-details__label task-details__label--priority">Priority:</span>
-          <div>
+          <div class="task-details__value task-details__value--priority">
             <SmartBox :list="taskPriorityList" :title="taskInfo.priority" mode="priority"
               @update-params="updateTaskParams"
               :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
+              <template #active-item>
+                <TaskPriorityElement :priority="taskInfo.priority" :titleDisplay="true" />
+              </template>
               <template #list-items="{ list, selectItem }">
-                <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
-                  <TaskPriorityElement :priority="item" :titleDisplay="true" />
+                <li v-for="item in list" :key="item"
+                  :class="['smart-box__list-item', { hidden: item === taskInfo.priority }]">
+                  <TaskPriorityElement :priority="item" :titleDisplay="true" @click.stop="selectItem(item)" />
                 </li>
               </template>
             </SmartBox>
@@ -50,8 +54,9 @@
           <SmartBox :list="projectsList" :title="taskInfo.project" mode="project" @update-params="updateTaskParams"
             :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
             <template #list-items="{ list, selectItem }">
-              <li class="smart-box__list-item" v-for="item in list" :key="item" @click="selectItem(item)">
-                <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
+              <li class="smart-box__list-item" v-for="item in list" :key="item">
+                <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action"
+                  @click.stop="selectItem(item.title)">
                   <span class="btn-text">{{ item.title }}</span>
                 </BaseButton>
               </li>
