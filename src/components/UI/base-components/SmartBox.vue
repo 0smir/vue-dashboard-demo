@@ -49,6 +49,7 @@ export default {
 <style lang="scss">
 .smart-box {
   position: relative;
+  min-width: max(135px, 50%);
 
   &.active {
     .smart-box__btn-control>.icon {
