@@ -1,5 +1,6 @@
 <template>
   <div class="login-form__wrapper">
+    <p v-if="error" class="error">{{ error }}</p>
     <form class="form from--login" @submit.prevent="submitForm">
       <div class="form__content">
         <div :class="['form-control', 'form-control--email', { error: !user.email.isValid }]">
@@ -45,7 +46,8 @@ export default {
           value: '',
           isValid: true
         }
-      }
+      },
+      error: null
     }
   },
   methods: {
@@ -70,14 +72,27 @@ export default {
       }
 
       const actionPayload = {
-        email: this.user.email,
-        password: this.user.password
+        email: this.user.email.value,
+        password: this.user.password.value
       };
+
+      this.login(actionPayload);
     },
+
+    async login(userData) {
+      try {
+        await this.$store.dispatch('users/login', userData);
+      } catch (error) {
+        this.error = error.message || 'Failed to auth!';
+      }
+      this.clearFormFields();
+    },
+
     clearFormFields() {
       this.user.email.value = '';
       this.user.password.value = '';
     },
+
     clearError() {
       this.user.email.isValid = true;
       this.user.password.isValid = true;
