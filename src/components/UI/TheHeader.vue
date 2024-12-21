@@ -24,7 +24,12 @@
 export default {
   data() {
     return {
-      isLoggedIn: this.$store.getters['users/isAuthenticated']
+
+    }
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters['users/isAuthenticated'];
     }
   }
 }
