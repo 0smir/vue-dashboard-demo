@@ -18,7 +18,8 @@ export default {
         name: responseData[key].name,
         lastName: responseData[key].lastName,
         position: responseData[key].position,
-        project: responseData[key].project
+        project: responseData[key].project,
+        email: responseData[key].email
       };
       employeesList.push(person);
     }
