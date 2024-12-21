@@ -1,5 +1,6 @@
 <template>
   <h2 class="header header--add-person">Registration</h2>
+  <p v-if="error" class="error">{{ error }}</p>
   <form @submit.prevent="submitForm" class="form form-add-person" autocomplete="off">
     <div class="form__content form__content--add-person">
       <div :class="['form-control', 'form-control--name', { error: !user.name.isValid }]">
@@ -78,6 +79,7 @@ export default {
       projects: this.$store.getters['projects/getProjects'],
       showPass: false,
       showConfirmPass: false,
+      error: null,
       user: {
         name: {
           value: '',
@@ -188,7 +190,6 @@ export default {
     },
     addUser() {
       let userData = {
-        id: 'u-' + new Date().getTime(),
         name: this.user.name.value,
         lastName: this.user.lastName.value,
         position: this.user.position.value,
@@ -196,8 +197,17 @@ export default {
         email: this.user.email.value,
         password: this.user.password.value
       }
-      this.$store.dispatch('people/addEmployee', userData);
+      this.registratePerson(userData);
     },
+    async registratePerson(personInfo) {
+      try {
+        await this.$store.dispatch('users/signup', personInfo);
+      }
+      catch (error) {
+        this.error = error.message || 'Failed with signup';
+      }
+    },
+
     clearFormFields() {
       this.user.name.value = '';
       this.user.lastName.value = '';
