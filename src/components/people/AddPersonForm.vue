@@ -167,10 +167,8 @@ export default {
         this.isFormValid = false;
         return;
       }
-      if (this.user.confirm_password.value === '' || this.user.password.value !== this.user.confirm_password.value) {
-        this.user.confirm_password.isValid = false;
-        this.user.confirm_password.errorMessage = this.user.confirm_password.errorMessage;
-        this.isFormValid = false;
+
+      if (!this.user.confirm_password.isValid) {
         return;
       }
     },
@@ -180,14 +178,19 @@ export default {
       if (confirmPassVal !== this.user.password.value) {
         this.user.confirm_password.isValid = false;
         this.isFormValid = false;
+      } else {
+        this.user.confirm_password.isValid = true;
+        this.isFormValid = true;
       }
     },
+
     submitForm() {
       this.validateForm();
       if (!this.isFormValid) return;
       this.addUser();
       this.clearFormFields();
     },
+
     addUser() {
       let userData = {
         name: this.user.name.value,
@@ -199,6 +202,7 @@ export default {
       }
       this.registratePerson(userData);
     },
+
     async registratePerson(personInfo) {
       try {
         await this.$store.dispatch('users/signup', personInfo);
@@ -216,6 +220,7 @@ export default {
       this.user.email.value = '';
       this.user.password.value = '';
     },
+
     clearError() {
       this.user.name.isValid = true;
       this.user.lastName.isValid = true;
