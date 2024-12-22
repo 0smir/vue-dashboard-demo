@@ -14,14 +14,13 @@ export default {
         mode: 'signup'
       });
 
-
       await context.dispatch('people/addEmployee', { ...payload, id: authData.localId }, { root: true });
 
     } catch (error) {
       console.error('Signup failed:', error);
       throw error; // Propagate error to the UI
     }
-    // return
+
   },
 
   async auth(context, payload) {
@@ -63,6 +62,15 @@ export default {
 
     return responseData; // Return user data
 
-  }
+  },
+
+  logout(context) {
+    const actPayload = {
+      token: null,
+      userID: null
+    };
+
+    context.commit('setUser', actPayload);
+  },
 
 }
