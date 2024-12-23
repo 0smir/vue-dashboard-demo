@@ -14,12 +14,12 @@
     <div class="task__description">
       {{ task.description }}
     </div>
-    <BaseButton v-if="type === 'board-item'" class="btn btn__outlined btn--small task__btn-edit" title="edit"
-      aria-label="edit task">
+    <BaseButton v-if="isLoggedIn && (type === 'board-item')" class="btn btn__outlined btn--small task__btn-edit"
+      title="edit" aria-label="edit task">
       <SvgIcon name="edit" class="icon" />
     </BaseButton>
-    <div v-else class="task__actions-wrapper">
-      <BaseButton class="btn btn__outlined btn--small" aria-label="Remove task" title="Remove task">
+    <div v-if="type !== 'board-item'" class="task__actions-wrapper">
+      <BaseButton v-if="isLoggedIn" class="btn btn__outlined btn--small" aria-label="Remove task" title="Remove task">
         <SvgIcon class="icon" name="remove" />
       </BaseButton>
       <RouterLink :to="TaskLink" class="btn btn__outlined btn--small task__link" aria-label="Link to task details">Task
@@ -39,7 +39,10 @@ export default {
   computed: {
     TaskLink() {
       return this.$route.path + '/' + this.task.id;
-    }
+    },
+    isLoggedIn() {
+      return this.$store.getters['users/isAuthenticated'];
+    },
   },
   methods: {
     getNameInitials() {
