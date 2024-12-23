@@ -43,12 +43,20 @@
           </span>
           <span class="sidebar__link-text">People</span></router-link>
       </li>
-      <li class="sidebar-nav__item">
+      <li v-if="isLoggedIn" class="sidebar-nav__item">
         <router-link class="sidebar__link" to="/create">
           <span class="sidebar__link-icon">
             <SvgIcon name="add" class="icon" />
           </span>
           <span class="sidebar__link-text">Create</span>
+        </router-link>
+      </li>
+      <li v-else class="sidebar-nav__item">
+        <router-link class="sidebar__link" to="/people/registration">
+          <span class="sidebar__link-icon">
+            <SvgIcon name="addperson" class="icon" />
+          </span>
+          <span class="sidebar__link-text">SignIn</span>
         </router-link>
       </li>
     </ul>
@@ -61,6 +69,9 @@ export default {
   emits: ['toggle-sidebar'],
 
   computed: {
+    isLoggedIn() {
+      return this.$store.getters['users/isAuthenticated'];
+    },
     sidebarControlAltText() {
       return this.isExpanded ? 'expanded' : 'collapsed';
     }
