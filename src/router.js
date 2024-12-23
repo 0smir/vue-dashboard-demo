@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, onBeforeRouteUpdate } from 'vue-router';
+import store from '@/store/index.js';
 
 const Home = () => import('@/pages/HomePage.vue');
 const NotFound = () => import('@/pages/NotFound.vue');
@@ -26,6 +27,7 @@ const router = createRouter({
     {
       path: '/create',
       component: CreatePage,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -75,6 +77,14 @@ const router = createRouter({
       component: NotFound
     }
   ]
+});
+
+router.beforeEach(function (to, from, next) {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    next('/login');
+  } else {
+    next();
+  }
 });
 
 export default router;
