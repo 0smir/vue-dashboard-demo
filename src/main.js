@@ -10,7 +10,8 @@ import './assets/styles/main.scss';
 import BaseButton from '@/components/UI/base-components/BaseButton.vue';
 import BaseDialog from '@/components/UI/base-components/BaseDialog.vue';
 import BaseSpinner from '@/components/UI/base-components/BaseSpinner.vue';
-import SvgIcon from './components/UI/base-components/SvgIcon.vue';
+import SvgIcon from '@/components/UI/base-components/SvgIcon.vue';
+import BaseDetails from '@/components/UI/base-components/BaseDetails.vue';
 
 import App from './App.vue';
 
@@ -25,5 +26,6 @@ app.component('BaseButton', BaseButton);
 app.component('BaseDialog', BaseDialog);
 app.component('BaseSpinner', BaseSpinner);
 app.component('SvgIcon', SvgIcon);
+app.component('BaseDetails', BaseDetails);
 
 app.mount('#app');
