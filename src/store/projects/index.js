@@ -22,7 +22,9 @@ export default {
           title: 'Career success',
           description: "Achieving career success involves strategic planning, skill-building, and a commitment to continuous growth. This project focuses on setting both short-term and long-term goals to foster career development and seize new opportunities. By defining key milestones, enhancing your skills, and building your professional network, you position yourself for sustained career growth. Whether aiming for a promotion or excelling in a current role, this project equips you with the tools to succeed professionally."
         }
-      ]
+      ],
+      status: [{ id: 'active', value: 'Active' }, { id: 'completed', value: 'Completed' }, { id: 'hold', value: 'On hold' }],
+      priority: [{ id: 'low', value: 'Low' }, { id: 'medium', value: 'Medium' }, { id: 'high', value: 'High' }]
     }
   },
   actions,
