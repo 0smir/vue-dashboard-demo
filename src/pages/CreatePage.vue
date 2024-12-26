@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="create__link-wrapper">
-      <RouterLink class="link create__link link-btn" to="/people/project">
+      <RouterLink class="link create__link link-btn" to="/project/new">
         <SvgIcon name="add" class="icon icon--add" />
         <span class="create__link-text">Project</span>
       </RouterLink>
