@@ -56,6 +56,47 @@
     }
   }
 
+  &__input-radio {
+    position: relative;
+    width: 35px;
+    height: 15px;
+    margin: 4px 7px 0 0;
+    vertical-align: top;
+    background-color: var(--ColorInputBg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid var(--color-primary-medium);
+    appearance: none;
+    border-radius: var(--border-radius-large);
+
+    &:after {
+      position: absolute;
+      top: 50%;
+      left: 3px;
+      transform: translateY(-50%);
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: var(--color-primary-light);
+      border: 1px solid var(--color-primary-medium);
+      content: '';
+      border-radius: var(--round);
+    }
+
+    &:checked {
+      background-color: var(--color-primary-medium);
+      border-color: var(--color-primary-medium);
+
+      &:after {
+        left: calc(100% - 10px - 3px);
+        background: var(--color-primary-light);
+        content: '';
+        border-radius: var(--round);
+      }
+    }
+  }
+
   &__textarea {
     height: 50px;
 
