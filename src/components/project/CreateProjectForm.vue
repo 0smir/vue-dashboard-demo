@@ -13,29 +13,38 @@
         <p class="error-text" v-if="!project.description.isValid">{{ project.description.errorMessage }}</p>
       </div>
       <div :class="['form-control', 'form-control--owner', { error: !project.owner.isValid }]">
-
+        owner
       </div>
       <div :class="['form-control', 'form-control--members', { error: !project.members.isValid }]">
-
+        members
       </div>
       <div :class="['form-control', 'form-control--boards']">
         <p class="description-text">{{ project.boards.descriptions }}</p>
       </div>
       <div :class="['form-control', 'form-control--status', { error: !project.status.isValid }]">
-        <label class="form-control__label" v-for="statusItem in statusList" :key="statusItem.id">
-          <input type="radio" :name="statusItem.value" :value="statusItem.id" v-model="project.status.value">
+        <h4 class="title">Choose project status:</h4>
+        <label class="form-control__label form-control__label--radio" v-for="statusItem in statusList"
+          :key="statusItem.id">
+          <input class="form-control__input-radio" type="radio" :name="statusItem.value" :value="statusItem.id"
+            v-model="project.status.value">
           <span>{{ statusItem.value }}</span>
         </label>
         <p class="error-text" v-if="!project.status.isValid">{{ project.status.errorMessage }}</p>
       </div>
       <div :class="['form-control', 'form-control--priority', { error: !project.priority.isValid }]">
-        <label class="form-control__label" v-for="priorityItem in priorityList" :key="priorityItem.id">
-          <input type="radio" :name="priorityItem.value" :value="priorityItem.id" v-model="project.priority.value">
+        <h4 class="title">Choose project priority:</h4>
+        <label class="form-control__label form-control__label--radio" v-for="priorityItem in priorityList"
+          :key="priorityItem.id">
+          <input class="form-control__input-radio" type="radio" :name="priorityItem.value" :value="priorityItem.id"
+            v-model="project.priority.value">
           <span>{{ priorityItem.value }}</span>
         </label>
         <p class="error-text" v-if="!project.priority.isValid">{{ project.priority.errorMessage }}</p>
       </div>
-
+      <div class="form-control form-control--btn-wrapper btn-wrapper">
+        <BaseButton class="btn btn__default btn--medium btn--add" type="submit">Create Project</BaseButton>
+        <BaseButton class="btn btn__outlined btn--medium btn--cancel">Cancel</BaseButton>
+      </div>
     </div>
   </form>
 </template>
@@ -59,7 +68,7 @@ export default {
           isValid: true
         },
         owner: {
-          value: null,
+          value: '',
           errorMessage: 'Please choose project owner.',
           isValid: true
         },
@@ -96,14 +105,49 @@ export default {
       this.createProject();
     },
     validateForm() {
-      console.log('validateForm');
+      this.isFormValid = true;
+      if (this.project.title.value === '') {
+        this.project.title.isValid = false;
+        this.isFormValid = false;
+        return;
+      }
+      if (this.project.description.value === '') {
+        this.project.description.isValid = false;
+        this.isFormValid = false;
+        return;
+      }
     },
     createProject() {
-      console.log('createProject');
+      let newProjectData = {
+        id: new Date().getTime(),
+        title: this.project.title.value,
+        description: this.project.description.value,
+        owner: this.project.owner.value,
+        members: this.project.members.value,
+        boards: this.project.boards.value,
+        priority: this.project.priority.value,
+        status: this.project.status.value,
+      };
+      console.log(newProjectData);
+      this.$store.dispatch('projects/createProject', newProjectData);
+      this.clearFormFields();
+    },
+    clearFormFields() {
+      this.project.title.value = '';
+      this.project.description.value = '';
+      this.project.owner.value = '';
+      this.project.members.value = [];
+      this.project.boards.value = [];
+      this.project.priority.value = 'low';
+      this.project.status.value = 'active';
     }
   }
 
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form-control__label--radio {
+  margin-right: 20px;
+}
+</style>
