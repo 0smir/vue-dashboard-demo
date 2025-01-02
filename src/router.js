@@ -11,6 +11,7 @@ const Person = () => import('@/pages/PersonPage.vue');
 const CreatePage = () => import('@/pages/CreatePage.vue');
 const NewBoardPage = () => import('@/pages/NewBoard.vue');
 const LoginPage = () => import('@/pages/LoginPage.vue');
+const CreateProjectPage = () => import('@/pages/CreateProjectPage.vue');
 
 
 const AddPersonForm = () => import('@/components/people/AddPersonForm.vue');
@@ -69,6 +70,20 @@ const router = createRouter({
       component: Person,
     },
     {
+      path: '/project',
+      children: [
+        {
+          path: '/project/new',
+          component: CreateProjectPage,
+        },
+        {
+          path: '/project/:id',
+          props: true,
+          component: CreateProjectPage,
+        }
+      ]
+    },
+    {
       path: '/board/new',
       component: NewBoardPage
     },
@@ -79,12 +94,12 @@ const router = createRouter({
   ]
 });
 
-router.beforeEach(function (to, from, next) {
-  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
-    next('/login');
-  } else {
-    next();
-  }
-});
+// router.beforeEach(function (to, from, next) {
+//   if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+//     next('/login');
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
