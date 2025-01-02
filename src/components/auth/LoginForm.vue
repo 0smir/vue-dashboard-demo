@@ -86,6 +86,7 @@ export default {
         this.error = error.message || 'Failed to auth!';
       }
       this.clearFormFields();
+      this.$router.replace('/');
     },
 
     clearFormFields() {
