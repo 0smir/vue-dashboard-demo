@@ -77,6 +77,9 @@ export default {
       };
 
       this.login(actionPayload);
+
+      this.clearFormFields();
+      this.$router.replace('/');
     },
 
     async login(userData) {
@@ -85,8 +88,6 @@ export default {
       } catch (error) {
         this.error = error.message || 'Failed to auth!';
       }
-      this.clearFormFields();
-      this.$router.replace('/');
     },
 
     clearFormFields() {
