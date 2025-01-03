@@ -7,4 +7,7 @@ export default {
     state.didAutoLogout = false;
   },
 
+  setUserData(state, payload) {
+    state.user = payload;
+  }
 }

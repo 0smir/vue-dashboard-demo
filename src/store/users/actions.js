@@ -1,10 +1,17 @@
+
+let API_KEY = 'AIzaSyBiZzawE5DYFXfZuh9irzQaMZxm5iNU25s';
 export default {
   async login(context, payload) {
     console.log('login payload: ', payload)
-    return context.dispatch('auth', {
+    const userData = await context.dispatch('auth', {
       ...payload,
       mode: 'login'
     });
+
+    if (userData) {
+      console.log('userData: ', userData);
+      await context.dispatch('loadUserData', userData.localId);
+    }
   },
   async signup(context, payload) {
     console.log('signup payload: ', payload)
@@ -25,7 +32,7 @@ export default {
 
   async auth(context, payload) {
     let mode = payload.mode;
-    let API_KEY = 'AIzaSyBiZzawE5DYFXfZuh9irzQaMZxm5iNU25s';
+    // let API_KEY = API_KEY;
     let url = '';
 
     if (mode === 'signup') {
@@ -72,5 +79,20 @@ export default {
 
     context.commit('setUser', actPayload);
   },
+
+  async loadUserData(context, data) {
+    let personID = data;
+    let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/people/${personID}.json`;
+
+    const userData = await fetch(url);
+    const responseUserData = await userData.json();
+
+    if (!userData.ok) {
+      const error = new Error(responseUserData.message || 'Faled to fetch');
+      throw error;
+    }
+
+    context.commit('setUserData', responseUserData);
+  }
 
 }
