@@ -1,0 +1,121 @@
+<template>
+  
+    <div v-if="userInfo" class="relative user-profile" v-click-outside="toggleUserNav">
+      <BaseButton class="btn btn--transparent user-profile__btn-action" @click="toggleUserNav">
+        <div class="user-profile__image-wrapper rounded">
+          <span>{{ userInitials }}</span>
+        </div>
+        <SvgIcon name="chevron-down" class="icon icon--medium" />
+      </BaseButton>
+      <ul v-show="isNavOpened" class="user-profile__nav">
+        <li class="user-profile__nav-item"><router-link class="user-profile__link" :to="userProfileLink">My Profile</router-link></li>
+        <li class="user-profile__nav-item"><router-link class="user-profile__link" to="/">My boards</router-link></li>
+        <li class="user-profile__nav-item"><router-link class="user-profile__link" to="/">My Projects</router-link></li>
+        <li class="user-profile__nav-item">
+          <BaseButton class="btn btn__default btn--medium user-profile__btn-logout" @click="logOut">
+            <SvgIcon name="logout" class="icon" />
+            <span>Logout</span>
+          </BaseButton>
+        </li>
+      </ul>
+    </div>
+  
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isNavOpened: false
+    }
+  },
+  
+  computed: {
+    userInfo() {
+      return this.$store.getters['users/getUserInfo'];
+    },
+    userProfileLink() {
+      return '/user' + '/' + this?.userInfo?.id;
+    },
+    userInitials() {
+      let initials = this?.userInfo?.lastName.charAt(0).toUpperCase() + this?.userInfo?.lastName.charAt(0).toUpperCase();
+      return initials;
+    }
+  },
+  methods: {
+    toggleUserNav() {
+      this.isNavOpened = !this.isNavOpened;
+    },
+    logOut() {
+      this.$store.dispatch('users/logout');
+    }
+  },
+  watch: {
+    $route() {
+      this.toggleUserNav();
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.user-profile {
+  &__nav {
+    position: absolute;
+    top: calc(100% - (-5px));
+    left: 100%;
+    z-index: 10;
+    overflow-x: hidden;
+    padding-left: 0;
+    list-style: none;
+    width: 170px;
+    border: 1px solid var(--color-secondary-light);
+    background: var(--color-white);
+    border-radius: var(--border-radius-medium);
+    transform: translateX(-100%);
+  }
+  &__nav-item {
+    margin-bottom: 7px;
+
+    &:last-of-type {
+      margin:  0;
+      padding-top: 15px;
+      border-top: 1px solid var(--color-secondary-light);
+    }
+  }
+  &__btn-action {
+    color: var(--color-text);
+    &:hover>.user-profile__image-wrapper{
+      background-color: var(--color-secondary-light);
+    }
+  }
+  &__image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    width: 34px;
+    height: 34px;
+    border: 2px solid var(--color-dark-bg);
+    font-size: 16px;
+    color: var(--color-text-dark);
+    background-color: var(--color-white);
+    font-weight: 400;
+    padding: 2px;
+  }
+  &__btn-logout {
+    width: 100%;
+    border-radius: 0;
+  }
+  &__link {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    color: var(--color-dark-bg);
+    text-decoration: none;
+    &:hover{
+      background: var(--color-primary-light);
+    }
+  }
+}
+</style>
