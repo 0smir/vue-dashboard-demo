@@ -1,6 +1,6 @@
 <template>
   
-    <div v-if="userInfo" class="relative user-profile" v-click-outside="toggleUserNav">
+    <div v-if="userInfo" class="relative user-profile" v-click-outside="closeUserNav">
       <BaseButton class="btn btn--transparent user-profile__btn-action" @click="toggleUserNav">
         <div class="user-profile__image-wrapper rounded">
           <span>{{ userInitials }}</span>
@@ -46,13 +46,16 @@ export default {
     toggleUserNav() {
       this.isNavOpened = !this.isNavOpened;
     },
+    closeUserNav() {
+      this.isNavOpened = false;
+    },
     logOut() {
       this.$store.dispatch('users/logout');
     }
   },
   watch: {
     $route() {
-      this.toggleUserNav();
+      this.closeUserNav();
     }
   }
 }
