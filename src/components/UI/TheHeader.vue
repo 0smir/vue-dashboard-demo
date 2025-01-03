@@ -14,7 +14,7 @@
       </nav>
       <div class="header__actions">
         <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
-        <BaseButton v-else class="btn btn__default btn--medium btn-logout" @click="logOut">Logout</BaseButton>
+        <UserProfile v-else :userInfo="userInfo" />
       </div>
     </div>
   </header>
@@ -22,19 +22,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-
-    }
-  },
   computed: {
     isLoggedIn() {
       return this.$store.getters['users/isAuthenticated'];
-    }
-  },
-  methods: {
-    logOut() {
-      this.$store.dispatch('users/logout');
     }
   }
 }
