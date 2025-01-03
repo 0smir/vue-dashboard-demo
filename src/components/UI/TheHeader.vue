@@ -14,14 +14,18 @@
       </nav>
       <div class="header__actions">
         <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
-        <UserProfile v-else :userInfo="userInfo" />
+        <UserProfile v-else />
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import UserProfile from '@/components/people/UserProfile.vue';
 export default {
+  components: {
+    UserProfile
+  },
   computed: {
     isLoggedIn() {
       return this.$store.getters['users/isAuthenticated'];
