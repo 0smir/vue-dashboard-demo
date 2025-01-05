@@ -7,14 +7,17 @@
       </router-link>
       <nav>
         <ul class="header__nav">
-          <li class="header__nav-item"><router-link to="/">Home</router-link></li>
-          <li class="header__nav-item"><router-link to="/">About</router-link></li>
-          <li class="header__nav-item"><router-link to="/">Projects</router-link></li>
+          <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/">Home</router-link></li>
+          <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/">About</router-link></li>
+          <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/">Projects</router-link></li>
         </ul>
       </nav>
-      <div class="header__actions">
-        <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
-        <UserProfile v-else />
+      <div v-if="!isLoggedIn" class="header__actions">
+        <router-link to="/login" class="header__link header__auth-link header__auth-link--login">Login</router-link>
+        <router-link to="/people/registration" class="header__link header__auth-link header__auth-link--registration">SignUp</router-link>
+      </div>
+      <div v-else  class="header__actions">
+        <UserProfile />
       </div>
     </div>
   </header>
@@ -77,6 +80,35 @@ export default {
 
     &-item {
       margin-right: 10px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+  }
+
+  &__link {
+    display: block;
+    padding: 10px 5px;
+    text-decoration: none;
+  }
+
+  &__nav-link {
+    border-bottom: 2px solid transparent;
+    &:hover {
+      border-bottom: 2px solid var(--color-primary-medium);
+    }
+  }
+
+  &__auth-link {
+    border-radius: var(--border-radius-medium);
+    border: 1px solid transparent;
+    &:hover{
+      border: 1px solid var(--color-primary-light);
+    }
+    &--login{
+      margin-right: 5px;
+      
     }
   }
 }
