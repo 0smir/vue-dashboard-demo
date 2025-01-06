@@ -1,20 +1,19 @@
 
 let API_KEY = 'AIzaSyBiZzawE5DYFXfZuh9irzQaMZxm5iNU25s';
+let timer;
+
 export default {
   async login(context, payload) {
-    console.log('login payload: ', payload)
     const userData = await context.dispatch('auth', {
       ...payload,
       mode: 'login'
     });
 
     if (userData) {
-      console.log('userData: ', userData);
       await context.dispatch('loadUserData', userData.localId);
     }
   },
   async signup(context, payload) {
-    console.log('signup payload: ', payload)
     try {
       const authData = await context.dispatch('auth', {
         ...payload,
@@ -32,7 +31,6 @@ export default {
 
   async auth(context, payload) {
     let mode = payload.mode;
-    // let API_KEY = API_KEY;
     let url = '';
 
     if (mode === 'signup') {
@@ -53,14 +51,23 @@ export default {
     );
 
     let responseData = await response.json();
-    console.log(responseData);
     if (!response.ok) {
       const error = new Error(
         responseData.message || 'Fail due fetch!'
       );
-      console.log(responseData);
       throw error;
     }
+
+    const expiresIn = +responseData.expiresIn * 1000;
+    const expirationDate = new Date().getTime() + expiresIn;
+
+    localStorage.setItem('token', responseData.idToken);
+    localStorage.setItem('userID', responseData.localId);
+    localStorage.setItem('tokenExpiration', expirationDate);
+
+    timer = setTimeout(function () {
+      context.dispatch('autoLogout');
+    }, expiresIn);
 
     context.commit('setUser', {
       token: responseData.idToken,
@@ -68,16 +75,56 @@ export default {
     });
 
     return responseData; // Return user data
+  },
 
+  autoLogin(context) {
+    let token = localStorage.getItem('token'),
+      userID = localStorage.getItem('userID'),
+      tokenExpiration = localStorage.getItem('tokenExpiration'),
+      userProfileData = JSON.parse(localStorage.getItem('userProfileData'));
+
+    let expiresIn = +tokenExpiration - new Date().getTime();
+
+    if (expiresIn < 0) {
+      return;
+    }
+
+    setTimeout(function () {
+      context.dispatch('autoLogout');
+    }, expiresIn);
+
+    if (token && userID) {
+      context.commit('setUser', {
+        token: token,
+        userID: userID
+      });
+      context.commit('setUserData', userProfileData);
+    }
   },
 
   logout(context) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userID');
+    localStorage.removeItem('tokenExpiration');
+    localStorage.removeItem('userProfileData');
+
+    clearTimeout(timer);
+
     const actPayload = {
       token: null,
       userID: null
     };
+    const userData = {
+      user: null
+    }
 
     context.commit('setUser', actPayload);
+    context.commit('setUserData', userData);
+  },
+
+  autoLogout(context) {
+    context.dispatch('logout');
+    context.commit('setAutoLogout');
   },
 
   async loadUserData(context, data) {
@@ -92,6 +139,7 @@ export default {
       throw error;
     }
 
+    localStorage.setItem('userProfileData', JSON.stringify(responseUserData));
     context.commit('setUserData', responseUserData);
   }
 

@@ -21,15 +21,34 @@ export default {
     TheFooter,
     TheSidebar
   },
+
   data() {
     return {
       isExpanded: false
     }
   },
 
+  computed: {
+    didAutologout() {
+      return this.$store.getters['users/getAutoLogoutInfo'];
+    }
+  },
+
   methods: {
     toggleSidebar() {
       this.isExpanded = !this.isExpanded;
+    }
+  },
+
+  mounted() {
+    this.$store.dispatch('users/autoLogin');
+  },
+
+  watch: {
+    didAutologout(value, oldValue) {
+      if (value && value !== oldValue) {
+        this.$router.replace('/login');
+      }
     }
   }
 }
