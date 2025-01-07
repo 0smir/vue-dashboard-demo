@@ -1,11 +1,13 @@
 <template>
   
     <div v-if="userInfo" class="relative user-profile" v-click-outside="closeUserNav">
-      <BaseButton class="btn btn--transparent user-profile__btn-action" @click="toggleUserNav">
+      <BaseButton :class="['btn btn--transparent user-profile__btn-action', {active: isNavOpened}]" @click="toggleUserNav">
         <div class="user-profile__image-wrapper rounded">
           <span>{{ userInitials }}</span>
         </div>
-        <SvgIcon name="chevron-down" class="icon icon--medium" />
+        <span class="icon-wrapper">
+          <SvgIcon name="chevron-down" class="icon icon--medium" />
+        </span>
       </BaseButton>
       <ul v-show="isNavOpened" class="user-profile__nav">
         <li class="user-profile__nav-item"><router-link class="user-profile__link" :to="userProfileLink">My Profile</router-link></li>
@@ -88,8 +90,22 @@ export default {
   }
   &__btn-action {
     color: var(--color-text);
+    
     &:hover>.user-profile__image-wrapper{
-      background-color: var(--color-secondary-light);
+      background-color: var(--color-primary-light);
+    }
+
+    .icon-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+      height: 35px;
+    }
+    &.active {
+      .icon-wrapper{
+        transform: rotate(180deg);
+      }
     }
   }
   &__image-wrapper {
