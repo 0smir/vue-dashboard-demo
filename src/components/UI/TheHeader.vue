@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="container header__content">
+    <div class="header__content">
       <router-link to="/" class="header-logo">
         <SvgIcon name="logo" class="icon icon--logo header-logo__icon" />
         <span class="company-name">GlobalBoard</span>
@@ -39,7 +39,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  padding: 15px 0;
+  padding: 15px;
   width: 100%;
   background-color: var(--color-primary);
 
