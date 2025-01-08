@@ -14,8 +14,14 @@
             </li>
           </template>
         </SmartBox>
-        <SmartBox :list="taskActionsList" title="Actions" mode="actions" @task-interaction="actionExecute"
-          :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
+        <SmartBox :list="taskActionsList" mode="actions" @task-interaction="actionExecute">
+          <template #active-item>
+            <BaseButton class="btn btn--medium btn--transparent task-info__btn-action btn-action--action smart-box__btn smart-box__btn-control">
+              <SvgIcon class="icon icon--medium smart-box__btn-icon" name="flash"/>
+              <span class="btn-action__title">Actions</span>
+              <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down"/>
+            </BaseButton>
+          </template>
           <template #list-items="{ list, selectItem }">
             <li class="smart-box__list-item" v-for="item in list" :key="item" @click.stop="selectItem(item)">
               <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
@@ -38,7 +44,11 @@
               @update-params="updateTaskParams"
               :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
               <template #active-item>
-                <TaskPriorityElement :priority="taskInfo.priority" :titleDisplay="true" />
+                <BaseButton class="btn btn--medium btn--transparent smart-box__btn smart-box__btn-control">
+                  <TaskPriorityElement :priority="taskInfo.priority" :titleDisplay="true" />
+                  <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down" />
+                </BaseButton>
+                
               </template>
               <template #list-items="{ list, selectItem }">
                 <li v-for="item in list" :key="item"
@@ -86,7 +96,7 @@
         </div>
       </div>
       <div>
-        comments
+       <TaskCommentsBlock />
       </div>
     </div>
   </div>
@@ -95,11 +105,14 @@
 
 <script>
 import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
+import BaseButton from '@/components/UI/base-components/BaseButton.vue';
 import SmartBox from '@/components/UI/base-components/SmartBox.vue';
+import TaskCommentsBlock from '@/components/tasks/TaskCommentsBlock.vue';
 export default {
   components: {
     TaskPriorityElement,
-    SmartBox
+    SmartBox,
+    TaskCommentsBlock
   },
   props: ['id'],
   data() {
@@ -244,6 +257,7 @@ export default {
 
 .task-details {
   display: flex;
+  align-items: center;
   margin-bottom: 10px;
 
   &__label {
@@ -255,5 +269,9 @@ export default {
     display: inline-flex;
     margin-right: 5px;
   }
+}
+
+.btn-action__title{
+  margin: 0 5px;
 }
 </style>
