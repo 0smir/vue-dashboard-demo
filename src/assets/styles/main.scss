@@ -27,6 +27,14 @@
   margin: 0 auto;
   max-width: 1200px;
   padding: 15px;
+
+  &__spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: 100%;
+  }
 }
 
 main {

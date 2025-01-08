@@ -10,7 +10,7 @@
       No items with task status {{ activeFilter }}
     </p>
   </div>
-  <div v-else class="container">
+  <div v-else class="container container__spinner-wrapper">
     <BaseSpinner />
   </div>
 </template>
@@ -93,7 +93,6 @@ export default {
     @media (min-width: $tablet) {
       width: calc(100%/4 - 10px);
     }
-
   }
 }
 </style>
