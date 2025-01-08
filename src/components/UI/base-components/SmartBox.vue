@@ -60,7 +60,7 @@ export default {
   &__list-wrapper {
     z-index: 5;
     position: absolute;
-    top: calc(100% - 4px);
+    top: calc(100% + 5px);
     padding: 5px;
     width: 100%;
     list-style: none;
@@ -83,7 +83,6 @@ export default {
   }
 
   &__btn-control {
-    margin-bottom: 10px;
 
     span {
       margin: 0 auto;
