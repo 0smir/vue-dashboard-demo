@@ -37,7 +37,7 @@ export default {
       return this.$store.getters['users/getUserInfo'];
     },
     userProfileLink() {
-      return '/user' + '/' + this?.userInfo?.id;
+      return '/people' + '/' + this?.userInfo?.id;
     },
     userInitials() {
       let initials = this?.userInfo?.lastName.charAt(0).toUpperCase() + this?.userInfo?.lastName.charAt(0).toUpperCase();
