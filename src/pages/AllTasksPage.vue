@@ -1,18 +1,24 @@
 <template>
-  <div class="container">
+  <div v-if="isLoading === false" class="container">
     <TasksFilter :filterItemsList="filterItemsList" :activeItem="activeFilter" @on-filter-change="filterNameChange" />
     <ul class="tasks-list__wrapper" v-if="tasks.length">
       <li class="tasks-list__item" v-for="task in tasks">
         <TaskItem :task="task" :key="task.id" type="grid-item" />
       </li>
     </ul>
-    <p v-else> No Items</p>
+    <p v-else>
+      No items with task status {{ activeFilter }}
+    </p>
+  </div>
+  <div v-else class="container">
+    <BaseSpinner />
   </div>
 </template>
 
 <script>
 import TasksFilter from '@/components/tasks/TasksFilter.vue';
 import TaskItem from '@/components/tasks/TaskItem.vue';
+import BaseSpinner from '@/components/UI/base-components/BaseSpinner.vue';
 export default {
   components: {
     TasksFilter,
@@ -20,6 +26,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       activeFilter: 'all',
       error: null
     }
@@ -40,11 +47,13 @@ export default {
   },
   methods: {
     async loadTasks() {
+      this.isLoading = true;
       try {
         await this.$store.dispatch('tasks/loadTasks');
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       }
+      this.isLoading = false;
     },
     filterNameChange(name) {
       this.activeFilter = name;
