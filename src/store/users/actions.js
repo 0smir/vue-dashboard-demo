@@ -114,9 +114,7 @@ export default {
       token: null,
       userID: null
     };
-    const userData = {
-      user: null
-    }
+    const userData = null;
 
     context.commit('setUser', actPayload);
     context.commit('setUserData', userData);
