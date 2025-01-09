@@ -8,8 +8,12 @@ export default {
       description: data.description,
       priority: data.priority,
       status: data.status,
+      reporter: data.reporter,
+      createdTime: data.createdTime,
       comments: []
-    }
+    };
+
+    console.log('taskInfo: ', taskInfo);
 
     const resp = await fetch(
       `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${taskInfo.id}.json`,
@@ -42,6 +46,8 @@ export default {
         description: resultData[key].description,
         priority: resultData[key].priority,
         status: resultData[key].status,
+        reporter: resultData[key].reporter,
+        createdTime: resultData[key].createdTime,
         comments: resultData[key]?.comments
       };
       taskList.push(task);
