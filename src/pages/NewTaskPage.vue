@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2 class="title">Create New Task</h2>
-    <CreateTaskForm></CreateTaskForm>
+    <CreateTaskForm :userID="userID"/>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ import CreateTaskForm from '@/components/tasks/CreateTaskForm.vue';
 export default {
   components: {
     CreateTaskForm
+  },
+  computed: {
+    userID() {
+      return this.$store.getters['users/userID'];
+    }
   }
 
 }
