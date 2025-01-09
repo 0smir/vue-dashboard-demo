@@ -30,7 +30,7 @@
         </div>
         <div class="task-details task-details__time task-details__time--created">
           <span class="task-details__label task-details__label--time-created">Created: </span>
-          <span class="task-details__value task-details__value--time-created"> {{ taskInfo?.created }}</span>
+          <span class="task-details__value task-details__value--time-created"> {{ taskInfo?.createdTime }}</span>
         </div>
         <div class="task-details task-details__time task-details__time--updated">
           <span class="task-details__label task-details__label--time-updated">Updated: </span>
@@ -116,7 +116,7 @@ export default {
       }
       if (mode === 'assignee') {
         this.$store.dispatch('tasks/setTaskAssignee', { ...this.taskInfo, assignee: newVal });
-      }
+      }  
     },
     actionExecute(newParams) {
       console.log(newParams);
