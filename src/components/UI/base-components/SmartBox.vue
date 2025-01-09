@@ -26,7 +26,7 @@ export default {
       let payload = {
         newVal: item,
         mode: this.mode
-      }
+      };
 
       if (this.mode !== 'actions') {
         this.$emit('update-params', payload);
