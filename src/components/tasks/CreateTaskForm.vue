@@ -13,15 +13,6 @@
         </select>
         <p class="error-text" v-if="!task.project.isValid">{{ task.project.errorMessage }}</p>
       </div>
-      <div :class="['form-control', 'form-control--assignee', { error: !task.assignee.isValid }]">
-        <label class="form-control__label" for="assignee">Assignee</label>
-        <select class="form-control__select" name="assignee" id="assignee" v-model="task.assignee.value">
-          <option class="form-control__select-option" v-for="person in assigneeList" :value="person.id">
-            {{ person.name + ' ' + person.lastName }}
-          </option>
-        </select>
-        <p class="error-text" v-if="!task.assignee.isValid">{{ task.assignee.errorMessage }}</p>
-      </div>
       <div :class="['form-control', 'form-control--status', { error: !task.status.isValid }]">
         <label class="form-control__label" for="status">Status</label>
         <select class="form-control__select" name="task-status" id="status" v-model="task.status.value">
@@ -29,6 +20,23 @@
             :key="status">{{ status }}</option>
         </select>
         <p class="error-text" v-if="!task.status.isValid">{{ task.status.errorMessage }}</p>
+      </div>
+      <div :class="['form-control', 'form-control--assignee', { error: !task.assignee.isValid }]">
+        <label class="form-control__label" for="assignee">Assignee</label>
+        <select class="form-control__select" name="assignee" id="assignee" v-model="task.assignee.value">
+          <option class="form-control__select-option" v-for="person in personsList" :value="person.id">
+            {{ person.name + ' ' + person.lastName }}
+          </option>
+        </select>
+        <p class="error-text" v-if="!task.assignee.isValid">{{ task.assignee.errorMessage }}</p>
+      </div>
+      <div :class="['form-control', 'form-control--reporter']">
+        <label class="form-control__label" for="reporter">Reporter</label>
+        <select class="form-control__select" name="reporter" id="reporter" v-model="task.reporter.value">
+          <option class="form-control__select-option" v-for="person in personsList" :value="person.id" >
+            {{ person.name + ' ' + person.lastName }}
+          </option>
+        </select>
       </div>
       <div :class="['form-control', 'form-control--priority', { error: !task.priority.isValid }]">
         <label class="form-control__label" for="priority">Priority</label>
@@ -54,7 +62,7 @@
 
 <script>
 export default {
-  props: ['className'],
+  props: ['className', 'userID'],
   data() {
     return {
       task: {
@@ -69,8 +77,12 @@ export default {
           isValid: true
         },
         assignee: {
-          value: '',
+          value: this.userID ? this.userID : '',
           errorMessage: 'Please assign the task to a valid team member.',
+          isValid: true
+        },
+        reporter: {
+          value: this.userID ? this.userID : '',
           isValid: true
         },
         priority: {
@@ -100,7 +112,7 @@ export default {
     projectsList() {
       return this.$store.getters['projects/getProjects'];
     },
-    assigneeList() {
+    personsList() {
       return this.$store.getters['people/getEmployeesList'];
     }
   },
@@ -147,17 +159,20 @@ export default {
     },
 
     addTask() {
-      let taskID = this.task.project.value.slice(0, 1).toUpperCase() + '-' + new Date().getTime();
-      let assigneeData = this.assigneeList.filter((item) => item.id === this.task.assignee.value)[0];
-      let formData = {
-        id: taskID,
-        title: this.task.title.value,
-        project: this.task.project.value,
-        assignee: assigneeData,
-        description: this.task.description.value,
-        priority: this.task.priority.value,
-        status: this.task.status.value
-      };
+      let taskID = this.task.project.value.slice(0, 1).toUpperCase() + '-' + new Date().getTime(),
+          assigneeData = this.personsList.filter((item) => item.id === this.task.assignee.value)[0],
+          reporterData = this.personsList.filter((item) => item.id === this.task.reporter.value)[0],
+          formData = {
+            id: taskID,
+            title: this.task.title.value,
+            project: this.task.project.value,
+            assignee: assigneeData,
+            reporter: reporterData,
+            description: this.task.description.value,
+            priority: this.task.priority.value,
+            status: this.task.status.value,
+            createdTime: new Date().getTime(),
+          };
 
       this.$store.dispatch('tasks/addTask', formData);
       this.clearFormFields();
@@ -166,7 +181,8 @@ export default {
     clearFormFields() {
       this.task.title.value = '';
       this.task.project.value = '';
-      this.task.assignee.value = '';
+      this.task.assignee.value = this.userID ? this.userID : '';
+      this.task.reporter.value = this.userID ? this.userID : '';
       this.task.description.value = '';
       this.task.priority.value = '';
       this.task.status.value = '';
