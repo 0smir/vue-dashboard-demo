@@ -1,100 +1,47 @@
 <template>
   <div v-if="taskInfo" class="task-info task-info__container">
+    
     <div class="task-info__details">
-
+ 
       <div class="task-info__actions-wrapper">
-        <SmartBox :list="taskStatusList" :title="taskStatus" mode="status"
-          :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--status-updata']"
-          @update-params="updateTaskParams">
-          <template #list-items="{ list, selectItem }">
-            <li class="smart-box__list-item" v-for="item in list" :key="item" @click.stop="selectItem(item)">
-              <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
-                <span class="btn-text">{{ item }}</span>
-              </BaseButton>
-            </li>
-          </template>
-        </SmartBox>
-        <SmartBox :list="taskActionsList" mode="actions" @task-interaction="actionExecute">
-          <template #active-item>
-            <BaseButton class="btn btn--medium btn--transparent task-info__btn-action btn-action--action smart-box__btn smart-box__btn-control">
-              <SvgIcon class="icon icon--medium smart-box__btn-icon" name="flash"/>
-              <span class="btn-action__title">Actions</span>
-              <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down"/>
-            </BaseButton>
-          </template>
-          <template #list-items="{ list, selectItem }">
-            <li class="smart-box__list-item" v-for="item in list" :key="item" @click.stop="selectItem(item)">
-              <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
-                <span class="btn-text">{{ item }}</span>
-              </BaseButton>
-            </li>
-          </template>
-        </SmartBox>
+        <TaskStatusDetails :taskStatusList="taskStatusList" :taskStatus="taskStatus" @choose-action="updateTaskParams"/>
+        <TaskActionsDetails :taskActionsList="taskActionsList" mode="actions" @choose-action="actionExecute"/>
       </div>
 
       <div class="task-info__details-wrapper">
-        <div class="task-details task-details--assignee" v-if="assigneeFullName">
-          <span class="task-details__label task-details__label--assignee">Assignee:</span>
-          <span class="task-details__value task-details__value--assignee"> {{ assigneeFullName }}</span>
+        <TaskAssigneeDetails :assigneeFullName="assigneeFullName"/>
+        <TaskPriorityDetails :taskPriorityList="taskPriorityList"
+                             :priorityTitle="taskInfo.priority"
+                             @choose-action="updateTaskParams"
+        />
+        <TaskProjectDetails v-if="taskInfo?.project" 
+                            :projectsList="projectsList" 
+                            :title="taskInfo.project"
+                            @choose-action="updateTaskParams"
+        />
+        <TaskReporterDetails :reporter="taskInfo.reporter" />
+        <div class="task-details task-details__time task-details--time-estimated">
+          <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
+          <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimate }}</span>
         </div>
-        <div class="task-details task-details--priority">
-          <span class="task-details__label task-details__label--priority">Priority:</span>
-          <div class="task-details__value task-details__value--priority">
-            <SmartBox :list="taskPriorityList" :title="taskInfo.priority" mode="priority"
-              @update-params="updateTaskParams"
-              :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
-              <template #active-item>
-                <BaseButton class="btn btn--medium btn--transparent smart-box__btn smart-box__btn-control">
-                  <TaskPriorityElement :priority="taskInfo.priority" :titleDisplay="true" />
-                  <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down" />
-                </BaseButton>
-                
-              </template>
-              <template #list-items="{ list, selectItem }">
-                <li v-for="item in list" :key="item"
-                  :class="['smart-box__list-item', { hidden: item === taskInfo.priority }]">
-                  <TaskPriorityElement :priority="item" :titleDisplay="true" @click.stop="selectItem(item)" />
-                </li>
-              </template>
-            </SmartBox>
-          </div>
+        <div class="task-details task-details__time task-details--time-trecked">
+          <span class="task-details__label task-details__label--time-trecked">Time tracked: </span>
+          <span class="task-details__value task-details__value--time-trecked"> {{ taskInfo?.logged }}</span>
         </div>
-        <div class="task-details task-details--creator" v-if="taskInfo?.project">
-          <span class="task-details__label task-details__label--creator">Project: </span>
-          <SmartBox :list="projectsList" :title="taskInfo.project" mode="project" @update-params="updateTaskParams"
-            :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
-            <template #list-items="{ list, selectItem }">
-              <li class="smart-box__list-item" v-for="item in list" :key="item">
-                <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action"
-                  @click.stop="selectItem(item.title)">
-                  <span class="btn-text">{{ item.title }}</span>
-                </BaseButton>
-              </li>
-            </template>
-          </SmartBox>
-
+        <div class="task-details task-details__time task-details__time--created">
+          <span class="task-details__label task-details__label--time-created">Created: </span>
+          <span class="task-details__value task-details__value--time-created"> {{ taskInfo?.created }}</span>
         </div>
-        <div class="task-details task-details--creator" v-if="taskInfo?.creator">
-          <span class="task-details__label task-details__label--creator">Reporter: </span>
-          <span class="task-details__value task-details__value--creator"> {{ creatorFullName }}</span>
-        </div>
-        <div class="task-details task-details--creator" v-if="taskInfo?.estimate">
-          <span class="task-details__label task-details__label--creator">Time tracking: </span>
-          <span class="task-details__value task-details__value--creator"> {{ taskInfo?.estimate }}</span>
+        <div class="task-details task-details__time task-details__time--updated">
+          <span class="task-details__label task-details__label--time-updated">Updated: </span>
+          <span class="task-details__value task-details__value--time-updated"> {{ taskInfo?.updated }}</span>
         </div>
       </div>
     </div>
 
     <div class="task-info__task-data">
-      <div class="task-info__main">
-        <h1 class="task-info__title">{{ id }}: {{ taskInfo?.title }}</h1>
-        <div class="task-info__descrioption-wrapper">
-          <span class="task-info__label task-info__label--description">Description:</span>
-          <div class="task-info__descrioption">
-            <p class="text">{{ taskInfo?.description }}</p>
-          </div>
-        </div>
-      </div>
+      <TaskContent :taskInfo="taskInfo" />
+
       <div>
        <TaskCommentsBlock />
       </div>
@@ -104,14 +51,24 @@
 </template>
 
 <script>
-import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
-import BaseButton from '@/components/UI/base-components/BaseButton.vue';
-import SmartBox from '@/components/UI/base-components/SmartBox.vue';
+import TaskStatusDetails from '@/components/tasks/TaskStatusDetails.vue';
+import TaskActionsDetails from '@/components/tasks/TaskActionsDetails.vue';
+import TaskAssigneeDetails from '@/components/tasks/TaskAssigneeDetails.vue';
+import TaskPriorityDetails from '@/components/tasks/TaskPriorityDetails.vue';
+import TaskReporterDetails from '@/components/tasks/TaskReporterDetails.vue';
+import TaskProjectDetails from '@/components/tasks/TaskProjectDetails.vue';
+
+import TaskContent from '@/components/tasks/TaskContent.vue';
 import TaskCommentsBlock from '@/components/tasks/TaskCommentsBlock.vue';
 export default {
   components: {
-    TaskPriorityElement,
-    SmartBox,
+    TaskStatusDetails,
+    TaskActionsDetails,
+    TaskAssigneeDetails,
+    TaskPriorityDetails,
+    TaskReporterDetails,
+    TaskProjectDetails,
+    TaskContent,
     TaskCommentsBlock
   },
   props: ['id'],
@@ -123,7 +80,7 @@ export default {
       taskActionsList: this.$store.getters['tasks/getTaskActionsList'],
       error: null
     }
-  },
+  }, 
   computed: {
     taskInfo() {
       return this.$store.getters['tasks/getTaskInfo'];
@@ -135,10 +92,7 @@ export default {
       let fullName = this?.taskInfo?.assignee.name + ' ' + this?.taskInfo?.assignee.lastName
       return fullName;
     },
-    creatorFullName() {
-      let fullName = this?.taskInfo?.creator.name + ' ' + this?.taskInfo?.creator.lastName
-      return fullName;
-    }
+    
   },
   methods: {
     async getTaskData() {
@@ -163,7 +117,6 @@ export default {
       if (mode === 'assignee') {
         this.$store.dispatch('tasks/setTaskAssignee', { ...this.taskInfo, assignee: newVal });
       }
-
     },
     actionExecute(newParams) {
       console.log(newParams);
