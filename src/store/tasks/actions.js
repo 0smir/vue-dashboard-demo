@@ -9,7 +9,10 @@ export default {
       priority: data.priority,
       status: data.status,
       reporter: data.reporter,
+      estimateTime: data.estimation,
+      loggedTime: null,
       createdTime: data.createdTime,
+      updateTime: null,
       comments: []
     };
 
