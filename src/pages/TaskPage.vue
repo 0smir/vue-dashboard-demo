@@ -22,7 +22,7 @@
         <TaskReporterDetails :reporter="taskInfo.reporter" />
         <div class="task-details task-details__time task-details--time-estimated">
           <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
-          <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimate }}</span>
+          <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimateTime }}</span>
         </div>
         <div class="task-details task-details__time task-details--time-trecked">
           <span class="task-details__label task-details__label--time-trecked">Time tracked: </span>
@@ -30,7 +30,7 @@
         </div>
         <div class="task-details task-details__time task-details__time--created">
           <span class="task-details__label task-details__label--time-created">Created: </span>
-          <span class="task-details__value task-details__value--time-created"> {{ taskInfo?.createdTime }}</span>
+          <span class="task-details__value task-details__value--time-created"> {{ createTime }}</span>
         </div>
         <div class="task-details task-details__time task-details__time--updated">
           <span class="task-details__label task-details__label--time-updated">Updated: </span>
@@ -92,7 +92,16 @@ export default {
       let fullName = this?.taskInfo?.assignee.name + ' ' + this?.taskInfo?.assignee.lastName
       return fullName;
     },
-    
+    createTime() {
+      let dateCreate = new Date(this.taskInfo?.createdTime )
+      let year    = dateCreate.getFullYear();
+      let month   = dateCreate.getMonth() + 1;
+      let day     = dateCreate.getDay();
+      let hour    = dateCreate.getHours();
+      let minute  = dateCreate.getMinutes();
+      let seconds = dateCreate.getSeconds();  
+      return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
+    }
   },
   methods: {
     async getTaskData() {
@@ -120,6 +129,7 @@ export default {
     },
     actionExecute(newParams) {
       console.log(newParams);
+      
     }
   },
   created() {
