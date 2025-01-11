@@ -16,7 +16,7 @@
       <div :class="['form-control', 'form-control--status', { error: !task.status.isValid }]">
         <label class="form-control__label" for="status">Status</label>
         <select class="form-control__select" name="task-status" id="status" v-model="task.status.value">
-          <option class="form-control__select-option" v-for="(status, index) in statusList" :value="status"
+          <option class="form-control__select-option" v-for="status in statusList" :value="status"
             :key="status">{{ status }}</option>
         </select>
         <p class="error-text" v-if="!task.status.isValid">{{ task.status.errorMessage }}</p>
@@ -46,6 +46,12 @@
         </select>
         <p class="error-text" v-if="!task.priority.isValid">{{ task.priority.errorMessage }}</p>
       </div>
+
+      <div :class="['form-control', 'form-control--estimation']">
+        <label class="form-control__label" for="estimation">Estimation time</label>
+        <input class="form-control__input" id="estimation" type="number" min="0" max="999" v-model.number="task.estimation.value" @blur="onBlurEstimation">
+      </div>
+
       <div :class="['form-control', 'form-control--description', { error: !task.description.isValid }]">
         <label class="form-control__label" for="description">Description</label>
         <textarea class="form-control__textarea" name="task-description" id="description" rows="5"
@@ -91,6 +97,10 @@ export default {
         },
         status: {
           value: 'toDo',
+          isValid: true
+        },
+        estimation: {
+          value: 0,
           isValid: true
         },
         description: {
@@ -171,11 +181,18 @@ export default {
             description: this.task.description.value,
             priority: this.task.priority.value,
             status: this.task.status.value,
+            estimation: this.task.estimation.value,
             createdTime: new Date().getTime(),
           };
 
       this.$store.dispatch('tasks/addTask', formData);
       this.clearFormFields();
+    },
+
+    onBlurEstimation() {
+      if (this.task.estimation.value === '') {
+        this.task.estimation.value = 0;
+      }
     },
 
     clearFormFields() {
@@ -186,6 +203,7 @@ export default {
       this.task.description.value = '';
       this.task.priority.value = '';
       this.task.status.value = '';
+      this.task.estimation.value = 0;
     },
     async loadUsersList() {
       try {
