@@ -28,13 +28,13 @@
           <span class="task-details__label task-details__label--time-trecked">Time tracked: </span>
           <span class="task-details__value task-details__value--time-trecked"> {{ taskInfo?.logged }}</span>
         </div>
-        <div class="task-details task-details__time task-details__time--created">
+        <div v-if="taskInfo?.createdTime" class="task-details task-details__time task-details__time--created">
           <span class="task-details__label task-details__label--time-created">Created: </span>
           <span class="task-details__value task-details__value--time-created"> {{ createTime }}</span>
         </div>
-        <div class="task-details task-details__time task-details__time--updated">
+        <div v-if="taskInfo?.updateTime" class="task-details task-details__time task-details__time--updated">
           <span class="task-details__label task-details__label--time-updated">Updated: </span>
-          <span class="task-details__value task-details__value--time-updated"> {{ taskInfo?.updated }}</span>
+          <span class="task-details__value task-details__value--time-updated"> {{ updateTime }}</span>
         </div>
       </div>
     </div>
@@ -93,13 +93,23 @@ export default {
       return fullName;
     },
     createTime() {
-      let dateCreate = new Date(this.taskInfo?.createdTime )
-      let year    = dateCreate.getFullYear();
-      let month   = dateCreate.getMonth() + 1;
-      let day     = dateCreate.getDay();
-      let hour    = dateCreate.getHours();
-      let minute  = dateCreate.getMinutes();
-      let seconds = dateCreate.getSeconds();  
+      let creatinDate = new Date(this.taskInfo?.createdTime);
+      let year    = creatinDate.getFullYear();
+      let month   = creatinDate.getMonth() + 1;
+      let day     = creatinDate.getDate();
+      let hour    = creatinDate.getHours();
+      let minute  = creatinDate.getMinutes();
+      let seconds = creatinDate.getSeconds();  
+      return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
+    },
+    updateTime() {
+      let updationDate = new Date(this.taskInfo?.updateTime);
+      let year    = updationDate.getFullYear();
+      let month   = updationDate.getMonth() + 1;
+      let day     = updationDate.getDate();
+      let hour    = updationDate.getHours();
+      let minute  = updationDate.getMinutes();
+      let seconds = updationDate.getSeconds();  
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
     }
   },
