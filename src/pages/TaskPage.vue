@@ -1,13 +1,10 @@
 <template>
-  <div v-if="taskInfo" class="task-info task-info__container">
-    
+  <div v-if="taskInfo !== null" class="task-info task-info__container">
     <div class="task-info__details">
- 
       <div class="task-info__actions-wrapper">
         <TaskStatusDetails :taskStatusList="taskStatusList" :taskStatus="taskStatus" @choose-action="updateTaskParams"/>
         <TaskActionsDetails :taskActionsList="taskActionsList" mode="actions" @choose-action="actionExecute"/>
       </div>
-
       <div class="task-info__details-wrapper">
         <TaskAssigneeDetails :assigneeFullName="assigneeFullName"/>
         <TaskPriorityDetails :taskPriorityList="taskPriorityList"
@@ -38,14 +35,15 @@
         </div>
       </div>
     </div>
-
     <div class="task-info__task-data">
       <TaskContent :taskInfo="taskInfo" />
-
       <div>
        <TaskCommentsBlock />
       </div>
     </div>
+  </div>
+  <div v-else class="task-info task-info__container">
+    Oooops! We don't have task with number {{ id }}.
   </div>
   <p v-if="error">Error</p>
 </template>
@@ -86,10 +84,10 @@ export default {
       return this.$store.getters['tasks/getTaskInfo'];
     },
     taskStatus() {
-      return this.taskInfo.status;
+      return this?.taskInfo?.status;
     },
     assigneeFullName() {
-      let fullName = this?.taskInfo?.assignee.name + ' ' + this?.taskInfo?.assignee.lastName
+      let fullName = this?.taskInfo?.assignee?.name + ' ' + this?.taskInfo?.assignee?.lastName
       return fullName;
     },
     createTime() {
@@ -139,7 +137,16 @@ export default {
     },
     actionExecute(newParams) {
       console.log(newParams);
-      
+      let { newVal } = newParams;
+      if (newVal === 'logtime') {
+        
+      }
+      if (newVal === 'print') {
+        
+      }
+      if (newVal === 'delate') {
+        this.$store.dispatch('tasks/removeTask', {id: this.id})
+      }
     }
   },
   created() {
