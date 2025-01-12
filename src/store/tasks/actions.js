@@ -55,6 +55,7 @@ export default {
       };
       taskList.push(task);
     }
+    sessionStorage.setItem('tasksList', JSON.stringify(taskList));
     context.commit('setTasks', taskList);
   },
 
@@ -141,5 +142,18 @@ export default {
     }
 
     context.commit('updateTask', { reporter, updateTime: updateTime });
+  },
+
+  async removeTask(context, data) {
+    let { id } = data;
+    let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
+    const resp = await fetch(url, { method: 'DELETE' });
+    const respData = await resp.json();
+
+    if (!resp.ok) {
+      const error = new Error(respData.message || 'faled to fetch!');
+      throw error;
+    }
+    context.commit('removeTask', { id });
   }
 }
