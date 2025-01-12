@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state() {
     return {
-      tasks: [],
+      tasks: JSON.parse(sessionStorage.getItem('tasksList')) ? JSON.parse(sessionStorage.getItem('tasksList')) : [],
       task: null,
       taskPriorityList: ['blocker', 'critical', 'high', 'medium', 'trivial', 'low'],
       taskStatusList: ['toDo', 'inProgress', 'inReview', 'Testing', 'Done', 'Blocked'],
