@@ -96,7 +96,7 @@ export default {
           isValid: true
         },
         status: {
-          value: 'toDo',
+          value: 'Active',
           isValid: true
         },
         estimation: {
