@@ -10,7 +10,7 @@ export default {
       task: null,
       taskPriorityList: ['blocker', 'critical', 'high', 'medium', 'trivial', 'low'],
       taskStatusList: ['Active', 'toDo', 'inProgress', 'inReview', 'Testing', 'Done', 'Blocked', 'Close'],
-      taskActions: ['logtime', 'print', 'delate'],
+      taskActions: ['logtime', 'print', 'delete'],
     }
   },
   mutations: mutations,
