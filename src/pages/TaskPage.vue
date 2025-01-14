@@ -23,7 +23,15 @@
         </div>
         <div class="task-details task-details__time task-details--time-trecked">
           <span class="task-details__label task-details__label--time-trecked">Time tracked: </span>
-          <span class="task-details__value task-details__value--time-trecked"> {{ taskInfo?.logged }}</span>
+          <div class="task-details__value task-details__value--time-trecked"> 
+            <div class="task-details__value-indicator-wrapper">
+              <span class="task-details__value-indicator" :style="{'width': loggedTimeIndicatorWidth + '%'}"></span>
+            </div>
+            <div class="trecked-time-details">
+                <span>22 logged</span>
+                <span>44 remaining</span>
+              </div>
+          </div>
         </div>
         <div v-if="taskInfo?.createdTime" class="task-details task-details__time task-details__time--created">
           <span class="task-details__label task-details__label--time-created">Created: </span>
@@ -45,6 +53,9 @@
   <div v-else class="task-info task-info__container">
     Oooops! We don't have task with number {{ id }}.
   </div>
+  <BaseDialog :show="showLogTimeModal" title="Time tracking" @close="closeLogTimeDialog">
+    
+  </BaseDialog>
   <p v-if="error">Error</p>
 </template>
 
@@ -76,7 +87,8 @@ export default {
       taskPriorityList: this.$store.getters['tasks/getPriorityList'],
       taskStatusList: this.$store.getters['tasks/getStatusList'],
       taskActionsList: this.$store.getters['tasks/getTaskActionsList'],
-      error: null
+      error: null,
+      showLogTimeModal: false
     }
   }, 
   computed: {
@@ -91,6 +103,7 @@ export default {
       return fullName;
     },
     createTime() {
+      if (this?.taskInfo?.createdTime === null) return '';
       let creatinDate = new Date(this.taskInfo?.createdTime);
       let year    = creatinDate.getFullYear();
       let month   = creatinDate.getMonth() + 1;
@@ -101,6 +114,8 @@ export default {
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
     },
     updateTime() {
+      if (this?.taskInfo?.updateTime === '') return '';
+
       let updationDate = new Date(this.taskInfo?.updateTime);
       let year    = updationDate.getFullYear();
       let month   = updationDate.getMonth() + 1;
@@ -109,6 +124,15 @@ export default {
       let minute  = updationDate.getMinutes();
       let seconds = updationDate.getSeconds();  
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
+    },
+
+    loggedTimeIndicatorWidth() {
+      // if (!this?.taskInfo?.loggedTime || !this?.taskInfo?.estimateTime) return 0;
+      // let width = (this?.taskInfo?.loggedTime / this?.taskInfo?.estimateTime) * 100;
+      let width = (2 / this?.taskInfo?.estimateTime) * 100;
+     
+      console.log('width', width);
+      return width;
     }
   },
   methods: {
@@ -139,14 +163,20 @@ export default {
       console.log(newParams);
       let { newVal } = newParams;
       if (newVal === 'logtime') {
-        
+        this.showLogTimeDialog();
       }
       if (newVal === 'print') {
-        
+        window.print();
       }
       if (newVal === 'delate') {
         this.$store.dispatch('tasks/removeTask', {id: this.id})
       }
+    },
+    showLogTimeDialog() {
+      this.showLogTimeModal = true;
+    },
+    closeLogTimeDialog() {
+      this.showLogTimeModal = false;
     }
   },
   created() {
@@ -221,6 +251,11 @@ export default {
     }
   }
 
+  &__value {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__actions-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -238,9 +273,12 @@ export default {
 .task-details {
   display: flex;
   align-items: center;
+  width: max(50%, calc(100% - 10px));
   margin-bottom: 10px;
 
   &__label {
+    display: flex;
+    width: clamp(25%, 100px, 50%);
     font-weight: 600;
     margin-right: 5px;
   }
@@ -248,6 +286,37 @@ export default {
   .task__priority {
     display: inline-flex;
     margin-right: 5px;
+  }
+
+  &__value{
+    display: flex;
+    width: max(50%, 175px);
+
+    &--time-trecked {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &__value-indicator{
+    display: block;
+    background-color: var(--color-primary);
+    height: 100%;
+  }
+  &__value-indicator-wrapper {
+    margin-bottom: 5px;
+    width: 100%;
+    height: 10px;
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--border-radius-medium);
+  }
+}
+
+.trecked-time-details{
+  display: flex;
+  justify-content: space-between;
+  span{
+    font-size: 10px;
+    color: var(--color-secondary);
   }
 }
 
