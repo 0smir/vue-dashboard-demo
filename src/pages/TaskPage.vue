@@ -21,18 +21,7 @@
           <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
           <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimateTime }}</span>
         </div>
-        <div class="task-details task-details__time task-details--time-trecked">
-          <span class="task-details__label task-details__label--time-trecked">Time tracked: </span>
-          <div class="task-details__value task-details__value--time-trecked"> 
-            <div class="task-details__value-indicator-wrapper">
-              <span class="task-details__value-indicator" :style="{'width': loggedTimeIndicatorWidth + '%'}"></span>
-            </div>
-            <div class="trecked-time-details">
-                <span>22 logged</span>
-                <span>44 remaining</span>
-              </div>
-          </div>
-        </div>
+        <TaskTreckedTimeDetails :estimated="taskInfo?.estimateTime" :trecked="taskInfo?.loggedTime"/>
         <div v-if="taskInfo?.createdTime" class="task-details task-details__time task-details__time--created">
           <span class="task-details__label task-details__label--time-created">Created: </span>
           <span class="task-details__value task-details__value--time-created"> {{ createTime }}</span>
@@ -66,6 +55,7 @@ import TaskAssigneeDetails from '@/components/tasks/TaskAssigneeDetails.vue';
 import TaskPriorityDetails from '@/components/tasks/TaskPriorityDetails.vue';
 import TaskReporterDetails from '@/components/tasks/TaskReporterDetails.vue';
 import TaskProjectDetails from '@/components/tasks/TaskProjectDetails.vue';
+import TaskTreckedTimeDetails from '@/components/tasks/TaskTreckedTimeDetails.vue';
 
 import TaskContent from '@/components/tasks/TaskContent.vue';
 import TaskCommentsBlock from '@/components/tasks/TaskCommentsBlock.vue';
@@ -77,6 +67,7 @@ export default {
     TaskPriorityDetails,
     TaskReporterDetails,
     TaskProjectDetails,
+    TaskTreckedTimeDetails,
     TaskContent,
     TaskCommentsBlock
   },
@@ -124,15 +115,6 @@ export default {
       let minute  = updationDate.getMinutes();
       let seconds = updationDate.getSeconds();  
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
-    },
-
-    loggedTimeIndicatorWidth() {
-      // if (!this?.taskInfo?.loggedTime || !this?.taskInfo?.estimateTime) return 0;
-      // let width = (this?.taskInfo?.loggedTime / this?.taskInfo?.estimateTime) * 100;
-      let width = (2 / this?.taskInfo?.estimateTime) * 100;
-     
-      console.log('width', width);
-      return width;
     }
   },
   methods: {
