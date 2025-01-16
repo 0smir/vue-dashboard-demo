@@ -13,7 +13,8 @@ export default {
       loggedTime: 0,
       createdTime: data.createdTime,
       updateTime: 0,
-      comments: []
+      comments: [],
+      taskUpdatesHistory: []
     };
 
     const resp = await fetch(
@@ -143,6 +144,11 @@ export default {
     }
 
     context.commit('updateTask', { reporter, updateTime: updateTime });
+  },
+
+  async LogTime(context, data) {
+    console.log(data);
+    // context.commit(setSpentTime, )
   },
 
   async removeTask(context, data) {
