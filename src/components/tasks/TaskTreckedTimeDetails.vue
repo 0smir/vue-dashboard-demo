@@ -1,6 +1,6 @@
 <template>
   <div class="task-details task-details__time task-details--time-trecked">
-    <span class="task-details__label task-details__label--time-trecked">Time tracked: </span>
+    <span v-if="isLabelVisible" class="task-details__label task-details__label--time-trecked">Time tracked: </span>
     <div class="task-details__value task-details__value--time-trecked"> 
       <div class="task-details__value-indicator-wrapper">
         <span class="task-details__value-indicator" :style="{'width': loggedTimeIndicatorWidth + '%'}"></span>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['estimated', 'trecked'],
+  props: ['isLabelVisible', 'estimated', 'trecked'],
   computed: {
     loggedTimeIndicatorWidth() {
       if (!this.estimated || !this.trecked) return 0;
