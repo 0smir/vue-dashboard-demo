@@ -38,6 +38,14 @@
 
   &__input,
   &__textarea {
+    &::placeholder {
+      font-size: 12px;
+      color: var(--color-tetriary);
+    }
+  }
+
+  &__input,
+  &__textarea {
     display: inline-block;
     width: 100%;
     padding: 8px 12px;
