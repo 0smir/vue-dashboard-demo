@@ -106,7 +106,11 @@ export default {
   }
 
   &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px 25px;
+    height: 100%;
     overflow-y: auto;
   }
 }
