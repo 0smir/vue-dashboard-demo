@@ -102,11 +102,11 @@ export default {
       if (this?.taskInfo?.createdTime === null) return '';
       let creatinDate = new Date(this.taskInfo?.createdTime);
       let year    = creatinDate.getFullYear();
-      let month   = creatinDate.getMonth() + 1;
-      let day     = creatinDate.getDate();
-      let hour    = creatinDate.getHours();
-      let minute  = creatinDate.getMinutes();
-      let seconds = creatinDate.getSeconds();  
+      let month   = String(creatinDate.getMonth() + 1).padStart(2, '0');
+      let day     = String(creatinDate.getDate()).padStart(2, '0');
+      let hour    = String(creatinDate.getHours()).padStart(2, '0');
+      let minute  = String(creatinDate.getMinutes()).padStart(2, '0');
+      let seconds = String(creatinDate.getSeconds()).padStart(2, '0');  
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
     },
     updateTime() {
@@ -114,11 +114,11 @@ export default {
 
       let updationDate = new Date(this.taskInfo?.updateTime);
       let year    = updationDate.getFullYear();
-      let month   = updationDate.getMonth() + 1;
-      let day     = updationDate.getDate();
-      let hour    = updationDate.getHours();
-      let minute  = updationDate.getMinutes();
-      let seconds = updationDate.getSeconds();  
+      let month   = String(updationDate.getMonth() + 1).padStart(2, '0');
+      let day     = String(updationDate.getDate()).padStart(2, '0');
+      let hour    = String(updationDate.getHours()).padStart(2, '0');
+      let minute  = String(updationDate.getMinutes()).padStart(2, '0');
+      let seconds = String(updationDate.getSeconds()).padStart(2, '0');  
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
     }
   },
