@@ -43,6 +43,10 @@ export default {
   width: 100%;
   background-color: var(--color-primary);
 
+  @media print {
+    display: none;
+  }
+
   &__content {
     display: flex;
     justify-content: space-between;

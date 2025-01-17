@@ -93,6 +93,10 @@ export default {
   background-color: var(--color-primary);
   padding: 10px 15px;
 
+  @media print {
+    display: none;
+  }
+
   &.close {
     width: 75px;
     transition: all 0.35s ease;

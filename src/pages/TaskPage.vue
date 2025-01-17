@@ -248,6 +248,10 @@ export default {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 15px;
+
+    @media print {
+      display: none;
+    }
   }
 
   &__details-wrapper {
