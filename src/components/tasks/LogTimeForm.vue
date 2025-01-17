@@ -14,7 +14,7 @@
       </div>
       <div :class="['form-control', 'form-control--title']">
         <label class="form-control__label" for="description">Work description</label>
-        <textarea id="description" name="work-description" class="form-control__textarea" rows="15" v-model="workLog.description.value"></textarea>
+        <textarea id="description" name="work-description" class="form-control__textarea" placeholder="Add your work description..." rows="15" v-model="workLog.description.value"></textarea>
       </div>
     </div>
     <div class="form-control form-control--btn-wrapper btn-wrapper">
