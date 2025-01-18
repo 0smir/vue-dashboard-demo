@@ -1,5 +1,8 @@
 <template>
-  <div v-if="taskInfo !== null" class="task-info task-info__container">
+  <div v-if="isLoading" class="container container__spinner-wrapper">
+    <BaseSpinner></BaseSpinner>
+  </div>
+  <div v-else-if="isLoading === false && hasTaskInfo" class="task-info task-info__container">
     <div class="task-info__details">
       <div class="task-info__actions-wrapper">
         <TaskStatusDetails :taskStatusList="taskStatusList" :taskStatus="taskStatus" @choose-action="updateTaskParams"/>
@@ -39,8 +42,10 @@
       </div>
     </div>
   </div>
-  <div v-else class="task-info task-info__container">
-    Oooops! We don't have task with number {{ id }}.
+  <div v-else class="task-info task-info__container task-info__notfound">
+    <div class="container container__notfound">
+      <h3 class="title title--notfound">Uh-oh! It seems there's no task matching this ID: {{ id }}. Please double-check and try again.</h3>
+    </div>
   </div>
   <BaseDialog :show="showLogTimeModal" title="Time tracking" @close="closeLogTimeDialog">
     <TaskTreckedTimeDetails :isLabelVisible="false"
@@ -79,17 +84,21 @@ export default {
   props: ['id'],
   data() {
     return {
+      isLoading: false,
+      error: null,
+      showLogTimeModal: false,
       projectsList: this.$store.getters['projects/getProjects'],
       taskPriorityList: this.$store.getters['tasks/getPriorityList'],
       taskStatusList: this.$store.getters['tasks/getStatusList'],
-      taskActionsList: this.$store.getters['tasks/getTaskActionsList'],
-      error: null,
-      showLogTimeModal: false
+      taskActionsList: this.$store.getters['tasks/getTaskActionsList']
     }
   }, 
   computed: {
     taskInfo() {
       return this.$store.getters['tasks/getTaskInfo'];
+    },
+    hasTaskInfo() {
+      return !this.isLoading && (this.taskInfo !== null);
     },
     taskStatus() {
       return this?.taskInfo?.status;
@@ -124,11 +133,13 @@ export default {
   },
   methods: {
     async getTaskData() {
+      this.isLoading = true;
       try {
-        this.$store.dispatch('tasks/getTaskData', { id: this.id });
+        await this.$store.dispatch('tasks/getTaskData', { id: this.id });
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       }
+      this.isLoading = false;
     },
     updateTaskParams(newParams) {
       console.log(newParams);
@@ -155,7 +166,7 @@ export default {
       if (newVal === 'print') {
         window.print();
       }
-      if (newVal === 'delate') {
+      if (newVal === 'delete') {
         this.$store.dispatch('tasks/removeTask', {id: this.id})
       }
     },
