@@ -64,8 +64,8 @@ export default {
     async logTime() {
       let payload = {
         id: this.id,
-        loggedTime: this.workLog.spentTime.value,
-        loggedTimeDate: this.workLog.date.value,
+        loggedTime: this.trecked + this.workLog.spentTime.value,
+        loggedTimeDate:  this.workLog.date.value,
         loggedTimeDescription: this.workLog.description.value
       }
       try{
