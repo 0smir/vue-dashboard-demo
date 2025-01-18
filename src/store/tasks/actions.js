@@ -148,7 +148,20 @@ export default {
 
   async LogTime(context, data) {
     console.log(data);
-    // context.commit(setSpentTime, )
+    let { id, loggedTimeDescription, loggedTimeDate, loggedTime } = data;
+    let updateTime = new Date().getTime();
+
+    let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
+    const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ loggedTime, updateTime: updateTime }) });
+    const resultData = await resp.json();
+
+    if (!resp.ok) {
+      const error = new Error(resultData.message || 'Failed to fetch!');
+      throw error;
+    }
+    //UpdateTaskHistory();
+    // context.commit('updateTaskHistory', { loggedTimeDate,  loggedTimeDescription, loggedTime, updateTime: updateTime });
+    context.commit('updateTask', { loggedTime, updateTime: updateTime });
   },
 
   async removeTask(context, data) {
