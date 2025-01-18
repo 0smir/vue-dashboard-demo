@@ -60,7 +60,7 @@
       </div>
       <div class="form-control form-control--btn-wrapper btn-wrapper">
         <BaseButton class="btn btn__default btn--medium btn--add" type="submit">Add Task</BaseButton>
-        <BaseButton class="btn btn__outlined btn--medium btn--cancel">Cancel</BaseButton>
+        <BaseButton class="btn btn__outlined btn--medium btn--cancel" @click="closeModal">Cancel</BaseButton>
       </div>
     </div>
   </form>
@@ -69,6 +69,7 @@
 <script>
 export default {
   props: ['className', 'userID'],
+  inject:['closeModal'],
   data() {
     return {
       task: {
@@ -109,7 +110,8 @@ export default {
           isValid: true
         }
       },
-      isFormValid: true
+      isFormValid: true,
+      error: null
     }
   },
   computed: {
@@ -168,7 +170,7 @@ export default {
       this.addTask();
     },
 
-    addTask() {
+    async addTask() {
       let taskID = this.task.project.value.slice(0, 1).toUpperCase() + '-' + new Date().getTime(),
           assigneeData = this.personsList.filter((item) => item.id === this.task.assignee.value)[0],
           reporterData = this.personsList.filter((item) => item.id === this.task.reporter.value)[0],
@@ -183,10 +185,16 @@ export default {
             status: this.task.status.value,
             estimation: this.task.estimation.value,
             createdTime: new Date().getTime(),
-          };
-
-      this.$store.dispatch('tasks/addTask', formData);
+        };
+          
+      try {
+        await this.$store.dispatch('tasks/addTask', formData);
+      } catch (error) {
+        this.error = error.message || 'Something goes wrong!';
+      }
+      
       this.clearFormFields();
+      this.closeModal();
     },
 
     onBlurEstimation() {
