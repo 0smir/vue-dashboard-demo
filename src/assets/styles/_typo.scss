@@ -32,3 +32,9 @@ h5,
 h6 {
   font-size: 12px;
 }
+
+.title {
+  &--notfound {
+    padding-top: 40px;
+  }
+}
