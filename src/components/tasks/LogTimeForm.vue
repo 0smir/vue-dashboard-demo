@@ -19,17 +19,19 @@
     </div>
     <div class="form-control form-control--btn-wrapper btn-wrapper">
         <BaseButton class="btn btn__default btn--medium btn--add" type="submit">Save</BaseButton>
-        <BaseButton class="btn btn__outlined btn--medium btn--cancel">Cancel</BaseButton>
+        <BaseButton class="btn btn__outlined btn--medium btn--cancel" @click="closeModal">Cancel</BaseButton>
     </div>
   </form>
 </template>
 
 <script>
 export default {
-  props:['className', 'id', 'trecked'],
+  props: ['className', 'id', 'trecked'],
+  inject:['closeModal'],
   data() {
     return {
       isFormValid: true,
+      error: null,
       workLog: {
         spentTime: {
           value: 0,
@@ -59,15 +61,22 @@ export default {
         return;
       }
     },
-    logTime() {
+    async logTime() {
       let payload = {
         id: this.id,
         loggedTime: this.workLog.spentTime.value,
         loggedTimeDate: this.workLog.date.value,
         loggedTimeDescription: this.workLog.description.value
       }
-      this.$store.dispatch('tasks/LogTime', payload);
+      try{
+        await this.$store.dispatch('tasks/LogTime', payload);
+      }
+      catch(error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
+      
       this.clearFormFields();
+      this.closeModal();
     },
     onBlurLoggedTime() {
       if (this.workLog.spentTime.value === '') {
