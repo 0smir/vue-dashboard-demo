@@ -147,7 +147,6 @@ export default {
   },
 
   async LogTime(context, data) {
-    console.log(data);
     let { id, loggedTimeDescription, loggedTimeDate, loggedTime } = data;
     let updateTime = new Date().getTime();
 
