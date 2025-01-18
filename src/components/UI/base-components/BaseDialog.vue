@@ -34,6 +34,11 @@ export default {
       required: false
     }
   },
+  provide() {
+    return {
+      closeModal: this.closeDialog
+    }
+  },
   methods: {
     closeDialog() {
       this.$emit('close');
