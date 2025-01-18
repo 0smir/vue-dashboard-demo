@@ -20,18 +20,13 @@ export default {
     loggedTimeIndicatorWidth() {
       if (!this.estimated || !this.trecked) return 0;
       let width = (this.trecked / this.estimated) * 100;
-      // let width = (2 / this.estimated) * 100;
       return width;
     },
     remaining() {
       let remainingTime = this.estimated - this.trecked;
       return remainingTime;
     }
-  },
-  mounted() {
-    console.log('trecked: ', this.trecked);
-  }
-    
+  } 
 }
 </script>
 
