@@ -60,14 +60,13 @@ export default {
       }
     },
     logTime() {
-      console.log('logTime');
       let payload = {
         id: this.id,
-        spentTime: this.workLog.spentTime.value,
-        date: this.workLog.date.value,
-        description: this.workLog.description.value
+        loggedTime: this.workLog.spentTime.value,
+        loggedTimeDate: this.workLog.date.value,
+        loggedTimeDescription: this.workLog.description.value
       }
-      this.$store.dispatch('tasks/LogTime', { payload });
+      this.$store.dispatch('tasks/LogTime', payload);
       this.clearFormFields();
     },
     onBlurLoggedTime() {
