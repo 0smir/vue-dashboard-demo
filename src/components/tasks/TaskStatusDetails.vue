@@ -1,20 +1,15 @@
 <template>
-  
-    <div class="task-info__actions-wrapper">
-      <SmartBox :list="taskStatusList" :title="taskStatus" mode="status"
-        :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--status-updata']"
-        @update-params="updateTaskParams">
-        <template #list-items="{ list, selectItem }">
-          <li class="smart-box__list-item" v-for="item in list" :key="item" @click.stop="selectItem(item)">
-            <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action">
-              <span class="btn-text">{{ item }}</span>
-            </BaseButton>
-          </li>
-        </template>
-      </SmartBox>
-    </div>
-  
-
+  <SmartBox :list="taskStatusList" :title="taskStatus" mode="mode"
+    :classList="['btn', 'btn--medium', 'btn__outlined', 'btn-status__controller']"
+    @update-params="updateTaskParams">
+    <template #list-items="{ list, selectItem }">
+      <li class="smart-box__list-item" v-for="item in list" :key="item" @click.stop="selectItem(item)">
+        <BaseButton class="btn btn--transparent btn-status__status-item">
+          <span class="btn-text">{{ item }}</span>
+        </BaseButton>
+      </li>
+    </template>
+  </SmartBox>
 </template>
 
 <script>
@@ -25,7 +20,7 @@ export default {
     TaskPriorityElement,
     SmartBox
   },
-  props: ['taskStatusList', 'taskStatus'],
+  props: ['taskStatusList', 'taskStatus', 'mode'],
   emits: ['choose-action'],
   methods: {
     updateTaskParams(payload){
@@ -35,6 +30,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+.btn-status {
+  &__controller {
+    background-color: var(--color-secondary-medium);
+    text-transform: uppercase;
+  }
 
+  &__status-item {
+    width: 100%;
+    justify-content: flex-start;
+    text-transform: uppercase;
+  }
+}
 </style>
