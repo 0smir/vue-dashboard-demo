@@ -1,14 +1,14 @@
 <template>
   <div class="task-details task-details__time task-details--time-trecked">
     <span v-if="isLabelVisible" class="task-details__label task-details__label--time-trecked">Time tracked: </span>
-    <div class="task-details__value task-details__value--time-trecked"> 
-      <div :class="['task-details__value-indicator-wrapper', {overdue: isTaskOverdue}]">
-        <span class="task-details__value-indicator" :style="{'width': loggedTimeIndicatorWidth + '%'}"></span>
+    <div :class="classNamesList"> 
+      <div :class="['time-line__treck', {overdue: isTaskOverdue}]">
+        <span class="time-line__time-indicator" :style="{'width': loggedTimeIndicatorWidth + '%'}"></span>
       </div>
-      <div class="trecked-time-details">
-          <span>{{ trecked }} logged</span>
-          <span v-if="!isTaskOverdue">{{ remaining }} remaining</span>
-          <span v-else>{{ estimated }} original estimated</span>
+      <div class="time-line__details">
+          <span>{{ trecked + 'h' }} logged</span>
+          <span v-if="!isTaskOverdue">{{ remaining }}h remaining</span>
+          <span v-else>{{ estimated + 'h' }} original estimation</span>
         </div>
     </div>
   </div>
@@ -36,16 +36,47 @@ export default {
     remaining() {
       let remainingTime = this.estimated - this.trecked;
       return remainingTime;
+    },
+    classNamesList() {
+      return this.isLabelVisible ? 'task-details__value' : 'time-line__wrapper';
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.task-details__value-indicator-wrapper {
-  &.overdue {
-    background-color: var(--color-inreview);
+.time-line {
+  &__wrapper {
+    width: 100%;
+  }
+
+  &__treck {
+    margin-bottom: 5px;
+    width: 100%;
+    height: 10px;
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--border-radius-medium);
+
+    &.overdue {
+      background-color: var(--color-inreview);
+    }
+  }
+
+  &__time-indicator {
+    display: block;
+    background-color: var(--color-primary);
+    height: 100%;
+  }
+
+  &__details{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    span{
+      font-size: 10px;
+      color: var(--color-secondary);
+    }
   }
 }
-
 </style>
