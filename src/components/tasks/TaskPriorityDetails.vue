@@ -2,13 +2,11 @@
   <div class="task-details task-details--priority">
     <span class="task-details__label task-details__label--priority">Priority:</span>
     <div class="task-details__value task-details__value--priority">
-      <SmartBox :list="taskPriorityList" :title="priorityTitle" mode="priority"
-        @update-params="updateTaskParams"
-        :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
+      <SmartBox :list="taskPriorityList" :title="priorityTitle" mode="priority" @update-params="updateTaskParams">
         <template #active-item>
-          <BaseButton class="btn btn--medium btn--transparent smart-box__btn smart-box__btn-control">
+          <BaseButton class="btn btn--medium btn--transparent btn-priority__controller">
             <TaskPriorityElement :priority="priorityTitle" :titleDisplay="true" />
-            <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down" />
+            <SvgIcon class="icon icon--medium icon-chevron" name="chevron-down" />
           </BaseButton>
         </template>
         <template #list-items="{ list, selectItem }">
@@ -37,14 +35,16 @@ export default {
       console.log(payload);
       this.$emit('choose-action', payload);
     }
-  },
-  create() {
-    console.log(taskPriorityList, taskPriorityList);
-  }
-    
-  }
+  }   
+}
 </script>
 
 <style lang="scss" scoped>
-
+.btn-priority__controller {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: auto;
+  padding: 5px 10px 5px 0;
+}
 </style>
