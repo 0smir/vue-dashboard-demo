@@ -35,6 +35,12 @@ export default {
   &__controller {
     background-color: var(--color-secondary-medium);
     text-transform: uppercase;
+
+    &:hover {
+      border: 2px solid var(--color-primary);
+      background-color: var(--color-primary);
+      color: var(--color-text);
+    }
   }
 
   &__status-item {
