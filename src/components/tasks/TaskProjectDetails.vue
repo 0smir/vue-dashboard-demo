@@ -2,10 +2,10 @@
   <div class="task-details task-details--creator">
     <span class="task-details__label task-details__label--creator">Project: </span>
     <SmartBox :list="projectsList" :title="title" mode="project" @update-params="updateTaskParams"
-      :classList="['btn', 'btn--medium', 'btn__outlined', 'task-info__btn-action', 'btn-action--action']">
+      :classList="['btn', 'btn--medium', 'btn--transparent', 'btn-project__controller']">
       <template #list-items="{ list, selectItem }">
         <li class="smart-box__list-item" v-for="item in list" :key="item">
-          <BaseButton class="btn btn--transparent smart-box__btn smart-box__btn-action"
+          <BaseButton class="btn btn--transparent btn-project__project-item"
             @click.stop="selectItem(item.title)">
             <span class="btn-text">{{ item.title }}</span>
           </BaseButton>
@@ -32,6 +32,22 @@ export default {
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+.btn-project {
+  &__controller {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+    text-transform: uppercase;
+
+    span:first-of-type {
+      margin: 0 auto 0 0;
+    }
+  }
+  &__project-item {
+    justify-content: flex-start;
+    text-transform: uppercase;
+  }
+}
 
 </style>
