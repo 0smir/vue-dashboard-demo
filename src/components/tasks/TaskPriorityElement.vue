@@ -27,6 +27,7 @@ export default {
 .priority {
   &__wrapper {
     display: flex;
+    align-items: center;
   }
 
   &__icon {
