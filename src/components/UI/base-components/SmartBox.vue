@@ -1,9 +1,9 @@
 <template>
   <div :class="['smart-box', { active: showSmartList }]" @click="toggleSmartList" v-click-outside="closeDropdown">
     <slot name="active-item">
-      <BaseButton :class="[classList, 'smart-box__btn', 'smart-box__btn-control']">
+      <BaseButton :class="['smart-box__btn', 'smart-box__btn-control', classList]">
         <span>{{ title }}</span>
-        <SvgIcon class="icon icon--medium smart-box__btn-icon" name="chevron-down" />
+        <SvgIcon class="icon icon--medium icon-chevron" name="chevron-down" />
       </BaseButton>
     </slot>
     <ul class="smart-box__list-wrapper" v-show="showSmartList">
@@ -51,8 +51,8 @@ export default {
   position: relative;
   min-width: auto;
 
-  &.active {
-    .smart-box__btn-control>.icon {
+  &.active:has(.icon-chevron) {
+    .icon-chevron {
       transform: rotate(180deg);
     }
   }
@@ -90,11 +90,5 @@ export default {
       margin: 0 auto;
     }
   }
-
-  &__btn-action {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
 }
 </style>
