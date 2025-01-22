@@ -142,3 +142,29 @@ a:hover {
     background-color: var(--color-success);
   }
 }
+
+.details {
+  border: 2px solid var(--color-secondary-medium);
+  border-radius: var(--border-radius-medium);
+
+  &[open] {
+    .details__arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__title {
+    display: inline-flex;
+    font-size: 16px;
+    margin-right: auto;
+  }
+}
+
+.summary {
+  display: flex;
+  padding: 15px;
+}
+
+.details .summary::-webkit-details-marker {
+  display: none;
+}
