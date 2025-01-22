@@ -8,7 +8,12 @@
         <TaskStatusDetails :taskStatusList="taskStatusList" :taskStatus="taskStatus" @choose-action="updateTaskParams"/>
         <TaskActionsDetails :taskActionsList="taskActionsList" mode="actions" @choose-action="actionExecute"/>
       </div>
-      <div class="task-info__details-wrapper">
+      <details class="details" open>
+        <summary class="summary">
+          <span class="details__title">Task Details</span>
+          <SvgIcon class="icon icon--small details__arrow" name="chevron-down" />
+        </summary>
+        <div class="task-info__details-wrapper">
         <TaskAssigneeDetails :assigneeFullName="assigneeFullName"/>
         <TaskPriorityDetails :taskPriorityList="taskPriorityList"
                              :priorityTitle="taskInfo.priority"
@@ -35,6 +40,7 @@
           <span class="task-details__value task-details__value--time-updated"> {{ updateTime }}</span>
         </div>
       </div>
+    </details>
     </div>
     <div class="task-info__task-data">
       <TaskContent :taskInfo="taskInfo" />
@@ -107,7 +113,7 @@ export default {
       return this.$store.getters['tasks/getStatusList'];
     },
     taskActionsList() {
-      this.$store.getters['tasks/getTaskActionsList'];
+      return this.$store.getters['tasks/getTaskActionsList'];
     },
     taskStatus() {
       return this?.taskInfo?.status;
@@ -210,11 +216,8 @@ export default {
     margin-bottom: 15px;
 
     @media (min-width: $md) {
-      order: 5;
+      order: 2;
       max-width: calc(35% - 10px);
-      padding: 10px 7px;
-      border-left: 2px solid var(--color-secondary-light);
-      height: 50vh;
     }
   }
 
@@ -272,9 +275,8 @@ export default {
   }
 
   &__details-wrapper {
-    padding: 10px 5px;
-    border: 1px solid var(--color-secondary-light);
-    border-radius: var(--border-radius-medium);
+    padding: 10px 5px 10px 15px;
+    border-top: 1px solid var(--color-secondary-medium);
   }
 }
 
