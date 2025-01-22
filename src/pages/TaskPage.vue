@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoading" class="container container__spinner-wrapper">
+  <div v-if="isLoading" class="container container__spinner-wrapper" aria-busy="true" aria-live="polite">
     <BaseSpinner></BaseSpinner>
   </div>
   <div v-else-if="isLoading === false && hasTaskInfo" class="task-info task-info__container">
@@ -87,11 +87,7 @@ export default {
     return {
       isLoading: false,
       error: null,
-      showLogTimeModal: false,
-      projectsList: this.$store.getters['projects/getProjects'],
-      taskPriorityList: this.$store.getters['tasks/getPriorityList'],
-      taskStatusList: this.$store.getters['tasks/getStatusList'],
-      taskActionsList: this.$store.getters['tasks/getTaskActionsList']
+      showLogTimeModal: false
     }
   }, 
   computed: {
@@ -100,6 +96,18 @@ export default {
     },
     hasTaskInfo() {
       return !this.isLoading && (this.taskInfo !== null);
+    },
+    projectsList() {
+      return this.$store.getters['projects/getProjects'];
+    }, 
+    taskPriorityList() {
+      return this.$store.getters['tasks/getPriorityList'];
+    },
+    taskStatusList() {
+      return this.$store.getters['tasks/getStatusList'];
+    },
+    taskActionsList() {
+      this.$store.getters['tasks/getTaskActionsList'];
     },
     taskStatus() {
       return this?.taskInfo?.status;
@@ -127,7 +135,7 @@ export default {
     },
 
     formatDate(timestamp) {
-      if (timestamp) return '';
+      if (!timestamp) return '';
       let creatinDate = new Date(this.taskInfo?.createdTime);
       let year    = creatinDate.getFullYear();
       let month   = String(creatinDate.getMonth() + 1).padStart(2, '0');
