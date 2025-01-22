@@ -37,6 +37,11 @@ if (props.iconType) {
     height: 18px;
   }
 
+  &--small {
+    width: 15px;
+    height: 15px;
+  }
+
   &>svg {
     object-fit: contain;
   }
