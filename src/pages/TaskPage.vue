@@ -60,6 +60,15 @@
                             :trecked="taskInfo?.loggedTime"/>
     <LogTimeForm className="trek-time" :id="id" :trecked="taskInfo?.loggedTime" />
   </BaseDialog>
+  <BaseDialog :show="showDeleteConfirmationModal" title="Confirm" @close="closeDeleteConfirmationDialog">
+    <div>
+      <p>Are you really want to delete this task?</p>
+      <div class="form-control form-control--btn-wrapper btn-wrapper">
+        <BaseButton class="btn btn__default btn--medium btn--add" @click="removeTask">Delete</BaseButton>
+        <BaseButton class="btn btn__outlined btn--medium btn--cancel" @click="closeDeleteConfirmationDialog" >Cancel</BaseButton>
+    </div>
+    </div>
+  </BaseDialog>
   <p v-if="!isLoading && error">Error</p>
 </template>
 
@@ -93,7 +102,8 @@ export default {
     return {
       isLoading: false,
       error: null,
-      showLogTimeModal: false
+      showLogTimeModal: false,
+      showDeleteConfirmationModal: false
     }
   }, 
   computed: {
@@ -171,7 +181,7 @@ export default {
       }  
     },
     async actionExecute(newParams) {
-      console.log(newParams);
+      
       let { newVal } = newParams;
       if (newVal === 'logtime') {
         this.showLogTimeDialog();
@@ -180,7 +190,18 @@ export default {
         window.print();
       }
       if (newVal === 'delete') {
-        this.$store.dispatch('tasks/removeTask', {id: this.id})
+        this.showDeleteConfirmationModal = true;
+      }
+    },
+    async removeTask() {
+      this.isLoading = true;
+      this.closeDeleteConfirmationDialog();
+      try {
+        await this.$store.dispatch('tasks/removeTask', { id: this.id });
+      } catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      } finally {
+        this.isLoading = false;
       }
     },
     showLogTimeDialog() {
@@ -188,6 +209,12 @@ export default {
     },
     closeLogTimeDialog() {
       this.showLogTimeModal = false;
+    },
+    showDeleteConfirmationDialog() {
+      this.showDeleteConfirmationModal = true;
+    },
+    closeDeleteConfirmationDialog() {
+      this.showDeleteConfirmationModal = false;
     }
   },
   created() {
