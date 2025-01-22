@@ -22,9 +22,10 @@
         <TaskReporterDetails :reporter="taskInfo.reporter" />
         <div class="task-details task-details__time task-details--time-estimated">
           <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
-          <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimateTime }}</span>
+          <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimateTime + 'h' }}</span>
         </div>
         <TaskTreckedTimeDetails :isLabelVisible="true" :estimated="taskInfo?.estimateTime" :trecked="taskInfo?.loggedTime"/>
+
         <div v-if="taskInfo?.createdTime" class="task-details task-details__time task-details__time--created">
           <span class="task-details__label task-details__label--time-created">Created: </span>
           <span class="task-details__value task-details__value--time-created"> {{ createTime }}</span>
@@ -42,7 +43,7 @@
       </div>
     </div>
   </div>
-  <div v-else class="task-info task-info__container task-info__notfound">
+  <div v-else-if="!isLoading && !hasTaskInfo && !error" class="task-info task-info__container task-info__notfound">
     <div class="container container__notfound">
       <h3 class="title title--notfound">Uh-oh! It seems there's no task matching this ID: {{ id }}. Please double-check and try again.</h3>
     </div>
@@ -53,7 +54,7 @@
                             :trecked="taskInfo?.loggedTime"/>
     <LogTimeForm className="trek-time" :id="id" :trecked="taskInfo?.loggedTime" />
   </BaseDialog>
-  <p v-if="error">Error</p>
+  <p v-if="!isLoading && error">Error</p>
 </template>
 
 <script>
@@ -108,27 +109,10 @@ export default {
       return fullName;
     },
     createTime() {
-      if (this?.taskInfo?.createdTime === null) return '';
-      let creatinDate = new Date(this.taskInfo?.createdTime);
-      let year    = creatinDate.getFullYear();
-      let month   = String(creatinDate.getMonth() + 1).padStart(2, '0');
-      let day     = String(creatinDate.getDate()).padStart(2, '0');
-      let hour    = String(creatinDate.getHours()).padStart(2, '0');
-      let minute  = String(creatinDate.getMinutes()).padStart(2, '0');
-      let seconds = String(creatinDate.getSeconds()).padStart(2, '0');  
-      return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
+      return this.formatDate(this?.taskInfo?.createdTime);
     },
     updateTime() {
-      if (this?.taskInfo?.updateTime === '') return '';
-
-      let updationDate = new Date(this.taskInfo?.updateTime);
-      let year    = updationDate.getFullYear();
-      let month   = String(updationDate.getMonth() + 1).padStart(2, '0');
-      let day     = String(updationDate.getDate()).padStart(2, '0');
-      let hour    = String(updationDate.getHours()).padStart(2, '0');
-      let minute  = String(updationDate.getMinutes()).padStart(2, '0');
-      let seconds = String(updationDate.getSeconds()).padStart(2, '0');  
-      return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
+      return this.formatDate(this?.taskInfo?.updateTime);
     }
   },
   methods: {
@@ -141,6 +125,20 @@ export default {
       }
       this.isLoading = false;
     },
+
+    formatDate(timestamp) {
+      if (timestamp) return '';
+      let creatinDate = new Date(this.taskInfo?.createdTime);
+      let year    = creatinDate.getFullYear();
+      let month   = String(creatinDate.getMonth() + 1).padStart(2, '0');
+      let day     = String(creatinDate.getDate()).padStart(2, '0');
+      let hour    = String(creatinDate.getHours()).padStart(2, '0');
+      let minute  = String(creatinDate.getMinutes()).padStart(2, '0');
+      let seconds = String(creatinDate.getSeconds()).padStart(2, '0');  
+
+      return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
+    },
+
     updateTaskParams(newParams) {
       console.log(newParams);
       let { newVal, mode } = newParams;
@@ -285,44 +283,10 @@ export default {
     margin-right: 5px;
   }
 
-  .task__priority {
-    display: inline-flex;
-    margin-right: 5px;
-  }
-
   &__value{
     display: flex;
-    width: max(50%, 175px);
-
-    &--time-trecked {
-      display: flex;
-      flex-direction: column;
-    }
+    flex-direction: column;
+    flex-grow: 2;
   }
-  &__value-indicator{
-    display: block;
-    background-color: var(--color-primary);
-    height: 100%;
-  }
-  &__value-indicator-wrapper {
-    margin-bottom: 5px;
-    width: 100%;
-    height: 10px;
-    border: 1px solid var(--color-secondary);
-    border-radius: var(--border-radius-medium);
-  }
-}
-
-.trecked-time-details{
-  display: flex;
-  justify-content: space-between;
-  span{
-    font-size: 10px;
-    color: var(--color-secondary);
-  }
-}
-
-.btn-action__title{
-  margin: 0 5px;
 }
 </style>
