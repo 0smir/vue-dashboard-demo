@@ -119,8 +119,8 @@ export default {
       return this?.taskInfo?.status;
     },
     assigneeFullName() {
-      let fullName = this?.taskInfo?.assignee?.name + ' ' + this?.taskInfo?.assignee?.lastName
-      return fullName;
+      const assignee = this.taskInfo?.assignee;
+      return assignee ? `${assignee.name} ${assignee.lastName}` : 'Unassigned';
     },
     createTime() {
       return this.formatDate(this?.taskInfo?.createdTime);
@@ -136,8 +136,9 @@ export default {
         await this.$store.dispatch('tasks/getTaskData', { id: this.id });
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
+      } finally {
+        this.isLoading = false;
       }
-      this.isLoading = false;
     },
 
     formatDate(timestamp) {
@@ -169,7 +170,7 @@ export default {
         this.$store.dispatch('tasks/setTaskAssignee', { ...this.taskInfo, assignee: newVal });
       }  
     },
-    actionExecute(newParams) {
+    async actionExecute(newParams) {
       console.log(newParams);
       let { newVal } = newParams;
       if (newVal === 'logtime') {
