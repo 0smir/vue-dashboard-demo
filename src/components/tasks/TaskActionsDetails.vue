@@ -4,7 +4,7 @@
       <BaseButton class="btn btn--medium btn--transparent btn-actions__controller">
         <SvgIcon class="icon icon--medium" name="flash"/>
         <span class="btn-actions__title">Actions</span>
-        <SvgIcon class="icon icon--medium icon-chevron" name="chevron-down"/>
+        <SvgIcon class="icon icon--small icon-chevron" name="chevron-down"/>
       </BaseButton>
     </template>
     <template #list-items="{ list, selectItem }">

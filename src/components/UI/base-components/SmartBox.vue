@@ -3,7 +3,7 @@
     <slot name="active-item">
       <BaseButton :class="['smart-box__btn', 'smart-box__btn-control', classList]">
         <span>{{ title }}</span>
-        <SvgIcon class="icon icon--medium icon-chevron" name="chevron-down" />
+        <SvgIcon class="icon icon--small icon-chevron" name="chevron-down" />
       </BaseButton>
     </slot>
     <ul class="smart-box__list-wrapper" v-show="showSmartList">

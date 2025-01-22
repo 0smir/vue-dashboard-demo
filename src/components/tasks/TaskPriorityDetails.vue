@@ -6,7 +6,7 @@
         <template #active-item>
           <BaseButton class="btn btn--medium btn--transparent btn-priority__controller">
             <TaskPriorityElement :priority="priorityTitle" :titleDisplay="true" />
-            <SvgIcon class="icon icon--medium icon-chevron" name="chevron-down" />
+            <SvgIcon class="icon icon--small icon-chevron" name="chevron-down" />
           </BaseButton>
         </template>
         <template #list-items="{ list, selectItem }">
