@@ -10,8 +10,7 @@ export default {
   props: ['reporter'],
   computed: {
     reporterFullName() {
-      let fullName = this?.reporter?.name + ' ' + this?.reporter?.lastName;
-        return fullName;
+        return this.reporter ? `${this.reporter.name} ${this.reporter.lastName}` : 'Unassigned';
       }
     }
     
