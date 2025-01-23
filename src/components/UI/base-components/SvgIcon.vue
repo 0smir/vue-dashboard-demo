@@ -32,6 +32,11 @@ if (props.iconType) {
   height: 24px;
   pointer-events: none;
 
+  &--large {
+    width: 30px;
+    height: 30px;
+  }
+
   &--medium {
     width: 18px;
     height: 18px;
