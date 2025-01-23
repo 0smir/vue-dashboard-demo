@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .backdrop {
   position: fixed;
   top: 0;
@@ -91,12 +91,16 @@ export default {
   &__header {
     background-color: var(--ColorDialogHeaderBG);
     color: var(--ColorDialogHeadeText);
-    // width: 100%;
     padding: 15px;
   }
 
   &__title {
-    font-size: 22px;
+    display: flex;
+    align-items: center;
+    
+    &:has(.icon) > .icon {
+      margin-right: 7px;
+    }
   }
 
   &__btn-close {
