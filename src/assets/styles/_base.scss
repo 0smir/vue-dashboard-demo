@@ -168,3 +168,17 @@ a:hover {
 .details .summary::-webkit-details-marker {
   display: none;
 }
+
+.description {
+  margin-bottom: 30px;
+  font-size: 18px;
+  color: var(--color-tetriary);
+
+  &-text {
+    margin-bottom: 10px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
