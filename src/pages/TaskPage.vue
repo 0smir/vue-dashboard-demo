@@ -52,6 +52,10 @@
   <div v-else-if="!isLoading && !hasTaskInfo && !error" class="task-info task-info__container task-info__notfound">
     <div class="container container__notfound">
       <h3 class="title title--notfound">Uh-oh! It seems there's no task matching this ID: {{ id }}. Please double-check and try again.</h3>
+      <ul class="link__wrapper">
+        <li><router-link class="link task-info__notfound-link" to="/">Back Home</router-link></li>
+        <li><router-link class="link task-info__notfound-link" to="/tasks">See All tasks list</router-link></li>
+      </ul>
     </div>
   </div>
   <BaseDialog :show="showLogTimeModal" title="Time tracking" @close="closeLogTimeDialog">
@@ -341,6 +345,16 @@ export default {
         width: auto;
       }
     }
+  }
+
+  &__notfound {
+    color: var(--color-tetriary);
+  }
+
+  &__notfound-link {
+    margin-right: 15px;
+    font-size: 18px;
+    color: var(--color-primary);
   }
 }
 
