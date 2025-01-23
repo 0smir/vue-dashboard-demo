@@ -91,13 +91,30 @@ export default {
   &__header {
     background-color: var(--ColorDialogHeaderBG);
     color: var(--ColorDialogHeadeText);
-    padding: 15px;
+    padding: 15px 40px 15px 10px;
+
+    @media (min-width: $tablet) {
+      padding: 15px 40px 15px 15px; 
+    }
   }
 
   &__title {
     display: flex;
     align-items: center;
+    font-size: 20px;
+
+    @media (min-width: $sm) {
+      font-size: 24px;
+    }
     
+    @media (min-width: $md) {
+      font-size: 28px;
+    }
+
+    @media (min-width: $tablet) {
+      font-size: 30px;
+    }
+
     &:has(.icon) > .icon {
       margin-right: 7px;
     }
@@ -105,8 +122,13 @@ export default {
 
   &__btn-close {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 0;
+    right: 0;
+
+    @media (min-width: $sm) {
+      top: 5px;
+      right: 5px;
+    }
   }
 
   &__content {
