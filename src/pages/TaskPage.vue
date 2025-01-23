@@ -213,6 +213,7 @@ export default {
       this.closeDeleteConfirmationDialog();
       try {
         await this.$store.dispatch('tasks/removeTask', { id: this.id });
+        this.$router.push('/tasks');
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       } finally {
