@@ -60,12 +60,22 @@
                             :trecked="taskInfo?.loggedTime"/>
     <LogTimeForm className="trek-time" :id="id" :trecked="taskInfo?.loggedTime" />
   </BaseDialog>
-  <BaseDialog :show="showDeleteConfirmationModal" title="Confirm" @close="closeDeleteConfirmationDialog">
-    <div>
-      <p>Are you really want to delete this task?</p>
-      <div class="form-control form-control--btn-wrapper btn-wrapper">
-        <BaseButton class="btn btn__default btn--medium btn--add" @click="removeTask">Delete</BaseButton>
-        <BaseButton class="btn btn__outlined btn--medium btn--cancel" @click="closeDeleteConfirmationDialog" >Cancel</BaseButton>
+  <BaseDialog :show="showDeleteConfirmationModal" @close="closeDeleteConfirmationDialog">
+    <template #header>
+      <h2 class="dialog__title">
+        <SvgIcon class="icon icon--large" name="attention"/>
+        <span class="dialog__title-text">Delate task {{id}} ?</span>
+      </h2>
+    </template>
+    <div class="dialog__content">
+      <div class="description">
+        <p class="description-text">Are you about permanently delete this task. It's comments and all of it's data.</p>
+        <p class="description-text">If you are not sure, you can close this task.</p>
+      </div>
+
+      <div class="task-info__dialog-btn-wrapper">
+        <BaseButton class="btn btn__default btn--medium btn--delete" @click="removeTask">Delete</BaseButton>
+        <BaseButton class="btn btn__outlined btn--medium btn--cancel" @click="closeDeleteConfirmationDialog">Cancel</BaseButton>
     </div>
     </div>
   </BaseDialog>
@@ -84,6 +94,7 @@ import LogTimeForm from '@/components/tasks/LogTimeForm.vue';
 
 import TaskContent from '@/components/tasks/TaskContent.vue';
 import TaskCommentsBlock from '@/components/tasks/TaskCommentsBlock.vue';
+import SvgIcon from '@/components/UI/base-components/SvgIcon.vue';
 export default {
   components: {
     TaskStatusDetails,
@@ -305,6 +316,31 @@ export default {
   &__details-wrapper {
     padding: 10px 5px 10px 15px;
     border-top: 1px solid var(--color-secondary-medium);
+  }
+
+  &__dialog-btn-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: $sm) {
+      flex-direction: row;
+      justify-content: flex-end;  
+    }
+
+    .btn--delete {
+      margin-bottom: 15px;
+
+      @media (min-width: $sm) {
+        margin: 0 10px 0 0;
+      }
+    }
+    .btn {
+      width: 100%;
+
+      @media (min-width: $sm) {
+        width: auto;
+      }
+    }
   }
 }
 
