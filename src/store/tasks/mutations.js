@@ -18,7 +18,7 @@ export default {
   removeTask(state, payload) {
     let id = payload.id;
     let index = state.tasks.findIndex((item) => item.id === id);
-
+    state.task = null;
     state.tasks.splice(index, 1);
   }
 }
