@@ -75,49 +75,6 @@ export default {
     context.commit('setTask', { ...resultData });
   },
 
-  // async setTaskStatus(context, data) {
-  //   let { id, status } = data;
-  //   let updateTime = new Date().getTime();
-  //   let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
-
-  //   const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ status, updateTime: updateTime }) });
-  //   const resultData = await resp.json();
-  //   if (!resp.ok) {
-  //     const error = new Error(resultData.message || 'Failed to fetch!');
-  //     throw error;
-  //   }
-  //   console.log('status', status)
-  //   context.commit('updateTask', { status, updateTime: updateTime });
-  // },
-  // async setTaskPriority(context, data) {
-  //   let { id, priority } = data;
-  //   let updateTime = new Date().getTime();
-  //   let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
-
-  //   const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ priority, updateTime: updateTime }) });
-  //   const resultData = await resp.json();
-  //   if (!resp.ok) {
-  //     const error = new Error(resultData.message || 'Failed to fetch!');
-  //     throw error;
-  //   }
-
-  //   context.commit('updateTask', { priority, updateTime: updateTime });
-  // },
-  // async setTaskProject(context, data) {
-  //   let { id, project } = data;
-  //   let updateTime = new Date().getTime();
-  //   let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
-
-  //   const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ project, updateTime: updateTime }) });
-  //   const resultData = await resp.json();
-  //   if (!resp.ok) {
-  //     const error = new Error(resultData.message || 'Failed to fetch!');
-  //     throw error;
-  //   }
-
-  //   context.commit('updateTask', { project, updateTime: updateTime });
-  // },
-
   async setTaskAssignee(context, data) {
     let { id, assignee } = data;
     let updateTime = new Date().getTime();
@@ -219,9 +176,8 @@ export default {
     context.commit('removeTask', { id });
   },
 
-  updateTaskHistory() {
+  // updateTaskHistory() {
 
-
-    context.commit('updateTaskHistory', { updateTime: updateTime });
-  }
+  //   context.commit('updateTaskHistory', { updateTime: updateTime });
+  // }
 }

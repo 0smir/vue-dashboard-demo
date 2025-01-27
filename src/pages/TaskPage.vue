@@ -184,7 +184,7 @@ export default {
       console.log(newParams);
       //mode: 'status', 'priority', 'project', 'assignee', 'reporter'
       let { newVal, mode } = newParams;
-      let params = { };
+      let params = {};
       params[mode] = newVal;
 
       this.$store.dispatch('tasks/updateTask', { id: this.taskInfo.id, mode: mode, ...params });
