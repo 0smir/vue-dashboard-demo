@@ -168,7 +168,8 @@ export default {
 
     formatDate(timestamp) {
       if (!timestamp) return '';
-      let creatinDate = new Date(this.taskInfo?.createdTime);
+      
+      let creatinDate = new Date(timestamp);
       let year    = creatinDate.getFullYear();
       let month   = String(creatinDate.getMonth() + 1).padStart(2, '0');
       let day     = String(creatinDate.getDate()).padStart(2, '0');
@@ -183,16 +184,16 @@ export default {
       console.log(newParams);
       let { newVal, mode } = newParams;
       if (mode === 'status') {
-        this.$store.dispatch('tasks/setTaskStatus', { ...this.taskInfo, status: newVal });
+        this.$store.dispatch('tasks/updateTask', { id: this.taskInfo.id, mode: mode, status: newVal });
       }
       if (mode === 'priority') {
-        this.$store.dispatch('tasks/setTaskPriority', { ...this.taskInfo, priority: newVal });
+        this.$store.dispatch('tasks/setTaskPriority', { id: this.taskInfo.id, mode: mode, priority: newVal });
       }
       if (mode === 'project') {
-        this.$store.dispatch('tasks/setTaskProject', { ...this.taskInfo, project: newVal });
+        this.$store.dispatch('tasks/setTaskProject', { id: this.taskInfo.id, mode: mode, project: newVal });
       }
       if (mode === 'assignee') {
-        this.$store.dispatch('tasks/setTaskAssignee', { ...this.taskInfo, assignee: newVal });
+        this.$store.dispatch('tasks/setTaskAssignee', { id: this.taskInfo.id, mode: mode, assignee: newVal });
       }  
     },
     async actionExecute(newParams) {
