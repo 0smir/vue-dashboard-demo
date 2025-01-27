@@ -75,48 +75,49 @@ export default {
     context.commit('setTask', { ...resultData });
   },
 
-  async setTaskStatus(context, data) {
-    let { id, status } = data;
-    let updateTime = new Date().getTime();
-    let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
+  // async setTaskStatus(context, data) {
+  //   let { id, status } = data;
+  //   let updateTime = new Date().getTime();
+  //   let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
 
-    const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ status, updateTime: updateTime }) });
-    const resultData = await resp.json();
-    if (!resp.ok) {
-      const error = new Error(resultData.message || 'Failed to fetch!');
-      throw error;
-    }
+  //   const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ status, updateTime: updateTime }) });
+  //   const resultData = await resp.json();
+  //   if (!resp.ok) {
+  //     const error = new Error(resultData.message || 'Failed to fetch!');
+  //     throw error;
+  //   }
+  //   console.log('status', status)
+  //   context.commit('updateTask', { status, updateTime: updateTime });
+  // },
+  // async setTaskPriority(context, data) {
+  //   let { id, priority } = data;
+  //   let updateTime = new Date().getTime();
+  //   let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
 
-    context.commit('updateTask', { status, updateTime: updateTime });
-  },
-  async setTaskPriority(context, data) {
-    let { id, priority } = data;
-    let updateTime = new Date().getTime();
-    let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
+  //   const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ priority, updateTime: updateTime }) });
+  //   const resultData = await resp.json();
+  //   if (!resp.ok) {
+  //     const error = new Error(resultData.message || 'Failed to fetch!');
+  //     throw error;
+  //   }
 
-    const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ priority, updateTime: updateTime }) });
-    const resultData = await resp.json();
-    if (!resp.ok) {
-      const error = new Error(resultData.message || 'Failed to fetch!');
-      throw error;
-    }
+  //   context.commit('updateTask', { priority, updateTime: updateTime });
+  // },
+  // async setTaskProject(context, data) {
+  //   let { id, project } = data;
+  //   let updateTime = new Date().getTime();
+  //   let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
 
-    context.commit('updateTask', { priority, updateTime: updateTime });
-  },
-  async setTaskProject(context, data) {
-    let { id, project } = data;
-    let updateTime = new Date().getTime();
-    let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
+  //   const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ project, updateTime: updateTime }) });
+  //   const resultData = await resp.json();
+  //   if (!resp.ok) {
+  //     const error = new Error(resultData.message || 'Failed to fetch!');
+  //     throw error;
+  //   }
 
-    const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ project, updateTime: updateTime }) });
-    const resultData = await resp.json();
-    if (!resp.ok) {
-      const error = new Error(resultData.message || 'Failed to fetch!');
-      throw error;
-    }
+  //   context.commit('updateTask', { project, updateTime: updateTime });
+  // },
 
-    context.commit('updateTask', { project, updateTime: updateTime });
-  },
   async setTaskAssignee(context, data) {
     let { id, assignee } = data;
     let updateTime = new Date().getTime();
@@ -158,9 +159,51 @@ export default {
       const error = new Error(resultData.message || 'Failed to fetch!');
       throw error;
     }
-    //UpdateTaskHistory();
+    //updateTaskHistory();
     // context.commit('updateTaskHistory', { loggedTimeDate,  loggedTimeDescription, loggedTime, updateTime: updateTime });
     context.commit('updateTask', { loggedTime, updateTime: updateTime });
+  },
+
+  async updateTask(context, data) {
+    let { id, mode } = data,
+      url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`,
+      updateTime = new Date().getTime(),
+      taskData = null;
+
+    switch (mode) {
+      case 'status': {
+        taskData = { status: data.status, updateTime: updateTime };
+        break;
+      }
+      case 'priority': {
+        taskData = { priority: data.priority, updateTime: updateTime };
+        break;
+      }
+      case 'project': {
+        taskData = { project: data.project, updateTime: updateTime };
+        break;
+      }
+      case 'assignee': {
+        taskData = { assignee: data.assignee, updateTime: updateTime };
+        break;
+      }
+      case 'reporter': {
+        taskData = { reporter: data.reporter, updateTime: updateTime };
+        break;
+      }
+    };
+
+    if (!taskData) return;
+
+    const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify(taskData) });
+    const resultData = await resp.json();
+    if (!resp.ok) {
+      const error = new Error(resultData.message || 'Failed to fetch!');
+      throw error;
+    }
+
+    context.commit('updateTask', taskData);
+    //updateTaskHistory();  
   },
 
   async removeTask(context, data) {
@@ -174,5 +217,11 @@ export default {
       throw error;
     }
     context.commit('removeTask', { id });
+  },
+
+  updateTaskHistory() {
+
+
+    context.commit('updateTaskHistory', { updateTime: updateTime });
   }
 }
