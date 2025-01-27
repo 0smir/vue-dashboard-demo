@@ -168,7 +168,7 @@ export default {
 
     formatDate(timestamp) {
       if (!timestamp) return '';
-      
+
       let creatinDate = new Date(timestamp);
       let year    = creatinDate.getFullYear();
       let month   = String(creatinDate.getMonth() + 1).padStart(2, '0');
@@ -182,19 +182,19 @@ export default {
 
     updateTaskParams(newParams) {
       console.log(newParams);
+      //mode: 'status', 'priority', 'project', 'assignee', 'reporter'
       let { newVal, mode } = newParams;
-      if (mode === 'status') {
-        this.$store.dispatch('tasks/updateTask', { id: this.taskInfo.id, mode: mode, status: newVal });
-      }
-      if (mode === 'priority') {
-        this.$store.dispatch('tasks/setTaskPriority', { id: this.taskInfo.id, mode: mode, priority: newVal });
-      }
-      if (mode === 'project') {
-        this.$store.dispatch('tasks/setTaskProject', { id: this.taskInfo.id, mode: mode, project: newVal });
-      }
-      if (mode === 'assignee') {
-        this.$store.dispatch('tasks/setTaskAssignee', { id: this.taskInfo.id, mode: mode, assignee: newVal });
-      }  
+      let params = { };
+      params[mode] = newVal;
+
+      this.$store.dispatch('tasks/updateTask', { id: this.taskInfo.id, mode: mode, ...params });
+    
+      // if (mode === 'assignee') {
+      //   this.$store.dispatch('tasks/setTaskAssignee', { id: this.taskInfo.id, mode: mode, assignee: newVal });
+      // }
+      // if (mode === 'reporter') {
+      //   this.$store.dispatch('tasks/setTaskReporter', { id: this.taskInfo.id, mode: mode, reporter: newVal });
+      // }
     },
     async actionExecute(newParams) {
       
