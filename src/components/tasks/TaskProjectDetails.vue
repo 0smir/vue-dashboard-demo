@@ -45,7 +45,9 @@ export default {
     }
   }
   &__project-item {
+    display: flex;
     justify-content: flex-start;
+    width: 100%;
     text-transform: uppercase;
   }
 }
