@@ -1,5 +1,5 @@
 <template>
-  <SmartBox :list="taskStatusList" :title="taskStatus" mode="mode"
+  <SmartBox :list="taskStatusList" :title="taskStatus" mode="status"
     :classList="['btn', 'btn--medium', 'btn__outlined', 'btn-status__controller']"
     @update-params="updateTaskParams">
     <template #list-items="{ list, selectItem }">
@@ -20,7 +20,7 @@ export default {
     TaskPriorityElement,
     SmartBox
   },
-  props: ['taskStatusList', 'taskStatus', 'mode'],
+  props: ['taskStatusList', 'taskStatus'],
   emits: ['choose-action'],
   methods: {
     updateTaskParams(payload){
