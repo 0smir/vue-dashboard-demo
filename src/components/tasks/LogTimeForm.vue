@@ -65,7 +65,8 @@ export default {
       let payload = {
         id: this.id,
         loggedTime: this.trecked + this.workLog.spentTime.value,
-        loggedTimeDate:  this.workLog.date.value,
+        spentTime: this.workLog.spentTime.value,
+        loggedTimeDate:  new Date(this.workLog.date.value).getTime(),
         loggedTimeDescription: this.workLog.description.value
       }
       try{
