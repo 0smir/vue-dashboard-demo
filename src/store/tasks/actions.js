@@ -106,20 +106,30 @@ export default {
   // },
 
   async LogTime(context, data) {
-    let { id, loggedTimeDescription, loggedTimeDate, loggedTime } = data;
+    let { id, loggedTimeDescription, loggedTimeDate, spentTime, loggedTime } = data;
     let updateTime = new Date().getTime();
 
     let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
-    const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ loggedTime, updateTime: updateTime }) });
+    const resp = await fetch(url, {
+      method: 'PATCH', body: JSON.stringify({
+        loggedTime,
+        updateTime
+      })
+    });
     const resultData = await resp.json();
 
     if (!resp.ok) {
       const error = new Error(resultData.message || 'Failed to fetch!');
       throw error;
     }
-    //updateTaskHistory();
-    // context.commit('updateTaskHistory', { loggedTimeDate,  loggedTimeDescription, loggedTime, updateTime: updateTime });
-    context.commit('updateTask', { loggedTime, updateTime: updateTime });
+
+    context.commit('updateTask', { loggedTime, updateTime: oldTreckedTimeVal + loggedTime });
+    context.dispatch('updateTaskHistory', {
+      id,
+      mode: 'logTime',
+      updateTime,
+      newValue: { loggedTimeDate, loggedTimeDescription, spentTime }
+    })
   },
 
   async updateTask(context, data) {
@@ -161,7 +171,7 @@ export default {
     }
 
     context.commit('updateTask', changedTaskData);
-    await context.dispatch('updateTaskHistory', { id, mode, ...changedTaskData });
+    await context.dispatch('updateTaskHistory', { id, mode, updateTime, newValue: changedTaskData[mode] });
   },
 
   async removeTask(context, data) {
@@ -178,7 +188,6 @@ export default {
   },
 
   async updateTaskHistory(context, data) {
-    console.log(data)
     let { id, mode, updateTime } = data;
     let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}/taskUpdatesHistory.json`;
     let changesAuthor = context.rootGetters['users/userID'];
@@ -187,7 +196,7 @@ export default {
       authorID: changesAuthor,
       updateTime: updateTime,
       mode,
-      newValue: data[mode]
+      newValue: data.newValue
     };
 
     const resp = await fetch(url, {
