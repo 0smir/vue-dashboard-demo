@@ -12,7 +12,7 @@
     <Board v-if="columnsToDisplay.length" :columnsList="columnsToDisplay" :tasksList="tasks" />
     <p v-else>Choose some filter points to display tasks</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
-      <CreateTaskForm className="dialog"></CreateTaskForm>
+      <CreateTaskForm className="dialog" mode="dialog"></CreateTaskForm>
     </BaseDialog>
   </div>
 </template>

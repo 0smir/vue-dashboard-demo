@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitForm" :class="['form', 'form-add-task', 'form-' + className, className]">
+  <form @submit.prevent="submitForm" :class="['form', 'form-add-task', 'form-' + className]">
     <div class="form__content">
       <div :class="['form-control', 'form-control--title', { error: !task.title.isValid }]">
         <label class="form-control__label" for="title">Title</label>
@@ -68,7 +68,7 @@
 
 <script>
 export default {
-  props: ['className', 'userID'],
+  props: ['className', 'userID', 'mode'],
   inject:['closeModal'],
   data() {
     return {
@@ -194,7 +194,9 @@ export default {
       }
       
       this.clearFormFields();
-      this.closeModal();
+      if (this.mode === 'dialog') {
+       this.closeModal(); 
+      }
     },
 
     onBlurEstimation() {
