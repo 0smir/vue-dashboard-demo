@@ -20,5 +20,8 @@ export default {
     let index = state.tasks.findIndex((item) => item.id === id);
     state.task = null;
     state.tasks.splice(index, 1);
+  },
+  updateTaskHistory(state, payload) {
+    state.task['taskUpdatesHistory'][payload.key] = payload.historyUpdatesData;
   }
 }
