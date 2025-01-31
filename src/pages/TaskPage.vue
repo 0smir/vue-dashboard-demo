@@ -45,7 +45,7 @@
     <div class="task-info__task-data">
       <TaskContent :taskInfo="taskInfo" />
       <div>
-       <TaskCommentsBlock />
+       <TaskActivityComponent :activity="taskUpdatesHistory"/>
       </div>
     </div>
   </div>
@@ -97,7 +97,7 @@ import TaskTreckedTimeDetails from '@/components/tasks/TaskTreckedTimeDetails.vu
 import LogTimeForm from '@/components/tasks/LogTimeForm.vue';
 
 import TaskContent from '@/components/tasks/TaskContent.vue';
-import TaskCommentsBlock from '@/components/tasks/TaskCommentsBlock.vue';
+import TaskActivityComponent from '@/components/tasks/TaskActivityComponent.vue';
 import SvgIcon from '@/components/UI/base-components/SvgIcon.vue';
 export default {
   components: {
@@ -110,7 +110,7 @@ export default {
     TaskTreckedTimeDetails,
     LogTimeForm,
     TaskContent,
-    TaskCommentsBlock
+    TaskActivityComponent
   },
   props: ['id'],
   data() {
@@ -142,6 +142,9 @@ export default {
     },
     taskStatus() {
       return this?.taskInfo?.status;
+    },
+    taskUpdatesHistory() {
+      return this?.taskInfo?.taskUpdatesHistory;
     },
     assigneeFullName() {
       const assignee = this.taskInfo?.assignee;
