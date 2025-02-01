@@ -97,7 +97,7 @@ import TaskTreckedTimeDetails from '@/components/tasks/TaskTreckedTimeDetails.vu
 import LogTimeForm from '@/components/tasks/LogTimeForm.vue';
 
 import TaskContent from '@/components/tasks/TaskContent.vue';
-import TaskActivityComponent from '@/components/tasks/TaskActivityComponent.vue';
+import TaskActivityComponent from '@/components/tasks/task/TaskActivityComponent.vue';
 import SvgIcon from '@/components/UI/base-components/SvgIcon.vue';
 export default {
   components: {
