@@ -45,7 +45,7 @@
     <div class="task-info__task-data">
       <TaskContent :taskInfo="taskInfo" />
       <div>
-       <TaskActivityComponent :activity="taskUpdatesHistory"/>
+       <TaskActivityComponent :taskID="id" :activity="taskUpdatesHistory"/>
       </div>
     </div>
   </div>
