@@ -44,9 +44,13 @@ export default {
     display: flex;
   }
   &__list-wraper {
-    padding-top: 50px;
-    border-top: 2px solid var(--color-secondary-medium);
     margin-top: 15px;
+    @media (min-width: $sm) {
+      padding-left: 10px; 
+    }
+    @media (min-width: $md) {
+      padding-left: 20px;
+    }
   }
 }
 </style>
