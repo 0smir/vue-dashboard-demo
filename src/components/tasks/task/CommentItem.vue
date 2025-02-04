@@ -29,7 +29,7 @@ export default {
       return this.timeFormattedData(this.comment.updateTime);
     },
     authorFullName() {
-      return `${this.comentAuthorInfo.name} ${this.comentAuthorInfo.lastName}`;
+      return `${this.comentAuthorInfo?.name} ${this.comentAuthorInfo?.lastName}`;
     }
   },
   methods: {
