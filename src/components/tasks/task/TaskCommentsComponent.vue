@@ -1,12 +1,12 @@
 <template>
   <div v-if="isLoggedIn" class="comments__form-wrapper">
     <UserProfileImg :userInfo="userInfo"/>
-    <AddCommentForm />
+    <AddCommentForm :taskID="taskID"/>
   </div>
   <div v-if="activity.length" class="comments__list-wraper">
     <ul class="comments__list">
-      <li class="comments__list-item">
-        <CommentItem />
+      <li class="comments__list-item" v-for="comment in activity">
+        <CommentItem :comment="comment"/>
       </li>
     </ul>
   </div>
@@ -18,7 +18,7 @@ import AddCommentForm from '@/components/tasks/task/AddCommentForm.vue';
 import CommentItem from '@/components/tasks/task/CommentItem.vue';
 
 export default {
-  props: ['activity'],
+  props: ['taskID', 'activity'],
   
   components: {
     UserProfileImg,
@@ -34,10 +34,6 @@ export default {
     isLoggedIn() {
       return this.$store.getters['users/isAuthenticated'];
     }
-  },
-  created() {
-    console.log(this.activity.length);
-    
   }
 }
 </script>
