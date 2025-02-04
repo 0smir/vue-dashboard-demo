@@ -17,5 +17,21 @@
 </script>
 
 <style lang="scss" scoped>
+.task-info {
+  &__title {
+    font-size: 2.4rem;
+    margin: 0 0 10px;
 
+    @media (min-width: $md) {
+      font-size: 2.8rem;
+      margin: 0 0 20px;
+    }
+  }
+
+  &__descrioption {
+    color: var(--color-tetriary);
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+}
 </style>

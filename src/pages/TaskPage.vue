@@ -271,29 +271,13 @@ export default {
 
   &__task-data {
     width: 100%;
-
+    padding-top: 25px;
     @media (min-width: $md) {
-      padding-top: 25px;
+      padding-top: 0;
       order: 1;
       max-width: calc(65% - 10px);
       height: 50vh;
     }
-  }
-
-  &__title {
-    font-size: 2.4rem;
-    margin: 0 0 10px;
-
-    @media (min-width: $md) {
-      font-size: 2.8rem;
-      margin: 0 0 20px;
-    }
-  }
-
-  &__descrioption {
-    color: var(--color-tetriary);
-    padding: 5px;
-    margin-bottom: 20px;
   }
 
   &__label {
