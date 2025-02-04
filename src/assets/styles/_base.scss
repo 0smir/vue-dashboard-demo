@@ -8,6 +8,11 @@
   margin: 0;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 html {
   margin: 0;
   scrollbar-gutter: stable;
@@ -18,11 +23,10 @@ body {
   --font-main: 'Roboto', 'Arial', 'Helvetica', sans-serif;
   --color-link-text: var(--color-text);
   --color-main-text: var(--color-text-dark);
-
   min-height: 100vh;
   padding: 0;
   color: var(--color-main-text);
-  background: var(--color-secondary);
+  overflow: auto;
   transition:
     color 0.5s,
     background-color 0.5s;

@@ -42,8 +42,8 @@
 }
 
 main {
-  height: 100%;
-  min-height: 100vh;
+  // height: 100%;
+  min-height: calc(100vh - 150px); //100vh - (header + footer)
   flex-grow: 2;
   background-color: var(--color-white);
   max-width: calc(100% - var(--asside-width-expanded));

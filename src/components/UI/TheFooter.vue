@@ -15,6 +15,7 @@ export default {
 <style lang="scss" scoped>
 footer {
     width: 100%;
+    min-height: 75px;
     background-color: var(--color-primary);
     color: #fff;
     

@@ -41,6 +41,7 @@ export default {
 .header {
   padding: 15px;
   width: 100%;
+  min-height: 75px;
   background-color: var(--color-primary);
 
   @media print {
