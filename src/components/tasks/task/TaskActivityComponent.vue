@@ -42,7 +42,6 @@ export default {
   },
   computed: {
     activityFiltered() {
-      console.log(this.activeItem);
       if (this.activeItem === 'all') {
         return Object.values(this.activity);
       }
