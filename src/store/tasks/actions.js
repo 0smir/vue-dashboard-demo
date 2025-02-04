@@ -187,6 +187,18 @@ export default {
     context.commit('removeTask', { id });
   },
 
+  async AddComment(context, data) {
+    let { id, mode, authorID, commentText } = data,
+      updateTime = new Date().getTime();
+
+    context.dispatch('updateTaskHistory', {
+      id,
+      mode,
+      updateTime,
+      newValue: { authorID, commentText }
+    });
+  },
+
   async updateTaskHistory(context, data) {
     let { id, mode, updateTime } = data;
     let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}/taskUpdatesHistory.json`;
