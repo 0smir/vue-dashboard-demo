@@ -276,7 +276,6 @@ export default {
       padding-top: 0;
       order: 1;
       max-width: calc(65% - 10px);
-      height: 50vh;
     }
   }
 
