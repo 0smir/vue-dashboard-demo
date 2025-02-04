@@ -69,7 +69,7 @@ export default {
 }
 .tabs {
   &__content {
-    padding-top: 20px;
+    padding: 20px 0;
   }
  
   &__label {
