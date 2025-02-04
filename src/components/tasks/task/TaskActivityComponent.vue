@@ -3,17 +3,17 @@
     <h4 class="section__title title">Activity</h4>
     <div class="tabs">
       <span class="tabs__label">Show:</span>
-      <BaseButton :class="['tabs__btn', { active: activeItem === 'TaskAllActivitiesComponent' }]" @click="updateFilter('TaskAllActivitiesComponent')">All
+      <BaseButton :class="['tabs__btn', { active: activeItem === 'all' }]" @click="updateFilter('all', 'TaskAllActivitiesComponent')">All
       </BaseButton>
-      <BaseButton :class="['tabs__btn', { active: activeItem === 'TaskCommentsComponent' }]" @click="updateFilter('TaskCommentsComponent')">Comments
+      <BaseButton :class="['tabs__btn', { active: activeItem === 'comment' }]" @click="updateFilter('comment', 'TaskCommentsComponent')">Comments
       </BaseButton>
-      <BaseButton :class="['tabs__btn', { active: activeItem === 'TaskHistoryComponent' }]" @click="updateFilter('TaskHistoryComponent')">History
+      <BaseButton :class="['tabs__btn', { active: activeItem === 'history' }]" @click="updateFilter('history', 'TaskHistoryComponent')">History
       </BaseButton>
-      <BaseButton :class="['tabs__btn', { active: activeItem === 'TaskWorkLogComponent' }]" @click="updateFilter('TaskWorkLogComponent')">Work log
+      <BaseButton :class="['tabs__btn', { active: activeItem === 'work-log' }]" @click="updateFilter('work-log', 'TaskWorkLogComponent')">Work log
       </BaseButton>
     </div>
     <div class="tabs__content">
-      <component :is="activeItem"></component>
+      <component :is="activeComponent" :taskID="taskID" :activity="activityFiltered"></component>
     </div>
     
   </section>
@@ -32,16 +32,30 @@ export default {
     TaskHistoryComponent,
     TaskWorkLogComponent
   },
-  props: ['activity'],
+  props: ['taskID', 'activity'],
   data() {
     return {
-      activeItem: 'TaskAllActivitiesComponent'
+      activeItem: 'all',
+      activeComponent: 'TaskAllActivitiesComponent',
+      activitiesAll: Array.from(Object.values(this.activity))
     }
   },
-  methods: {
-    updateFilter(componentName) {
-      this.activeItem = componentName;
+  computed: {
+    activityFiltered() {
+      console.log(this.activeItem);
+      if (this.activeItem === 'all') {
+        return Object.values(this.activity);
+      }
+      return Object.values(this.activity).filter(item => item.mode === this.activeItem);
     }
+  },
+
+  methods: {
+    updateFilter(mode, componentName) {
+      this.activeItem = mode;
+      this.activeComponent = componentName;
+    },
+    
   }
   
 }
