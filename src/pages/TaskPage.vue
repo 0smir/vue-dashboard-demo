@@ -44,7 +44,7 @@
     </div>
     <div class="task-info__task-data">
       <TaskContent :taskInfo="taskInfo" />
-      <div>
+      <div v-if="taskUpdatesHistory">
        <TaskActivityComponent :taskID="id" :activity="taskUpdatesHistory"/>
       </div>
     </div>
@@ -200,7 +200,6 @@ export default {
       // }
     },
     async actionExecute(newParams) {
-      
       let { newVal } = newParams;
       if (newVal === 'logtime') {
         this.showLogTimeDialog();
