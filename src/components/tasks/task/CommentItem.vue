@@ -1,6 +1,6 @@
 <template>
   <div class="comment__item">
-    <UserProfileImg :userInfo="comentAuthorInfo"/>
+    <UserProfileImg :userInfo="userInfo"/>
     <div class="comment__content">
       <div class="comment__details"> <span class="author">{{ authorFullName }}</span> <span class="poste-time">Posted at:</span> {{ commentPostTime }}</div>
       <div class="comment__comment-text">
@@ -18,18 +18,18 @@ export default {
   components: {
     UserProfileImg
   },
-  data() {
-    return {
-      error: null,
-      comentAuthorInfo: null
-    }
-  },
   computed: {
     commentPostTime() {
-      return this.timeFormattedData(this.comment.updateTime);
+      return this.timeFormattedData(this?.comment?.updateTime);
+    },
+    userInfo() {
+      return {
+        name: this?.comment?.authorName,
+        lastName: this?.comment?.authorLastName
+      }
     },
     authorFullName() {
-      return `${this.comentAuthorInfo?.name} ${this.comentAuthorInfo?.lastName}`;
+      return `${this?.comment?.authorName} ${this?.comment?.authorLastName}`;
     }
   },
   methods: {
@@ -45,30 +45,7 @@ export default {
       let seconds = String(creatinDate.getSeconds()).padStart(2, '0');  
 
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
-    },
-    loadUserData(authorID) {
-      let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/people/${authorID}.json`;
-      fetch(url)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-        })
-        .then((data) => {
-          console.log(data);
-          this.comentAuthorInfo = data;
-        })
-        .catch((error) => { this.error = 'falid with' + error})
-        .finally()
     }
-  },
-  created() {
-    if (this.comment.authorID !== this.$store.getters['users/userID']) {
-      this.loadUserData(this.comment.authorID);
-    } else {
-      this.comentAuthorInfo = this.$store.getters['users/getUserInfo'];
-    }
-    
   }
 }
 </script>
