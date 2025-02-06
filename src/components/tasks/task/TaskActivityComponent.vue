@@ -9,7 +9,7 @@
       </BaseButton>
       <BaseButton :class="['tabs__btn', { active: activeItem === 'history' }]" @click="updateFilter('history', 'TaskHistoryComponent')">History
       </BaseButton>
-      <BaseButton :class="['tabs__btn', { active: activeItem === 'work-log' }]" @click="updateFilter('work-log', 'TaskWorkLogComponent')">Work log
+      <BaseButton :class="['tabs__btn', { active: activeItem === 'logTime' }]" @click="updateFilter('logTime', 'TaskWorkLogComponent')">Work log
       </BaseButton>
     </div>
     <div class="tabs__content">
