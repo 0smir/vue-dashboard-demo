@@ -14,7 +14,7 @@
     </div>
     <div class="tabs__content">
       <component :is="activeComponent" :taskID="taskID" :activity="activityFiltered"></component>
-    </div>
+    </div> 
     
   </section>
 </template>
@@ -35,17 +35,31 @@ export default {
   props: ['taskID', 'activity'],
   data() {
     return {
+      isLoading: false,
       activeItem: 'all',
       activeComponent: 'TaskAllActivitiesComponent',
-      activitiesAll: Array.from(Object.values(this.activity))
+      activitiesAll: Array.from(Object.values(this.activity)),
+      authorsDataList: []
     }
   },
   computed: {
+    enrichedHistory() {
+      return Object.entries(this.activity).map(([id, update]) => {
+        const author = this?.authorsDataList.find(user => user.id === update.authorID) || { name: 'Unknown', lastName: '' };
+        return {
+          id,
+          ...update,
+          authorName: author.name,
+          authorLastName: author.lastName
+        };
+      });
+    },
     activityFiltered() {
+      let updatesHistory = this.enrichedHistory;
       if (this.activeItem === 'all') {
-        return Object.values(this.activity);
+        return updatesHistory;
       }
-      return Object.values(this.activity).filter(item => item.mode === this.activeItem);
+      return updatesHistory.filter(item => item.mode === this.activeItem);
     }
   },
 
@@ -54,9 +68,30 @@ export default {
       this.activeItem = mode;
       this.activeComponent = componentName;
     },
-    
-  }
-  
+      
+    getAuthorsData() {
+      let activity  = Object.values(this.activity);
+      let uniqueIDList = [...new Set(activity.map((item => item.authorID)))];
+      let requests = uniqueIDList.map((id) => fetch(`https://jira-vue-demo-default-rtdb.firebaseio.com/people/${id}.json`));
+      
+      this.isLoading = true;
+
+      Promise.all(requests)
+        .then((resp) => Promise.all(resp.map(r => r.json())))
+        .then((users) => { 
+          let authorsData = [];  
+          users.forEach(user => {
+            authorsData.push(user);
+          });
+          this.authorsDataList = authorsData;
+      })
+    }
+  },
+  mounted() {
+    if (this.activity) {
+      this.getAuthorsData();
+    }
+  } 
 }
 </script>
 
