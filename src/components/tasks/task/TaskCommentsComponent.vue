@@ -3,7 +3,7 @@
     <UserProfileImg :userInfo="userInfo"/>
     <AddCommentForm :taskID="taskID"/>
   </div>
-  <div  class="comments__list-wraper">
+  <div  class="comments__list-wrapper">
     <ul v-if="activity.length" class="comments__list">
       <li class="comments__list-item" v-for="comment in activity">
         <CommentItem :comment="comment"/>
@@ -44,7 +44,7 @@ export default {
   &__form-wrapper {
     display: flex;
   }
-  &__list-wraper {
+  &__list-wrapper {
     margin-top: 15px;
     @media (min-width: $sm) {
       padding-left: 10px; 
