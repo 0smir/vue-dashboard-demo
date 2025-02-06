@@ -3,12 +3,13 @@
     <UserProfileImg :userInfo="userInfo"/>
     <AddCommentForm :taskID="taskID"/>
   </div>
-  <div v-if="activity.length" class="comments__list-wraper">
-    <ul class="comments__list">
+  <div  class="comments__list-wraper">
+    <ul v-if="activity.length" class="comments__list">
       <li class="comments__list-item" v-for="comment in activity">
         <CommentItem :comment="comment"/>
       </li>
     </ul>
+    <p v-else>No comments</p>
   </div>
 </template>
 
@@ -34,7 +35,7 @@ export default {
     isLoggedIn() {
       return this.$store.getters['users/isAuthenticated'];
     }
-  }
+  } 
 }
 </script>
 
