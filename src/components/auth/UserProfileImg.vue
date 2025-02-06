@@ -12,7 +12,7 @@ export default {
   props: ['userInfo'],
   computed: {
     userInitials() {
-      let initials = this?.userInfo?.lastName.charAt(0).toUpperCase() + this?.userInfo?.lastName.charAt(0).toUpperCase();
+      let initials = this?.userInfo?.name.charAt(0).toUpperCase() + this?.userInfo?.lastName.charAt(0).toUpperCase();
       return initials;
     }
   }
