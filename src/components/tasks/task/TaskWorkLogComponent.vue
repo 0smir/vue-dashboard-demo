@@ -1,11 +1,11 @@
 <template>
   <div class="time-log__list-wrapper">
-    <ul class="time-log__list">
+    <ul v-if="activity.length" class="time-log__list">
       <li class="time-log__list" v-for="work in activity">
         <WorkLogItem :workLog="work" :key="work.id"/>
       </li>
     </ul>
-    
+    <p v-else>No time logged yet</p>
   </div>
 </template>
 
