@@ -58,8 +58,11 @@ export default {
       let updatesHistory = this.enrichedHistory;
       if (this.activeItem === 'all') {
         return updatesHistory;
+      } else if (this.activeItem === 'comment' || this.activeItem === 'logTime') {
+        return updatesHistory.filter(item => item.mode === this.activeItem);
+      } else {
+        return updatesHistory.filter(item => item.mode !== 'comment' && item.mode !== 'logTime');
       }
-      return updatesHistory.filter(item => item.mode === this.activeItem);
     }
   },
 
