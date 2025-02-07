@@ -9,7 +9,7 @@
           <WorkLogItem :workLog="item"/>
         </template>
         <template v-else>
-          {{ item.mode }}
+          <HistoryItem :item="item"/>
         </template>
       </li>
     </ul>
@@ -19,15 +19,13 @@
 <script>
 import CommentItem from '@/components/tasks/task/CommentItem.vue';
 import WorkLogItem from '@/components/tasks/task/WorkLogItem.vue';
+import HistoryItem from '@/components/tasks/task/HistoryItem.vue';
 export default {
   components: {
     CommentItem,
-    WorkLogItem
+    WorkLogItem,
+    HistoryItem
   },
   props: ['taskID', 'activity']
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
