@@ -123,6 +123,18 @@ a:hover {
   display: none;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
 .rounded {
   border-radius: 50%;
 }
