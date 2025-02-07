@@ -2,7 +2,7 @@
   <div class="time-log__list-wrapper">
     <ul class="time-log__list">
       <li class="time-log__list" v-for="work in activity">
-        <WorkLogItem :workLog="work"/>
+        <WorkLogItem :workLog="work" :key="work.id"/>
       </li>
     </ul>
     

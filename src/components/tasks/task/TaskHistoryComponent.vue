@@ -2,7 +2,7 @@
    <div class="history__list-wrapper">
     <ul class="history__list">
       <li class="history__list-item" v-for="item in activity">
-        <HistoryItem :item="item"/>
+        <HistoryItem :item="item" :key="item.id"/>
       </li>
     </ul>
   </div>

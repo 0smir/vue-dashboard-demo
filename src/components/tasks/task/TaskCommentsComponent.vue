@@ -6,7 +6,7 @@
   <div  class="comments__list-wrapper">
     <ul v-if="activity.length" class="comments__list">
       <li class="comments__list-item" v-for="comment in activity">
-        <CommentItem :comment="comment"/>
+        <CommentItem :comment="comment" :key="comment.id"/>
       </li>
     </ul>
     <p v-else>No comments</p>

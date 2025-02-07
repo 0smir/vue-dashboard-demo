@@ -3,13 +3,13 @@
     <ul>
       <li v-for="item in activity">
         <template v-if="item.mode === 'comment'">
-          <CommentItem :comment="item"/>
+          <CommentItem :comment="item" :key="item.id"/>
         </template>
         <template v-else-if="item.mode === 'logTime'">
-          <WorkLogItem :workLog="item"/>
+          <WorkLogItem :workLog="item" :key="item.id"/>
         </template>
         <template v-else>
-          <HistoryItem :item="item"/>
+          <HistoryItem :item="item" :key="item.id"/>
         </template>
       </li>
     </ul>
