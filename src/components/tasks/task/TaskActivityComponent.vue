@@ -12,9 +12,10 @@
       <BaseButton :class="['tabs__btn', { active: activeItem === 'logTime' }]" @click="updateFilter('logTime', 'TaskWorkLogComponent')">Work log
       </BaseButton>
     </div>
-    <div class="tabs__content">
+    <div class="tabs__content" v-if="!isLoading">
       <component :is="activeComponent" :taskID="taskID" :activity="activityFiltered"></component>
     </div> 
+    <BaseSpinner v-else />
     
   </section>
 </template>
@@ -24,6 +25,7 @@ import TaskAllActivitiesComponent from '@/components/tasks/task/TaskAllActivitie
 import TaskCommentsComponent from '@/components/tasks/task/TaskCommentsComponent.vue';
 import TaskHistoryComponent from '@/components/tasks/task/TaskHistoryComponent.vue';
 import TaskWorkLogComponent from '@/components/tasks/task/TaskWorkLogComponent.vue';
+import BaseSpinner from '@/components/UI/base-components/BaseSpinner.vue';
 
 export default {
   components: {
@@ -36,6 +38,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      error: null,
       activeItem: 'all',
       activeComponent: 'TaskAllActivitiesComponent',
       activitiesAll: Array.from(Object.values(this.activity)),
@@ -44,6 +47,7 @@ export default {
   },
   computed: {
     enrichedHistory() {
+      if (!this.authorsDataList.length) return [];
       return Object.entries(this.activity).map(([id, update]) => {
         const author = this?.authorsDataList.find(user => user.id === update.authorID) || { name: 'Unknown', lastName: '' };
         return {
@@ -85,12 +89,17 @@ export default {
           let authorsData = [];  
           users.forEach(user => {
             authorsData.push(user);
-          });
+          })
           this.authorsDataList = authorsData;
-      })
+          this.isLoading = false;  
+        })
+        .catch(error => {
+          console.error('Failed to fetch authors:', error);
+          
+        });
     }
   },
-  mounted() {
+  created() {
     if (this.activity) {
       this.getAuthorsData();
     }
