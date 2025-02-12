@@ -5,9 +5,6 @@
         <TaskPriorityElement :priority="task.priority" />
         <span class="task-id">{{ task.id }}</span>
       </span>
-      <!-- <span v-if="task.assignee" class="task__info-assignee rounded" :title="task.assignee.name">
-        <span v-if="!task.assignee.img">{{ getNameInitials() }}</span>
-      </span> -->
       <UserProfileImg :userInfo="userInfo" theme="light" />
     </div>
 
