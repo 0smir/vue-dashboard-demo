@@ -83,6 +83,26 @@
     </div>
     </div>
   </BaseDialog>
+  <BaseDialog :show="showLoginRequirementModal" @close="closeLoginRequirementDialog">
+    <template #header>
+      <h2 class="dialog__title">
+        <SvgIcon class="icon icon--large" name="attention"/>
+        <span class="dialog__title-text">You're Not Logged In!</span>
+      </h2>
+    </template>
+    <div class="dialog__content">
+      <div class="description">
+        <p class="description__text">
+          You need to be logged in to make changes to this task.
+          Please sign in to log time, update the priority, change the status, or modify this task.
+        </p>
+      </div>
+      <div class="task-info__dialog-btn-wrapper">
+        <router-link class="link btn btn__default btn--medium btn--login" to="/login">Login</router-link>
+        <router-link class="link btn btn__default btn--medium btn--signup" to="/people/registration">SignUp</router-link>
+      </div>
+    </div>
+  </BaseDialog>
   <p v-if="!isLoading && error">Error</p>
 </template>
 
@@ -118,10 +138,14 @@ export default {
       isLoading: false,
       error: null,
       showLogTimeModal: false,
-      showDeleteConfirmationModal: false
+      showDeleteConfirmationModal: false,
+      showLoginRequirementModal: false
     }
   }, 
   computed: {
+    isLoggedIn() {
+      return this.$store.getters['users/isAuthenticated'];
+    },
     taskInfo() {
       return this.$store.getters['tasks/getTaskInfo'];
     },
@@ -190,17 +214,25 @@ export default {
       let params = {};
       params[mode] = newVal;
 
-      this.$store.dispatch('tasks/updateTask', { id: this.taskInfo.id, mode: mode, ...params });
-    
-      // if (mode === 'assignee') {
+      if (!this.isLoggedIn) {
+        this.showLoginRequirementDialog();
+        return;
+      } else {
+        // if (mode === 'assignee') {
       //   this.$store.dispatch('tasks/setTaskAssignee', { id: this.taskInfo.id, mode: mode, assignee: newVal });
       // }
       // if (mode === 'reporter') {
       //   this.$store.dispatch('tasks/setTaskReporter', { id: this.taskInfo.id, mode: mode, reporter: newVal });
       // }
+        this.$store.dispatch('tasks/updateTask', { id: this.taskInfo.id, mode: mode, ...params });
+      }
     },
     async actionExecute(newParams) {
       let { newVal } = newParams;
+      if (!this.isLoggedIn) {
+        this.showLoginRequirementDialog();
+        return;
+      }
       if (newVal === 'logtime') {
         this.showLogTimeDialog();
       }
@@ -234,6 +266,13 @@ export default {
     },
     closeDeleteConfirmationDialog() {
       this.showDeleteConfirmationModal = false;
+    },
+
+    showLoginRequirementDialog() {
+      this.showLoginRequirementModal = true;
+    },
+    closeLoginRequirementDialog() {
+      this.showLoginRequirementModal = false;
     }
   },
   created() {
@@ -319,6 +358,13 @@ export default {
     }
 
     .btn--delete {
+      margin-bottom: 15px;
+
+      @media (min-width: $sm) {
+        margin: 0 10px 0 0;
+      }
+    }
+    .btn--login {
       margin-bottom: 15px;
 
       @media (min-width: $sm) {
