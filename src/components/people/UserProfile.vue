@@ -2,9 +2,7 @@
   
     <div v-if="userInfo" class="relative user-profile" v-click-outside="closeUserNav">
       <BaseButton :class="['btn btn--transparent user-profile__btn-action', {active: isNavOpened}]" @click="toggleUserNav">
-        <div class="user-profile__image-wrapper rounded">
-          <span>{{ userInitials }}</span>
-        </div>
+        <UserProfileImg :userInfo="userInfo" theme="dark" />
         <span class="icon-wrapper">
           <SvgIcon name="chevron-down" class="icon icon--medium" />
         </span>
@@ -25,7 +23,11 @@
 </template>
 
 <script>
+import UserProfileImg from '@/components/auth/UserProfileImg.vue';
 export default {
+  components: {
+    UserProfileImg
+  },
   data() {
     return {
       isNavOpened: false
