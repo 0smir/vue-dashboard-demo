@@ -5,9 +5,10 @@
         <TaskPriorityElement :priority="task.priority" />
         <span class="task-id">{{ task.id }}</span>
       </span>
-      <span v-if="task.assignee" class="task__info-assignee rounded" :title="task.assignee.name">
+      <!-- <span v-if="task.assignee" class="task__info-assignee rounded" :title="task.assignee.name">
         <span v-if="!task.assignee.img">{{ getNameInitials() }}</span>
-      </span>
+      </span> -->
+      <UserProfileImg :userInfo="userInfo" theme="light" />
     </div>
 
     <h2 :class="['task__title', { cropped: type !== 'board-item' }]">{{ task.title }}</h2>
@@ -31,9 +32,11 @@
 
 <script>
 import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
+import UserProfileImg from '@/components/auth/UserProfileImg.vue';
 export default {
   components: {
-    TaskPriorityElement
+    TaskPriorityElement,
+    UserProfileImg
   },
   props: ['task', 'type'],
   computed: {
@@ -43,6 +46,9 @@ export default {
     isLoggedIn() {
       return this.$store.getters['users/isAuthenticated'];
     },
+    userInfo() {
+      return this.task.assignee;
+    }
   },
   methods: {
     getNameInitials() {
