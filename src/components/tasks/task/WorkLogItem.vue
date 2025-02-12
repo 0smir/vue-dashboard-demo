@@ -1,7 +1,7 @@
 <template>
   <div class="time-log__item">
     <div class="flex time-log__details">
-      <UserProfileImg :userInfo="userInfo"/>
+      <UserProfileImg :userInfo="userInfo" theme="light" />
       <span class="author">{{ authorFullName }}</span> 
       <span class="poste-time" v-html="updateTime"></span>
     </div>

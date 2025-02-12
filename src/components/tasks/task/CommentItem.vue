@@ -1,6 +1,6 @@
 <template>
   <div class="comment__item">
-    <UserProfileImg :userInfo="userInfo"/>
+    <UserProfileImg :userInfo="userInfo" theme="light"/>
     <div class="comment__content">
       <div class="comment__details"> <span class="author">{{ authorFullName }}</span> <span class="poste-time">Posted at:</span> {{ commentPostTime }}</div>
       <div class="comment__comment-text">

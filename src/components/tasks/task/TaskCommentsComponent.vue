@@ -1,6 +1,6 @@
 <template>
   <div v-if="isLoggedIn" class="comments__form-wrapper">
-    <UserProfileImg :userInfo="userInfo"/>
+    <UserProfileImg :userInfo="userInfo" theme="light"/>
     <AddCommentForm :taskID="taskID"/>
   </div>
   <div  class="comments__list-wrapper">

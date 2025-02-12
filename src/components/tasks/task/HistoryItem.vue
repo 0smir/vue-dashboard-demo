@@ -1,6 +1,6 @@
 <template>
   <div class="activity-item">
-    <UserProfileImg :userInfo="userInfo"/>
+    <UserProfileImg :userInfo="userInfo" theme="light"/>
     <div class="activity-item__content">
       <div class="activity-item__details">
         <span class="author">{{ authorFullName }}</span>
