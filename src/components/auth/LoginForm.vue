@@ -23,8 +23,8 @@
         </div>
         <div class="form-control__btn-wrapper login-form__btn-wrapper">
           <BaseButton class="btn btn__default btn--medium btn--login">Login</BaseButton>
-          <RouterLink class="link link--forget-pass" to="/people/registration">Registration</RouterLink>
-          <RouterLink class="link link--forget-pass" to="/">Forgot password?</RouterLink>
+          <RouterLink class="link link--registration" to="/people/registration" aria-lebel="link to registration page">Registration</RouterLink>
+          <RouterLink class="link link--forget-pass" to="/" aria-lebel="link to password recovery page">Forgot password?</RouterLink>
         </div>
       </div>
     </form>
@@ -123,7 +123,10 @@ export default {
   margin: 20px 0 40px;
 }
 
-.link--forget-pass {
-  color: var(--color-primary);
+.link {
+  &--registration,
+  &--forget-pass {
+    color: var(--color-primary);
+  }
 }
 </style>
