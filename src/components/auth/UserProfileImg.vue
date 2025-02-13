@@ -19,13 +19,6 @@ export default {
     userFullName() {
       return `${this?.userInfo?.name.toUpperCase()} ${this?.userInfo?.lastName.toUpperCase()}`;
     }
-  },
-  mounted() {
-    if (this.theme) {
-      console.log(this.theme);
-    } else {
-      console.log('no theme');
-    }
   }
 }
 </script>
