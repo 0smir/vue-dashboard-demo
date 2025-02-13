@@ -64,8 +64,9 @@
         </div>
       </div>
       <div class="form-control__btn-wrapper btn-wrapper">
-        <BaseButton class="btn btn__default btn--medium btn--add">Add User</BaseButton>
-        <BaseButton class="btn btn__outlined btn--medium btn--cancel">Cancel</BaseButton>
+        <RouterLink class="link link--login" to="/login" aria-lebel="link to login page">Go to Login page?</RouterLink>
+        <BaseButton class="btn btn__default btn--medium btn--add" aria-label="click to add user">Add User</BaseButton>
+        <BaseButton class="btn btn__outlined btn--medium btn--cancel" aria-label="click to cencel">Cancel</BaseButton>
       </div>
     </div>
   </form>
@@ -271,7 +272,7 @@ export default {
 
     @media (min-width: $md) {
       flex-direction: row;
-      justify-content: flex-end;
+      align-items: flex-end;
       margin-top: 45px;
     }
   }
@@ -296,4 +297,18 @@ export default {
     }
   }
 }
+
+.btn-wrapper {
+  .link--login {
+    display: flex;
+    color: var(--color-primary);
+    margin-bottom: 25px;
+
+    @media (min-width: $md) {
+      order: -1;
+      margin: 0 auto 0 0;
+    }
+  }
+}
+
 </style>
