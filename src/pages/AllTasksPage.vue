@@ -59,7 +59,7 @@ export default {
       this.activeFilter = name;
     }
   },
-  mounted() {
+  created() {
     this.loadTasks();
   }
 }
