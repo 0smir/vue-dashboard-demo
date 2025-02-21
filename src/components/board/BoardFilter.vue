@@ -5,6 +5,14 @@
         @click="isFilterListVisible = !isFilterListVisible">
         <SvgIcon name="filterHorizontal" class="icon" />
       </BaseButton>
+      <div class="filter-params__wrapper">
+        <div class="filter-params__columns-list">
+          <div v-for="col in columns.val" :class="['filter-params__column-item', col.toLowerCase()]">
+            {{ col }}
+            <BaseButton class="filter-params__btn-remove" @click="removeColumn(col)"><SvgIcon name="close" class="icon icon--small" /></BaseButton>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="filter-list__wrapper" v-show="isFilterListVisible">
@@ -61,7 +69,7 @@ export default {
       defaultBoardCollumns: this.$store.getters['boards/getDefaultBoardColumns'],
       isFilterListVisible: false,
       columns: {
-        val: []
+        val: null
       }
     }
   },
@@ -73,6 +81,10 @@ export default {
   methods: {
     chooseColumns() {
       this.$emit('save-filter', this.columns.val);
+    },
+    removeColumn(item) {
+      let itemIndex = this.columns.val.indexOf(item);
+      this.columns.val.splice(itemIndex, 1);
     },
     clearFilter() {
       this.columns.val = [...this.defaultBoardCollumns];
@@ -108,6 +120,8 @@ export default {
   padding: 0 0 15px 0;
 
   &__header {
+    display: flex;
+    align-items: center;
     margin-bottom: 20px;
   }
 
@@ -193,11 +207,41 @@ export default {
     }
   }
 }
-
+.filter-params {
+  &__wrapper {
+    display: flex;
+  }
+  &__column-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    padding: 3px 7px;
+    color: var(--color-text);
+    border-radius: var(--border-radius-large);
+    
+    &:hover {
+      .filter-params__btn-remove {
+        background-color: rgba(#fff, .3);
+      }
+    }
+  }
+  &__btn-remove {
+    display: flex;
+    justify-content: center;
+    margin-left: 6px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--color-white);
+    background: transparent;
+  }
+}
 .btn--board-filter {
+  margin-right: 15px;
+  transition: background-color .25s linear;
   &:hover {
     color: var(--filter-btn-text-color);
     background-color: var(--filter-btn-bg);
+    transition: background-color .25s linear;
   }
 }
 
