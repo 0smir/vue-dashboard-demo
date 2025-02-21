@@ -94,6 +94,13 @@ a:hover {
   background-color: var(--color-blocked);
 }
 
+.status-active {
+  background-color: var(--color-active);
+}
+
+.close {
+  background-color: var(--color-close);
+}
 
 .board__column--todo {
   order: 1;
