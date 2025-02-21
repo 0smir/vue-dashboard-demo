@@ -7,9 +7,11 @@
       </BaseButton>
       <div class="filter-params__wrapper">
         <div class="filter-params__columns-list">
-          <div v-for="col in columns.val" :class="['filter-params__column-item', col.toLowerCase()]">
+          <div v-for="col in columns.val" :class="['filter-params__column-item', col.toLowerCase()]" :title="col">
             {{ col }}
-            <BaseButton class="filter-params__btn-remove" @click="removeColumn(col)"><SvgIcon name="close" class="icon icon--small" /></BaseButton>
+            <BaseButton class="filter-params__btn-remove" @click="removeColumn(col)" :aria-label="`click to remove column ${col}`">
+              <SvgIcon name="close" class="icon icon--small" />
+            </BaseButton>
           </div>
         </div>
       </div>
@@ -60,6 +62,8 @@
 </template>
 
 <script>
+import BaseButton from '../UI/base-components/BaseButton.vue';
+
 export default {
   emits: ['save-filter'],
   data() {
