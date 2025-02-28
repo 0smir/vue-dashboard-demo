@@ -1,0 +1,75 @@
+<template>
+  <div class="user-profile__data-wrapper">
+    <div :class="['user-profile__image-wrapper', 'rounded', {[theme]: theme}, {[size]: size}]" 
+        :title="userFullName">
+      <span>{{ userInitials }}</span>
+    </div>
+    <div v-if="showName" class="user-profile__full-name">{{userFullName}}</div>
+  </div>
+</template>
+
+<script>
+  
+export default {
+  props: ['userInfo', 'theme', 'showName', 'size'],
+  computed: {
+    userInitials() {
+      let initials = this?.userInfo?.name.charAt(0).toUpperCase() + this?.userInfo?.lastName.charAt(0).toUpperCase();
+      return initials;
+    },
+    userFullName() {
+      return `${this?.userInfo?.name} ${this?.userInfo?.lastName}`;
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.user-profile{
+  &__data-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  &__image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    width: 34px;
+    height: 34px;
+    border: 2px solid;
+    font-size: 16px;
+    color: var(--color-text-dark);
+    background-color: var(--color-white);
+    font-weight: 400;
+    padding: 2px;
+
+    &.dark {
+      border-color: var(--color-dark-bg);
+    }
+    &.light {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary-light);
+    }
+    &.large {
+      width: 70px;
+      height: 70px;
+      font-size: 28px;
+    }
+    &.medium {
+      width: 34px;
+      height: 34px;
+      font-size: 16px;
+    }
+    &.small {
+      width: 25px;
+      height: 25px;
+      font-size: 12px;
+    }
+  }
+  &__full-name {
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+}
+</style>
