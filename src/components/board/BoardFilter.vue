@@ -38,7 +38,6 @@
                                   placeholder="Select Priority"
                                   mode="priority"
               />
-            
             </div>
             <div class="filter__btn-wrapper">
               <BaseButton class="btn btn__default btn--medium filter__btn--apply">Apply Filter</BaseButton>
@@ -134,8 +133,8 @@ export default {
   &__label {
     display: inline-flex;
     align-items: center;
-    padding: 3px 7px;
-    margin: 0 15px 0 5px;
+    // padding: 3px 7px;
+    // margin: 0 15px 0 5px;
     height: 30px;
     border-radius: 16px;
 
