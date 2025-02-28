@@ -7,7 +7,7 @@
       </BaseButton>
       <div class="filter-params__wrapper">
         <div class="filter-params__columns-list">
-          <div v-for="col in columns.val" :class="['filter-params__column-item', col.toLowerCase()]" :title="col">
+          <div v-for="col in selectedColumns" :class="['filter-params__column-item', col == 'Active' ? 'active-status' : col.toLowerCase() ]" :title="col">
             {{ col }}
             <BaseButton class="filter-params__btn-remove" @click="removeColumn(col)" :aria-label="`click to remove column ${col}`">
               <SvgIcon name="close" class="icon icon--small" />
@@ -16,65 +16,62 @@
         </div>
       </div>
     </div>
+    <template v-if="!isLoading">
+      <div class="filter-list__wrapper" v-show="isFilterListVisible">
+        <div class="filter-type">
+          <form @submit.prevent="chooseColumns">
+            <div class="form-content">
+              <BoardFilterDropdown v-model="selectedColumns" 
+                            :options="taskStatusList" 
+                            placeholder="Select columns"
+                            mode="columns"
+              />
 
-    <div class="filter-list__wrapper" v-show="isFilterListVisible">
-      <div class="filter-type">
-
-        <form @submit.prevent="chooseColumns">
-          <div class="form-content">
-            <fieldset class="form-content__fieldset form-content__fieldset--columns">
-              <legend class="form-content__fieldset-legend"> Columns to display:</legend>
-              <div class="form-control" v-for="status in taskStatusList">
-                <label :class="['filter__label', status.toLowerCase()]" :for="status">
-                  <span class="filter__input-indicator">
-                    <input class="filter__input" type="checkbox" :key="status" :id="status" :value="status"
-                      v-model="columns.val">
-                    <SvgIcon name="checkCircle" class="icon" />
-                  </span>
-                  <span class="filter__label-text">{{ status }}</span>
-                </label>
-              </div>
-            </fieldset>
-
-            <fieldset class="form-content__fieldset form-content__fieldset--person">
-              <legend class="form-content__fieldset-legend">Assigneed to:</legend>
-              <select name="priority" id="task-priority">
-                <option v-for="person in peopleList" :value="person.id">{{ person.name }}{{ person.lastName }}</option>
-              </select>
-            </fieldset>
-
-            <fieldset class="form-content__fieldset form-content__fieldset--labels">
-              <legend class="form-content__fieldset-legend">Task priority:</legend>
-              <select name="priority" id="task-priority">
-                <option v-for="prirityItem in priorityList" :value="prirityItem">{{ prirityItem }}</option>
-              </select>
-            </fieldset>
-          </div>
-          <div class="filter__btn-wrapper">
-            <BaseButton class="btn btn__default btn--medium filter__btn--apply">Apply Filter</BaseButton>
-            <BaseButton class="btn btn__outlined btn--medium btn--light filter__btn--clear" @click="clearFilter">Clear
-            </BaseButton>
-          </div>
-        </form>
+              <BoardFilterDropdown v-model="selectedPeople"
+                                  :options="peopleList"
+                                  placeholder="Select People"
+                                  mode="person"
+              />
+        
+              <BoardFilterDropdown v-model="selectedPriorities"
+                                  :options="priorityList"
+                                  placeholder="Select Priority"
+                                  mode="priority"
+              />
+            
+            </div>
+            <div class="filter__btn-wrapper">
+              <BaseButton class="btn btn__default btn--medium filter__btn--apply">Apply Filter</BaseButton>
+              <BaseButton class="btn btn__outlined btn--medium btn--light filter__btn--clear" @click="clearFilter">Clear
+              </BaseButton>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </template>
+    <BaseSpinner v-else/>
   </div>
 </template>
 
 <script>
 import BaseButton from '../UI/base-components/BaseButton.vue';
-
+import BoardFilterDropdown from '@/components/board/BoardFilterDropdown.vue';
+import BaseSpinner from '../UI/base-components/BaseSpinner.vue';
 export default {
+  components: {
+    BoardFilterDropdown
+  },
   emits: ['save-filter'],
   data() {
     return {
       priorityList: this.$store.getters['tasks/getPriorityList'],
       taskStatusList: this.$store.getters['tasks/getStatusList'],
       defaultBoardCollumns: this.$store.getters['boards/getDefaultBoardColumns'],
-      isFilterListVisible: false,
-      columns: {
-        val: null
-      }
+      isFilterListVisible: true,
+      selectedColumns: [],
+      selectedPeople: [],
+      selectedPriorities: [],
+      isLoading: false
     }
   },
   computed: {
@@ -84,19 +81,24 @@ export default {
   },
   methods: {
     chooseColumns() {
-      this.$emit('save-filter', this.columns.val);
+      this.$emit('save-filter', this.selectedColumns);
     },
     removeColumn(item) {
-      let itemIndex = this.columns.val.indexOf(item);
+      let itemIndex = this.selectedColumns.indexOf(item);
       this.columns.val.splice(itemIndex, 1);
     },
     clearFilter() {
-      this.columns.val = [...this.defaultBoardCollumns];
+      
+      this.selectedPeople = [];
+      this.selectedPriorities = [];
+      this.selectedColumns = [...this.defaultBoardCollumns];
       this.chooseColumns();
     },
     async loadUsersList() {
+      this.isLoading = true;
       try {
         await this.$store.dispatch('people/loadEmployeesList');
+        this.isLoading = false;
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       }
@@ -106,13 +108,13 @@ export default {
     this.loadUsersList();
   },
   mounted() {
-    this.columns.val = [...this.defaultBoardCollumns];
+    this.selectedColumns = [...this.defaultBoardCollumns];
     this.chooseColumns();
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .filter {
   --filter-btn-bg: var(--color-primary-light);
   --filter-btn-text-color: var(--color-primary);
