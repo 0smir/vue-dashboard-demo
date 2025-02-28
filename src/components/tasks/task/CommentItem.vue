@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import UserProfileImg from '@/components/auth/UserProfileImg.vue';
+import UserProfileImg from '@/components/auth/UserProfileInfo.vue';
 
 export default {
   props: ['comment'],

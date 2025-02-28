@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import UserProfileImg from '@/components/auth/UserProfileImg.vue';
+import UserProfileImg from '@/components/auth/UserProfileInfo.vue';
 import AddCommentForm from '@/components/tasks/task/AddCommentForm.vue';
 import CommentItem from '@/components/tasks/task/CommentItem.vue';
 
