@@ -38,6 +38,7 @@
                                   placeholder="Select Priority"
                                   mode="priority"
               />
+            
             </div>
             <div class="filter__btn-wrapper">
               <BaseButton class="btn btn__default btn--medium filter__btn--apply">Apply Filter</BaseButton>
@@ -133,14 +134,16 @@ export default {
   &__label {
     display: inline-flex;
     align-items: center;
-    // padding: 3px 7px;
-    // margin: 0 15px 0 5px;
-    height: 30px;
-    border-radius: 16px;
 
     .icon {
       display: none;
     }
+  }
+
+  &__label-text.status {
+    padding: 2px 5px;
+    color: var(--color-text);
+    border-radius: var(--border-radius-small);
   }
 
   &__input {
@@ -164,10 +167,13 @@ export default {
   }
 
   &__input-indicator {
+    border: 1px solid var(--color-secondary-medium);
+    border-radius: var(--border-radius-small);
     &:has(:checked) {
       background-color: transparent;
-
+      border: 1px solid var(--color-tetriary);
       .icon {
+        color: var(--color-tetriary);
         display: inline-block;
         transform: scale(1.2);
       }
@@ -177,7 +183,6 @@ export default {
       outline: 2px solid var(--color-secondary);
     }
   }
-
 
   &__btn-wrapper {
     display: flex;
@@ -255,21 +260,8 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
 
-  &__fieldset {
-    display: flex;
-  }
-
-  &__fieldset-legend {
-    color: var(--fieldset-legend-text-color);
-  }
-
-  &__fieldset--columns {
-    width: 100%;
-  }
-
-  &__fieldset--person,
-  &__fieldset--labels {
-    width: calc(50% - 8px);
+  @media (min-width: $md){
+    justify-content: flex-start;
   }
 }
 </style>
