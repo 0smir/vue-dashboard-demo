@@ -9,37 +9,37 @@
    
     <div v-show="isDropdownOpen" class="dropdown__content-wrapper">
       <ul class="dropdown__content-list">
-        <li class="dropdown__content-item" >
-          <template v-if="mode === 'columns'" v-for="item in options">
-            <label  :class="['filter__label', item == 'Active' ? 'active-status' : item.toLowerCase() ]" :for="item || item.id">
-            <span class="filter__input-indicator">
-              <input class="filter__input" type="checkbox" :key="item.id || item" :id="item || item.id" :value="item"
-                v-model="selectedValues">
-              <SvgIcon name="checkCircle" class="icon" />
-            </span>
-            <span class="filter__label-text">{{ item.name ? item.name + ' ' + item.lastName : item }}</span>
-          </label>
+        <li class="dropdown__content-item" v-for="item in options">
+          <template v-if="mode === 'columns'" >
+            <label  class="filter__label" :for="item || item.id">
+              <span class="filter__input-indicator">
+                <input class="filter__input" type="checkbox" :key="item.id || item" :id="item || item.id" :value="item"
+                  v-model="selectedValues">
+                <SvgIcon name="check" class="icon icon--small" />
+              </span>
+              <span :class="['filter__label-text status', item == 'Active' ? 'active-status' : item.toLowerCase() ]">{{ item.name ? item.name + ' ' + item.lastName : item }}</span>
+            </label>
           </template>
           
-          <template v-if="mode === 'priority'"  v-for="item in options">
+          <template v-if="mode === 'priority'"  >
             <label  class="filter__label" :for="item || item.id">
             <span class="filter__input-indicator">
               <input class="filter__input" type="checkbox" :key="item.id || item" :id="item || item.id" :value="item"
                 v-model="selectedValues">
-              <SvgIcon name="checkCircle" class="icon" />
+              <SvgIcon name="check" class="icon icon--small" />
             </span>
             <TaskPriorityElement :priority="item" :titleDisplay="true" />
             </label>
           </template>
 
-          <template v-if="mode === 'person'"  v-for="item in options">
+          <template v-if="mode === 'person'"  >
             <label  class="filter__label" :for="item || item.id">
             <span class="filter__input-indicator">
               <input class="filter__input" type="checkbox" :key="item.id || item" :id="item || item.id" :value="item"
                 v-model="selectedValues">
-              <SvgIcon name="checkCircle" class="icon" />
+              <SvgIcon name="check" class="icon icon--small" />
             </span>
-            {{ item.name }}
+            <UserProfileInfo :userInfo="item" theme="light" :showName="true" size="small"/>
             </label>
           </template>
           
@@ -51,10 +51,11 @@
 
 <script>
 import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
-
+import UserProfileInfo from '@/components/auth/UserProfileInfo.vue';
 export default {
   components: {
-    TaskPriorityElement
+    TaskPriorityElement,
+    UserProfileInfo
   },
   props: ['options', 'placeholder', 'modelValue', 'mode'],
   data() {
@@ -80,7 +81,6 @@ export default {
       this.isDropdownOpen = false;
     }
   }
-
 }
 </script>
 
@@ -88,21 +88,32 @@ export default {
 .dropdown{
   &__wrapper {
     position: relative;
+    margin-right: 15px;
   }
   &__content-wrapper {
     position: absolute;
     top: 100%;
     z-index: 10;
     padding: 5px;
+    min-width: 100%;
     background-color: var(--color-white);
     border-radius: var(--border-radius-medium);
     border: 1px solid var(--color-secondary-medium);
   }
+
   &__content-item {
+    padding: 2px 5px;
+    border-radius: var(--border-radius-small);
     margin-bottom: 10px;
 
     &:last-of-type {
       margin: 0;
+    }
+
+    &:hover,
+    &:focus,
+    &:has(:focus) {
+      background-color: var(--color-secondary-light);
     }
   }
   &__btn {
