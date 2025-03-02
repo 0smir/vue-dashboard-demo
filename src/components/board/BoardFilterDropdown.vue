@@ -11,38 +11,46 @@
       <ul class="dropdown__content-list">
         <li class="dropdown__content-item" v-for="item in options">
           <template v-if="mode === 'columns'" >
-            <label  class="filter__label" :for="item || item.id">
+            <label  class="filter__label" :for="item.id || item">
               <span class="filter__input-indicator">
-                <input class="filter__input" type="checkbox" :key="item.id || item" :id="item || item.id" :value="item"
-                  v-model="selectedValues">
+                <input class="filter__input" type="checkbox" 
+                                            :key="item.id || item" 
+                                            :id="item.id || item" 
+                                            :value="item"
+                                            v-model="selectedValues">
                 <SvgIcon name="check" class="icon icon--small" />
               </span>
               <span :class="['filter__label-text status', item == 'Active' ? 'active-status' : item.toLowerCase() ]">{{ item.name ? item.name + ' ' + item.lastName : item }}</span>
             </label>
           </template>
           
-          <template v-if="mode === 'priority'"  >
-            <label  class="filter__label" :for="item || item.id">
-            <span class="filter__input-indicator">
-              <input class="filter__input" type="checkbox" :key="item.id || item" :id="item || item.id" :value="item"
-                v-model="selectedValues">
-              <SvgIcon name="check" class="icon icon--small" />
-            </span>
-            <TaskPriorityElement :priority="item" :titleDisplay="true" />
+          <template v-if="mode === 'priority'" >
+            <label  class="filter__label" :for="item.id || item">
+              <span class="filter__input-indicator">
+                <input class="filter__input" type="checkbox" 
+                                            :key="item.id || item" 
+                                            :id="item.id || item" 
+                                            :value="item"
+                                            v-model="selectedValues">
+                <SvgIcon name="check" class="icon icon--small" />
+              </span>
+              <TaskPriorityElement :priority="item" :titleDisplay="true" />
             </label>
           </template>
 
-          <template v-if="mode === 'person'"  >
-            <label  class="filter__label" :for="item || item.id">
-            <span class="filter__input-indicator">
-              <input class="filter__input" type="checkbox" :key="item.id || item" :id="item || item.id" :value="item"
-                v-model="selectedValues">
-              <SvgIcon name="check" class="icon icon--small" />
-            </span>
-            <UserProfileInfo :userInfo="item" theme="light" :showName="true" size="small"/>
+          <template v-if="mode === 'person'">
+            <label  class="filter__label" :for="item.id || item">
+              <span class="filter__input-indicator">
+                <input class="filter__input" type="checkbox" 
+                                            :key="item.id || item" 
+                                            :id="item.id || item" 
+                                            :value="item"
+                                            v-model="selectedValues">
+                <SvgIcon name="check" class="icon icon--small" />
+              </span>
+              <UserProfileInfo :userInfo="item" theme="light" :showName="true" size="small"/>
             </label>
           </template>
-          
         </li>
       </ul>
     </div>
