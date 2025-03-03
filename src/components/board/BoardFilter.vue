@@ -18,7 +18,7 @@
     </div>
     <template v-if="!isLoading">
       <div class="filter-list__wrapper" v-show="isFilterListVisible">
-        <div class="filter-type">
+        <!-- <div class="filter-type"></div> -->
           <form @submit.prevent="chooseColumns">
             <div class="form-content">
               <BoardFilterDropdown v-model="selectedColumns" 
@@ -46,7 +46,7 @@
               </BaseButton>
             </div>
           </form>
-        </div>
+        
       </div>
     </template>
     <BaseSpinner v-else/>
@@ -167,10 +167,10 @@ export default {
   }
 
   &__input-indicator {
+    background-color: var(--color-white);
     border: 1px solid var(--color-secondary-medium);
     border-radius: var(--border-radius-small);
     &:has(:checked) {
-      background-color: transparent;
       border: 1px solid var(--color-tetriary);
       .icon {
         color: var(--color-tetriary);
