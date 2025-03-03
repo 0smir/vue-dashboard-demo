@@ -6,47 +6,51 @@
         <SvgIcon name="filterHorizontal" class="icon" />
       </BaseButton>
       <div class="filter-params__wrapper">
-        <div class="filter-params__columns-list">
-          <div v-for="col in selectedColumns" :class="['filter-params__column-item', col == 'Active' ? 'active-status' : col.toLowerCase() ]" :title="col">
-            {{ col }}
-            <BaseButton class="filter-params__btn-remove" @click="removeColumn(col)" :aria-label="`click to remove column ${col}`">
-              <SvgIcon name="close" class="icon icon--small" />
-            </BaseButton>
-          </div>
-        </div>
+        <BoardFilterParamsItem v-if="selectedColumns.length" 
+                              :options="selectedColumns"
+                              mode="columns"
+                              @remove-filter-item="removeFilterParamItem"
+        />
+        <BoardFilterParamsItem v-if="selectedPeople.length" 
+                              :options="selectedPeople"
+                              mode="persons"
+                               @remove-filter-item="removeFilterParamItem"
+        />
+        <BoardFilterParamsItem v-if="selectedPriorities.length" 
+                              :options="selectedPriorities"
+                              mode="priority"
+                               @remove-filter-item="removeFilterParamItem"
+        />
       </div>
     </div>
     <template v-if="!isLoading">
       <div class="filter-list__wrapper" v-show="isFilterListVisible">
-        <!-- <div class="filter-type"></div> -->
-          <form @submit.prevent="chooseColumns">
-            <div class="form-content">
-              <BoardFilterDropdown v-model="selectedColumns" 
-                            :options="taskStatusList" 
-                            placeholder="Select columns"
-                            mode="columns"
-              />
+        <form @submit.prevent="chooseColumns">
+          <div class="form-content">
+            <BoardFilterDropdown v-model="selectedColumns" 
+                          :options="taskStatusList" 
+                          placeholder="Select columns"
+                          mode="columns"
+            />
 
-              <BoardFilterDropdown v-model="selectedPeople"
-                                  :options="peopleList"
-                                  placeholder="Select People"
-                                  mode="person"
-              />
-        
-              <BoardFilterDropdown v-model="selectedPriorities"
-                                  :options="priorityList"
-                                  placeholder="Select Priority"
-                                  mode="priority"
-              />
-            
-            </div>
-            <div class="filter__btn-wrapper">
-              <BaseButton class="btn btn__default btn--medium filter__btn--apply">Apply Filter</BaseButton>
-              <BaseButton class="btn btn__outlined btn--medium btn--light filter__btn--clear" @click="clearFilter">Clear
-              </BaseButton>
-            </div>
-          </form>
-        
+            <BoardFilterDropdown v-model="selectedPeople"
+                                :options="peopleList"
+                                placeholder="Select People"
+                                mode="person"
+            />
+      
+            <BoardFilterDropdown v-model="selectedPriorities"
+                                :options="priorityList"
+                                placeholder="Select Priority"
+                                mode="priority"
+            />
+          </div>
+          <div class="filter__btn-wrapper">
+            <BaseButton class="btn btn__default btn--medium filter__btn--apply">Apply Filter</BaseButton>
+            <BaseButton class="btn btn__outlined btn--medium btn--light filter__btn--clear" @click="clearFilter">Clear
+            </BaseButton>
+          </div>
+        </form>
       </div>
     </template>
     <BaseSpinner v-else/>
@@ -56,10 +60,13 @@
 <script>
 import BaseButton from '../UI/base-components/BaseButton.vue';
 import BoardFilterDropdown from '@/components/board/BoardFilterDropdown.vue';
+import BoardFilterParamsItem from '@/components/board/BoardFilterParamsItem.vue';
 import BaseSpinner from '../UI/base-components/BaseSpinner.vue';
+
 export default {
   components: {
-    BoardFilterDropdown
+    BoardFilterDropdown,
+    BoardFilterParamsItem
   },
   emits: ['save-filter'],
   data() {
@@ -83,9 +90,21 @@ export default {
     chooseColumns() {
       this.$emit('save-filter', this.selectedColumns);
     },
-    removeColumn(item) {
-      let itemIndex = this.selectedColumns.indexOf(item);
-      this.columns.val.splice(itemIndex, 1);
+    removeFilterParamItem(params) {
+      let { option, mode } = params;
+      let selectedArray,
+        itemIndex,
+        targetItem = option.id || option;
+      switch (mode){
+        case 'columns': selectedArray = this.selectedColumns;
+          break;
+        case 'persons': selectedArray = this.selectedPeople;
+          break;
+        case 'priority': selectedArray = this.selectedPriorities;
+          break;
+      }
+      itemIndex = selectedArray.indexOf(targetItem);
+      selectedArray.splice(itemIndex, 1);
     },
     clearFilter() {
       
@@ -220,6 +239,10 @@ export default {
 .filter-params {
   &__wrapper {
     display: flex;
+    flex-wrap: wrap;
+  }
+  &__block {
+    width: 100%;
   }
   &__column-item {
     display: inline-flex;
@@ -246,6 +269,7 @@ export default {
   }
 }
 .btn--board-filter {
+  align-self: flex-start;
   margin-right: 15px;
   transition: background-color .25s linear;
   &:hover {
