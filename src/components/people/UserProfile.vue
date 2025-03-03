@@ -77,6 +77,10 @@ export default {
     list-style: none;
     width: 170px;
     border: 1px solid var(--color-secondary-light);
+    border-bottom: none;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 
+                0 3px 1px -2px rgba(0,0,0,.2), 
+                0 1px 5px 0 rgba(0,0,0,.12);
     background: var(--color-white);
     border-radius: var(--border-radius-medium);
     transform: translateX(-100%);
