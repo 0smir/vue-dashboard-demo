@@ -1,0 +1,29 @@
+//custom scrollbar
+::-webkit-scrollbar-button {
+  width: 4px;
+  height: 0;
+}
+
+::-webkit-scrollbar-button:horizontal {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-white);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: var(--border-radius-medium);
+  background-color: var(--color-secondary-light);
+  /*box-shadow: 0 1px 1px $top-bar-bg inset;*/
+}
+
+::-webkit-resizer {
+  width: 20px;
+  height: 0;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
