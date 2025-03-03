@@ -29,12 +29,17 @@ export default {
   &__data-wrapper {
     display: flex;
     align-items: center;
+    &:has(.user-profile__full-name) {
+      &>.user-profile__image-wrapper {
+        margin-right: 5px;
+      }
+    }
   }
   &__image-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 5px;
+    margin-right:0;
     width: 34px;
     height: 34px;
     border: 2px solid;
