@@ -241,32 +241,29 @@ export default {
     display: flex;
     flex-wrap: wrap;
   }
-  &__block {
-    width: 100%;
-  }
-  &__column-item {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 10px;
-    padding: 3px 7px;
-    color: var(--color-text);
-    border-radius: var(--border-radius-large);
+  // &__column-item {
+  //   display: inline-flex;
+  //   align-items: center;
+  //   margin-right: 10px;
+  //   padding: 3px 7px;
+  //   color: var(--color-text);
+  //   border-radius: var(--border-radius-large);
     
-    &:hover {
-      .filter-params__btn-remove {
-        background-color: rgba(#fff, .3);
-      }
-    }
-  }
-  &__btn-remove {
-    display: flex;
-    justify-content: center;
-    margin-left: 6px;
-    padding: 0;
-    border-radius: 50%;
-    border: 1px solid var(--color-white);
-    background: transparent;
-  }
+  //   &:hover {
+  //     .filter-params__btn-remove {
+  //       background-color: rgba(#fff, .3);
+  //     }
+  //   }
+  // }
+  // &__btn-remove {
+  //   display: flex;
+  //   justify-content: center;
+  //   margin-left: 6px;
+  //   padding: 0;
+  //   border-radius: 50%;
+  //   border: 1px solid var(--color-white);
+  //   background: transparent;
+  // }
 }
 .btn--board-filter {
   align-self: flex-start;
