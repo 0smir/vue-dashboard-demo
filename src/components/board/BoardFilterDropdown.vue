@@ -99,8 +99,11 @@ export default {
     margin-right: 15px;
   }
   &__content-wrapper {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 
+                0 3px 1px -2px rgba(0,0,0,.2), 
+                0 1px 5px 0 rgba(0,0,0,.12);
     position: absolute;
-    top: 100%;
+    top: calc(100% + 5px);
     z-index: 10;
     padding: 5px;
     min-width: 100%;
@@ -109,8 +112,16 @@ export default {
     border: 1px solid var(--color-secondary-medium);
   }
 
+  &__content-list {
+    padding-right: 5px;
+    max-height: 250px;
+    overflow-x: hidden;
+  }
+
   &__content-item {
-    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
     border-radius: var(--border-radius-small);
     margin-bottom: 10px;
 
