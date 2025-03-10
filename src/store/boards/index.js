@@ -6,6 +6,8 @@ export default {
   namespaced: true,
   state() {
     return {
+      board: null,
+      boardsList: [],
       boardColumns: [],
       defaultBoardCollumns: ['toDo', 'inProgress', 'Done'],
     }
