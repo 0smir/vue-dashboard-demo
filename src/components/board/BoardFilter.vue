@@ -74,7 +74,7 @@ export default {
       priorityList: this.$store.getters['tasks/getPriorityList'],
       taskStatusList: this.$store.getters['tasks/getStatusList'],
       defaultBoardCollumns: this.$store.getters['boards/getDefaultBoardColumns'],
-      isFilterListVisible: true,
+      isFilterListVisible: false,
       selectedColumns: [],
       selectedPeople: [],
       selectedPriorities: [],
@@ -142,7 +142,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding: 0 0 15px 0;
+  padding: 0 135px 15px 0;
 
   &__header {
     display: flex;
@@ -241,29 +241,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
   }
-  // &__column-item {
-  //   display: inline-flex;
-  //   align-items: center;
-  //   margin-right: 10px;
-  //   padding: 3px 7px;
-  //   color: var(--color-text);
-  //   border-radius: var(--border-radius-large);
-    
-  //   &:hover {
-  //     .filter-params__btn-remove {
-  //       background-color: rgba(#fff, .3);
-  //     }
-  //   }
-  // }
-  // &__btn-remove {
-  //   display: flex;
-  //   justify-content: center;
-  //   margin-left: 6px;
-  //   padding: 0;
-  //   border-radius: 50%;
-  //   border: 1px solid var(--color-white);
-  //   background: transparent;
-  // }
 }
 .btn--board-filter {
   align-self: flex-start;
@@ -274,6 +251,10 @@ export default {
     background-color: var(--filter-btn-bg);
     transition: background-color .25s linear;
   }
+}
+
+.filter-list__wrapper {
+  border: 1px dotted var(--color-tetriary);
 }
 
 .form-content {
