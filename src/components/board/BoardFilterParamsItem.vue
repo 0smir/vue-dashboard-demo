@@ -52,6 +52,7 @@ export default {
 .filter-params {
   &__block {
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 10px;
     width: 100%;
     &:last-of-type {
