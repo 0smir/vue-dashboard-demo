@@ -1,11 +1,11 @@
 <template>
   <div class="dropdown dropdown__wrapper" v-click-outside="closeDropdown">
-    <slot name="action-block">
-      <BaseButton :class="['btn btn__default btn--medium dropdown__btn', {active: isDropdownOpen}]" @click="toggleDropdown">
-        <span>{{ placeholder }}</span>
-        <SvgIcon class="icon icon--small icon-chevron" name="chevron-down" />
-      </BaseButton>
-    </slot>
+    <BaseButton :class="['btn btn__default btn--medium dropdown__btn', {active: isDropdownOpen}]" 
+                @click="toggleDropdown">
+      <span>{{ placeholder }}</span>
+      <SvgIcon class="icon icon--small icon-chevron" name="chevron-down" />
+    </BaseButton>
+    
    
     <div v-show="isDropdownOpen" class="dropdown__content-wrapper">
       <ul class="dropdown__content-list">
@@ -66,6 +66,7 @@ export default {
     UserProfileInfo
   },
   props: ['options', 'placeholder', 'modelValue', 'mode'],
+  emits: ['update:modelValue'],
   data() {
     return {
     isDropdownOpen: false
