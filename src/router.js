@@ -9,9 +9,10 @@ const NewTask = () => import('@/pages/NewTaskPage.vue');
 const Employees = () => import('@/pages/PeoplePage.vue');
 const Person = () => import('@/pages/PersonPage.vue');
 const CreatePage = () => import('@/pages/CreatePage.vue');
-const NewBoardPage = () => import('@/pages/NewBoard.vue');
+const NewBoardPage = () => import('@/pages/NewBoardPage.vue');
 const LoginPage = () => import('@/pages/LoginPage.vue');
 const CreateProjectPage = () => import('@/pages/CreateProjectPage.vue');
+const BoardPage = () => import('@/pages/BoardPage.vue');
 
 
 const AddPersonForm = () => import('@/components/people/AddPersonForm.vue');
@@ -86,6 +87,11 @@ const router = createRouter({
     {
       path: '/board/new',
       component: NewBoardPage
+    },
+    {
+      path: '/board/:id',
+      props: true,
+      component: BoardPage
     },
     {
       path: '/:notFound(.*)',
