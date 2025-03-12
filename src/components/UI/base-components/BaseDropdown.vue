@@ -3,6 +3,8 @@
     <BaseButton 
       class="btn btn__default btn--medium dropdown__btn" 
       :class="{ active: isDropdownOpen }"
+      aria-label="Close"
+      type="button"
       @click.stop="toggleDropdown"
     >
       <span>{{ placeholder }}</span>
