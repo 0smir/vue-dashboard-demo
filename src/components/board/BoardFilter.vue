@@ -115,9 +115,9 @@ export default {
     },
 
     clearFilter() {
-      this.selectedPeople = [];
-      this.selectedPriorities = [];
-      this.selectedColumns = [...this.defaultBoardCollumns];
+      this.filterParams.selectedPeople = [];
+      this.filterParams.selectedPriorities = [];
+      this.filterParams.selectedColumns = [...this.defaultBoardCollumns];
       this.updateFilter();
     },
 
