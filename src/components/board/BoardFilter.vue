@@ -6,43 +6,38 @@
         <SvgIcon name="filterHorizontal" class="icon" />
       </BaseButton>
       <div class="filter-params__wrapper">
-        <BoardFilterParamsItem v-if="selectedColumns.length" 
-                              :options="selectedColumns"
+        <BoardFilterParamsItem v-if="filterParams.selectedColumns.length" 
+                              :options="filterParams.selectedColumns"
                               mode="columns"
                               @remove-filter-item="removeFilterParamItem"
         />
-        <BoardFilterParamsItem v-if="selectedPeople.length" 
-                              :options="selectedPeople"
+        <BoardFilterParamsItem v-if="filterParams.selectedPeople.length" 
+                              :options="filterParams.selectedPeople"
                               mode="persons"
                                @remove-filter-item="removeFilterParamItem"
         />
-        <BoardFilterParamsItem v-if="selectedPriorities.length" 
-                              :options="selectedPriorities"
+        <BoardFilterParamsItem v-if="filterParams.selectedPriorities.length" 
+                              :options="filterParams.selectedPriorities"
                               mode="priority"
-                               @remove-filter-item="removeFilterParamItem"
+                              @remove-filter-item="removeFilterParamItem"
         />
       </div>
     </div>
     <template v-if="!isLoading">
       <div class="filter-list__wrapper" v-show="isFilterListVisible">
-        <form @submit.prevent="chooseColumns">
+        <form @submit.prevent="submitForm">
           <div class="form-content">
-            <BoardFilterDropdown v-model="selectedColumns" 
-                          :options="taskStatusList" 
-                          placeholder="Select columns"
-                          mode="columns"
+            <ColumnsDropdown v-model="filterParams.selectedColumns" 
+                             :options="statusOptions" 
+                             placeholder="Select columns" 
             />
-
-            <BoardFilterDropdown v-model="selectedPeople"
-                                :options="peopleList"
-                                placeholder="Select People"
-                                mode="person"
+            <PeopleDropdown v-model="filterParams.selectedPeople"
+                            :options="peopleOptions"
+                            placeholder="Select People"
             />
-      
-            <BoardFilterDropdown v-model="selectedPriorities"
-                                :options="priorityList"
+            <PrioritiesDropdown v-model="filterParams.selectedPriorities"
+                                :options="priorityOptions"
                                 placeholder="Select Priority"
-                                mode="priority"
             />
           </div>
           <div class="filter__btn-wrapper">
@@ -58,61 +53,75 @@
 </template>
 
 <script>
-import BaseButton from '../UI/base-components/BaseButton.vue';
-import BoardFilterDropdown from '@/components/board/BoardFilterDropdown.vue';
+
 import BoardFilterParamsItem from '@/components/board/BoardFilterParamsItem.vue';
-import BaseSpinner from '../UI/base-components/BaseSpinner.vue';
+import ColumnsDropdown from '@/components/board/ColumnsDropdown.vue';
+import PrioritiesDropdown from '@/components/board/PrioritiesDropdown.vue';
+import PeopleDropdown from '@/components/board/PeopleDropdown.vue';
+
 
 export default {
   components: {
-    BoardFilterDropdown,
-    BoardFilterParamsItem
+    BoardFilterParamsItem,
+    ColumnsDropdown,
+    PrioritiesDropdown,
+    PeopleDropdown
   },
   emits: ['save-filter'],
   data() {
     return {
-      priorityList: this.$store.getters['tasks/getPriorityList'],
-      taskStatusList: this.$store.getters['tasks/getStatusList'],
+      isFilterListVisible: true,
+      isLoading: false,
+      isFormValid: true,
       defaultBoardCollumns: this.$store.getters['boards/getDefaultBoardColumns'],
-      isFilterListVisible: false,
-      selectedColumns: [],
-      selectedPeople: [],
-      selectedPriorities: [],
-      isLoading: false
+      priorityOptions: this.$store.getters['tasks/getPriorityList'],
+      statusOptions: this.$store.getters['tasks/getStatusList'],
+      filterParams: {
+        selectedColumns: [],
+        selectedPeople: [],
+        selectedPriorities: [],
+      }
     }
   },
   computed: {
-    peopleList() {
+    peopleOptions() {
       return this.$store.getters['people/getEmployeesList'];
     }
   },
   methods: {
-    chooseColumns() {
-      this.$emit('save-filter', this.selectedColumns);
+    submitForm(e) {
+      this.updateFilter();
     },
+
+    updateFilter() {
+      this.$emit('save-filter', this.filterParams);
+    },
+
     removeFilterParamItem(params) {
       let { option, mode } = params;
       let selectedArray,
         itemIndex,
         targetItem = option.id || option;
       switch (mode){
-        case 'columns': selectedArray = this.selectedColumns;
+        case 'columns': selectedArray = this.filterParams.selectedColumns;
           break;
-        case 'persons': selectedArray = this.selectedPeople;
+        case 'persons': selectedArray = this.filterParams.selectedPeople;
           break;
-        case 'priority': selectedArray = this.selectedPriorities;
+        case 'priority': selectedArray = this.filterParams.selectedPriorities;
           break;
       }
       itemIndex = selectedArray.indexOf(targetItem);
       selectedArray.splice(itemIndex, 1);
+      this.updateFilter();
     },
+
     clearFilter() {
-      
       this.selectedPeople = [];
       this.selectedPriorities = [];
       this.selectedColumns = [...this.defaultBoardCollumns];
-      this.chooseColumns();
+      this.updateFilter();
     },
+
     async loadUsersList() {
       this.isLoading = true;
       try {
@@ -127,8 +136,11 @@ export default {
     this.loadUsersList();
   },
   mounted() {
-    this.selectedColumns = [...this.defaultBoardCollumns];
-    this.chooseColumns();
+    this.filterParams.selectedColumns = [...this.defaultBoardCollumns];
+    this.updateFilter();
+  },
+  beforeDestroy() {
+    this.clearFilter();
   }
 }
 </script>
