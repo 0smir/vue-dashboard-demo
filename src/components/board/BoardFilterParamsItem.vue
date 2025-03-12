@@ -8,7 +8,7 @@
     </div>
   </div>
   <div v-if="mode === 'persons'" class="filter-params__block people-list">
-    <div v-for="option in options" class="filter-params__item filter-params__item--people">
+    <div v-for="(option, index) in options" class="filter-params__item filter-params__item--people" :style="{ left: `calc(-10px * ${index})` }">
       <UserProfileInfo :userInfo="option" theme="light" :showName="false" size="medium"/>
       <BaseButton class="filter-params__btn-remove btn-remove" @click="removeItem(option, mode)" :aria-label="`click to remove person ${option.name} ${option.lastname}`">
         <SvgIcon name="close" class="icon icon--small" />
@@ -95,8 +95,8 @@ export default {
 
     .btn-remove {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: -4px;
+      left: -4px;
       margin-left: 0;
       border: 1px solid var(--color-secondary);
       background-color: var(--color-white);
