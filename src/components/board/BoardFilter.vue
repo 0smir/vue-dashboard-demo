@@ -70,9 +70,8 @@ export default {
   emits: ['save-filter'],
   data() {
     return {
-      isFilterListVisible: true,
+      isFilterListVisible: false,
       isLoading: false,
-      isFormValid: true,
       defaultBoardCollumns: this.$store.getters['boards/getDefaultBoardColumns'],
       priorityOptions: this.$store.getters['tasks/getPriorityList'],
       statusOptions: this.$store.getters['tasks/getStatusList'],
@@ -155,6 +154,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   padding: 0 135px 15px 0;
+  border-bottom: 2px solid var(--color-primary);
 
   &__header {
     display: flex;
@@ -263,10 +263,6 @@ export default {
     background-color: var(--filter-btn-bg);
     transition: background-color .25s linear;
   }
-}
-
-.filter-list__wrapper {
-  border: 1px dotted var(--color-tetriary);
 }
 
 .form-content {
