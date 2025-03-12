@@ -5,7 +5,7 @@
       :class="{ active: isDropdownOpen }"
       aria-label="Close"
       type="button"
-      @click.stop="toggleDropdown"
+      @click="toggleDropdown"
     >
       <span>{{ placeholder }}</span>
       <SvgIcon class="icon icon--small icon-chevron" name="chevron-down" />
