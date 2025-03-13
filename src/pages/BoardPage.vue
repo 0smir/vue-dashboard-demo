@@ -9,8 +9,9 @@
       </BaseButton>
       <BoardFilter @save-filter="updateBoardData" />
     </div>
-    <Board v-if="filterParams.columns.length && filterParams.tasks" :columnsList="filterParams.columns" :tasksList="filterParams.tasks" />
-    <p v-else>Choose some filter points to display tasks</p>
+    <Board v-if="filterParams.columns.length && filterParams.tasks.length" :columnsList="filterParams.columns" :tasksList="filterParams.tasks" />
+    <p v-if="filterParams.tasks.length && !filterParams.columns.length && !filterParams.priority.length && !filterParams.people.length">Choose some filter points to display tasks</p>
+    <p v-if="!filterParams.tasks.length">No task to display</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
       <CreateTaskForm className="dialog" mode="dialog"></CreateTaskForm>
     </BaseDialog>
