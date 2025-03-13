@@ -10,7 +10,7 @@
                                       v-model="selectedValues">
           <SvgIcon name="check" class="icon icon--small" />
         </span>
-        <UserProfileInfo :userInfo="item" theme="light" :showName="true" size="small"/>
+        <UserProfileInfo :userInfo="item" theme="blue" :showName="true" size="small"/>
       </label>
     </li>
   </BaseDropdown>
