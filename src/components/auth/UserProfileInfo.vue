@@ -52,9 +52,13 @@ export default {
     &.dark {
       border-color: var(--color-dark-bg);
     }
-    &.light {
+    &.blue {
       border-color: var(--color-primary);
       background-color: var(--color-primary-light);
+    }
+    &.light {
+      border-color: var(--color-primary);
+      background-color: var(--color-white);
     }
     &.large {
       width: 70px;
