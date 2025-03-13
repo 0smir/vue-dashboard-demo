@@ -69,8 +69,13 @@ export default {
     transition: transform .25s ease;
 
     &:has(.btn-remove:hover){
-      transform: scale(1.02);
+      transform: scale(1.04);
       transition: transform .25s ease;
+
+      ::v-deep(.user-profile__image-wrapper) {
+        background-color: var(--color-primary-light);
+        transition: background-color .25s ease;
+      }
     }
   }
 
