@@ -7,6 +7,9 @@ export default {
   },
   getBoardColumns(state) {
     return state.boardColumns;
-  }
+  },
+  getBoardTasksList(state) {
+    return state.boardTasksList;
+  },
 
 }
