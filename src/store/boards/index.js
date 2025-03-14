@@ -8,6 +8,7 @@ export default {
     return {
       board: null,
       boardsList: [],
+      boardTasksList: [],
       boardColumns: [],
       defaultBoardCollumns: ['toDo', 'inProgress', 'Done'],
     }
