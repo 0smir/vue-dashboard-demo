@@ -11,6 +11,9 @@ export default {
     } else {
       state.board = payload;
     }
-
+  },
+  updateBoardTasksList(state, payload) {
+    console.log("updateBardsTasksList: ", payload);
+    state.boardsTasksList.push(payload.id);
   }
 }
