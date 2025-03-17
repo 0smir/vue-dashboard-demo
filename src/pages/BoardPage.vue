@@ -9,9 +9,9 @@
       </BaseButton>
       <BoardFilter @save-filter="updateBoardData" />
     </div>
-    <Board v-if="filterParams.columns.length && filterParams.tasks.length" :columnsList="filterParams.columns" :tasksList="filterParams.tasks" />
-    <p v-if="filterParams.tasks.length && !filterParams.columns.length && !filterParams.priority.length && !filterParams.people.length">Choose some filter points to display tasks</p>
-    <p v-if="!filterParams.tasks.length">No task to display</p>
+    <Board v-if="filterParams.columns.length && boardTasks.length" :columnsList="filterParams.columns" :tasksList="boardTasks" />
+    <p v-if="boardTasks.length && !filterParams.columns.length && !filterParams.priority.length && !filterParams.people.length">Choose some filter points to display tasks</p>
+    <p v-if="!boardTasks.length">No task to display</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
       <CreateTaskForm className="dialog" mode="dialog"></CreateTaskForm>
     </BaseDialog>
@@ -40,7 +40,6 @@ export default {
       taskPriorityList: this.$store.getters['tasks/getPriorityList'],
       filterParams: {
         columns: [],
-        tasks: [],
         priority: [],
         people: []
       }
@@ -53,6 +52,9 @@ export default {
     },
     boardData() {
       return this.$store.getters['boards/getBoardData'];
+    },
+    boardTasks() {
+      return this.$store.getters['boards/getBoardTasksList'];
     }
   },
   methods: {
@@ -72,9 +74,10 @@ export default {
     async loadTasks(taskIds) {
       try {
         const tasks = await Promise.all(
-          taskIds.map(id => this.$store.dispatch('tasks/getTaskData', { id }))
+          taskIds.map(id => {
+            this.$store.dispatch('tasks/getTaskData', { id, mutation: 'updateBoardTasksList' }, { root: true });
+          })
         );
-        this.filterParams.tasks = tasks;
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
