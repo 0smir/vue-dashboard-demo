@@ -75,7 +75,7 @@ export default {
       try {
         const tasks = await Promise.all(
           taskIds.map(id => {
-            this.$store.dispatch('tasks/getTaskData', { id, mutation: 'updateBoardTasksList' }, { root: true });
+            this.$store.dispatch('tasks/getTaskData', { id, action: 'boards/setToBoardTasksList' }, { root: true });
           })
         );
       } catch (error) {
