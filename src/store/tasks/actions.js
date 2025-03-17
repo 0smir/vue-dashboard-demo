@@ -64,6 +64,7 @@ export default {
 
   async getTaskData(context, data) {
     let taskID = data.id,
+      mutation = data.mutation,
       url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${taskID}.json`;
 
     const resp = await fetch(url);
@@ -73,7 +74,11 @@ export default {
       throw error;
     }
 
-    context.commit('setTask', { ...resultData });
+    if (!mutation) {
+      context.commit('setTask', { ...resultData });
+    } else {
+      context.dispatch('boards/setToBoardTasksList', resultData, { root: true });
+    }
   },
 
   // async setTaskAssignee(context, data) {

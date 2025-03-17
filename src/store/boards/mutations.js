@@ -13,7 +13,6 @@ export default {
     }
   },
   updateBoardTasksList(state, payload) {
-    console.log("updateBardsTasksList: ", payload);
-    state.boardsTasksList.push(payload.id);
+    state.boardTasksList.push(payload);
   }
 }
