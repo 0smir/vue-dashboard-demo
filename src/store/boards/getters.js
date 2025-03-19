@@ -8,8 +8,10 @@ export default {
   getBoardColumns(state) {
     return state.boardColumns;
   },
+  getBoardFilterParms(state) {
+    return state.boardFilterParms;
+  },
   getBoardTasksList(state) {
     return state.boardTasksList;
-  },
-
+  }
 }
