@@ -7,9 +7,9 @@
         <SvgIcon name="add" class="icon" />
         <span>Create task</span>
       </BaseButton>
-      <BoardFilter @save-filter="updateBoardData" />
+      <BoardFilter :filterData="filterParams"  @save-filter="updateBoardData" />
     </div>
-    <Board v-if="filterParams.columns.length && boardTasks.length" :columnsList="filterParams.columns" :tasksList="boardTasks" />
+    <Board v-if="filterParams.columns.length && boardTasks.length" :columnsList="filterParams.columns" :tasksList="tasksListFiltered" />
     <p v-if="boardTasks.length && !filterParams.columns.length && !filterParams.priority.length && !filterParams.people.length">Choose some filter points to display tasks</p>
     <p v-if="!boardTasks.length">No task to display</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
@@ -37,12 +37,7 @@ export default {
       isLoading: false,
       error: null,
       addTaskDialogDisplay: false,
-      taskPriorityList: this.$store.getters['tasks/getPriorityList'],
-      filterParams: {
-        columns: [],
-        priority: [],
-        people: []
-      }
+      taskPriorityList: this.$store.getters['tasks/getPriorityList']
     }
   },
 
@@ -53,8 +48,28 @@ export default {
     boardData() {
       return this.$store.getters['boards/getBoardData'];
     },
+    filterInfo() {
+      return this.$store.getters['boards/getBoardFilterParms']
+    },
+    filterParams() {
+      return {
+        columns: this.filterInfo.columns,
+        priority: this.filterInfo.priority,
+        people: this.filterInfo.people
+      };
+    },
     boardTasks() {
       return this.$store.getters['boards/getBoardTasksList'];
+    },
+    tasksListFiltered() {
+      console.log('this.filterParams.people: ', this.filterParams.people);
+      return this.boardTasks.filter((task) => {
+        return (
+          (!this.filterParams.priority.length || this.filterParams.priority.some((p) => task.priority.includes(p))) &&
+          (!this.filterParams.columns.length || this.filterParams.columns.some((s) => task.status.includes(s))) &&
+          (!this.filterParams.people.length || this.filterParams.people.some((e) => task.assignee.id.includes(e.id)))
+        );
+      }); 
     }
   },
   methods: {
@@ -73,7 +88,7 @@ export default {
 
     async loadTasks(taskIds) {
       try {
-        const tasks = await Promise.all(
+        await Promise.all(
           taskIds.map(id => {
             this.$store.dispatch('tasks/getTaskData', { id, action: 'boards/setToBoardTasksList' }, { root: true });
           })
@@ -84,11 +99,13 @@ export default {
     },
 
     updateBoardData(filterParams) {
-      console.log('filterParams: ', filterParams);
-      console.log('page updateBoardData');
-      this.filterParams.columns = filterParams.selectedColumns;
-      this.filterParams.people = filterParams.selectedPeople;
-      this.filterParams.priority = filterParams.selectedPriorities;
+      let params = {
+        columns: filterParams.selectedColumns,
+        people:  filterParams.selectedPeople,
+        priority:  filterParams.selectedPriorities
+      };
+      
+      this.$store.dispatch('boards/setBoardFilter', params);
     },
 
     openDialog() {
@@ -102,6 +119,10 @@ export default {
 
   async created() {
     await this.loadBoardInfo(this.id);
+  },
+
+  beforeUnmount() {
+    this.$store.dispatch('boards/setBoardFilter', this.filterParams);
   }
 }
 </script>
