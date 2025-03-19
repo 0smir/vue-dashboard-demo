@@ -67,6 +67,7 @@ export default {
     PrioritiesDropdown,
     PeopleDropdown
   },
+  props: ['filterData'],
   emits: ['save-filter'],
   data() {
     return {
@@ -76,9 +77,9 @@ export default {
       priorityOptions: this.$store.getters['tasks/getPriorityList'],
       statusOptions: this.$store.getters['tasks/getStatusList'],
       filterParams: {
-        selectedColumns: [],
-        selectedPeople: [],
-        selectedPriorities: [],
+        selectedColumns: this.filterData.columns,
+        selectedPeople: this.filterData.people,
+        selectedPriorities: this.filterData.priority,
       }
     }
   },
@@ -135,11 +136,11 @@ export default {
     this.loadUsersList();
   },
   mounted() {
-    this.filterParams.selectedColumns = [...this.defaultBoardCollumns];
+    console.log('this.filterDat: ', this.filterData);
+    if (!this.filterData.columns.length) {
+      this.filterParams.selectedColumns = [...this.defaultBoardCollumns];
+    }
     this.updateFilter();
-  },
-  beforeDestroy() {
-    this.clearFilter();
   }
 }
 </script>
