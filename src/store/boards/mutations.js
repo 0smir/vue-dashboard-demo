@@ -14,5 +14,8 @@ export default {
   },
   updateBoardTasksList(state, payload) {
     state.boardTasksList.push(payload);
+  },
+  setBoardFilterParams(state, payload) {
+    state.boardFilterParms = payload;
   }
 }
