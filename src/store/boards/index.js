@@ -11,6 +11,11 @@ export default {
       boardTasksList: [],
       boardColumns: [],
       defaultBoardCollumns: ['toDo', 'inProgress', 'Done'],
+      boardFilterParms: {
+        columns: [],
+        priority: [],
+        people: []
+      }
     }
   },
   actions,
