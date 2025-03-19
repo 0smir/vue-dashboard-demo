@@ -39,23 +39,6 @@ export default {
 
     context.commit('setBoard', { ...respData });
   },
-  async getBoardTasks({ dispatch, commit }, data) {
-    let taskIds = data.tasksList;
-    console.log(taskIds);
-    // try {
-
-    //   const tasks = await Promise.all(
-    //     taskIds.map(id => {
-    //       console.log(id);
-    //       dispatch('tasks/getTaskData', { id }, { root: true });
-    //     })
-    //   );
-    //   console.log(tasks);
-    //   commit('updateBoardTasksList', tasks);
-    // } catch(error) {
-    //   console.error('Error fetching tasks:', error);
-    // }
-  },
 
   setToBoardTasksList(context, data) {
     context.commit('updateBoardTasksList', data);
@@ -63,6 +46,9 @@ export default {
 
   setBoardColumns(context, data) {
     context.commit('updateBoardFilter', ...data);
+  },
+  setBoardFilter(context, data) {
+    context.commit('setBoardFilterParams', data);
   }
 
 }
