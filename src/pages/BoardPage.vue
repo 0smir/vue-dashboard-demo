@@ -62,7 +62,6 @@ export default {
       return this.$store.getters['boards/getBoardTasksList'];
     },
     tasksListFiltered() {
-      console.log('this.filterParams.people: ', this.filterParams.people);
       return this.boardTasks.filter((task) => {
         return (
           (!this.filterParams.priority.length || this.filterParams.priority.some((p) => task.priority.includes(p))) &&
@@ -104,8 +103,8 @@ export default {
         people:  filterParams.selectedPeople,
         priority:  filterParams.selectedPriorities
       };
-      
-      this.$store.dispatch('boards/setBoardFilter', params);
+
+      this.$store.dispatch('boards/setBoardFilter', { boardId: this.id, params });
     },
 
     openDialog() {
