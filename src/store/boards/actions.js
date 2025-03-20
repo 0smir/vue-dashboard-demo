@@ -48,7 +48,8 @@ export default {
     context.commit('updateBoardFilter', ...data);
   },
   setBoardFilter(context, data) {
-    context.commit('setBoardFilterParams', data);
+    let params = data.params;
+    context.commit('setBoardFilterParams', { boardId: data.boardId, params });
   }
 
 }
