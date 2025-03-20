@@ -16,6 +16,7 @@ export default {
     state.boardTasksList.push(payload);
   },
   setBoardFilterParams(state, payload) {
-    state.boardFilterParms = payload;
+    state.boardFilterParms = payload.params;
+    localStorage.setItem('boardsFilterParams', JSON.stringify({ [payload.boardId]: { params: payload.params } }));
   }
 }
