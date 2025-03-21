@@ -9,8 +9,7 @@ export default {
     return state.boardColumns;
   },
   getBoardFilterParms(state) {
-    let boardId = state.board.id;
-    return JSON.parse(localStorage.getItem('boardsFilterParams'))[boardId] ? JSON.parse(localStorage.getItem('boardsFilterParams'))[boardId].params : state.boardFilterParms;
+    return state.boardFilterParms;
   },
   getBoardTasksList(state) {
     return state.boardTasksList;
