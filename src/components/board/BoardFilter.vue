@@ -136,7 +136,6 @@ export default {
     this.loadUsersList();
 
     if (JSON.parse(localStorage.getItem('boardsFilterParams')) && (JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId].params)) {
-      console.log((JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId].params))
       let params = JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId].params;
 
       this.filterParams.selectedColumns = params.columns;
@@ -146,7 +145,7 @@ export default {
     } else if (!this.filterData.columns.length && !this.filterData.people.length && !this.filterData.priority.length) {
       this.filterParams.selectedColumns = [...this.defaultBoardCollumns];
     }
-    
+
     this.updateFilter();
   }
 }
