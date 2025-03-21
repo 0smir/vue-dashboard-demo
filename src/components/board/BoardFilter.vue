@@ -67,7 +67,7 @@ export default {
     PrioritiesDropdown,
     PeopleDropdown
   },
-  props: ['filterData'],
+  props: ['boardId', 'filterData'],
   emits: ['save-filter'],
   data() {
     return {
@@ -134,12 +134,19 @@ export default {
   },
   created() {
     this.loadUsersList();
-  },
-  mounted() {
-    console.log('this.filterDat: ', this.filterData);
-    if (!this.filterData.columns.length) {
+
+    if (JSON.parse(localStorage.getItem('boardsFilterParams')) && (JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId].params)) {
+      console.log((JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId].params))
+      let params = JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId].params;
+
+      this.filterParams.selectedColumns = params.columns;
+      this.filterParams.selectedPeople = params.people;
+      this.filterParams.selectedPriorities = params.priority;
+
+    } else if (!this.filterData.columns.length && !this.filterData.people.length && !this.filterData.priority.length) {
       this.filterParams.selectedColumns = [...this.defaultBoardCollumns];
     }
+    
     this.updateFilter();
   }
 }
