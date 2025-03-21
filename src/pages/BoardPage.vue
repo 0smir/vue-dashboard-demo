@@ -7,7 +7,7 @@
         <SvgIcon name="add" class="icon" />
         <span>Create task</span>
       </BaseButton>
-      <BoardFilter :filterData="filterParams"  @save-filter="updateBoardData" />
+      <BoardFilter :boardId="id" :filterData="filterParams"  @save-filter="updateBoardData" />
     </div>
     <Board v-if="filterParams.columns.length && boardTasks.length" :columnsList="filterParams.columns" :tasksList="tasksListFiltered" />
     <p v-if="boardTasks.length && !filterParams.columns.length && !filterParams.priority.length && !filterParams.people.length">Choose some filter points to display tasks</p>
@@ -118,10 +118,6 @@ export default {
 
   async created() {
     await this.loadBoardInfo(this.id);
-  },
-
-  beforeUnmount() {
-    this.$store.dispatch('boards/setBoardFilter', this.filterParams);
   }
 }
 </script>
