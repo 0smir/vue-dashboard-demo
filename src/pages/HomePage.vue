@@ -33,7 +33,8 @@ export default {
       taskPriorityList: this.$store.getters['tasks/getPriorityList'],
       columnsToDisplay: this.$store.getters['boards/getDefaultBoardColumns'],
       addTaskDialogDisplay: false,
-      error: null
+      error: null,
+      isLoading: false
     }
   },
   computed: {
@@ -42,11 +43,24 @@ export default {
     },
     tasks() {
       return this.$store.getters['tasks/getTasksList'];
-    }
+    },
+    peopleList() {
+      return this.$store.getters['people/getEmployeesList'];
+    },
+    boardColumns() {
+      this.$store.getters['boards/getBoardColumns'];
+    },
   },
   methods: {
     displayColumns(columnsList) {
       this.columnsToDisplay = columnsList;
+    },
+    updateBoardData(filterParams) {
+      let { columns, people, priorities } = filterParams;
+      console.log('columns: ', columns);
+      console.log('people: ', people);
+      console.log('priorities: ', priorities);
+      console.log('page updateBoardData');
     },
     openDialog() {
       this.addTaskDialogDisplay = true;
@@ -54,9 +68,20 @@ export default {
     closeAddTaskDialog() {
       this.addTaskDialogDisplay = false;
     },
-    async loadTasks(params) {
+    async loadTasks() {
+      this.isLoading = true;
       try {
         await this.$store.dispatch('tasks/loadTasks');
+        this.isLoading = false;
+      } catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
+    },
+    async loadUsersList() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('people/loadEmployeesList');
+        this.isLoading = false;
       } catch (error) {
         this.error = error.message || 'Smth went wrong!';
       }
@@ -64,6 +89,7 @@ export default {
   },
   mounted() {
     this.loadTasks();
+    this.loadUsersList();
   }
 }
 </script>
