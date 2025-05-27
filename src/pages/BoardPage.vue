@@ -7,10 +7,13 @@
         <SvgIcon name="add" class="icon" />
         <span>Create task</span>
       </BaseButton>
-      <BoardFilter :boardId="id" :filterData="filterParams"  @save-filter="updateBoardData" />
+      <BoardFilter :boardId="id" :filterData="filterParams" @save-filter="updateBoardData" />
     </div>
-    <Board v-if="filterParams.columns.length && boardTasks.length" :columnsList="filterParams.columns" :tasksList="tasksListFiltered" />
-    <p v-if="boardTasks.length && !filterParams.columns.length && !filterParams.priority.length && !filterParams.people.length">Choose some filter points to display tasks</p>
+    <Board v-if="filterParams.columns.length && boardTasks.length" :columnsList="filterParams.columns"
+      :tasksList="tasksListFiltered" />
+    <p
+      v-if="boardTasks.length && !filterParams.columns.length && !filterParams.priority.length && !filterParams.people.length">
+      Choose some filter points to display tasks</p>
     <p v-if="!boardTasks.length">No task to display</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
       <CreateTaskForm className="dialog" mode="dialog"></CreateTaskForm>
@@ -68,7 +71,7 @@ export default {
           (!this.filterParams.columns.length || this.filterParams.columns.some((s) => task.status.includes(s))) &&
           (!this.filterParams.people.length || this.filterParams.people.some((e) => task.assignee.id.includes(e.id)))
         );
-      }); 
+      });
     }
   },
   methods: {
@@ -77,6 +80,7 @@ export default {
       try {
         await this.$store.dispatch('boards/loadBoardData', { id });
         if (this.boardData?.tasksList?.length) {
+          console.log(this.boardData.tasksList);
           await this.loadTasks(this.boardData.tasksList);
         }
       } catch (error) {
@@ -87,11 +91,25 @@ export default {
 
     async loadTasks(taskIds) {
       try {
-        await Promise.all(
-          taskIds.map(id => {
-            this.$store.dispatch('tasks/getTaskData', { id, action: 'boards/setToBoardTasksList' }, { root: true });
-          })
-        );
+        let tasksArr = [];
+        let promises = taskIds.map(id => {
+          let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
+          return fetch(url).then(response => response.json()); 
+        });
+      
+        
+        await Promise.allSettled(promises).then((results) => {
+          return results.forEach((result) => {
+            if (result.status === 'fulfilled') {
+              tasksArr.push(result.value);
+            } else {
+              console.error(`Failed to load task ${taskIds[index]}:`, result.reason);
+            }
+          });
+        });
+        
+        console.log(tasksArr);
+        this.$store.dispatch('boards/setToBoardTasksList' ,  tasksArr);
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
@@ -100,8 +118,8 @@ export default {
     updateBoardData(filterParams) {
       let params = {
         columns: filterParams.selectedColumns,
-        people:  filterParams.selectedPeople,
-        priority:  filterParams.selectedPriorities
+        people: filterParams.selectedPeople,
+        priority: filterParams.selectedPriorities
       };
 
       this.$store.dispatch('boards/setBoardFilter', { boardId: this.id, params });
@@ -138,5 +156,4 @@ export default {
     margin-left: 7px;
   }
 }
-
 </style>
