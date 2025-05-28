@@ -79,8 +79,8 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch('boards/loadBoardData', { id });
-        if (this.boardData?.tasksList?.length) {
-          console.log(this.boardData.tasksList);
+        
+        if (this.boardData?.tasksList?.length && !this.boardTasks.length) {
           await this.loadTasks(this.boardData.tasksList);
         }
       } catch (error) {
@@ -108,7 +108,6 @@ export default {
           });
         });
         
-        console.log(tasksArr);
         this.$store.dispatch('boards/setToBoardTasksList' ,  tasksArr);
       } catch (error) {
         console.error('Error fetching tasks:', error);
