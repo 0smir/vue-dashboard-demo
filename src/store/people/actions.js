@@ -23,6 +23,8 @@ export default {
       };
       employeesList.push(person);
     }
+
+    localStorage.setItem('employees', JSON.stringify(employeesList));
     context.commit('setEmployees', employeesList);
   },
 

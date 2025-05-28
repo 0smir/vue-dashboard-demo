@@ -6,15 +6,7 @@ export default {
   namespaced: true,
   state() {
     return {
-      people: [
-        {
-          id: '001',
-          name: 'Helga',
-          lastName: 'Vaal',
-          position: 'Front-End',
-          project: ''
-        }
-      ],
+      people: JSON.parse(localStorage.getItem('employees')) ? JSON.parse(localStorage.getItem('employees')) : [],
       positionsList: ['Front-End', 'Back-End', 'QA', 'Manager', 'Product Owner', 'SEO']
     }
   },
