@@ -58,7 +58,7 @@ export default {
       };
       taskList.push(task);
     }
-    sessionStorage.setItem('tasksList', JSON.stringify(taskList));
+    localStorage.setItem('tasksList', JSON.stringify(taskList));
     context.commit('setTasks', taskList);
   },
 

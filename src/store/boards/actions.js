@@ -45,7 +45,7 @@ export default {
   },
 
   setToBoardTasksList(context, data) {
-    sessionStorage.setItem('boardTasksList', JSON.stringify(data));
+    localStorage.setItem('boardTasksList', JSON.stringify(data));
     context.commit('updateBoardTasksList', data);
   },
 
