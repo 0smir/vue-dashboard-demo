@@ -40,7 +40,12 @@ export default {
     context.commit('setBoard', { ...respData });
   },
 
+  addTaskToBoard(context, data) {
+    //add task to board
+  },
+
   setToBoardTasksList(context, data) {
+    sessionStorage.setItem('boardTasksList', JSON.stringify(data));
     context.commit('updateBoardTasksList', data);
   },
 

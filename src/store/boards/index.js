@@ -8,7 +8,7 @@ export default {
     return {
       board: null,
       boardsList: [],
-      boardTasksList: [],
+      boardTasksList: JSON.parse(sessionStorage.getItem('boardTasksList')) ? JSON.parse(sessionStorage.getItem('boardTasksList')) : [],
       boardColumns: [],
       defaultBoardCollumns: ['toDo', 'inProgress', 'Done'],
       boardFilterParms: {
