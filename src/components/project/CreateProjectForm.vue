@@ -132,9 +132,10 @@ export default {
         return;
       }
     },
+
     removeEmployee(params) {
       let { option } = params,
-        targetItem = option.id
+        targetItem = option.id,
         membersList = this.project.members.value,
         itemIndex = membersList.indexOf(targetItem);
       membersList.splice(itemIndex, 1);
