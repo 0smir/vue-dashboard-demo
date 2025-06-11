@@ -23,7 +23,7 @@
         </select>
         <p class="error-text" v-if="!user.position.isValid">{{ user.position.errorMessage }}</p>
       </div>
-      <div :class="['form-control', 'form-control--project', { error: !user.project.isValid }]">
+      <!-- <div :class="['form-control', 'form-control--project', { error: !user.project.isValid }]">
         <label for="project" class="form-control__label">Project: </label>
         <select class="form-control__select" name="projectName" id="project" v-model="user.project.value">
           <option value="" disabled selected>Select Project</option>
@@ -32,7 +32,7 @@
           </option>
         </select>
         <p class="error-text" v-if="!user.project.isValid">{{ user.project.errorMessage }}</p>
-      </div>
+      </div> -->
       <div :class="['form-control', 'form-control--email', { error: !user.email.isValid }]">
         <label for="email" class="form-control__label">Email:</label>
         <input class="form-control__input" id="email" autocomplete="off" type="email" v-model="user.email.value">
@@ -97,11 +97,11 @@ export default {
           isValid: true,
           errorMessage: 'Please select your position from the list.'
         },
-        project: {
-          value: '',
-          isValid: true,
-          errorMessage: 'Project assignment is required to proceed.'
-        },
+        // project: {
+        //   value: '',
+        //   isValid: true,
+        //   errorMessage: 'Project assignment is required to proceed.'
+        // },
         email: {
           value: '',
           isValid: true,
@@ -145,12 +145,12 @@ export default {
         this.isFormValid = false;
         return;
       }
-      if (this.user.project.value === '') {
-        this.user.project.isValid = false;
-        this.user.project.errorMessage = this.user.project.errorMessage;
-        this.isFormValid = false;
-        return;
-      }
+      // if (this.user.project.value === '') {
+      //   this.user.project.isValid = false;
+      //   this.user.project.errorMessage = this.user.project.errorMessage;
+      //   this.isFormValid = false;
+      //   return;
+      // }
       if (
         this.user.email.value === '' ||
         !this.user.email.value.includes('@') ||
@@ -197,7 +197,7 @@ export default {
         name: this.user.name.value,
         lastName: this.user.lastName.value,
         position: this.user.position.value,
-        project: this.user.project.value,
+        // project: this.user.project.value,
         email: this.user.email.value,
         password: this.user.password.value
       }
@@ -217,7 +217,7 @@ export default {
       this.user.name.value = '';
       this.user.lastName.value = '';
       this.user.position.value = '';
-      this.user.project.value = '';
+      // this.user.project.value = '';
       this.user.email.value = '';
       this.user.password.value = '';
     },
@@ -226,7 +226,7 @@ export default {
       this.user.name.isValid = true;
       this.user.lastName.isValid = true;
       this.user.position.isValid = true;
-      this.user.project.isValid = true;
+      // this.user.project.isValid = true;
       this.user.email.isValid = true;
       this.user.password.isValid = true;
     }
@@ -254,9 +254,9 @@ export default {
     @media (min-width: $md) {
       width: calc(50% - 7px);
 
-      &--email {
-        width: 100%;
-      }
+      // &--email {
+      //   width: 100%;
+      // }
     }
   }
 }
