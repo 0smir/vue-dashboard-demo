@@ -7,7 +7,7 @@ export default {
       title: data.title,
       description: data.description,
       owner: data.owner,
-      members: [],
+      members: data.members,
       boards: [],
       priority: data.priority,
       status: data.status
