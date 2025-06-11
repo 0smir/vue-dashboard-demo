@@ -220,6 +220,7 @@ export default {
       // this.user.project.value = '';
       this.user.email.value = '';
       this.user.password.value = '';
+      this.user.confirm_password.value = '';
     },
 
     clearError() {
