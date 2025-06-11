@@ -12,11 +12,18 @@
           v-model="project.description.value"></textarea>
         <p class="error-text" v-if="!project.description.isValid">{{ project.description.errorMessage }}</p>
       </div>
-      <div :class="['form-control', 'form-control--owner', { error: !project.owner.isValid }]">
-        owner
+      <div :class="['form-control', 'form-control--owner']">
+        <p><span>Project Ownre: </span> <strong>{{owner}}</strong></p>
       </div>
       <div :class="['form-control', 'form-control--members', { error: !project.members.isValid }]">
-        members
+        <label class="form-control__label" for="description">Choose Members:</label>
+        <BoardFilterParamsItem :options="project.members.value"
+                                mode="persons"
+                               @remove-filter-item="removeEmployee"/>
+        <PeopleDropdown v-model="project.members.value"
+                            :options="employees"
+                            placeholder="Select People"
+            />
       </div>
       <div :class="['form-control', 'form-control--boards']">
         <p class="description-text">{{ project.boards.descriptions }}</p>
@@ -50,7 +57,14 @@
 </template>
 
 <script>
+import BoardFilterParamsItem from '@/components/board/BoardFilterParamsItem.vue';
+import PeopleDropdown from '@/components/board/PeopleDropdown.vue';
 export default {
+  components: {
+    BoardFilterParamsItem,
+    PeopleDropdown
+  },
+  props: ['employees'],
   data() {
     return {
       statusList: this.$store.getters['projects/getStatusList'],
@@ -65,11 +79,6 @@ export default {
         description: {
           value: '',
           errorMessage: 'Project description is required and cannot be empty.',
-          isValid: true
-        },
-        owner: {
-          value: '',
-          errorMessage: 'Please choose project owner.',
           isValid: true
         },
         members: {
@@ -96,6 +105,12 @@ export default {
       }
     }
   },
+  computed: {
+    owner() {
+      let userInfo = this.$store.getters['users/getUserInfo'];
+      return `${userInfo?.name} ${userInfo?.lastName}`;
+    }   
+  },
 
   methods: {
     submitForm() {
@@ -117,32 +132,38 @@ export default {
         return;
       }
     },
+    removeEmployee(params) {
+      let { option } = params,
+        targetItem = option.id
+        membersList = this.project.members.value,
+        itemIndex = membersList.indexOf(targetItem);
+      membersList.splice(itemIndex, 1);
+    },
+
     createProject() {
       let newProjectData = {
         id: new Date().getTime(),
         title: this.project.title.value,
         description: this.project.description.value,
-        owner: this.project.owner.value,
+        owner: this.owner,
         members: this.project.members.value,
         boards: this.project.boards.value,
         priority: this.project.priority.value,
         status: this.project.status.value,
       };
-      console.log(newProjectData);
+    
       this.$store.dispatch('projects/createProject', newProjectData);
       this.clearFormFields();
     },
     clearFormFields() {
       this.project.title.value = '';
       this.project.description.value = '';
-      this.project.owner.value = '';
       this.project.members.value = [];
       this.project.boards.value = [];
       this.project.priority.value = 'low';
       this.project.status.value = 'active';
     }
   }
-
 }
 </script>
 

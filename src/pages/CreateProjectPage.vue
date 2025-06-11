@@ -24,8 +24,6 @@ export default {
   },
   computed: {
     employeesList() {
-      console.log(this.$store.getters['people/getEmployeesList'].length);
-      
       return this.$store.getters['people/getEmployeesList'];
     }
   },
