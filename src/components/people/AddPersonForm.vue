@@ -5,12 +5,12 @@
     <div class="form__content form__content--add-person">
       <div :class="['form-control', 'form-control--name', { error: !user.name.isValid }]">
         <label for="name" class="form-control__label">Name: </label>
-        <input class="form-control__input" id="name" type="text" v-model="user.name.value">
+        <input class="form-control__input" id="name" type="text" v-model.trim="user.name.value">
         <p class="error-text" v-if="!user.name.isValid">{{ user.name.errorMessage }}</p>
       </div>
       <div :class="['form-control', 'form-control--lastname', { error: !user.lastName.isValid }]">
         <label for="lastName" class="form-control__label">Last Name:</label>
-        <input class="form-control__input" id="lastName" type="text" v-model="user.lastName.value">
+        <input class="form-control__input" id="lastName" type="text" v-model.trim="user.lastName.value">
         <p class="error-text" v-if="!user.lastName.isValid">{{ user.lastName.errorMessage }}</p>
       </div>
       <div :class="['form-control', 'form-control--position', { error: !user.position.isValid }]">
@@ -35,7 +35,7 @@
       </div> -->
       <div :class="['form-control', 'form-control--email', { error: !user.email.isValid }]">
         <label for="email" class="form-control__label">Email:</label>
-        <input class="form-control__input" id="email" autocomplete="off" type="email" v-model="user.email.value">
+        <input class="form-control__input" id="email" autocomplete="off" type="email" v-model.trim="user.email.value">
         <p class="error-text" v-if="!user.email.isValid">{{ user.email.errorMessage }}</p>
       </div>
       <div :class="['form-control', 'form-control--password', { error: !user.password.isValid }]">
