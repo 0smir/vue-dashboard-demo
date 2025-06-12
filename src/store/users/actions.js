@@ -22,6 +22,8 @@ export default {
 
       await context.dispatch('people/addEmployee', { ...payload, id: authData.localId }, { root: true });
 
+      localStorage.setItem('userProfileData', JSON.stringify(payload));
+      context.dispatch('autoLogin');
     } catch (error) {
       console.error('Signup failed:', error);
       throw error; // Propagate error to the UI
@@ -82,7 +84,6 @@ export default {
       userID = localStorage.getItem('userID'),
       tokenExpiration = localStorage.getItem('tokenExpiration'),
       userProfileData = JSON.parse(localStorage.getItem('userProfileData'));
-
     let expiresIn = +tokenExpiration - new Date().getTime();
 
     if (expiresIn < 0) {
@@ -98,6 +99,7 @@ export default {
         token: token,
         userID: userID
       });
+
       context.commit('setUserData', userProfileData);
     }
   },
