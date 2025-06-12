@@ -10,7 +10,7 @@ export default {
       userID: null,
       token: null,
       didAutoLogout: false,
-      user: null
+      user: JSON.parse(localStorage.getItem('userProfileData')) ? JSON.parse(localStorage.getItem('userProfileData')) : null
     }
   },
   mutations: mutations,
