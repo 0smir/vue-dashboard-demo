@@ -1,11 +1,13 @@
 <template>
   <div class="login-form__wrapper">
-    <p v-if="error" class="error">{{ error }}</p>
     <form class="form from--login" @submit.prevent="submitForm">
       <div class="form__content">
+        <div v-if="error" class="form-control">
+          <p  class="error-text">{{ error }}</p>
+        </div>
         <div :class="['form-control', 'form-control--email', { error: !user.email.isValid }]">
           <label for="email" class="form-control__label">Email</label>
-          <input id="email" type="text" autocomplete="off" class="form-control__input" v-model="user.email.value">
+          <input id="email" type="text" autocomplete="off" class="form-control__input" v-model="user.email.value" @focus="clearError">
           <p v-if="!user.email.isValid" class="error-text"> Please, enter a valid email address</p>
         </div>
         <div :class="['form-control', 'form-control--password', { error: !user.password.isValid }]">
@@ -18,7 +20,7 @@
               <SvgIcon v-else name="eyeSplash" class="icon" />
             </span>
           </div>
-          <p v-if="!user.password.isValid" class="error-text"> Password is required and must be at least 8
+          <p v-if="!user.password.isValid" class="error-text"> Password is required and must be at least 6
             characters long.</p>
         </div>
         <div class="form-control__btn-wrapper login-form__btn-wrapper">
@@ -77,16 +79,24 @@ export default {
       };
 
       this.login(actionPayload);
-
-      this.clearFormFields();
-      this.$router.replace('/');
     },
 
     async login(userData) {
       try {
         await this.$store.dispatch('users/login', userData);
+        this.clearFormFields();
+        this.$router.replace('/');
       } catch (error) {
-        this.error = error.message || 'Failed to auth!';
+        this.isFormValid = false;
+        this.user.email.isValid = false;
+        this.user.password.isValid = false;
+          
+        if (error.message === 'INVALID_LOGIN_CREDENTIALS') {
+          this.error = 'Incorrect email or password.';
+        } else {
+          this.error = 'An unexpected error occurred. Please try again.';
+        }
+        console.log('this.error', this.error);
       }
     },
 
@@ -98,6 +108,7 @@ export default {
     clearError() {
       this.user.email.isValid = true;
       this.user.password.isValid = true;
+      this.error = null;
     }
   }
 
