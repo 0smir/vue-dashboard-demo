@@ -7,7 +7,7 @@ export default {
   state() {
     return {
       people: JSON.parse(localStorage.getItem('employees')) ? JSON.parse(localStorage.getItem('employees')) : [],
-      positionsList: ['Front-End', 'Back-End', 'QA', 'Manager', 'Product Owner', 'SEO', 'Designer']
+      positionsList: ['Front-End', 'Back-End', 'QA', 'Manager', 'Product Owner', 'SEO', 'Designer', 'HR']
     }
   },
   actions,
