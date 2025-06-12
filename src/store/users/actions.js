@@ -53,9 +53,10 @@ export default {
     );
 
     let responseData = await response.json();
+
     if (!response.ok) {
       const error = new Error(
-        responseData.message || 'Fail due fetch!'
+        responseData.error.message || 'Fail due fetch!'
       );
       throw error;
     }
@@ -84,6 +85,7 @@ export default {
       userID = localStorage.getItem('userID'),
       tokenExpiration = localStorage.getItem('tokenExpiration'),
       userProfileData = JSON.parse(localStorage.getItem('userProfileData'));
+
     let expiresIn = +tokenExpiration - new Date().getTime();
 
     if (expiresIn < 0) {
@@ -99,7 +101,6 @@ export default {
         token: token,
         userID: userID
       });
-
       context.commit('setUserData', userProfileData);
     }
   },
