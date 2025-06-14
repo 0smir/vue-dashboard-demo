@@ -1,18 +1,18 @@
 <template>
   
     <div v-if="userInfo" class="relative user-profile" v-click-outside="closeUserNav">
-      <BaseButton :class="['btn btn--transparent user-profile__btn-action', {active: isNavOpened}]" @click="toggleUserNav">
+      <BaseButton :class="['btn btn--transparent user-profile__btn-action', {active: isNavOpened}]" @click="toggleUserNav" aria-label="click to open user navigation">
         <UserProfileImg :userInfo="userInfo" theme="dark" />
         <span class="icon-wrapper">
           <SvgIcon name="chevron-down" class="icon icon--medium" />
         </span>
       </BaseButton>
       <ul v-show="isNavOpened" class="user-profile__nav">
-        <li class="user-profile__nav-item"><router-link class="user-profile__link" :to="userProfileLink">My Profile</router-link></li>
-        <li class="user-profile__nav-item"><router-link class="user-profile__link" to="/">My boards</router-link></li>
-        <li class="user-profile__nav-item"><router-link class="user-profile__link" to="/">My Projects</router-link></li>
+        <li class="user-profile__nav-item"><router-link class="user-profile__link" :to="userProfileLink" title="My Profile" aria-label="link to: My Profile">My Profile</router-link></li>
+        <li class="user-profile__nav-item"><router-link class="user-profile__link" to="/" title="My boards" aria-label="link to: My boards">My boards</router-link></li>
+        <li class="user-profile__nav-item"><router-link class="user-profile__link" to="/" title="My Projects" aria-label="link to: My Projects">My Projects</router-link></li>
         <li class="user-profile__nav-item">
-          <BaseButton class="btn btn__default btn--medium user-profile__btn-logout" @click="logOut">
+          <BaseButton class="btn btn__default btn--medium user-profile__btn-logout" @click="logOut" >
             <SvgIcon name="logout" class="icon" />
             <span>Logout</span>
           </BaseButton>

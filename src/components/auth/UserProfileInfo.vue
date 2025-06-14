@@ -1,10 +1,10 @@
 <template>
   <div class="user-profile__data-wrapper">
     <div :class="['user-profile__image-wrapper', 'rounded', {[theme]: theme}, {[size]: size}]" 
-        :title="userFullName">
+        :title="userFullName" :aria-label="`user name: ${userFullName}`">
       <span>{{ userInitials }}</span>
     </div>
-    <div v-if="showName" class="user-profile__full-name">{{userFullName}}</div>
+    <div v-if="showName" class="user-profile__full-name" :aria-label="`user name: ${userFullName}`">{{userFullName}}</div>
   </div>
 </template>
 
