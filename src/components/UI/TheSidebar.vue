@@ -9,42 +9,42 @@
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/">
+        <router-link class="sidebar__link" to="/" title="Boards">
           <span class="sidebar__link-icon">
             <SvgIcon name="board" class="icon" />
           </span>
           <span class="sidebar__link-text">Boards</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/">
+        <router-link class="sidebar__link" to="/" title="Statistic">
           <span class="sidebar__link-icon">
             <SvgIcon name="statistic" class="icon" />
           </span>
           <span class="sidebar__link-text">Statistic</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/">
+        <router-link class="sidebar__link" to="/" title="Settings">
           <span class="sidebar__link-icon">
             <SvgIcon name="settings" class="icon" />
           </span>
           <span class="sidebar__link-text">Settings</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/tasks">
+        <router-link class="sidebar__link" to="/tasks" title="All Tasks">
           <span class="sidebar__link-icon">
             <SvgIcon name="tasks" class="icon" />
           </span>
           <span class="sidebar__link-text">All Tasks</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/people">
+        <router-link class="sidebar__link" to="/people" title="People">
           <span class="sidebar__link-icon">
             <SvgIcon name="users" class="icon" />
           </span>
           <span class="sidebar__link-text">People</span></router-link>
       </li>
       <li v-if="isLoggedIn" class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/create">
+        <router-link class="sidebar__link" to="/create" title="Create">
           <span class="sidebar__link-icon">
             <SvgIcon name="add" class="icon" />
           </span>
@@ -52,7 +52,7 @@
         </router-link>
       </li>
       <li v-else class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/people/registration">
+        <router-link class="sidebar__link" to="/people/registration" title="SignIn">
           <span class="sidebar__link-icon">
             <SvgIcon name="addperson" class="icon" />
           </span>
