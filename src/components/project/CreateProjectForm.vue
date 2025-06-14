@@ -1,6 +1,9 @@
 <template>
   <form @submit.prevent="submitForm" :class="['form', 'form-add-project']">
     <div class="form__content">
+      <div v-if="error" class="form-control">
+        <p  class="error-text">{{ error }}</p>
+      </div>
       <div :class="['form-control', 'form-control--title', { error: !project.title.isValid }]">
         <label class="form-control__label" for="title">Title</label>
         <input class="form-control__input" id="title" type="text" v-model="project.title.value">
@@ -64,6 +67,7 @@ export default {
     BoardFilterParamsItem,
     PeopleDropdown
   },
+  emits:['on-project-create'],
   props: ['employees'],
   data() {
     return {
@@ -101,8 +105,8 @@ export default {
           errorMessage: 'Please add project status.',
           isValid: true
         }
-
-      }
+      },
+      error: null
     }
   },
   computed: {
@@ -141,7 +145,7 @@ export default {
       membersList.splice(itemIndex, 1);
     },
 
-    createProject() {
+    async createProject() {
       let newProjectData = {
         id: new Date().getTime(),
         title: this.project.title.value,
@@ -152,9 +156,20 @@ export default {
         priority: this.project.priority.value,
         status: this.project.status.value,
       };
-    
-      this.$store.dispatch('projects/createProject', newProjectData);
-      this.clearFormFields();
+      try {
+        this.$store.dispatch('projects/createProject', newProjectData);
+        this.$emit('on-project-create', {
+          created: true,
+          projParams: { id: newProjectData.id, title: newProjectData.title}
+        });
+        this.clearErrors();
+        this.clearFormFields();
+      } catch (error) {
+        if (error.message) {
+          this.isFormValid = false;
+          this.error = 'An unexpected error occurred. Please try again.';
+        }
+      }
     },
     clearFormFields() {
       this.project.title.value = '';
@@ -163,6 +178,16 @@ export default {
       this.project.boards.value = [];
       this.project.priority.value = 'low';
       this.project.status.value = 'active';
+    },
+    clearErrors() {
+      this.isFormValid = true;
+      this.error = null;
+      this.project.title.isValid = true
+      this.project.description.isValid = true
+      this.project.members.isValid = true
+      this.project.boards.isValid = true
+      this.project.priority.isValid = true
+      this.project.status.isValid = true 
     }
   }
 }
