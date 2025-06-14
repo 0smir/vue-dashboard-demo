@@ -12,6 +12,7 @@ const CreatePage = () => import('@/pages/CreatePage.vue');
 const NewBoardPage = () => import('@/pages/NewBoardPage.vue');
 const LoginPage = () => import('@/pages/LoginPage.vue');
 const CreateProjectPage = () => import('@/pages/CreateProjectPage.vue');
+const ProjectPage = () => import('@/pages/ProjectPage.vue');
 const BoardPage = () => import('@/pages/BoardPage.vue');
 
 
@@ -40,15 +41,17 @@ const router = createRouter({
     {
       path: '/tasks',
       component: TasksList,
-    },
-    {
-      path: '/tasks/:id',
-      props: true,
-      component: TaskDetail,
-    },
-    {
-      path: '/tasks/new',
-      component: NewTask
+      children: [
+        {
+          path: ':id',
+          props: true,
+          component: TaskDetail,
+        },
+        {
+          path: '/tasks/new',
+          component: NewTask
+        }
+      ]
     },
     {
       path: '/people',
@@ -76,25 +79,32 @@ const router = createRouter({
       path: '/project',
       children: [
         {
-          path: '/project/new',
+          path: 'new',
           component: CreateProjectPage,
         },
         {
-          path: '/project/:id',
+          path: ':id',
           props: true,
-          component: CreateProjectPage,
+          component: ProjectPage,
         }
       ]
     },
     {
-      path: '/board/new',
-      component: NewBoardPage
+      path: '/board',
+      children: [
+        {
+          path: 'new',
+          props: true,
+          component: NewBoardPage
+        },
+        {
+          path: ':id',
+          props: true,
+          component: BoardPage
+        },
+      ]
     },
-    {
-      path: '/board/:id',
-      props: true,
-      component: BoardPage
-    },
+
     {
       path: '/:notFound(.*)',
       component: NotFound
