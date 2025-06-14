@@ -222,9 +222,18 @@ export default {
         this.error = error.message || 'Smth went wrong!';
       }
     },
+    async loadProjectsList() {
+      try {
+        await this.$store.dispatch('projects/loadProjectsList');
+      }
+      catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
+    }
   },
   created() {
     this.loadUsersList();
+    this.loadProjectsList();
   }
 }
 </script>
