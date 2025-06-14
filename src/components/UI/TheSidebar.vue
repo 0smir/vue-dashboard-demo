@@ -2,6 +2,7 @@
   <aside :class="['sidebar', { open: isExpanded, close: !isExpanded }]">
     <div class="sidebar__controls-wrapper">
       <BaseButton class="btn btn__default btn--small sidebar__controls-btn" :alt="sidebarControlAltText"
+      :aria-label="sidebarControlAltText"
         @click="toggleSidebar">
         <SvgIcon v-if="!isExpanded" name="chevronLeft" class="icon sidebar__controls-icon" />
         <SvgIcon v-else name="chevronRight" class="icon sidebar__controls-icon" />
@@ -9,42 +10,42 @@
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/" title="Boards">
+        <router-link class="sidebar__link" to="/" title="Boards" aria-label="link to: Boards">
           <span class="sidebar__link-icon">
             <SvgIcon name="board" class="icon" />
           </span>
           <span class="sidebar__link-text">Boards</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/" title="Statistic">
+        <router-link class="sidebar__link" to="/" title="Statistic" aria-label="link to: Statistic">
           <span class="sidebar__link-icon">
             <SvgIcon name="statistic" class="icon" />
           </span>
           <span class="sidebar__link-text">Statistic</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/" title="Settings">
+        <router-link class="sidebar__link" to="/" title="Settings" aria-label="link to: Settings">
           <span class="sidebar__link-icon">
             <SvgIcon name="settings" class="icon" />
           </span>
           <span class="sidebar__link-text">Settings</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/tasks" title="All Tasks">
+        <router-link class="sidebar__link" to="/tasks" title="All Tasks" aria-label="link to: All Tasks">
           <span class="sidebar__link-icon">
             <SvgIcon name="tasks" class="icon" />
           </span>
           <span class="sidebar__link-text">All Tasks</span></router-link>
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/people" title="People">
+        <router-link class="sidebar__link" to="/people" title="People" aria-label="link to: People">
           <span class="sidebar__link-icon">
             <SvgIcon name="users" class="icon" />
           </span>
           <span class="sidebar__link-text">People</span></router-link>
       </li>
       <li v-if="isLoggedIn" class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/create" title="Create">
+        <router-link class="sidebar__link" to="/create" title="Create" aria-label="link to: Create page">
           <span class="sidebar__link-icon">
             <SvgIcon name="add" class="icon" />
           </span>
@@ -52,7 +53,7 @@
         </router-link>
       </li>
       <li v-else class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/people/registration" title="SignIn">
+        <router-link class="sidebar__link" to="/people/registration" title="SignIn" aria-label="link to: SignIn">
           <span class="sidebar__link-icon">
             <SvgIcon name="addperson" class="icon" />
           </span>
