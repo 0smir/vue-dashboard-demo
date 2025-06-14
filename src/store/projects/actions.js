@@ -43,7 +43,7 @@ export default {
 
     context.commit('setProject', { ...respData });
   },
-  async loadAllProjectsData(context, data) {
+  async loadProjectsList(context) {
     let url = `${BASE_URL}/projectsList.json`;
 
     let resp = await fetch(url);
@@ -54,6 +54,21 @@ export default {
       throw error;
     }
 
+    let projectsList = [];
+    for (const key in respData) {
+      const project = {
+        id: key,
+        title: respData[key].title,
+        description: respData[key].description,
+        owner: respData[key].owner,
+        members: respData[key].members,
+        boards: respData[key].boards,
+        priority: respData[key].priority,
+        status: respData[key].status
+      };
+      projectsList.push(project);
+    }
+    localStorage.setItem('projectsList', JSON.stringify(projectsList));
     context.commit('setProjectsList', respData);
   }
 
