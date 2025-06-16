@@ -28,9 +28,6 @@
                             placeholder="Select People"
             />
       </div>
-      <div :class="['form-control', 'form-control--boards']">
-        <p class="description-text">{{ project.boards.descriptions }}</p>
-      </div>
       <div :class="['form-control', 'form-control--status', { error: !project.status.isValid }]">
         <h4 class="title">Choose project status:</h4>
         <label class="form-control__label form-control__label--radio" v-for="statusItem in statusList"
