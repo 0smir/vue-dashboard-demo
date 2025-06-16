@@ -1,7 +1,7 @@
 <template>
-  <div class="container" v-if="!isProjCreationSuccess">
+  <div class="container container--create-project" v-if="!isProjCreationSuccess">
     <div v-if="employeesList.length">
-      <h2 class="title page-title">Create new project</h2>
+      <h2 class="title page-title create-project__page-title">Create new project</h2>
       <CreateProjectForm :employees="employeesList" @on-project-create="projectCreated"
       />
     </div>
@@ -66,4 +66,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container--create-project {
+  max-width: 840px;
+}
+</style>
