@@ -40,7 +40,10 @@ const router = createRouter({
     },
     {
       path: '/tasks',
-      component: TasksList,
+      component: TasksList
+    },
+    {
+      path: '/tasks',
       children: [
         {
           path: ':id',
@@ -48,7 +51,8 @@ const router = createRouter({
           component: TaskDetail,
         },
         {
-          path: '/tasks/new',
+          path: 'new',
+          name: 'newTask',
           component: NewTask
         }
       ]
@@ -68,13 +72,14 @@ const router = createRouter({
           name: 'all',
           component: PersonsList,
         },
+        {
+          path: '/people/:id',
+          props: true,
+          component: Person,
+        },
       ]
     },
-    {
-      path: '/people/:id',
-      props: true,
-      component: Person,
-    },
+
     {
       path: '/project',
       children: [
