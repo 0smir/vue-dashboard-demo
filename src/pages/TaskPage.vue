@@ -14,7 +14,9 @@
           <SvgIcon class="icon icon--small details__arrow" name="chevron-down" />
         </summary>
         <div class="task-info__details-wrapper">
-        <TaskAssigneeDetails :assigneeFullName="assigneeFullName"/>
+        <TaskAssigneeDetails :assignee="assigneeInfo"
+                              @update-assignee="updateTaskParams"
+        />
         <TaskPriorityDetails :taskPriorityList="taskPriorityList"
                              :priorityTitle="taskInfo.priority"
                              @choose-action="updateTaskParams"
@@ -170,9 +172,8 @@ export default {
     taskUpdatesHistory() {
       return this?.taskInfo?.taskUpdatesHistory;
     },
-    assigneeFullName() {
-      const assignee = this.taskInfo?.assignee;
-      return assignee ? `${assignee.name} ${assignee.lastName}` : 'Unassigned';
+    assigneeInfo() {
+      return this.taskInfo?.assignee;
     },
     createTime() {
       return this.formatDate(this?.taskInfo?.createdTime);
@@ -218,9 +219,9 @@ export default {
         this.showLoginRequirementDialog();
         return;
       } else {
-        // if (mode === 'assignee') {
-      //   this.$store.dispatch('tasks/setTaskAssignee', { id: this.taskInfo.id, mode: mode, assignee: newVal });
-      // }
+        if (mode === 'assignee') {
+        this.$store.dispatch('tasks/setTaskAssignee', { id: this.taskInfo.id, mode: mode, assignee: newVal });
+      }
       // if (mode === 'reporter') {
       //   this.$store.dispatch('tasks/setTaskReporter', { id: this.taskInfo.id, mode: mode, reporter: newVal });
       // }
