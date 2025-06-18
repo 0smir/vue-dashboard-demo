@@ -190,4 +190,10 @@
   color: var(--color-primary-medium);
 }
 
+.error {
+  .password-visibility-wrapper {
+    color: var(--color-danger);
+  }
+}
+
 .smart-list-box {}
