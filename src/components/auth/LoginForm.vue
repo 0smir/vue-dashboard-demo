@@ -2,8 +2,9 @@
   <div class="login-form__wrapper">
     <form class="form from--login" @submit.prevent="submitForm">
       <div class="form__content">
-        <div v-if="error" class="form-control">
-          <p  class="error-text">{{ error }}</p>
+        
+        <div  class="form-control error-placeholder">
+          <p v-if="error" class="error-text login-form__form-error-message">{{ error }}</p>
         </div>
         <div :class="['form-control', 'form-control--email', { error: !user.email.isValid }]">
           <label for="email" class="form-control__label">Email</label>
@@ -117,6 +118,11 @@ export default {
 
 <style lang="scss" scoped>
 .login-form {
+  &__form-error-message{
+    position: absolute;
+    top: 3px;
+    font-size: 18px;
+  }
   &__wrapper {
     max-width: 36rem;
   }
@@ -139,5 +145,10 @@ export default {
   &--forget-pass {
     color: var(--color-primary);
   }
+}
+.error-placeholder {
+  position: relative;
+  padding-bottom: 30px;
+  margin-bottom: 0;
 }
 </style>
