@@ -8,7 +8,13 @@
         <span class="poste-time">{{ updateTime }}</span>
       </div>
       <p class="activity-item__description">
-        Task {{ item.mode }} update to <strong :class="{ 'capitalize': item.mode !== 'status' }">{{ item.newValue }}</strong>
+        Task {{ item.mode }} updated to 
+        <strong v-if="item.mode === 'reporter' || item.mode === 'assignee'">
+          {{ item.newValue.name }} {{ item.newValue.lastName }}
+        </strong>
+        <strong v-else :class="{ 'capitalize': item.mode !== 'status' }">
+          {{ item.newValue }}
+        </strong>
       </p>
     </div>
   </div>
