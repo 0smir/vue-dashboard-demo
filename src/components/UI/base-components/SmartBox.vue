@@ -62,9 +62,12 @@ export default {
     position: absolute;
     top: calc(100% + 5px);
     left: 50%;
+    overflow-y: auto;
     transform: translateX(-50%);
     padding: 5px;
     width: max(100%, 170px);
+    min-height: 100px;
+    max-height: 220px;
     list-style: none;
     background: var(--color-white);
     border: 1px solid var(--color-secondary-medium);
