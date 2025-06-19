@@ -10,7 +10,7 @@
           </BaseButton>
         </template>
         <template #list-items="{ list, selectItem }">
-          <li v-for="item in list" :key="item"
+          <li v-for="item in list" :key="item" :id="item.id || item"
             :class="['smart-box__list-item', { hidden: item === priorityTitle }]">
             <TaskPriorityElement :priority="item" :titleDisplay="true" @click.stop="selectItem(item)" />
           </li>
