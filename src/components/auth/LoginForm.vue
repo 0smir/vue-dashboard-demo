@@ -1,13 +1,13 @@
 <template>
   <div class="login-form__wrapper">
     <form class="form from--login" @submit.prevent="submitForm">
-      <div class="form__content">
+      <div class="form__content login-form__content">
         
         <div  class="form-control error-placeholder">
           <p v-if="error" class="error-text login-form__form-error-message">{{ error }}</p>
         </div>
         <div :class="['form-control', 'form-control--email', { error: !user.email.isValid }]">
-          <label for="email" class="form-control__label">Email</label>
+          <label for="email" class="form-control__label">Email:</label>
           <input id="email" type="text" autocomplete="off" class="form-control__input" v-model="user.email.value" @focus="clearError">
           <p v-if="!user.email.isValid" class="error-text"> Please, enter a valid email address</p>
         </div>
@@ -118,6 +118,10 @@ export default {
 
 <style lang="scss" scoped>
 .login-form {
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
   &__form-error-message{
     position: absolute;
     top: 3px;
