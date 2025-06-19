@@ -61,30 +61,7 @@ export default {
 }
 </script>
 
-<style lang="scss" >
-.task-details--assignee{
-  position: relative;
-
-  &:hover{ 
-    .btn__edit-assignee {
-      visibility: visible;
-    }
-  }
-}
-.btn__edit-assignee {
-  visibility: hidden;
-  padding: 0;
-  height: 25px;
-  width: 25px;
-  border-radius: 4px;
-  transition: all .35s ease;
-  &:hover {
-    .icon--edit{
-      color: var(--color-white);
-    }
-  }
-}
-
+<style lang="scss" scoped>
 .btn-assignee__controller {
   display: flex;
   justify-content: space-between;
