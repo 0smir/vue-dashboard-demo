@@ -32,7 +32,7 @@ export default {
   emits: ['choose-action'],
   methods: {
     updateTaskParams(payload) {
-      console.log(payload);
+     
       this.$emit('choose-action', payload);
     }
   }   
