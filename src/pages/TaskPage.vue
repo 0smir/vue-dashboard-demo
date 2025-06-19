@@ -219,12 +219,6 @@ export default {
         this.showLoginRequirementDialog();
         return;
       } else {
-        if (mode === 'assignee') {
-        this.$store.dispatch('tasks/setTaskAssignee', { id: this.taskInfo.id, mode: mode, assignee: newVal });
-      }
-      // if (mode === 'reporter') {
-      //   this.$store.dispatch('tasks/setTaskReporter', { id: this.taskInfo.id, mode: mode, reporter: newVal });
-      // }
         this.$store.dispatch('tasks/updateTask', { id: this.taskInfo.id, mode: mode, ...params });
       }
     },
