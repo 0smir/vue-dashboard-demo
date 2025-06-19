@@ -26,7 +26,9 @@
                             :title="taskInfo.project"
                             @choose-action="updateTaskParams"
         />
-        <TaskReporterDetails :reporter="taskInfo.reporter" />
+        <TaskReporterDetails :reporter="taskInfo.reporter" 
+                              @update-reporter="updateTaskParams"
+        />
         <div v-if="taskInfo?.estimateTime" class="task-details task-details__time task-details--time-estimated">
           <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
           <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimateTime + 'h' }}</span>
