@@ -14,19 +14,18 @@
           <SvgIcon class="icon icon--small details__arrow" name="chevron-down" />
         </summary>
         <div class="task-info__details-wrapper">
-        <TaskAssigneeDetails :assignee="assigneeInfo"
+        <TaskAssigneeDetails v-if="assigneeInfo" :assignee="assigneeInfo"
                               @update-assignee="updateTaskParams"
         />
-        <TaskPriorityDetails :taskPriorityList="taskPriorityList"
+        <TaskPriorityDetails v-if="taskPriorityList" :taskPriorityList="taskPriorityList"
                              :priorityTitle="taskInfo.priority"
                              @choose-action="updateTaskParams"
         />
         <TaskProjectDetails v-if="taskInfo?.project" 
-                            :projectsList="projectsList" 
-                            :title="taskInfo.project"
+                            :title="taskInfo?.project?.title"
                             @choose-action="updateTaskParams"
         />
-        <TaskReporterDetails :reporter="taskInfo.reporter" 
+        <TaskReporterDetails v-if="taskInfo.reporter" :reporter="taskInfo.reporter" 
                               @update-reporter="updateTaskParams"
         />
         <div v-if="taskInfo?.estimateTime" class="task-details task-details__time task-details--time-estimated">
@@ -156,9 +155,7 @@ export default {
     hasTaskInfo() {
       return !this.isLoading && (this.taskInfo !== null);
     },
-    projectsList() {
-      return this.$store.getters['projects/getProjects'];
-    }, 
+  
     taskPriorityList() {
       return this.$store.getters['tasks/getPriorityList'];
     },
