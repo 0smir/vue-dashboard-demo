@@ -63,6 +63,8 @@ export default {
 <style lang="scss" scoped>
 .activity-item {
   display: flex;
+  align-items: flex-start;
+  gap: 5px;
   margin-bottom: 20px;
   
   &__details {
