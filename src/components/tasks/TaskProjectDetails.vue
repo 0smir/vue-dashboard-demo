@@ -5,9 +5,13 @@
       <SmartBox :list="projectsList" :title="title" mode="project" @update-params="updateTaskParams"
         :classList="['btn', 'btn--medium', 'btn--transparent', 'btn-project__controller']">
         <template #list-items="{ list, selectItem }">
-          <li class="smart-box__list-item" v-for="item in list" :key="item">
+          <li  v-if="!list.length" class="smart-box__list-item">
+            <BaseSpinner />
+          </li>
+          <li v-else class="smart-box__list-item" v-for="item in list" :key="item.id">
             <BaseButton class="btn btn--transparent btn-project__project-item"
-              @click.stop="selectItem(item.title)">
+                        :id="item.id"
+                        @click.stop="selectItem(item)">
               <span class="btn-text">{{ item.title }}</span>
             </BaseButton>
           </li>
@@ -19,13 +23,18 @@
 
 <script>
 import SmartBox from '@/components/UI/base-components/SmartBox.vue';
+import BaseSpinner from '../UI/base-components/BaseSpinner.vue';
 export default {
-  props: ['projectsList', 'title'],
+  props: ['title'],
   emits: ['choose-action'],
   components: {
     SmartBox
   },
-
+  computed: {
+    projectsList() {
+      return this.$store.getters['projects/getProjects'];
+    }
+  },
   methods: {
     updateTaskParams(payload) {
       this.$emit('choose-action', payload);
@@ -40,7 +49,6 @@ export default {
       }
     }
   }
-    
 }
 </script>
 
