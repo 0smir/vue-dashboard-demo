@@ -13,7 +13,7 @@
           {{ item.newValue.name }} {{ item.newValue.lastName }}
         </strong>
         <strong v-else :class="{ 'capitalize': item.mode !== 'status' }">
-          {{ item.newValue }}
+          {{ item?.newValue?.title || item?.newValue }}
         </strong>
       </p>
     </div>
