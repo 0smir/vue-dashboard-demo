@@ -3,7 +3,7 @@
     <span class="task-details__label task-details__label--reporter">Reporter: </span>
 
     <div class="task-details__value task-details__value--reporter" @click="loadUsersList">
-      <SmartBox mode="reporter" @update-params="changeReporterName">
+      <SmartBox :list="personsList"  mode="reporter" @update-params="changeReporterName">
         <template #active-item>
           <BaseButton class="btn btn--medium btn--transparent btn-reporter__controller" 
                       :aria-label="`current assegnee is: ${reporterFullName}. Click to see list of employees`">
@@ -11,8 +11,11 @@
             <SvgIcon name="edit" class="icon icon--small icon--edit"/>
           </BaseButton>
         </template>
-        <template v-if="personsList" #list-items="{ list, selectItem }">
-          <li v-for="item in personsList" :key="item.id" :id="item.id"
+        <template  #list-items="{ list, selectItem }">
+          <li v-if="!list.length" class="smart-box__list-item">
+            <BaseSpinner />
+          </li>
+          <li v-else v-for="item in list" :key="item.id" :id="item.id"
             :class="['smart-box__list-item', { hidden: item.id === reporter.id }]"
           >
             <UserProfileInfo :userInfo="item" theme="blue" :showName="true" size="small" @click.stop="selectItem(item)"/>
