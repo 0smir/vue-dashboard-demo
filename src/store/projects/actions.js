@@ -69,7 +69,7 @@ export default {
       projectsList.push(project);
     }
     localStorage.setItem('projectsList', JSON.stringify(projectsList));
-    context.commit('setProjectsList', respData);
+    context.commit('setProjectsList', projectsList);
   }
 
 }
