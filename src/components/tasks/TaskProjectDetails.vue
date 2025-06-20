@@ -1,17 +1,19 @@
 <template>
-  <div class="task-details task-details--creator">
-    <span class="task-details__label task-details__label--creator">Project: </span>
-    <SmartBox :list="projectsList" :title="title" mode="project" @update-params="updateTaskParams"
-      :classList="['btn', 'btn--medium', 'btn--transparent', 'btn-project__controller']">
-      <template #list-items="{ list, selectItem }">
-        <li class="smart-box__list-item" v-for="item in list" :key="item">
-          <BaseButton class="btn btn--transparent btn-project__project-item"
-            @click.stop="selectItem(item.title)">
-            <span class="btn-text">{{ item.title }}</span>
-          </BaseButton>
-        </li>
-      </template>
-    </SmartBox>
+  <div class="task-details task-details--project">
+    <span class="task-details__label task-details__label--project">Project: </span>
+    <div class="task-details__value task-details__value--project" @click="loadProjectsList">
+      <SmartBox :list="projectsList" :title="title" mode="project" @update-params="updateTaskParams"
+        :classList="['btn', 'btn--medium', 'btn--transparent', 'btn-project__controller']">
+        <template #list-items="{ list, selectItem }">
+          <li class="smart-box__list-item" v-for="item in list" :key="item">
+            <BaseButton class="btn btn--transparent btn-project__project-item"
+              @click.stop="selectItem(item.title)">
+              <span class="btn-text">{{ item.title }}</span>
+            </BaseButton>
+          </li>
+        </template>
+      </SmartBox>
+    </div>
   </div>
 </template>
 
@@ -23,13 +25,23 @@ export default {
   components: {
     SmartBox
   },
+
   methods: {
     updateTaskParams(payload) {
       this.$emit('choose-action', payload);
+    },
+    async loadProjectsList() {
+      if (!this.projectsList.length) {
+        try {
+          await this.$store.dispatch('projects/loadProjectsList');
+        } catch (error) {
+          this.error = error.message || 'Smth went wrong!';
+        }
+      }
     }
   }
     
-  }
+}
 </script>
 
 <style lang="scss" >
