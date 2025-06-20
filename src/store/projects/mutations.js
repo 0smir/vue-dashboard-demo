@@ -7,7 +7,6 @@ export default {
     state.projectInfo = payload;
   },
   setProjectsList(state, payload) {
-    console.log("setProjectsList", payload);
     state.projects = payload;
   }
 }
