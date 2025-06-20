@@ -43,6 +43,8 @@ export default {
 .comments {
   &__form-wrapper {
     display: flex;
+    align-items: flex-start;
+    gap: 5px;
   }
   &__list-wrapper {
     margin-top: 15px;
