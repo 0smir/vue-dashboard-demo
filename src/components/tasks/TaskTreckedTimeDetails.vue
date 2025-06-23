@@ -51,6 +51,7 @@ export default {
   }
 
   &__treck {
+    overflow: hidden;
     margin-bottom: 5px;
     width: 100%;
     height: 10px;
