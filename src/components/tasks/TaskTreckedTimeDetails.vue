@@ -6,7 +6,8 @@
         <span class="time-line__time-indicator" :style="{'width': loggedTimeIndicatorWidth + '%'}"></span>
       </div>
       <div class="time-line__details">
-          <span>{{ trecked + 'h' }} logged</span>
+          <span v-if="!trecked">0h logged</span>
+          <span v-else>{{ trecked + 'h' }} logged</span>
           <span v-if="!isTaskOverdue">{{ remaining }}h remaining</span>
           <span v-else>{{ estimated + 'h' }} original estimation</span>
         </div>
