@@ -81,37 +81,8 @@ export default {
     }
   },
 
-  // async setTaskAssignee(context, data) {
-  //   let { id, assignee } = data;
-  //   let updateTime = new Date().getTime();
-  //   let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
-
-  //   const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ assignee, updateTime: updateTime }) });
-  //   const resultData = await resp.json();
-  //   if (!resp.ok) {
-  //     const error = new Error(resultData.message || 'Failed to fetch!');
-  //     throw error;
-  //   }
-
-  //   context.commit('updateTask', { assignee, updateTime: updateTime });
-  // },
-  // async setTaskReporter(context, data) {
-  //   let { id, reporter } = data;
-  //   let updateTime = new Date().getTime();
-  //   let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
-
-  //   const resp = await fetch(url, { method: 'PATCH', body: JSON.stringify({ reporter, updateTime: updateTime }) });
-  //   const resultData = await resp.json();
-  //   if (!resp.ok) {
-  //     const error = new Error(resultData.message || 'Failed to fetch!');
-  //     throw error;
-  //   }
-
-  //   context.commit('updateTask', { reporter, updateTime: updateTime });
-  // },
-
   async LogTime(context, data) {
-    let { id, loggedTimeDescription, loggedTimeDate, spentTime, loggedTime } = data;
+    let { id, mode, loggedTimeDescription, loggedTimeDate, spentTime, loggedTime } = data;
     let updateTime = new Date().getTime();
 
     let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
@@ -128,10 +99,10 @@ export default {
       throw error;
     }
 
-    context.commit('updateTask', { loggedTime, updateTime: oldTreckedTimeVal + loggedTime });
+    context.commit('updateTask', { loggedTime, updateTime: spentTime + loggedTime });
     context.dispatch('updateTaskHistory', {
       id,
-      mode: 'logTime',
+      mode,
       updateTime,
       newValue: { loggedTimeDate, loggedTimeDescription, spentTime }
     })
@@ -218,7 +189,7 @@ export default {
 
     const resp = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(historyUpdatesData),
+      body: JSON.stringify(historyUpdatesData)
     });
     const respData = await resp.json();
 
