@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container login-page__container">
     <div class="registration-logo__wrapper">
       <SvgIcon name="logo" class="icon icon--logo registration-logo__icon" />
     </div>
@@ -19,11 +19,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.login-page__container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 40px;
+  padding: 40px 0;
 }
 
 .registration-logo {
