@@ -22,6 +22,12 @@ export default {
     state.tasks.splice(index, 1);
   },
   updateTaskHistory(state, payload) {
-    state.task['taskUpdatesHistory'][payload.key] = payload.historyUpdatesData;
+    state.task.taskUpdatesHistory = {
+      ...(state.task.taskUpdatesHistory || {}),
+      [payload.key]: payload.historyUpdatesData
+    };
+
+
+    // state.task['taskUpdatesHistory'][payload.key] = payload.historyUpdatesData;
   }
 }
