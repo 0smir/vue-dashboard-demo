@@ -99,7 +99,7 @@ export default {
       throw error;
     }
 
-    context.commit('updateTask', { loggedTime, updateTime: spentTime + loggedTime });
+    context.commit('updateTask', { loggedTime, updateTime });
     context.dispatch('updateTaskHistory', {
       id,
       mode,
