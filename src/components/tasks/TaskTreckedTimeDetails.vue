@@ -6,10 +6,10 @@
         <span class="time-line__time-indicator" :style="{'width': loggedTimeIndicatorWidth + '%'}"></span>
       </div>
       <div class="time-line__details">
-          <span v-if="!trecked">0h logged</span>
-          <span v-else>{{ trecked + 'h' }} logged</span>
-          <span v-if="!isTaskOverdue">{{ remaining }}h remaining</span>
-          <span v-else>{{ estimated + 'h' }} original estimation</span>
+          <span v-if="!trecked" class="text-left">0h logged</span>
+          <span v-else class="text-left">{{ trecked + 'h' }} logged</span>
+          <span v-if="!isTaskOverdue && estimated > 0" class="text-right">{{ remaining }}h remaining</span>
+          <span v-else class="text-right">{{ estimated + 'h' }} original estimation</span>
         </div>
     </div>
   </div>
@@ -20,12 +20,13 @@ export default {
   props: ['isLabelVisible', 'estimated', 'trecked'],
   data() {
     return {
-      isTaskOverdue: this?.trecked > this?.estimated
+      isTaskOverdue: this?.estimated > 0 ? this?.trecked > this?.estimated : false
     }
   },
   computed: {
     loggedTimeIndicatorWidth() {
       let width;
+      if (!this.estimated && this.trecked > 0) return 100;
       if (!this.estimated || !this.trecked) return 0;
       if (this.isTaskOverdue) {
         width = (this.estimated / this.trecked) * 100;
