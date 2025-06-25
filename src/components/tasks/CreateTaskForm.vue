@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submitForm" :class="['form', 'form-add-task', 'form-' + className]">
-    <div class="form__content">
+    <div class="form__content form-add-task__content form-add-task__content">
       <div :class="['form-control', 'form-control--title', { error: !task.title.isValid }]">
         <label class="form-control__label" for="title">Title</label>
         <input class="form-control__input" id="title" type="text" v-model="task.title.value">
@@ -276,7 +276,7 @@ export default {
   }
 }
 
-.form__content {
+.form-add-task__content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
