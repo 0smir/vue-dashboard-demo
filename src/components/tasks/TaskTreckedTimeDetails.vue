@@ -20,7 +20,7 @@ export default {
   props: ['isLabelVisible', 'estimated', 'trecked'],
   data() {
     return {
-      isTaskOverdue: !(this.estimated >= this.trecked)
+      isTaskOverdue: this?.trecked >= this?.estimated
     }
   },
   computed: {
