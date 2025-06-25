@@ -39,7 +39,7 @@ export default {
       return `${this?.workLog?.authorName} ${this?.workLog?.authorLastName}`;
     },
     timeSpent() {
-      return this.workLog.newValue.loggedTime + 'h';
+      return this.workLog.newValue.spentTime + 'h';
     },
     workDescription() {
       return this.workLog.newValue.loggedTimeDescription || '<No comment>';
