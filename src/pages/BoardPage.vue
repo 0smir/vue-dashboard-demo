@@ -16,7 +16,7 @@
       Choose some filter points to display tasks</p>
     <p v-if="!boardTasks.length">No task to display</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
-      <CreateTaskForm className="dialog" mode="dialog"></CreateTaskForm>
+      <CreateTaskForm className="dialog" mode="dialog" :userID="userInfo.id"></CreateTaskForm>
     </BaseDialog>
   </div>
 </template>
@@ -47,6 +47,9 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters['users/isAuthenticated'];
+    },
+    userInfo() {
+      return this.$store.getters['users/getUserInfo'];
     },
     boardData() {
       return this.$store.getters['boards/getBoardData'];
