@@ -26,8 +26,5 @@ export default {
       ...(state.task.taskUpdatesHistory || {}),
       [payload.key]: payload.historyUpdatesData
     };
-
-
-    // state.task['taskUpdatesHistory'][payload.key] = payload.historyUpdatesData;
   }
 }
