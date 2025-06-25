@@ -9,7 +9,7 @@
       <div :class="['form-control', 'form-control--project', { error: !task.project.isValid }]">
         <label class="form-control__label" for="project">Select Project: </label>
         <select class="form-control__select" name="project-name" id="project" v-model="task.project.value">
-          <option v-for="project in projectsList" :value="project.id">{{ project.title }}</option>
+          <option v-for="project in projectsList" :value="{ id: project.id, title: project.title }">{{ project.title }}</option>
         </select>
         <p class="error-text" v-if="!task.project.isValid">{{ task.project.errorMessage }}</p>
       </div>
@@ -79,7 +79,10 @@ export default {
           isValid: true
         },
         project: {
-          value: '',
+          value: {
+            id: '',
+            title: ''
+          },
           errorMessage: 'Select a project before creating the task.',
           isValid: true
         },
@@ -137,7 +140,7 @@ export default {
         this.isFormValid = false;
         return;
       }
-      if (this.task.project.value === '') {
+      if (this.task.project.value.id === '' || this.task.project.value.title === '') {
         this.task.project.isValid = false;
         this.isFormValid = false;
         return;
@@ -171,7 +174,7 @@ export default {
     },
 
     async addTask() {
-      let taskID = this.task.project.value.slice(0, 1).toUpperCase() + '-' + new Date().getTime(),
+      let taskID = this.task.project.value.title.slice(0, 1).toUpperCase() + '-' + new Date().getTime(),
           assigneeData = this.personsList.filter((item) => item.id === this.task.assignee.value)[0],
           reporterData = this.personsList.filter((item) => item.id === this.task.reporter.value)[0],
           formData = {
