@@ -37,7 +37,13 @@ export default {
   },
   methods: {
     updateTaskParams(payload) {
-      this.$emit('choose-action', payload);
+      let { mode, newVal } = payload;
+      let options = {
+        id: newVal.id,
+        title: newVal.title
+      };
+      
+      this.$emit('choose-action', {mode, newVal: options});
     },
     async loadProjectsList() {
       if (!this.projectsList.length) {
