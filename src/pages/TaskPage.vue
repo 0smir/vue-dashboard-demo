@@ -32,7 +32,7 @@
           <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
           <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimateTime + 'h' }}</span>
         </div>
-        <TaskTreckedTimeDetails v-if="taskInfo?.estimateTime && taskInfo?.loggedTime" :isLabelVisible="true" :estimated="taskInfo?.estimateTime" :trecked="taskInfo?.loggedTime"/>
+        <TaskTreckedTimeDetails v-if="taskInfo?.loggedTime" :isLabelVisible="true" :estimated="taskInfo?.estimateTime" :trecked="taskInfo?.loggedTime"/>
 
         <div v-if="taskInfo?.createdTime" class="task-details task-details__time task-details__time--created">
           <span class="task-details__label task-details__label--time-created">Created: </span>
