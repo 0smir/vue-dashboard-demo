@@ -20,7 +20,10 @@ export default {
     state.boardTasksList = payload;
   },
   setBoardFilterParams(state, payload) {
+    let boardsList = JSON.parse(localStorage.getItem('boardsFilterParams')) || {};
+    boardsList[payload.boardId] = payload.params;
+
     state.boardFilterParms = payload.params;
-    localStorage.setItem('boardsFilterParams', JSON.stringify({ [payload.boardId]: { params: payload.params } }));
+    localStorage.setItem('boardsFilterParams', JSON.stringify(boardsList));
   }
 }
