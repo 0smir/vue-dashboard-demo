@@ -14,6 +14,7 @@ const LoginPage = () => import('@/pages/LoginPage.vue');
 const CreateProjectPage = () => import('@/pages/CreateProjectPage.vue');
 const ProjectPage = () => import('@/pages/ProjectPage.vue');
 const BoardPage = () => import('@/pages/BoardPage.vue');
+const BoardsPage = () => import('@/pages/BoardsPage.vue');
 
 
 const AddPersonForm = () => import('@/components/people/AddPersonForm.vue');
@@ -107,6 +108,10 @@ const router = createRouter({
           props: true,
           component: BoardPage
         },
+        {
+          path: 'boards_all',
+          component: BoardsPage
+        }
       ]
     },
 
