@@ -54,6 +54,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 10px;
+    gap: 10px;
     width: 100%;
     &:last-of-type {
       margin-bottom: 0;
@@ -82,7 +83,6 @@ export default {
   &__item--column {
     display: inline-flex;
     align-items: center;
-    margin-right: 10px;
     padding: 3px 7px;
     color: var(--color-text);
     border-radius: var(--border-radius-large);
