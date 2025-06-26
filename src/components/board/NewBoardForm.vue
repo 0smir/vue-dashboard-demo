@@ -85,7 +85,7 @@ export default {
       this.redirectToBoard(boardID);
     },
     redirectToBoard(id) {
-      let redirectUrl = this.$router + '/board/' + id;
+      let redirectUrl = '/board/' + id;
       this.$router.replace(redirectUrl);
     },
     clearFormFields() {
