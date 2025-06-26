@@ -134,9 +134,10 @@ export default {
   },
   created() {
     this.loadUsersList();
+    let boardsFilterData = JSON.parse(localStorage.getItem('boardsFilterParams'));
 
-    if (JSON.parse(localStorage.getItem('boardsFilterParams')) && (JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId].params)) {
-      let params = JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId].params;
+    if (boardsFilterData && boardsFilterData[this.boardId] && boardsFilterData[this.boardId]){
+      let params = JSON.parse(localStorage.getItem('boardsFilterParams'))[this.boardId];
 
       this.filterParams.selectedColumns = params.columns;
       this.filterParams.selectedPeople = params.people;
