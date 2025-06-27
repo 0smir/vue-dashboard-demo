@@ -38,6 +38,7 @@ export default {
     }
 
     context.commit('setBoard', { ...respData });
+    return respData;
   },
 
   addTaskToBoard(context, data) {
@@ -45,7 +46,7 @@ export default {
   },
 
   setToBoardTasksList(context, data) {
-    localStorage.setItem('boardTasksList', JSON.stringify(data));
+    console.log(data);
     context.commit('updateBoardTasksList', data);
   },
 
