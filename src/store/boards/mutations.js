@@ -17,7 +17,12 @@ export default {
   },
 
   updateBoardTasksList(state, payload) {
-    state.boardTasksList = payload;
+    let { boardId, tasksList } = payload;
+    let boardTasksList = JSON.parse(localStorage.getItem('boardTasksList')) || {};
+    boardTasksList[boardId] = tasksList;
+
+    state.boardTasksList = tasksList;
+    localStorage.setItem('boardTasksList', JSON.stringify(boardTasksList));
   },
   setBoardFilterParams(state, payload) {
     let boardsList = JSON.parse(localStorage.getItem('boardsFilterParams')) || {};
