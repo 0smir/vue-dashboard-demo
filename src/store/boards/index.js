@@ -8,7 +8,7 @@ export default {
     return {
       board: null,
       boardsList: [],
-      boardTasksList: JSON.parse(localStorage.getItem('boardTasksList')) ? JSON.parse(localStorage.getItem('boardTasksList')) : [],
+      boardTasksList: [],
       boardColumns: [],
       defaultBoardCollumns: ['toDo', 'inProgress', 'Done'],
       boardFilterParms: {
