@@ -46,7 +46,6 @@ export default {
   },
 
   setToBoardTasksList(context, data) {
-    console.log(data);
     context.commit('updateBoardTasksList', data);
   },
 
