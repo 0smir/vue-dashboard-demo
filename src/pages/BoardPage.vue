@@ -82,24 +82,32 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch('boards/loadBoardData', { id });
-        
+        let boardTasksList = this.boardData?.tasksList;
+
+        if (!boardTasksList) {
+          return this.updateBoardTasksList([]);
+        }
+       
         if (this.boardData?.tasksList?.length && !this.boardTasks.length) {
           await this.loadTasks(this.boardData.tasksList);
         }
       } catch (error) {
         this.error = error.message || 'faled to Fatch';
+      }finally{
+         this.isLoading = false;
       }
-      this.isLoading = false;
     },
 
     async loadTasks(taskIds) {
+      if (!taskIds.length) {
+        return this.updateBoardTasksList([]);
+      }
       try {
         let tasksArr = [];
         let promises = taskIds.map(id => {
           let url = `https://jira-vue-demo-default-rtdb.firebaseio.com/tasksList/${id}.json`;
           return fetch(url).then(response => response.json()); 
         });
-      
         
         await Promise.allSettled(promises).then((results) => {
           return results.forEach((result) => {
@@ -110,11 +118,16 @@ export default {
             }
           });
         });
-        
-        this.$store.dispatch('boards/setToBoardTasksList' ,  tasksArr);
+        this.updateBoardTasksList(tasksArr);
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
+    },
+    updateBoardTasksList(tasks = []) {
+      this.$store.dispatch('boards/setToBoardTasksList', {
+        boardId: this.id,
+        tasksList: tasks
+      });
     },
 
     updateBoardData(filterParams) {
