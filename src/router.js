@@ -26,7 +26,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/boards/test_board',
+      redirect: '/boards/all',
       // component: Home,
       component: BoardPage,
     },
