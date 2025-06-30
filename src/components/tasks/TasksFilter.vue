@@ -15,10 +15,15 @@
       </li>
     </ul>
   </div>
+  <BaseTabs :tabsList="filterItemsList" :activeItem="activeItem"/>
 </template>
 
 <script>
+import BaseTabs from '@/components/UI/base-components/BaseTabs.vue';
 export default {
+  components:{
+    BaseTabs
+  },
   props: ['filterItemsList', 'activeItem'],
   emits: ['on-filter-change'],
   methods: {
