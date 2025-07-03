@@ -22,11 +22,19 @@ export default {
     },
     scrollToActiveItem() {
       let targetEl = document.getElementsByClassName('active')[0],
+        targetElWidth = targetEl.clientWidth,
         wrapperWidth = this.$refs.tabsContainer.clientWidth,
         listEl = this.$refs.tabsList,
-        position = targetEl.offsetLeft;
-        
-      listEl.scrollLeft = position - (wrapperWidth / 2);
+        targetPosition = targetEl.offsetLeft;
+      let offset;
+
+      if (wrapperWidth/2 > (targetPosition - (targetElWidth/2))) {
+        listEl.scrollLeft = 0
+      } else {
+        offset = (targetElWidth) + targetPosition - (wrapperWidth/2);
+        listEl.scrollLeft = offset;
+      }
+      
     }
   },
 
@@ -51,6 +59,7 @@ export default {
     width: 100%;
     overflow: auto;
     scroll-behavior: smooth;
+   
     &::-webkit-scrollbar {
       display: none;
     }
