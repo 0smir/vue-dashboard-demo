@@ -26,7 +26,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/board/test_board',
+      redirect: '/boards/all',
       // component: Home,
       component: BoardPage,
     },
@@ -96,20 +96,24 @@ const router = createRouter({
       ]
     },
     {
-      path: '/board',
+      path: '/boards',
+      name:'boards',
       children: [
         {
           path: 'new',
+          name: 'newBoard',
           props: true,
           component: NewBoardPage
         },
         {
           path: ':id',
+          name: 'boardDetails',
           props: true,
           component: BoardPage
         },
         {
-          path: 'boards_all',
+          path: 'all',
+          name: 'allBoards',
           component: BoardsPage
         }
       ]

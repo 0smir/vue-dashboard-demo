@@ -12,6 +12,9 @@ export default {
       state.board = payload;
     }
   },
+  setBoardsList(state, payload){
+    state.boardsList = payload;
+  },
   addTaskToBoard(state, payload) {
     console.log('set task unit to board');
   },

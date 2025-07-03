@@ -17,25 +17,43 @@
       <SvgIcon name="edit" class="icon" />
     </BaseButton>
     <div v-if="type !== 'board-item'" class="task__actions-wrapper">
-      <BaseButton v-if="isLoggedIn" class="btn btn__outlined btn--small" aria-label="Remove task" title="Remove task">
+      <BaseButton v-if="isLoggedIn" class="btn btn__outlined btn--small" 
+                :aria-label="`Remove task id:${task.id}`"
+                title="Remove task"
+                @click="toggleRemoveDialog"
+      >
         <SvgIcon class="icon" name="remove" />
       </BaseButton>
       <RouterLink :to="TaskLink" class="btn btn__outlined btn--small task__link" aria-label="Link to task details">Task
-        details</RouterLink>
+        details
+      </RouterLink>
     </div>
-
   </div>
+  <Teleport to="body">
+    <DialogRemoveTask :show="showDeleteTaskModal" 
+                      :id="task.id" 
+                      @close-dialog="toggleRemoveDialog"
+                      @confirm-task-removement="removeTaskItem"/>
+  </Teleport>
+ 
 </template>
 
 <script>
 import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
 import UserProfileImg from '@/components/auth/UserProfileInfo.vue';
+import DialogRemoveTask from '@/components/tasks/DialogRemoveTask.vue';
 export default {
   components: {
     TaskPriorityElement,
-    UserProfileImg
+    UserProfileImg,
+    DialogRemoveTask
   },
   props: ['task', 'type'],
+  data(){
+    return{
+      showDeleteTaskModal: false
+    }
+  },
   computed: {
     TaskLink() {
       return this.$route.path + '/' + this.task.id;
@@ -50,9 +68,21 @@ export default {
   methods: {
     getNameInitials() {
       return this.task.assignee.name.charAt(0) + this.task.assignee.lastName.charAt(0);
+    },
+    toggleRemoveDialog(){
+      this.showDeleteTaskModal = !this.showDeleteTaskModal;
+    },
+    async removeTaskItem(payload){
+    console.log(payload);
+    let {id}=payload;
+      this.toggleRemoveDialog();
+      try {
+        await this.$store.dispatch('tasks/removeTask', { id: id })
+      } catch (error) {
+        this.error = error.message || 'Smth went wrong!';
+      }
     }
   }
-
 }
 </script>
 

@@ -41,6 +41,30 @@ export default {
     return respData;
   },
 
+  async LoadAllBoardsData(context){
+    let url = `${BASE_URL}/boardsList.json`;
+    
+    let resp = await fetch(url);
+    let response = await resp.json();
+
+    if(!resp.ok){
+      const error = new Error(response.message || 'failed to fetch LoadAllBoardsData');
+      throw error;
+    }
+    let boardsList = [];
+    for(let key in response){
+      let board = {
+        id: key,
+        title: response[key].title,
+        description: response[key].description,
+        tasksList: response[key]?.tasksList || []
+      };
+      boardsList.push(board);
+    }
+    context.commit("setBoardsList", boardsList);
+    return response;
+  },
+
   addTaskToBoard(context, data) {
     //add task to board
   },
