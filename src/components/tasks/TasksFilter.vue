@@ -15,7 +15,7 @@
       </li>
     </ul>
   </div>
-  <BaseTabs :tabsList="filterItemsList" :activeItem="activeItem"/>
+  <BaseTabs :tabsList="filterItemsList" :activeItem="activeItem" @choose-item="updateFilter"/>
 </template>
 
 <script>
@@ -27,8 +27,8 @@ export default {
   props: ['filterItemsList', 'activeItem'],
   emits: ['on-filter-change'],
   methods: {
-    updateFilter(name) {
-      this.$emit('on-filter-change', name);
+    updateFilter(item) {
+      this.$emit('on-filter-change', item.name);
     }
   }
 }
