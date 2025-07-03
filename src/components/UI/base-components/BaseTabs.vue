@@ -1,54 +1,42 @@
 <template>
   <div class="tabs" ref="tabsContainer">
     <ul class="tabs__list" ref="tabsList">
-      <li class="tabs__item"> 
-        <BaseButton :class="['tabs__btn', { active: activeItem === 'all' }]" 
-                    @click="updateFilter('all')">
-                    All
-        </BaseButton>
-      </li>
       <li class="tabs__item" v-for="item in tabsList" :key="item">
-         <BaseButton  @click="updateFilter(item)"
+         <BaseButton  @click="updateActiveItem(item)"
           :class="['tabs__btn', { active: activeItem === item }]">
           {{ item }}
         </BaseButton>
       </li>
     </ul>
-    <BaseButton v-if="isTabControlsVisible && isLeftControlVisible" class="btn btn__default btn--small tabs__controls-btn prev">
-      <SvgIcon class="icon icon--small" name="chevronLeft" />
-    </BaseButton>
-    <BaseButton v-if="isTabControlsVisible && isRightControlVisible" class="btn btn__default btn--small tabs__controls-btn next">
-      <SvgIcon class="icon icon--small" name="chevronRight" />
-    </BaseButton>
   </div>
 </template>
 
 <script>
 export default {
   props: ['tabsList', 'activeItem'],
-  data(){
-    return{
-      isTabControlsVisible: false,
-      isLeftControlVisible: false,
-      isRightControlVisible: true
-    }
-  },
+  emits:['choose-item'],
   
   methods:{
-    tabControlsDisplay(){
-      let blockWrapper = this.$refs.tabsContainer,
-          listWrapper = this.$refs.tabsList;
-      let show = blockWrapper.offsetWidth < listWrapper.scrollWidth;
-      console.log(this.$refs.tabsContainer.offsetWidth);
-      console.log(this.$refs.tabsList.scrollWidth);
-      console.log(show);
-      this.isTabControlsVisible = show;
+    updateActiveItem(item) {
+      this.$emit('choose-item', { name: item });
+    },
+    scrollToActiveItem() {
+      let targetEl = document.getElementsByClassName('active')[0],
+        wrapperWidth = this.$refs.tabsContainer.clientWidth,
+        listEl = this.$refs.tabsList,
+        position = targetEl.offsetLeft;
+        
+      listEl.scrollLeft = position - (wrapperWidth / 2);
     }
   },
-  mounted(){
-    this.tabControlsDisplay();
-  }
-    
+
+  watch: {
+    activeItem(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.scrollToActiveItem();
+      }
+    }
+  } 
 }
 </script>
 
@@ -62,6 +50,7 @@ export default {
     display: flex;
     width: 100%;
     overflow: auto;
+    scroll-behavior: smooth;
     &::-webkit-scrollbar {
       display: none;
     }
