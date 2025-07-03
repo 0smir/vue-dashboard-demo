@@ -1,21 +1,5 @@
 <template>
-  <div class="tabs">
-    <ul class="tabs__list">
-      <li class="tabs__item"> 
-        <BaseButton :class="['tabs__btn', { active: activeItem === 'all' }]" 
-                    @click="updateFilter('all')">
-                    All
-        </BaseButton>
-      </li>
-      <li class="tabs__item" v-for="item in filterItemsList" :key="item">
-         <BaseButton  @click="updateFilter(item)"
-          :class="['tabs__btn', { active: activeItem === item }]">
-          {{ item }}
-        </BaseButton>
-      </li>
-    </ul>
-  </div>
-  <BaseTabs :tabsList="filterItemsList" :activeItem="activeItem" @choose-item="updateFilter"/>
+  <BaseTabs :tabsList="tabsList" :activeItem="activeItem" @choose-item="updateFilter"/>
 </template>
 
 <script>
@@ -26,6 +10,14 @@ export default {
   },
   props: ['filterItemsList', 'activeItem'],
   emits: ['on-filter-change'],
+
+  computed: {
+    tabsList() {
+      let tabsArray = ['all', ...this.filterItemsList];
+      return tabsArray;
+    }
+  },
+
   methods: {
     updateFilter(item) {
       this.$emit('on-filter-change', item.name);
