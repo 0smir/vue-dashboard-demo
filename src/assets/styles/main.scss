@@ -43,17 +43,18 @@
 }
 
 main {
-  // height: 100%;
   min-height: calc(100vh - 150px); //100vh - (header + footer)
-  flex-grow: 2;
+  width: 100%;
   background-color: var(--color-white);
-  max-width: calc(100% - var(--asside-width-expanded));
   transition: max-width 0.35s ease;
+
+  @media(min-width: $md) {
+    padding-left: var(--asside-width-close);
+  }
 }
 
 .sidebar.close {
   &~.main {
-    max-width: calc(100% - var(--asside-width-close));
-    transition: max-width 0.35s ease;
+    transition: width 0.35s ease;
   }
 }

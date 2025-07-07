@@ -1,10 +1,13 @@
 <template>
   <div class="layout">
     <TheHeader></TheHeader>
-    <TheSidebar :isExpanded="isExpanded" @toggle-sidebar="toggleSidebar"></TheSidebar>
+    <div class="layout__content">
+          <TheSidebar :isExpanded="isExpanded" @toggle-sidebar="toggleSidebar"></TheSidebar>
     <main class="main">
       <router-view></router-view>
     </main>
+    </div>
+
     <TheFooter></TheFooter>
   </div>
 
@@ -54,4 +57,17 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.layout {
+  &__content {
+    position: relative;
+     display: contents;
+
+    @media (min-width: $sm) {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+}
+</style>

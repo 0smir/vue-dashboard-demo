@@ -66,7 +66,12 @@
 
 <script>
 export default {
-  props: ['isExpanded'],
+  props: {
+    isExpanded: {
+      type: Boolean,
+      default: false
+    }
+  },
   emits: ['toggle-sidebar'],
 
   computed: {
@@ -90,18 +95,27 @@ export default {
 .sidebar {
   --link-hovered: var(--color-primary-medium);
 
+  
+  height: 100%;
   color: var(--color-text);
   background-color: var(--color-primary);
   padding: 10px 15px;
+  
+  @media(min-width: $md) {
+    position: absolute;
+    z-index: 9999;
+  }
 
   @media print {
     display: none;
   }
 
   &.close {
-    width: 75px;
+    width: 100%;
     transition: all 0.35s ease;
-
+    @media(min-width: $sm) {
+      width: 75px;
+    }
     .sidebar__controls-wrapper {
       justify-content: center;
     }
@@ -163,11 +177,25 @@ export default {
     justify-content: center;
     margin-right: 7px;
   }
+ &__controls-btn {
+  display: none;
+
+  @media(min-width: $md) {
+    display: flex;
+  }
+ }
 }
 
 .sidebar-nav {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  
+  @media(min-width: $sm) {
+    flex-direction: column;
+  }
 }
 </style>
