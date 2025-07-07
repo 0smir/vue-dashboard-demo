@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import UserProfile from '@/components/people/UserProfile.vue';
+import UserProfile from '@/components/people/UserProfileDropdown.vue';
 export default {
   components: {
     UserProfile
