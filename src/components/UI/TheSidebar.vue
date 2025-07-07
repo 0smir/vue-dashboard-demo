@@ -4,7 +4,7 @@
       <BaseButton class="btn btn__default btn--small sidebar__controls-btn" :alt="sidebarControlAltText"
       :aria-label="sidebarControlAltText"
         @click="toggleSidebar">
-        <SvgIcon v-if="!isExpanded" name="chevronLeft" class="icon sidebar__controls-icon" />
+        <SvgIcon v-if="isExpanded" name="chevronLeft" class="icon sidebar__controls-icon" />
         <SvgIcon v-else name="chevronRight" class="icon sidebar__controls-icon" />
       </BaseButton>
     </div>
