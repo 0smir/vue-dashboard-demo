@@ -72,13 +72,13 @@ const router = createRouter({
           path: 'all',
           name: 'all',
           component: PersonsList,
-        },
-        {
-          path: '/people/:id',
-          props: true,
-          component: Person,
-        },
+        }
       ]
+    },
+    {
+      path: '/profile/:id',
+      props: true,
+      component: Person,
     },
 
     {
@@ -97,7 +97,7 @@ const router = createRouter({
     },
     {
       path: '/boards',
-      name:'boards',
+      name: 'boards',
       children: [
         {
           path: 'new',
@@ -126,12 +126,12 @@ const router = createRouter({
   ]
 });
 
-// router.beforeEach(function (to, from, next) {
-//   if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
-//     next('/login');
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach(function (to, from, next) {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router;
