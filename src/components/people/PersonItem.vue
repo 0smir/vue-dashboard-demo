@@ -34,7 +34,7 @@ export default {
       return this.person.name + ' ' + this.person.lastName;
     },
     profileLink() {
-      return '/people/' + this.person.id;
+      return '/profile/' + this.person.id;
     }
   }
 }
