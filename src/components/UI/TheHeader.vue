@@ -9,7 +9,7 @@
         <ul class="header__nav">
           <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/" title="Home" aria-label="link to: Home">Home</router-link></li>
           <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/" title="About" aria-label="link to: About">About</router-link></li>
-          <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/" title="Projects" aria-label="link to: Projects">Projects</router-link></li>
+          <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/projects/all" title="Projects" aria-label="link to: Projects">Projects</router-link></li>
         </ul>
       </nav>
       <div v-if="!isLoggedIn" class="header__actions">
