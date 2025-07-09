@@ -127,7 +127,7 @@ const router = createRouter({
 });
 
 router.beforeEach(function (to, from, next) {
-  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+  if (to.meta.requiresAuth && !store.getters['users/isAuthenticated']) {
     next('/login');
   } else {
     next();
