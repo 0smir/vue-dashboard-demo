@@ -11,6 +11,8 @@ const Person = () => import('@/pages/PersonPage.vue');
 const CreatePage = () => import('@/pages/CreatePage.vue');
 const NewBoardPage = () => import('@/pages/NewBoardPage.vue');
 const LoginPage = () => import('@/pages/LoginPage.vue');
+
+const AllProjectsPage = () => import('@/pages/AllProjectsPage.vue');
 const CreateProjectPage = () => import('@/pages/CreateProjectPage.vue');
 const ProjectPage = () => import('@/pages/ProjectPage.vue');
 const BoardPage = () => import('@/pages/BoardPage.vue');
@@ -82,8 +84,13 @@ const router = createRouter({
     },
 
     {
-      path: '/project',
+      path: '/projects',
       children: [
+        {
+          path: 'all',
+          name: 'all-projects',
+          component: AllProjectsPage
+        },
         {
           path: 'new',
           component: CreateProjectPage,
