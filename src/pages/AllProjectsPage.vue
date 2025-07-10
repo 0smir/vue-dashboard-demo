@@ -81,7 +81,7 @@ export default {
 .search-string{
   margin-bottom: 20px;
 }
-.projects-page__content{
+.projects-page__content {
   padding-top: 20px;
   display: flex;
   justify-content: stretch;
@@ -99,16 +99,25 @@ export default {
     }
   }
   &__list {
+    display: flex;
+    gap: 0 10px;
     @media(min-width: $md) {
+      gap: 10px 0;
       width: 30%;
+      flex-direction: column;
     }
   }
   &__project-content {
-    // border: 3px solid var(--color-primary);
-    border-left: 3px solid var(--color-primary);
+    height: 100%;
+    padding: 7px;
+    border: none;
+    border-top: 1px solid var(--color-primary);
+    background-color: var(--color-primary-light);
     @media(min-width: $md) {
       width: 70%;
-      padding: 0 15px;
+      border-top: none;
+      border-top: 1px solid var(--color-primary);
+      border-left: 1px solid var(--color-primary);
     }
   }
 }
