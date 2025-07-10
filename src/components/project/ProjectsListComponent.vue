@@ -26,28 +26,58 @@ export default {
 
 <style lang="scss" scoped>
 .projects {
-  &__list-item{
-   margin-bottom: 10px;
+  &__list-item {
+    display: flex;
+    height: 45px;
+    @media(min-width: $md) {
+      height: auto;
+      width: 100%;
+    }
   }
   &__project-button {
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: baseline;
-    width: 100%;
-    padding: 15px;
+    padding: 8px 10px;
+    height: 100%;
     border: 1px solid var(--color-primary);
-    border-right: none;
+    border-bottom: none;
     border-radius: var(--border-radius-small);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
     background-color: var(--color-white);
     color: var(--color-primary);
-    font-weight: 700;
-    &:hover{
+    font-weight: 500;
+    font-size: 14px;
+
+    @media(min-width: $md) {
+      flex-direction: row;
+      padding: 15px;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--color-primary);
+      border-right: none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: var(--border-radius-small);
+      font-size: 16px;
+    }
+    &:hover {
       background-color: var(--color-primary-light);
     }
     &.active {
-      border: 3px solid var(--color-primary);
-      border-right: 3px solid white;
-      width: calc(100% + 3px);
+      height: calc(100% + 1px);
+      border: 1px solid var(--color-primary);
+      border-bottom: 1px solid transparent;
+      background-color: var(--color-primary-light);
+      @media(min-width: $md) {
+        height: auto;
+        right: -1px;
+        border: 1px solid var(--color-primary);
+        border-right: 1px solid transparent;
+        width: calc(100% + 1px);
+      }
     }
   }
 }
