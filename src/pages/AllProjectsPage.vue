@@ -8,14 +8,15 @@
       </p>
       <div v-else class="projects__info">
         <ul class="projects__list">
-          <ProjectsListComponent v-for="project in filteredProjects" 
+          <ProjectsListComponent v-for="(project, index) in filteredProjects" 
                                   :key="project.id" 
                                   :project="project"
+                                  :isActive="index === activeProjIndex"
                                   @change-active-project="updateActiveProject"
           />
         </ul>
         <div class="projects__project-content">
-          <ProjectInfoComponent :project="filteredProjects[0]"></ProjectInfoComponent>
+          <ProjectInfoComponent :project="filteredProjects[activeProjIndex]"></ProjectInfoComponent>
         </div>
       </div>
     </div>
@@ -34,7 +35,8 @@ export default {
     ProjectInfoComponent
   },
   data() {
-    return {
+    return { 
+      activeProjIndex: 0,
       searchString: '',
       error: null
     }
@@ -64,8 +66,8 @@ export default {
       this.searchString = searchValue;
     },
     updateActiveProject(project) {
-      console.log("updateActiveProject", project);
-      
+      let activeIndex = this.filteredProjects.indexOf(project);
+      this.activeProjIndex = activeIndex;
     }
   },
   created() {
@@ -80,8 +82,10 @@ export default {
   margin-bottom: 20px;
 }
 .projects-page__content{
-  border: 1px solid red;
-  height: 400px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: stretch;
+  min-height: 70vh;
 }
 .projects{
   &__info {
@@ -100,9 +104,11 @@ export default {
     }
   }
   &__project-content {
-    border: 1px solid var(--color-primary);
+    // border: 3px solid var(--color-primary);
+    border-left: 3px solid var(--color-primary);
     @media(min-width: $md) {
       width: 70%;
+      padding: 0 15px;
     }
   }
 }
