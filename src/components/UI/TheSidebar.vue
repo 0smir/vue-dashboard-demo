@@ -145,7 +145,9 @@ export default {
   &__controls-wrapper {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 25px;
+    @media(min-width: $md) {
+      margin-bottom: 25px;
+    }
   }
 
   &__controls-icon {
