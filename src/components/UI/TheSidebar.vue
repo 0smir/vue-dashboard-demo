@@ -103,7 +103,7 @@ export default {
   
   @media(min-width: $md) {
     position: absolute;
-    z-index: 9999;
+    z-index: 10;
   }
 
   @media print {

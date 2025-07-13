@@ -57,7 +57,7 @@ export default {
   width: 100%;
   padding: 15px;
   background-color: rgba(0, 0, 0, 0.75);
-  z-index: 10;
+  z-index: 999;
 }
 
 .dialog {
