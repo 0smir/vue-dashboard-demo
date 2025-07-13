@@ -113,6 +113,7 @@ export default {
       itemIndex = selectedArray.indexOf(targetItem);
       selectedArray.splice(itemIndex, 1);
       this.updateFilter();
+      this.isFilterListVisible = false;
     },
 
     clearFilter() {
@@ -120,6 +121,7 @@ export default {
       this.filterParams.selectedPriorities = [];
       this.filterParams.selectedColumns = [...this.defaultBoardCollumns];
       this.updateFilter();
+      this.isFilterListVisible = false;
     },
 
     async loadUsersList() {
