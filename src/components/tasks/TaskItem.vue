@@ -225,4 +225,9 @@ export default {
     -webkit-box-orient: vertical;
   }
 }
+.task.board-item {
+  .task__title {
+    font-size: 15px;
+  }
+}
 </style>
