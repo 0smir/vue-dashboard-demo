@@ -71,7 +71,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .time-log {
   &__item {
     margin-bottom: 20px;
@@ -119,7 +119,7 @@ export default {
   color: var(--color-primary);
   font-weight: 500;
 
-  ::v-deep .date-time {
+  .date-time {
     color: var(--color-secondary);
     font-weight: 400;
   }

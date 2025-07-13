@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .filter-params {
   &__block {
     display: flex;
@@ -73,7 +73,7 @@ export default {
       transform: scale(1.04);
       transition: transform .25s ease;
 
-      ::v-deep(.user-profile__image-wrapper) {
+     .user-profile__image-wrapper {
         background-color: var(--color-primary-light);
         transition: background-color .25s ease;
       }
