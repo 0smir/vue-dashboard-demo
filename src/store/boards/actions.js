@@ -69,6 +69,27 @@ export default {
     //add task to board
   },
 
+  async editBoardInfo(context, data){
+    console.log(data);
+    let {boardID, property, newValue} = data,
+        url = `${BASE_URL}/boardsList/${boardID}.json`,
+        boardInfo = {};
+        boardInfo[property] = newValue;
+
+    let resp = await fetch(url, {
+        method: 'PATCH',
+        body: JSON.stringify(boardInfo)
+      });
+    let response = await resp.json();
+
+    if (!resp.ok) {
+      const error = new Error(response.message || 'Failed to fetch!');
+      throw error;
+    }
+   
+    context.commit('updateBoardInfo', {boardID, property, newValue});
+  },
+
   setToBoardTasksList(context, data) {
     context.commit('updateBoardTasksList', data);
   },
