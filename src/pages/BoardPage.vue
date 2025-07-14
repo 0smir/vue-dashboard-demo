@@ -1,7 +1,10 @@
 <template>
   <BaseSpinner v-if="isLoading"></BaseSpinner>
-  <div v-else class="page-container">
-    <h1>{{ boardData.title }}</h1>
+  <div v-else class="page-container board__page-container">
+    <BoardTitleComponennt :title="boardData.title"
+                          :id="id"
+                          @update-board="updateBoard"
+    />
     <div class="board__controls-wrapper relative">
       <BaseButton v-if="isLoggedIn" @click="openDialog" class="btn btn__outlined btn--medium btn--light btn__add-task">
         <SvgIcon name="add" class="icon" />
@@ -25,12 +28,14 @@
 import BoardFilter from '@/components/board/BoardFilter.vue';
 import Board from '@/components/board/Board.vue';
 import CreateTaskForm from '@/components/tasks/CreateTaskForm.vue';
+import BoardTitleComponennt from '@/components/board/BoardTitleComponent.vue';
 
 export default {
   components: {
     BoardFilter,
     Board,
-    CreateTaskForm
+    CreateTaskForm,
+    BoardTitleComponennt
   },
 
   props: ['id'],
@@ -140,6 +145,20 @@ export default {
       this.$store.dispatch('boards/setBoardFilter', { boardId: this.id, params });
     },
 
+    async updateBoard(options){
+      let data = {
+        boardID: this.id,
+        property: options.type,
+        newValue: options.newValue
+      }
+      console.log("updateBoard", data);
+      try{
+        await this.$store.dispatch('boards/editBoardInfo', data);
+      }catch(error){
+        this.error = error.message || "failed to fetch";
+      }
+    },
+
     openDialog() {
       this.addTaskDialogDisplay = true;
     },
@@ -157,9 +176,14 @@ export default {
 
 <style lang="scss" scoped>
 .page-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 15px;
+
+}
+.board {
+  &__page-container{
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 15px 15px;
+  }
 }
 
 .btn__add-task {
