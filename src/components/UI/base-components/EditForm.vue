@@ -1,12 +1,14 @@
 <template>
-	<form class="form edit-form" @submit.prevent="saveChanges">
+	<form class="form edit-form" @submit.prevent="validateForm">
 		<div class="edit-form__content">
-			<div class="form-control">
+			<div :class="['form-control', {'error': !isFormValid }]">
 				<input class="form-control__input edit-form__input" 
 				type="text" 
 				v-model.trim="value"
+				@focus="clearError"
 				@keyup.enter="saveChanges"
 			>
+			<p v-show="!isFormValid" class="error-text">{{errorMessage}}</p>
 			</div>
 			<div class="form-control edit-form__btn-wrapper">
 				<BaseButton class="btn btn__dark btn-cancel"
@@ -18,7 +20,6 @@
 				<BaseButton class="btn btn__default btn-save"
 										type="submit"
 										aria-label="click to save changes"
-										@click.enter="saveChanges"
 				>
 					Save
 				</BaseButton>
@@ -32,18 +33,35 @@
 		props:['type', 'titleValue'],
 		emits: ['cancel-edition', 'save-changes'],
 		data(){
-			return{
-				value: this.titleValue
+			return {
+				value: this.titleValue,
+				isFormValid: true,
+				errorMessage: ''
 			}
 		},
 		methods: {
+			validateForm(){
+				if(this.value === this.titleValue){
+					this.isFormValid = false;
+					this.errorMessage = 'New board title should not be the same as the old one!';
+				}
+				if( this.value === '') {
+					this.isFormValid = false;
+					this.errorMessage = 'New board title should not be empty!';
+				};
+				this.isFormValid &&= this.saveChanges();
+			},
 			saveChanges(){
-				if(this.value === this.titleValue || this.value === '') return;
 				this.$emit('save-changes', this.value);
 			},
 
 			cancelChanges(){
 				this.$emit('cancel-edition');
+			},
+
+			clearError(){
+				this.isFormValid = true;
+				this.errorMessage = '';
 			}
 		}
 
