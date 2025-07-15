@@ -9,8 +9,7 @@
 				<SvgIcon class="icon" name="edit" />
 			</BaseButton>
 		</div>
-		<EditForm v-else type="input" 
-										:titleValue="title" 
+		<EditForm v-else :titleValue="title" 
 										@cancel-edition="toggleEditBlock"	
 										@save-changes="editTitle"
 		/>

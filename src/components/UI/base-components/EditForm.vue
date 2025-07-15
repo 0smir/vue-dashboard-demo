@@ -30,7 +30,7 @@
 
 <script>
 	export default {
-		props:['type', 'titleValue'],
+		props:['titleValue'],
 		emits: ['cancel-edition', 'save-changes'],
 		data(){
 			return {
