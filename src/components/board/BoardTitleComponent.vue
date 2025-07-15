@@ -2,7 +2,7 @@
 	<div class="board__header">
 		<div v-if="!isEditFormVisible" class="board__title-wrapper">
 			<h1 class="title board__title"> {{ title }} </h1>
-			<BaseButton class="btn btn__outlined btn--small board__btn btn__edit-title"
+			<BaseButton class="btn btn--transparent btn--small board__btn btn__edit-title"
 									aria-label="edit board title"
 									@click="toggleEditBlock"
 			>
