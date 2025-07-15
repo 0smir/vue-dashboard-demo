@@ -70,7 +70,6 @@ export default {
   },
 
   async editBoardInfo(context, data){
-    console.log(data);
     let {boardID, property, newValue} = data,
         url = `${BASE_URL}/boardsList/${boardID}.json`,
         boardInfo = {};
@@ -87,7 +86,7 @@ export default {
       throw error;
     }
    
-    context.commit('updateBoardInfo', {boardID, property, newValue});
+    context.commit('updateBoardInfo', {property, newValue});
   },
 
   setToBoardTasksList(context, data) {
