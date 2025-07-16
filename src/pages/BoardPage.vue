@@ -1,6 +1,9 @@
 <template>
   <BaseSpinner v-if="isLoading"></BaseSpinner>
   <div v-else class="page-container board__page-container">
+    <BoardProjectInfoComponent :project="boardData?.project" 
+                              @update-board="updateBoard"
+    />
     <BoardTitleComponennt :title="boardData.title"
                           :id="id"
                           @update-board="updateBoard"
@@ -29,13 +32,17 @@ import BoardFilter from '@/components/board/BoardFilter.vue';
 import Board from '@/components/board/Board.vue';
 import CreateTaskForm from '@/components/tasks/CreateTaskForm.vue';
 import BoardTitleComponennt from '@/components/board/BoardTitleComponent.vue';
+import BoardProjectInfoComponent from '@/components/board/BoardProjectInfoComponent.vue';
+import BoardProjectEdit from '@/components/board/BoardProjectEdit.vue';
 
 export default {
   components: {
     BoardFilter,
     Board,
     CreateTaskForm,
-    BoardTitleComponennt
+    BoardTitleComponennt,
+    BoardProjectInfoComponent,
+    BoardProjectEdit
   },
 
   props: ['id'],
@@ -145,13 +152,12 @@ export default {
       this.$store.dispatch('boards/setBoardFilter', { boardId: this.id, params });
     },
 
-    async updateBoard(options){
+    async updateBoard(options){     
       let data = {
         boardID: this.id,
         property: options.type,
         newValue: options.newValue
       }
-      console.log("updateBoard", data);
       try{
         await this.$store.dispatch('boards/editBoardInfo', data);
       }catch(error){
