@@ -12,6 +12,10 @@ export default {
       state.board = payload;
     }
   },
+  updateBoardInfo(state, payload){
+    let {property, newValue} = payload;
+    state.board[property] = newValue;
+  },
   setBoardsList(state, payload){
     state.boardsList = payload;
   },

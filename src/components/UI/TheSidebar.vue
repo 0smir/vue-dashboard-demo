@@ -103,7 +103,7 @@ export default {
   
   @media(min-width: $md) {
     position: absolute;
-    z-index: 9999;
+    z-index: 10;
   }
 
   @media print {
@@ -145,7 +145,9 @@ export default {
   &__controls-wrapper {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 25px;
+    @media(min-width: $md) {
+      margin-bottom: 25px;
+    }
   }
 
   &__controls-icon {
