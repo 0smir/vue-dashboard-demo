@@ -1,13 +1,15 @@
 <template>
   <BaseSpinner v-if="isLoading"></BaseSpinner>
   <div v-else class="page-container board__page-container">
-    <BoardProjectInfoComponent :project="boardData?.project" 
-                              @update-board="updateBoard"
-    />
-    <BoardTitleComponennt :title="boardData.title"
-                          :id="id"
-                          @update-board="updateBoard"
-    />
+    <div class="board__header">
+      <BoardTitleComponennt :title="boardData.title"
+                            :id="id"
+                            @update-board="updateBoard"
+      />
+      <BoardProjectInfoComponent :project="boardData?.project" 
+                                @update-board="updateBoard"
+      />
+    </div>
     <div class="board__controls-wrapper relative">
       <BaseButton v-if="isLoggedIn" @click="openDialog" class="btn btn__outlined btn--medium btn--light btn__add-task">
         <SvgIcon name="add" class="icon" />
@@ -181,14 +183,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page-container {
-
-}
 .board {
-  &__page-container{
+  &__page-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 15px 15px;
+  }
+  &__header {
+    display: flex;
+    margin-bottom: 20px;
   }
 }
 
