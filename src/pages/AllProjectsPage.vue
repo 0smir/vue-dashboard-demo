@@ -111,7 +111,7 @@ export default {
     height: 100%;
     padding: 7px;
     border: none;
-    border-top: 1px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
     background-color: var(--color-primary-light);
     @media(min-width: $md) {
       width: 70%;
