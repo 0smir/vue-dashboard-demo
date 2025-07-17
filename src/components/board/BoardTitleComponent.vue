@@ -1,12 +1,12 @@
 <template>
-	<div class="board__header">
+	<div class="board__title-details">
 		<div v-if="!isEditFormVisible" class="board__title-wrapper">
 			<h1 class="title board__title"> {{ title }} </h1>
 			<BaseButton class="btn btn--transparent btn--small board__btn btn__edit-title"
 									aria-label="edit board title"
 									@click="toggleEditBlock"
 			>
-				<SvgIcon class="icon" name="edit" />
+				<SvgIcon class="icon icon--medium" name="edit" />
 			</BaseButton>
 		</div>
 		<EditForm v-else :titleValue="title" 
@@ -44,19 +44,19 @@ export default {
 
 <style lang="scss">
 .board {
-	&__header {
+	&__title-details {
 		@media(min-width: $md){
-			max-width: 50%;
+			width: 50%;
 		}
 	}
 	&__title{
 		margin: 0;
+		line-height: 1;
 	}
 	&__title-wrapper{
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-bottom: 15px;
 
 		&:hover {
 			.btn__edit-title{

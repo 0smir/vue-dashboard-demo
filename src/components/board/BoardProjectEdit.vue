@@ -1,6 +1,7 @@
 <template>
-	<div class="task-details__value task-details__value--project" @click="loadProjectsList">
-		<p>choose project to bind board:</p>
+	<div class="board__project-details" @click="loadProjectsList">
+		<p v-if="mode === 'untied'">choose project to bind board:</p>
+		<p v-else>change project:</p>
 		<SmartBox :list="projectsList" :title="projTitle" mode="project" @update-params="updateProject"
 			:classList="['btn', 'btn--medium', 'btn--transparent', 'btn-project__controller']">
 			<template #list-items="{ list, selectItem }">
@@ -35,7 +36,7 @@
 
 <script>
 import SmartBox from '@/components/UI/base-components/SmartBox.vue';
-import BaseSpinner from '../UI/base-components/BaseSpinner.vue';
+import BaseSpinner from '@/components/UI/base-components/BaseSpinner.vue';
 export default {
 		components: {
 		SmartBox

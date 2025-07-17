@@ -12,12 +12,12 @@
 		</template>
 		<template v-else>
 			<div v-show="!isEditFormVisible" class="board__project-wrapper">
-				<span>This bard align to project: {{ project.title }} </span>
+				<span>project: {{ project.title }} </span>
 				<BaseButton class="btn btn--transparent btn--small board__btn btn__edit"
 										aria-label="edit board title"
 										@click="toggleEditBlock"
 				>
-					<SvgIcon class="icon" name="edit" />
+					<SvgIcon class="icon icon--medium" name="edit" />
 				</BaseButton>
 			</div>
 		</template>
@@ -63,6 +63,14 @@ export default {
 
 <style lang="scss">
 .board {
+	&__project-info {
+		display: flex;
+		border: 1px solid red;
+		justify-content: flex-end;
+		@media(min-width: $md){
+			width: 50%;
+		}
+	}
 	&__project-wrapper {
 		&:hover {
 			.btn__edit{
@@ -70,9 +78,7 @@ export default {
 			}
 		}
 	}
-	&__project-info {
-		justify-content: end;
-	}
+	
 }
 
 </style>
