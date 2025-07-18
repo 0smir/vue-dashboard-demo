@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import EditForm from '@/components/UI/base-components/EditForm.vue';
+import EditForm from '@/components/UI/base-components/settings/EditTitleForm.vue';
 export default {
 	components: {
 		EditForm
