@@ -66,8 +66,8 @@ export default {
 .board {
 	&__project-info {
 		display: flex;
-		// border: 1px solid red;
 		justify-content: flex-end;
+		align-items: center;
 		@media(min-width: $md){
 			width: 50%;
 		}
