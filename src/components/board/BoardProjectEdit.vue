@@ -17,20 +17,19 @@
 				</li>
 			</template>
 		</SmartBox>
-		<div v-if="mode === 'untied'" class="btn-wrapper">
 			<BaseButton class="btn btn__dark btn-cancel"
 										aria-label="click to cancel changes"
-									
+										@click="cancelChanges"			
 			>
 				Cancel
 			</BaseButton>
-			<BaseButton class="btn btn__default btn-save"
+			<BaseButton v-if="mode === 'untied'" class="btn btn__default btn-save"
 									aria-label="click to save changes"
 									@click="bindProject"
 			>
 				Save	
 			</BaseButton>
-		</div>
+	
 	</div>
 </template>
 
@@ -42,7 +41,7 @@ export default {
 		SmartBox
 	},
 	props:['currentProj', 'mode'],
-	emits: ['change-project', 'bind-project'],
+	emits: ['change-project', 'bind-project', 'cancel-changes'],
 	data(){
 		return{
 			error: null
@@ -83,7 +82,10 @@ export default {
 		updateProject(payload) {
 			let {newVal} = payload;
       this.$emit('change-project', newVal);
-    }
+		},
+		cancelChanges() {
+			this.$emit('cancel-changes');
+		}
 	},
 	created(){
 		if(this.mode === 'untied'){
