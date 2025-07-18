@@ -25,7 +25,8 @@
 																					 :currentProj="project"
 																					 :mode="mode"
 																					 @bind-project="editProject"
-																					 @change-project="editProject"  
+																					 @change-project="editProject"
+																					 @cancel-changes="toggleEditBlock"  
 		/>
 	</div>
 </template>
@@ -65,7 +66,7 @@ export default {
 .board {
 	&__project-info {
 		display: flex;
-		border: 1px solid red;
+		// border: 1px solid red;
 		justify-content: flex-end;
 		@media(min-width: $md){
 			width: 50%;
