@@ -5,7 +5,7 @@
         <SvgIcon name="add" class="icon icon--add" />
         <span class="create__link-text">Project</span>
       </RouterLink>
-      <RouterLink class="link create__link link-btn" to="/board/new">
+      <RouterLink class="link create__link link-btn" to="/boards/new">
         <SvgIcon name="add" class="icon icon--add" />
         <span class="create__link-text">Create Board</span>
       </RouterLink>
