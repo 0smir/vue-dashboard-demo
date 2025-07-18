@@ -192,6 +192,7 @@ export default {
   &__header {
     display: flex;
     margin-bottom: 20px;
+    gap: 15px;
   }
 }
 
