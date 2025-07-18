@@ -1,6 +1,11 @@
 <template>
   <BaseSpinner v-if="isLoading"></BaseSpinner>
   <div v-else class="page-container board__page-container">
+  <BoardDetailsPanel :starred="boardData?.starred"
+                    :taskCount="boardTasks.length"
+                    :id="id"
+                    @update-board="updateBoard"
+     />
     <div class="board__header">
       <BoardTitleComponennt :title="boardData.title"
                             :id="id"
@@ -36,9 +41,11 @@ import CreateTaskForm from '@/components/tasks/CreateTaskForm.vue';
 import BoardTitleComponennt from '@/components/board/BoardTitleComponent.vue';
 import BoardProjectInfoComponent from '@/components/board/BoardProjectInfoComponent.vue';
 import BoardProjectEdit from '@/components/board/BoardProjectEdit.vue';
+import BoardDetailsPanel from '@/components/board/BoardDetailsPanel.vue';
 
 export default {
   components: {
+    BoardDetailsPanel,
     BoardFilter,
     Board,
     CreateTaskForm,
@@ -187,7 +194,7 @@ export default {
   &__page-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 15px 15px;
+    padding: 20px 15px 15px;
   }
   &__header {
     display: flex;
