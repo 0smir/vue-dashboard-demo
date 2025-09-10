@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 
+$-font-main: 'Roboto', 'Arial', 'Helvetica', sans-serif;
+$-color-link-text: $color-text;
+$-color-main-text: $color-text-dark;
+
 *,
 *::before,
 *::after {
@@ -21,18 +25,14 @@ html {
 }
 
 body {
-  --font-main: 'Roboto', 'Arial', 'Helvetica', sans-serif;
-  --color-link-text: var(--color-text);
-  --color-main-text: var(--color-text-dark);
   min-height: 100vh;
   padding: 0;
-  color: var(--color-main-text);
+  color: $-color-main-text;
   overflow: auto;
-  transition:
-    color 0.5s,
+  transition: color 0.5s,
     background-color 0.5s;
   line-height: 1.42;
-  font-family: var(--font-main);
+  font-family: $-font-main;
   font-size: 1.4rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -54,12 +54,12 @@ ul {
 }
 
 a {
-  color: var(--color-link-text);
-  text-decoration: none;
+  color: $-color-link-text;
 }
 
+a,
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 #app {
@@ -98,11 +98,11 @@ a:hover {
 main {
   min-height: calc(100vh - 150px); //100vh - (header + footer)
   width: 100%;
-  background-color: var(--color-white);
+  background-color: $color-white;
   transition: max-width 0.35s ease;
 
   @media(min-width: $md) {
-    padding-left: var(--asside-width-close);
+    padding-left: $asside-width-close;
   }
 }
 
@@ -121,35 +121,35 @@ main {
 }
 
 .todo {
-  background-color: var(--color-todo);
+  background-color: $color-todo;
 }
 
 .inprogress {
-  background-color: var(--color-inprogress);
+  background-color: $color-inprogress;
 }
 
 .inreview {
-  background-color: var(--color-inreview);
+  background-color: $color-inreview;
 }
 
 .testing {
-  background-color: var(--color-testing);
+  background-color: $color-testing;
 }
 
 .done {
-  background-color: var(--color-done);
+  background-color: $color-done;
 }
 
 .blocked {
-  background-color: var(--color-blocked);
+  background-color: $color-blocked;
 }
 
 .active-status {
-  background-color: var(--color-active);
+  background-color: $color-active;
 }
 
 .close {
-  background-color: var(--color-close);
+  background-color: $color-close;
 }
 
 .board__column--todo {
@@ -202,33 +202,33 @@ main {
 
 .priority {
   &--blocker {
-    background-color: var(--color-danger);
+    background-color: $color-danger;
   }
 
   &--critical {
-    background-color: var(--color-violet);
+    background-color: $color-violet;
   }
 
   &--high {
-    background-color: var(--color-attention);
+    background-color: $color-attention;
   }
 
   &--low {
-    background-color: var(--color-success-dark);
+    background-color: $color-success-dark;
   }
 
   &--medium {
-    background-color: var(--color-everage);
+    background-color: $color-everage;
   }
 
   &--trivial {
-    background-color: var(--color-success);
+    background-color: $color-success;
   }
 }
 
 .details {
-  border: 2px solid var(--color-secondary-medium);
-  border-radius: var(--border-radius-medium);
+  border: 2px solid $color-secondary-medium;
+  border-radius: $border-radius-medium;
 
   &[open] {
     .details__arrow {
@@ -255,7 +255,7 @@ main {
 .description {
   margin-bottom: 30px;
   font-size: 18px;
-  color: var(--color-tetriary);
+  color: $color-tetriary;
 
   &-text {
     margin-bottom: 10px;
