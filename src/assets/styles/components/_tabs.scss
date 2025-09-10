@@ -1,21 +1,23 @@
+@use "../index" as *;
+
+$-colorTabsBg: $color-white;
+$-colorTabsText: $color-secondary;
+$-colorTabsTextHovered: $color-primary;
+$-colorTabsBgHovered: $color-secondary-light;
+$-colorTabsBgActive: $color-primary-light;
+
+$-colorTabsBorder: $color-primary;
+$-colorTabsBorderRadius: $border-radius-medium;
+
 .tabs {
-  --colorTabsBg: var(--color-white);
-  --colorTabsText: var(--color-secondary);
-  --colorTabsTextHovered: var(--color-primary);
-  --colorTabsBgHovered: var(--color-secondary-light);
-  --colorTabsBgActive: var(--color-primary-light);
-
-  --colorTabsBorder: var(--color-primary);
-  --colorTabsBorderRadius: var(--border-radius-medium);
-
   &__btn {
     padding: 12px 15px;
     margin-right: 8px;
     border: none;
     border-bottom: 2px solid transparent;
-    border-top-right-radius: var(--colorTabsBorderRadius);
-    border-top-left-radius: var(--colorTabsBorderRadius);
-    color: var(--colorTabsText);
+    border-top-right-radius: $colorTabsBorderRadius;
+    border-top-left-radius: $colorTabsBorderRadius;
+    color: $colorTabsText;
     font-weight: 500;
     text-transform: uppercase;
 
@@ -24,14 +26,14 @@
     }
 
     &:hover {
-      background-color: var(--colorTabsBgHovered);
+      background-color: $colorTabsBgHovered;
       text-decoration: none;
     }
 
     &.active {
-      color: var(--colorTabsTextHovered);
-      background-color: var(--colorTabsBgActive);
-      border-bottom-color: var(--colorTabsBorder);
+      color: $colorTabsTextHovered;
+      background-color: $colorTabsBgActive;
+      border-bottom-color: $colorTabsBorder;
     }
   }
 
