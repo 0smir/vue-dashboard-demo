@@ -1,49 +1,45 @@
-:root {
-
-  --color-dark-bg: #12223d;
+  $color-dark-bg: #12223d;
 
   //================================
 
-  --color-primary: #015C98;
-  --color-primary-medium: #5C8AA8;
-  --color-primary-light: #DBEBF5;
+  $color-primary: #015C98;
+  $color-primary-medium: #5C8AA8;
+  $color-primary-light: #DBEBF5;
 
-  --color-secondary: #323232;
-  --color-secondary-medium: #D5D5D5;
-  --color-secondary-light: #E0E0E0;
+  $color-secondary: #323232;
+  $color-secondary-medium: #D5D5D5;
+  $color-secondary-light: #E0E0E0;
 
-  --color-tetriary: #5A5A5A;
-  --color-tetriary-light: #EBEBEB;
+  $color-tetriary: #5A5A5A;
+  $color-tetriary-light: #EBEBEB;
 
-  --color-white: #FFFFFF;
+  $color-white: #FFFFFF;
   //===============================
 
-  --color-text: var(--color-white);
-  --color-text-dark: var(--color-secondary);
+  $color-text: var($color-white);
+  $color-text-dark: var($color-secondary);
 
-  --color-todo: #04c7e5;
-  --color-inprogress: #ffc405;
-  --color-inreview: #fe7453;
-  --color-testing: #9c27b0;
-  --color-done: #56daa4;
-  --color-blocked: #ff7b7d;
-  --color-active: #4fb7ad;
-  --color-close: #3b8f3e;
+  $color-todo: #04c7e5;
+  $color-inprogress: #ffc405;
+  $color-inreview: #fe7453;
+  $color-testing: #9c27b0;
+  $color-done: #56daa4;
+  $color-blocked: #ff7b7d;
+  $color-active: #4fb7ad;
+  $color-close: #3b8f3e;
 
-  --color-success: #62bf3b;
-  --color-success-dark: #01885b;
-  --color-danger: #ff7b7d;
-  --color-attention: #fc9f1f;
-  --color-everage: #44afe6;
-  --color-violet: #8c4de4;
+  $color-success: #62bf3b;
+  $color-success-dark: #01885b;
+  $color-danger: #ff7b7d;
+  $color-attention: #fc9f1f;
+  $color-everage: #44afe6;
+  $color-violet: #8c4de4;
 
-  --asside-width-expanded: 200px;
-  --asside-width-close: 75px;
+  $asside-width-expanded: 200px;
+  $asside-width-close: 75px;
 
-  --round: 50%;
-  --border-radius-rounded: 16px;
-  --border-radius-large: 8px;
-  --border-radius-medium: 4px;
-  --border-radius-small: 2px;
-
-}
+  $round: 50%;
+  $border-radius-rounded: 16px;
+  $border-radius-large: 8px;
+  $border-radius-medium: 4px;
+  $border-radius-small: 2px;
