@@ -20,17 +20,9 @@ export default {
 
 <style lang="scss" scoped>
 .board {
-  --board-header-bg: var(--color-tetriary-light);
-  --board-header-border: var(--color-secondary-light);
-  --board-header-border-hovered: var(--color-primary);
-  --board-header-border-radius: var(--border-radius-medium);
-  --board-header-text-color: var(--color-secondary);
-
-  --column-bg-hover: var(--color-primary-light);
-
   display: flex;
   justify-content: space-between;
-  border-radius: var(--board-header-border-radius);
+  border-radius: $border-radius-medium;
   margin: 20px 0;
   flex-direction: column;
 
@@ -41,13 +33,13 @@ export default {
   &__column {
     flex-direction: column;
     margin-bottom: 20px;
-    border-radius: var(--board-header-border-radius);
+    border-radius: $border-radius-medium;
 
     &:hover {
-      background-color: var(--color-primary-light);
+      background-color: $color-primary-light;
 
       .board__column-header {
-        background-color: var(--board-header-border);
+        background-color: $color-secondary-light;
       }
     }
   }

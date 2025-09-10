@@ -39,7 +39,7 @@ export default {
 
 <style lang="scss" scoped>
 .board-link {
-  color: var(--color-primary);
+  color: $color-primary;
   // &__wrapper {
     
   // }

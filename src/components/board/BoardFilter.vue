@@ -156,15 +156,11 @@ export default {
 
 <style lang="scss" >
 .filter {
-  --filter-btn-bg: var(--color-primary-light);
-  --filter-btn-text-color: var(--color-primary);
-  --fieldset-legend-text-color: var(--color-secondary);
-
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   padding: 0 135px 15px 0;
-  border-bottom: 2px solid var(--color-primary);
+  border-bottom: 2px solid $color-primary;
 
   &__header {
     display: flex;
@@ -183,8 +179,8 @@ export default {
 
   &__label-text.status {
     padding: 2px 5px;
-    color: var(--color-text);
-    border-radius: var(--border-radius-small);
+    color: $color-text;
+    border-radius: $border-radius-small;
   }
 
   &__input {
@@ -202,26 +198,26 @@ export default {
       width: 19px;
       height: 19px;
       margin-right: 5px;
-      background: var(--color-text);
+      background: $color-text;
       border-radius: 16px;
     }
   }
 
   &__input-indicator {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-secondary-medium);
-    border-radius: var(--border-radius-small);
+    background-color: $color-white;
+    border: 1px solid $color-secondary-medium;
+    border-radius: $border-radius-small;
     &:has(:checked) {
-      border: 1px solid var(--color-tetriary);
+      border: 1px solid $color-tetriary;
       .icon {
-        color: var(--color-tetriary);
+        color: $color-tetriary;
         display: inline-block;
         transform: scale(1.2);
       }
     }
 
     &:has(:focus) {
-      outline: 2px solid var(--color-secondary);
+      outline: 2px solid $color-secondary;
     }
   }
 
@@ -269,8 +265,8 @@ export default {
   margin-right: 15px;
   transition: background-color .25s linear;
   &:hover {
-    color: var(--filter-btn-text-color);
-    background-color: var(--filter-btn-bg);
+    color: $color-primary;
+    background-color: $color-primary-light;
     transition: background-color .25s linear;
   }
 }

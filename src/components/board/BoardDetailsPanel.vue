@@ -45,7 +45,6 @@ export default {
 
 <style lang="scss" >
 .board {
-  --starred-color: var(--color-inprogress);
 
   &__details {
     margin-bottom: 15px;
@@ -63,27 +62,27 @@ export default {
   }
   &__btn-priority,
   &__btn-priority:hover {
-    background-color: var(--color-white);
-    color: var(--color-inprogress);
+    background-color: $color-white;
+    color: $color-inprogress;
     border-color: transparent;
   }
   &__btn-priority:hover {
-    border-color: var(--btn-secondary-border);
+    border-color:  $color-secondary-medium;
   }
   &__settings-link {
     display: flex;
     padding: 8px 15px;
     align-items: center;
-    color: var(--color-primary);
+    color: $color-primary;
     font-weight: 500;
-    border-radius: var(--border-radius-medium);
+    border-radius: $border-radius-medium;
       &>.icon {
         transform: scale(1);
         transition: transform 0.35s ease;
       }
     
     &:hover{
-      background-color: var(--color-primary-light);
+      background-color: $color-primary-light;
       text-decoration: none;
 
       &>.icon {

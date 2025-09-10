@@ -74,7 +74,7 @@ export default {
       transition: transform .25s ease;
 
      .user-profile__image-wrapper {
-        background-color: var(--color-primary-light);
+        background-color: $color-primary-light;
         transition: background-color .25s ease;
       }
     }
@@ -84,8 +84,8 @@ export default {
     display: inline-flex;
     align-items: center;
     padding: 3px 7px;
-    color: var(--color-text);
-    border-radius: var(--border-radius-large);
+    color: $color-text;
+    border-radius: $border-radius-large;
     
     .btn-remove {
       &:hover  {
@@ -103,42 +103,42 @@ export default {
       top: -4px;
       left: -4px;
       margin-left: 0;
-      border: 1px solid var(--color-secondary);
-      background-color: var(--color-white);
+      border: 1px solid $color-secondary;
+      background-color: $color-white;
       
       &:hover,
       &:has(:focus) {
-        background-color: var(--color-tetriary-light);
+        background-color: $color-tetriary-light;
       }
       .icon {
-        fill: var(--color-secondary);
+        fill: $color-secondary;
       }
     }
   }
   &__item--priority {
     margin-right: 10px; 
     padding: 2px;
-    border: 1px solid var(--color-tetriary-light);
-    border-radius: var(--border-radius-medium);
+    border: 1px solid $color-tetriary-light;
+    border-radius: $border-radius-medium;
     transition: border-color 0.25s ease;
 
     &:hover,
     &:focus {
-      border: 1px solid var(--color-secondary);
+      border: 1px solid $color-secondary;
       transition: border-color 0.25s ease;
     }
 
     .btn-remove {
-      border: 1px solid var(--color-secondary);
-      background-color: var(--color-white);
+      border: 1px solid $color-secondary;
+      background-color: $color-white;
 
       &:hover,
       &:has(:focus) {
-        background-color: var(--color-tetriary-light);
+        background-color: $color-tetriary-light;
       }
     }
     .icon {
-      fill: var(--color-secondary);
+      fill: $color-secondary;
     }
   }
 
@@ -148,7 +148,7 @@ export default {
     margin-left: 6px;
     padding: 0;
     border-radius: 50%;
-    border: 1px solid var(--color-white);
+    border: 1px solid $color-white;
     background: transparent;
   }
 }

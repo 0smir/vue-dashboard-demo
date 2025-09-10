@@ -45,6 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .btn--board-arrow {
   display: block;
 
@@ -52,6 +53,7 @@ export default {
     display: none;
   }
 }
+
 
 .board {
 
@@ -64,21 +66,21 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 8px 25px;
-    background-color: var(--board-header-bg);
-    border: 2px solid var(--board-header-border);
-    color: var(--board-header-text-color);
-    border-radius: var(--board-header-border-radius);
+    background-color: $color-tetriary-light;
+    border: 2px solid $color-secondary-light;
+    color: $color-secondary;
+    border-radius: $border-radius-medium;
 
     &:hover {
-      background-color: var(--board-header-border);
-      border: 2px solid var(--board-header-border-hovered);
+      background-color: $color-secondary-light;
+      border: 2px solid $color-primary;
     }
   }
 
   &__column-task-count {
     margin-left: 15px;
     font-size: 75%;
-    color: var(--);
+    color: $color-secondary;
   }
 
   &__column-content {
