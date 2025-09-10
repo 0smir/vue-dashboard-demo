@@ -4,8 +4,6 @@ import router from './router';
 import store from '@/store/index.js';
 import clickOutsideEvent from '@/click-outside-directives';
 
-import './assets/styles/main.scss';
-
 
 import BaseButton from '@/components/UI/base-components/BaseButton.vue';
 import BaseDialog from '@/components/UI/base-components/BaseDialog.vue';
