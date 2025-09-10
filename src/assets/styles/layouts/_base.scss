@@ -1,3 +1,4 @@
+@use "../index" as *;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 
@@ -61,6 +62,55 @@ a:hover {
   text-decoration: underline;
 }
 
+#app {
+  margin: 0 auto;
+  font-weight: normal;
+}
+
+.flex {
+  display: flex;
+}
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 15px;
+
+  &__spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    max-width: 100%;
+  }
+
+  &__notfound {
+    max-width: 80%;
+  }
+}
+
+main {
+  min-height: calc(100vh - 150px); //100vh - (header + footer)
+  width: 100%;
+  background-color: var(--color-white);
+  transition: max-width 0.35s ease;
+
+  @media(min-width: $md) {
+    padding-left: var(--asside-width-close);
+  }
+}
+
+.sidebar.close {
+  &~.main {
+    transition: width 0.35s ease;
+  }
+}
 
 .relative {
   position: relative;

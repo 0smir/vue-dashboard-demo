@@ -1,60 +1,12 @@
-@forward './mediaqueries';
-@use './variables';
-@use './normalize.scss';
-@use './typo';
-@use './buttons';
-@use './form-controls';
-@use './tabs';
-@use './scrollbar';
-@use './base.scss';
+// @forward './mediaqueries';
+// @use './variables';
+// @use './normalize.scss';
+// @use './typo';
+@forward "./index";
 
+@use './components/buttons';
+@use './components/form-controls';
+@use './components/tabs';
 
-#app {
-  margin: 0 auto;
-  font-weight: normal;
-}
-
-.flex {
-  display: flex;
-}
-
-.layout {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 15px;
-
-  &__spinner-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    max-width: 100%;
-  }
-
-  &__notfound {
-    max-width: 80%;
-  }
-}
-
-main {
-  min-height: calc(100vh - 150px); //100vh - (header + footer)
-  width: 100%;
-  background-color: var(--color-white);
-  transition: max-width 0.35s ease;
-
-  @media(min-width: $md) {
-    padding-left: var(--asside-width-close);
-  }
-}
-
-.sidebar.close {
-  &~.main {
-    transition: width 0.35s ease;
-  }
-}
+@use './layouts/base';
+@use './layouts/scrollbar';
