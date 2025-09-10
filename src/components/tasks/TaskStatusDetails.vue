@@ -33,13 +33,13 @@ export default {
 <style lang="scss" >
 .btn-status {
   &__controller {
-    background-color: var(--color-secondary-medium);
+    background-color: $color-secondary-medium;
     text-transform: uppercase;
 
     &:hover {
-      border: 2px solid var(--color-primary);
-      background-color: var(--color-primary);
-      color: var(--color-text);
+      border: 2px solid $color-primary;
+      background-color: $color-primary;
+      color: $color-text;
     }
   }
 

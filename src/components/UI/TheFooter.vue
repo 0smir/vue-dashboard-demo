@@ -16,8 +16,8 @@ export default {
 footer {
     width: 100%;
     min-height: 75px;
-    background-color: var(--color-primary);
-    color: #fff;
+    background-color: $color-primary;
+    color: $color-white;
     
     @media print {
         display: none;

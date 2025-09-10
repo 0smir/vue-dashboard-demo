@@ -69,17 +69,17 @@ export default {
     min-height: 100px;
     max-height: 220px;
     list-style: none;
-    background: var(--color-white);
-    border: 1px solid var(--color-secondary-medium);
-    border-radius: var(--border-radius-medium);
+    background: $color-white;
+    border: 1px solid $color-secondary-medium;
+    border-radius: $border-radius-medium;
   }
 
   &__list-item {
     padding: 5px 0 5px 5px;
-    border-radius: var(--border-radius-small);
+    border-radius: $border-radius-small;
 
     &:hover {
-      background-color: var(--color-secondary-light);
+      background-color: $color-secondary-light;
     }
   }
 

@@ -147,7 +147,7 @@ export default {
 .link {
   &--registration,
   &--forget-pass {
-    color: var(--color-primary);
+    color: $color-primary;
   }
 }
 .error-placeholder {

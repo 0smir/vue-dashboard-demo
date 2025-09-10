@@ -36,8 +36,8 @@ export default {
     padding: 2px;
     width: 22px;
     height: 22px;
-    border-radius: var(--border-radius-small);
-    color: var(--color-white);
+    border-radius: $border-radius-small;
+    color: $color-white;
   }
 
   &__title {

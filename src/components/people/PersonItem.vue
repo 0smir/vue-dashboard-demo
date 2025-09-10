@@ -42,37 +42,22 @@ export default {
 
 <style lang="scss" scoped>
 .person {
-  --colorItemBg: var(--color-white);
-  --colorItemText: var(--color-secondary);
-  --colorItemBorder: var(--color-secondary-light);
-  --colorItemBorderHovered: var(--color-primary);
-  --colorItemRadius: var(--border-radius-large);
-
-  --colorPositionText: var(--color-primary-medium);
-
-  --colorItemLinkBg: var(--color-primary-light);
-  --colorItemLinkHoveredBg: var(--color-primary);
-  --colorItemLinkText: var(--color-primary);
-  --colorItemLinkTextHovered: var(--color-white);
-
-  --colorItemImgBorder: var(--color-secondary-light);
-
   position: relative;
   display: flex;
   flex-direction: column;
   text-align: center;
   padding: 0;
-  background-color: var(--colorItemBg);
-  border: 2px solid var(--colorItemBorder);
+  background-color: $color-white;
+  border: 2px solid $color-secondary-light;
   border-radius: 12px;
   transition: all .35s ease;
 
   &:hover {
-    border-color: var(--colorItemBorderHovered);
+    border-color: $color-primary;
     transition: all .35s ease;
 
     .person__image-wrapper {
-      border-color: var(--colorItemBorderHovered);
+      border-color: $color-primary;
     }
   }
 
@@ -87,8 +72,8 @@ export default {
       }
 
       .person__btn-actions {
-        background-color: var(--colorItemLinkBg);
-        color: var(--colorItemLinkText);
+        background-color: $color-primary-light;
+        color: $color-primary;
       }
     }
   }
@@ -96,12 +81,12 @@ export default {
   &__btn-actions {
     margin: 3px 10px 5px 0;
     border: none;
-    background-color: var(--colorItemBg);
-    color: var(--colorItemText);
+    background-color: $color-white;
+    color: $color-secondary;
 
     &:hover {
-      background-color: var(--colorItemLinkBg);
-      color: var(--colorItemLinkText);
+      background-color: $color-primary-light;
+      color: $color-primary;
     }
   }
 
@@ -114,8 +99,8 @@ export default {
     max-width: 150px;
     padding: 10px 5px;
     border-radius: 4px;
-    background-color: var(--colorItemLinkBg);
-    border: 1px solid var(--colorItemBorder);
+    background-color: $color-primary-light;
+    border: 1px solid $color-secondary-light;
   }
 
   &__btn-delete {
@@ -137,8 +122,8 @@ export default {
     margin: 0 auto 20px;
     width: 50%;
     aspect-ratio: 1;
-    border: 3px solid var(--colorItemImgBorder);
-    color: var(--colorItemImgBorder);
+    border: 3px solid $color-secondary-light;
+    color: $color-secondary-light;
   }
 
   &__svg {
@@ -155,7 +140,7 @@ export default {
 
   &__position {
     font-size: 12px;
-    color: var(--colorPositionText);
+    color: $color-primary-medium;
     margin-bottom: 15px;
   }
 
@@ -164,16 +149,16 @@ export default {
     justify-content: center;
     margin-top: auto;
     padding: 15px;
-    background-color: var(--colorItemLinkBg);
-    color: var(--colorItemLinkText);
-    border-bottom-left-radius: var(--colorItemRadius);
-    border-bottom-right-radius: var(--colorItemRadius);
+    background-color: $color-primary-light;
+    color: $color-primary;
+    border-bottom-left-radius: $border-radius-large;
+    border-bottom-right-radius: $border-radius-large;
     text-decoration: none;
     transition: all .35s ease;
 
     &:hover {
-      background-color: var(--colorItemLinkHoveredBg);
-      color: var(--colorItemLinkTextHovered);
+      background-color: $color-primary;
+      color: $color-white;
       transition: all .35s ease;
     }
   }

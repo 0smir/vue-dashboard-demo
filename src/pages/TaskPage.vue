@@ -339,7 +339,7 @@ export default {
 
   &__details-wrapper {
     padding: 10px 5px 10px 15px;
-    border-top: 1px solid var(--color-secondary-medium);
+    border-top: 1px solid $color-secondary-medium;
   }
 
   &__dialog-btn-wrapper {
@@ -375,13 +375,13 @@ export default {
   }
 
   &__notfound {
-    color: var(--color-tetriary);
+    color: $color-tetriary;
   }
 
   &__notfound-link {
     margin-right: 15px;
     font-size: 18px;
-    color: var(--color-primary);
+    color: $color-primary;
   }
 }
 

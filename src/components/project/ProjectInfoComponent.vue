@@ -18,7 +18,7 @@ export default {
   &__project-info {
     padding: 10px;
     height: 100%;
-    background-color: var(--color-white);
+    background-color: $color-white;
   }
 }
 </style>

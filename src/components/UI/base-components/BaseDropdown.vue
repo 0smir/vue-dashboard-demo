@@ -55,9 +55,9 @@ export default {
     z-index: 10;
     padding: 5px;
     min-width: 100%;
-    background-color: var(--color-white);
-    border-radius: var(--border-radius-medium);
-    border: 1px solid var(--color-secondary-medium);
+    background-color: $color-white;
+    border-radius: $border-radius-medium;
+    border: 1px solid $color-secondary-medium;
   }
 
   &__content-list {
@@ -70,7 +70,7 @@ export default {
     display: flex;
     align-items: center;
     padding: 3px 5px;
-    border-radius: var(--border-radius-small);
+    border-radius: $border-radius-small;
     margin-bottom: 10px;
 
     &:last-of-type {
@@ -80,7 +80,7 @@ export default {
     &:hover,
     &:focus,
     &:has(:focus) {
-      background-color: var(--color-secondary-light);
+      background-color: $color-secondary-light;
     }
   }
   &__btn {

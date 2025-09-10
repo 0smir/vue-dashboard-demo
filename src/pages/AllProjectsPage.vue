@@ -111,13 +111,13 @@ export default {
     height: 100%;
     padding: 7px;
     border: none;
-    border: 1px solid var(--color-primary);
-    background-color: var(--color-primary-light);
+    border: 1px solid $color-primary;
+    background-color: $color-primary-light;
     @media(min-width: $md) {
       width: 70%;
       border-top: none;
-      border-top: 1px solid var(--color-primary);
-      border-left: 1px solid var(--color-primary);
+      border-top: 1px solid $color-primary;
+      border-left: 1px solid $color-primary;
     }
   }
 }

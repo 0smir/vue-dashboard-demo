@@ -44,21 +44,21 @@ export default {
     height: 34px;
     border: 2px solid;
     font-size: 16px;
-    color: var(--color-text-dark);
-    background-color: var(--color-white);
+    color: $color-text-dark;
+    background-color: $color-white;
     font-weight: 400;
     padding: 2px;
 
     &.dark {
-      border-color: var(--color-dark-bg);
+      border-color: $color-dark-bg;
     }
     &.blue {
-      border-color: var(--color-primary);
-      background-color: var(--color-primary-light);
+      border-color: $color-primary;
+      background-color: $color-primary-light;
     }
     &.light {
-      border-color: var(--color-primary);
-      background-color: var(--color-white);
+      border-color: $color-primary;
+      background-color: $color-white;
     }
     &.large {
       width: 70px;

@@ -57,17 +57,17 @@ export default {
     margin-bottom: 5px;
     width: 100%;
     height: 10px;
-    border: 1px solid var(--color-secondary);
-    border-radius: var(--border-radius-medium);
+    border: 1px solid $color-secondary;
+    border-radius: $border-radius-medium;
 
     &.overdue {
-      background-color: var(--color-inreview);
+      background-color: $color-inreview;
     }
   }
 
   &__time-indicator {
     display: block;
-    background-color: var(--color-primary);
+    background-color: $color-primary;
     height: 100%;
   }
 
@@ -78,7 +78,7 @@ export default {
 
     span{
       font-size: 10px;
-      color: var(--color-secondary);
+      color: $color-secondary;
     }
   }
 }

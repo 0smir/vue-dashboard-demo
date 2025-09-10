@@ -61,23 +61,16 @@ export default {
 }
 
 .dialog {
-  --ColorDialogBG: var(--color-white);
-  --ColorDialogRadius: var(--border-radius-large);
-  --ColorDialogHeaderBG: var(--color-primary);
-  --ColorDialogHeadeText: var(--ColorDialogBG);
-  --DialogHeight: 500px;
-  --DialogWidth: 565px;
-
   position: fixed;
   top: 50%;
   display: flex;
   flex-direction: column;
   width: calc(100% - 40px);
-  max-width: var(--DialogWidth);
+  max-width:  565px;
   height: 100%;
-  max-height: var(--DialogHeight);
+  max-height: 500px;
   z-index: 100;
-  border-radius: var(--ColorDialogRadius);
+  border-radius: $border-radius-large;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border: none;
@@ -85,12 +78,12 @@ export default {
   padding: 0;
   margin: 0 auto;
   overflow: hidden;
-  background-color: var(--ColorDialogBG);
+  background-color: $color-white;
   transform: translateY(-50%);
 
   &__header {
-    background-color: var(--ColorDialogHeaderBG);
-    color: var(--ColorDialogHeadeText);
+    background-color: $color-primary;
+    color: $color-white;
     padding: 15px 40px 15px 10px;
 
     @media (min-width: $tablet) {

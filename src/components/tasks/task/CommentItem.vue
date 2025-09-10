@@ -67,13 +67,13 @@ export default {
       display: inline-flex;
       padding: 7px 5px 5px 5px;
       margin-right: 7px;
-      border-radius: var(--border-radius-large);
-      background-color: var(--color-primary-light);
+      border-radius: $border-radius-large;
+      background-color: $color-primary-light;
       font-weight: 500;
       text-transform: uppercase;
     }
     .poste-time {
-      color: var(--color-primary);
+      color: $color-primary;
       font-weight: 500;
     }
   }

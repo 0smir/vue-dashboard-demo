@@ -32,7 +32,7 @@ export default {
   }
 
   &__icon {
-    color: var(--color-primary);
+    color: $color-primary;
     width: 75px;
     height: 75px;
   }

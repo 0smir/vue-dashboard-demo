@@ -302,7 +302,7 @@ export default {
 .btn-wrapper {
   .link--login {
     display: flex;
-    color: var(--color-primary);
+    color: $color-primary;
     margin-bottom: 25px;
 
     @media (min-width: $md) {

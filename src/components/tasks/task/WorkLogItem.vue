@@ -94,7 +94,7 @@ export default {
     } 
 
     .description-label {
-      color: var(--color-tetriary);
+      color: $color-tetriary;
       flex: 1 1 75px;
     }
     .description-value {
@@ -108,19 +108,19 @@ export default {
   display: inline-flex;
   padding: 7px 5px 5px 5px;
   margin-right: 7px;
-  border-radius: var(--border-radius-large);
-  background-color: var(--color-primary-light);
+  border-radius: $border-radius-large;
+  background-color: $color-primary-light;
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
 }
 .poste-time {
   font-size: 12px;
-  color: var(--color-primary);
+  color: $color-primary;
   font-weight: 500;
 
   .date-time {
-    color: var(--color-secondary);
+    color: $color-secondary;
     font-weight: 400;
   }
 }

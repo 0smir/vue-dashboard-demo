@@ -42,7 +42,7 @@ export default {
   padding: 15px;
   width: 100%;
   min-height: 75px;
-  background-color: var(--color-primary);
+  background-color: $color-primary;
 
   @media print {
     display: none;
@@ -61,7 +61,7 @@ export default {
     text-decoration: none;
 
     &:hover {
-      color: var(--color-primary-light);
+      color: $color-primary-light;
     }
 
     .company-name {
@@ -101,15 +101,15 @@ export default {
   &__nav-link {
     border-bottom: 2px solid transparent;
     &:hover {
-      border-bottom: 2px solid var(--color-primary-medium);
+      border-bottom: 2px solid $color-primary-medium;
     }
   }
 
   &__auth-link {
-    border-radius: var(--border-radius-medium);
+    border-radius: $border-radius-medium;
     border: 1px solid transparent;
     &:hover{
-      border: 1px solid var(--color-primary-light);
+      border: 1px solid $color-primary-light;
     }
     &--login{
       margin-right: 5px;

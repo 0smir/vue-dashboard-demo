@@ -29,7 +29,7 @@
   }
 
   &__descrioption {
-    color: var(--color-tetriary);
+    color: $color-tetriary;
     padding: 5px;
     margin-bottom: 20px;
   }

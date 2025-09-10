@@ -48,9 +48,9 @@ export default {
     margin: 0 auto;
     width: max(50rem, calc(50% - 15px));
     aspect-ratio: 1;
-    border: 4px solid var(--color-primary);
-    border-radius: var(--border-radius-large);
-    color: var(--color-primary-medium);
+    border: 4px solid $color-primary;
+    border-radius: $border-radius-large;
+    color: $color-primary-medium;
     font-size: 18px;
     font-weight: 700;
     transition: all .35s ease;
@@ -58,8 +58,8 @@ export default {
     text-transform: uppercase;
 
     &:hover {
-      border: 4px solid var(--color-primary);
-      color: var(--color-primary);
+      border: 4px solid $color-primary;
+      color: $color-primary;
       transform: scale(1.02);
       transition: all .35s ease;
     }

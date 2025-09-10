@@ -93,12 +93,9 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
-  --link-hovered: var(--color-primary-medium);
-
-  
   height: 100%;
-  color: var(--color-text);
-  background-color: var(--color-primary);
+  color: $color-text;
+  background-color: $color-primary;
   padding: 10px 15px;
   
   @media(min-width: $md) {
@@ -164,7 +161,7 @@ export default {
     border-radius: 3px;
 
     &:hover {
-      background-color: var(--link-hovered);
+      background-color: $color-primary-medium;
       text-decoration: none;
 
       .sidebar__link-icon {

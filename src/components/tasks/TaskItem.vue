@@ -88,10 +88,10 @@ export default {
 
 <style lang="scss" scoped>
 .task {
-  --task-border: var(--color-secondary-medium);
-  --task-border-secondary: var(--color-primary);
-  --task-text-color: var(--color-secondary);
-  --task-text-description: var(--color-tetriary);
+  // --task-border: $color-secondary-medium;
+  // --task-border-secondary: $color-primary;
+  // --task-text-color: $color-secondary;
+  // --task-text-description: $color-tetriary;
 
 
   position: relative;
@@ -101,9 +101,9 @@ export default {
   padding: 12px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-  border: 2px solid var(--task-border);
+  border: 2px solid $color-secondary-medium;
   border-left: 4px solid;
-  color: var(--task-text-color);
+  color: $color-secondary;
   background-color: #fff;
 
   &:last-of-type {
@@ -118,7 +118,7 @@ export default {
     align-items: center;
     padding-bottom: 10px;
     margin-bottom: 10px;
-    border-bottom: 2px solid var(--task-border);
+    border-bottom: 2px solid $color-secondary-medium;
   }
 
   &__title {
@@ -129,7 +129,7 @@ export default {
 
   &__description {
     margin-bottom: 7px;
-    color: var(--task-text-description);
+    color: $color-tetriary;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -158,9 +158,9 @@ export default {
     align-items: center;
     width: 34px;
     height: 34px;
-    border: 2px solid var(--task-border-secondary);
+    border: 2px solid $color-primary;
     font-size: 16px;
-    background-color: var(--color-primary-light);
+    background-color: $color-primary-light;
     font-weight: 400;
     padding: 2px;
     margin-left: auto;
@@ -179,27 +179,27 @@ export default {
   &__status {
 
     &--todo {
-      border-left-color: var(--color-todo);
+      border-left-color: $color-todo;
     }
 
     &--inprogress {
-      border-left-color: var(--color-inprogress);
+      border-left-color: $color-inprogress;
     }
 
     &--inreview {
-      border-left-color: var(--color-inreview);
+      border-left-color: $color-inreview;
     }
 
     &--testing {
-      border-left-color: var(--color-testing);
+      border-left-color: $color-testing;
     }
 
     &--done {
-      border-left-color: var(--color-done);
+      border-left-color: $color-done;
     }
 
     &--blocked {
-      border-left-color: var(--color-blocked);
+      border-left-color: $color-blocked;
     }
   }
 

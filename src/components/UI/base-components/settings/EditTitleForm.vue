@@ -77,7 +77,7 @@
 	.btn-cancel,
 	.btn-save {
 		padding: 8px 15px;	
-		border-radius: var(--border-radius-medium);
+		border-radius: $border-radius-medium;
 	}
 
 	.btn-cancel {

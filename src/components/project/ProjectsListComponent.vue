@@ -41,13 +41,13 @@ export default {
     align-items: baseline;
     padding: 8px 10px;
     height: 100%;
-    border: 1px solid var(--color-primary);
+    border: 1px solid $color-primary;
     border-bottom: none;
-    border-radius: var(--border-radius-small);
+    border-radius: $border-radius-small;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-    background-color: var(--color-white);
-    color: var(--color-primary);
+    background-color: $color-white;
+    color: $color-primary;
     font-weight: 500;
     font-size: 14px;
 
@@ -56,25 +56,25 @@ export default {
       padding: 15px;
       width: 100%;
       height: auto;
-      border: 1px solid var(--color-primary);
+      border: 1px solid $color-primary;
       border-right: none;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom-left-radius: var(--border-radius-small);
+      border-bottom-left-radius: $border-radius-small;
       font-size: 16px;
     }
     &:hover {
-      background-color: var(--color-primary-light);
+      background-color: $color-primary-light;
     }
     &.active {
       height: calc(100% + 1px);
-      border: 1px solid var(--color-primary);
+      border: 1px solid $color-primary;
       border-bottom: 1px solid transparent;
-      background-color: var(--color-primary-light);
+      background-color: $color-primary-light;
       @media(min-width: $md) {
         height: auto;
         right: -1px;
-        border: 1px solid var(--color-primary);
+        border: 1px solid $color-primary;
         border-right: 1px solid transparent;
         width: calc(100% + 1px);
       }
@@ -86,7 +86,7 @@ export default {
 }
 .boards-count {
   margin-left: auto;
-  color: var(--color-tetriary);
+  color: $color-tetriary;
   font-size: 10px;
   line-height: 1;
   text-transform: lowercase;

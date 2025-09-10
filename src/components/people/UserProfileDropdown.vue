@@ -76,13 +76,13 @@ export default {
     padding-left: 0;
     list-style: none;
     width: 170px;
-    border: 1px solid var(--color-secondary-light);
+    border: 1px solid $color-secondary-light;
     border-bottom: none;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 
                 0 3px 1px -2px rgba(0,0,0,.2), 
                 0 1px 5px 0 rgba(0,0,0,.12);
-    background: var(--color-white);
-    border-radius: var(--border-radius-medium);
+    background: $color-white;
+    border-radius: $border-radius-medium;
     transform: translateX(-100%);
   }
   &__nav-item {
@@ -91,14 +91,14 @@ export default {
     &:last-of-type {
       margin:  0;
       padding-top: 15px;
-      border-top: 1px solid var(--color-secondary-light);
+      border-top: 1px solid $color-secondary-light;
     }
   }
   &__btn-action {
-    color: var(--color-text);
+    color: $color-text;
     
     &:hover>.user-profile__image-wrapper{
-      background-color: var(--color-primary-light);
+      background-color: $color-primary-light;
     }
 
     .icon-wrapper {
@@ -121,10 +121,10 @@ export default {
     margin-right: 5px;
     width: 34px;
     height: 34px;
-    border: 2px solid var(--color-dark-bg);
+    border: 2px solid $color-dark-bg;
     font-size: 16px;
-    color: var(--color-text-dark);
-    background-color: var(--color-white);
+    color: $color-text-dark;
+    background-color: $color-white;
     font-weight: 400;
     padding: 2px;
   }
@@ -136,10 +136,10 @@ export default {
     display: block;
     width: 100%;
     padding: 10px 15px;
-    color: var(--color-dark-bg);
+    color: $color-dark-bg;
     text-decoration: none;
     &:hover{
-      background: var(--color-primary-light);
+      background: $color-primary-light;
     }
   }
 }
