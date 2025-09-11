@@ -29,7 +29,7 @@
       Choose some filter points to display tasks</p>
     <p v-if="!boardTasks.length">No task to display</p>
     <BaseDialog :show="addTaskDialogDisplay" title="New Task" @close="closeAddTaskDialog">
-      <CreateTaskForm className="dialog" mode="dialog" :userID="userInfo.id"></CreateTaskForm>
+      <CreateTaskForm className="dialog" mode="dialog" :boardID="id" :userID="userInfo.id"></CreateTaskForm>
     </BaseDialog>
   </div>
 </template>
@@ -103,15 +103,15 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch('boards/loadBoardData', { id });
-        let boardTasksList = this.boardData?.tasksList;
-
-        if (!boardTasksList) {
+        let boardTasksList = Object.values(this.boardData?.tasksList);
+        if (!boardTasksList.length) {
           return this.updateBoardTasksList([]);
         }
        
-        if (this.boardData?.tasksList?.length && !this.boardTasks.length) {
-          await this.loadTasks(this.boardData.tasksList);
+        if (boardTasksList?.length && !this.boardTasks.length) {
+          await this.loadTasks(boardTasksList);
         }
+       
       } catch (error) {
         this.error = error.message || 'faled to Fatch';
       }finally{
