@@ -23,7 +23,16 @@ export default {
         method: 'PUT',
         body: JSON.stringify(taskInfo)
       }
-    )
+    );
+    const resultData = await resp.json();
+
+    if (!resp.ok) {
+      const error = new Error(resultData.message || 'Failed to fetch!');
+      throw error;
+    } else if (data.boardID) {
+      context.dispatch('boards/addTaskToBoard', { taskID: taskInfo.id, boardID: data.boardID }, { root: true });
+    }
+
     context.commit('addTask', taskInfo);
   },
 
