@@ -1,7 +1,7 @@
 <template>
   <BaseSpinner v-if="isLoading"></BaseSpinner>
   <div v-else class="page-container board__page-container">
-  <BoardDetailsPanel :starred="boardData?.starred"
+  <BoardDetailsPanel v-if="isLoggedIn" :starred="boardData?.starred"
                     :taskCount="boardTasks.length"
                     :id="id"
                     @update-board="updateBoard"
@@ -11,7 +11,7 @@
                             :id="id"
                             @update-board="updateBoard"
       />
-      <BoardProjectInfoComponent :project="boardData?.project" 
+      <BoardProjectInfoComponent v-if="isLoggedIn" :project="boardData?.project" 
                                 @update-board="updateBoard"
       />
     </div>
