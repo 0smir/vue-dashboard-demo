@@ -11,7 +11,7 @@
         tasks: {{ taskCount }}
       </li>
       <li class="board__details-list-item">
-        <router-link class="board__settings board__link board__settings-link">
+        <router-link class="board__settings board__link board__settings-link" to="/">
           <SvgIcon class="icon icon--small" name="puzzle" />
           <span class="text">Customize</span>
         </router-link>
