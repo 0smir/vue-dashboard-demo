@@ -68,7 +68,7 @@
 
 <script>
 export default {
-  props: ['className', 'userID', 'mode'],
+  props: ['className', 'boardID', 'userID', 'mode'],
   inject:['closeModal'],
   data() {
     return {
@@ -188,6 +188,7 @@ export default {
             status: this.task.status.value,
             estimation: this.task.estimation.value,
             createdTime: new Date().getTime(),
+            boardID: this.boardID
         };
           
       try {
