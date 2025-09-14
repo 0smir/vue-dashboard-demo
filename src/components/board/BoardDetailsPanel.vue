@@ -2,15 +2,19 @@
   <div class="board__details">
     <ul class="board__details-list">
       <li class="board__details-list-item">
-        <BaseButton class="btn btn__outlined btn--small board__btn-priority" @click="makeStarred">
+        <BaseButton v-if="isLoggedIn" class="btn btn__outlined btn--small board__btn-priority" @click="makeStarred">
           <SvgIcon v-if="!starred" class="icon icon-star--outlined" name="starOutline"/>
           <SvgIcon v-else class="icon icon-star--solid" name="starSolid"/>
         </BaseButton>
+        <div v-else class="board__btn-priority">
+          <SvgIcon v-if="!starred" class="icon icon-star--outlined" name="starOutline"/>
+          <SvgIcon v-else class="icon icon-star--solid" name="starSolid"/>
+        </div>
       </li>
       <li class="board__details-list-item">
         tasks: {{ taskCount }}
       </li>
-      <li class="board__details-list-item">
+      <li v-if="isLoggedIn" class="board__details-list-item">
         <router-link class="board__settings board__link board__settings-link" to="/">
           <SvgIcon class="icon icon--small" name="puzzle" />
           <span class="text">Customize</span>
@@ -26,6 +30,9 @@ export default {
   props: ['id', 'starred', 'taskCount'],
   emits: ['update-board'],
   computed: {
+    isLoggedIn() {
+      return this.$store.getters['users/isAuthenticated'];
+    },
     customizationUrl() {
       return 'settings/' + this.id;
     }
@@ -60,11 +67,16 @@ export default {
       margin-right: 0;
     }
   }
+  &__btn-priority {
+    display: flex;
+    align-items: center;
+    border-color: transparent;
+  }
   &__btn-priority,
   &__btn-priority:hover {
     background-color: $color-white;
     color: $color-inprogress;
-    border-color: transparent;
+   
   }
   &__btn-priority:hover {
     border-color:  $color-secondary-medium;

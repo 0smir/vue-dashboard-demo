@@ -1,7 +1,7 @@
 <template>
   <BaseSpinner v-if="isLoading"></BaseSpinner>
   <div v-else class="page-container board__page-container">
-  <BoardDetailsPanel v-if="isLoggedIn" :starred="boardData?.starred"
+  <BoardDetailsPanel :starred="boardData?.starred"
                     :taskCount="boardTasks.length"
                     :id="id"
                     @update-board="updateBoard"
@@ -111,7 +111,6 @@ export default {
         if (boardTasksList?.length && !this.boardTasks.length) {
           await this.loadTasks(boardTasksList);
         }
-       
       } catch (error) {
         this.error = error.message || 'faled to Fatch';
       }finally{

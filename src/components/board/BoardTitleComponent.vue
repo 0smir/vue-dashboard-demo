@@ -2,7 +2,7 @@
 	<div class="board__title-details">
 		<div v-if="!isEditFormVisible" class="board__title-wrapper">
 			<h1 class="title board__title"> {{ title }} </h1>
-			<BaseButton class="btn btn--transparent btn--small board__btn btn__edit-title"
+			<BaseButton v-if="isLoggedIn" class="btn btn--transparent btn--small board__btn btn__edit-title"
 									aria-label="edit board title"
 									@click="toggleEditBlock"
 			>
@@ -27,6 +27,11 @@ export default {
 	data(){
 		return{
 			isEditFormVisible: false
+		}
+	},
+	computed: {
+		isLoggedIn() {
+			return this.$store.getters['users/isAuthenticated'];
 		}
 	},
 	methods: {
@@ -66,7 +71,11 @@ export default {
 	}
 }
 .btn__edit-title {
+	background-color: transparent;
 	visibility: hidden;
+	&:hover {
+		background-color: $color-secondary-light;
+	}
 }
 
 </style>
