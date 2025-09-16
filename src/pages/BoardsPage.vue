@@ -2,9 +2,8 @@
   <div class="container">
     <h1>Boards list</h1>
     <ul>
-      <li class="board-link__wrapper" v-for="board in boardsList">
+      <li class="board-link__wrapper" v-for="board in boardsList" :key="board.id">
         <router-link  :to="getUrl(board.id)" 
-                      :key="board.id"
                       class="board-link"
         >
           {{ board.title }}
