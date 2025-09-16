@@ -73,6 +73,8 @@ export default {
 		}
 	}
 	&__project-wrapper {
+		display: flex;
+		align-items: center;
 		&:hover {
 			.btn__edit{
 				visibility: visible;
