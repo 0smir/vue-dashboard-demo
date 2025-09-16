@@ -37,7 +37,7 @@ export default {
   },
   resetBoardTasksList(state, payload) {
     let { tasksList } = payload;
-    state.boardTaskList = tasksList;
+    state.boardTasksList = tasksList;
   },
   setBoardFilterParams(state, payload) {
     let boardsList = JSON.parse(localStorage.getItem('boardsFilterParams')) || {};
