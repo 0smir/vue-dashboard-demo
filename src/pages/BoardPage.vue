@@ -184,6 +184,10 @@ export default {
 
   async created() {
     await this.loadBoardInfo(this.id);
+  },
+
+  unmounted() {
+    this.$store.dispatch('boards/clearToBoardTasksList', {tasksList: []});
   }
 }
 </script>

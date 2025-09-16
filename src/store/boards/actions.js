@@ -107,6 +107,10 @@ export default {
     context.commit('updateBoardTasksList', data);
   },
 
+  clearToBoardTasksList(context, data) {
+    context.commit('resetBoardTasksList', data);
+  },
+
   setBoardColumns(context, data) {
     context.commit('updateBoardFilter', ...data);
   },

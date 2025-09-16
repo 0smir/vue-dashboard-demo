@@ -2,7 +2,7 @@ export default {
   getBoardData(state) {
     return state.board;
   },
-  getBoardsList(state){
+  getBoardsList(state) {
     return state.boardsList;
   },
   getDefaultBoardColumns(state) {

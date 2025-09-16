@@ -12,24 +12,32 @@ export default {
       state.board = payload;
     }
   },
-  updateBoardInfo(state, payload){
-    let {property, newValue} = payload;
+  updateBoardInfo(state, payload) {
+    let { property, newValue } = payload;
     state.board[property] = newValue;
   },
-  setBoardsList(state, payload){
+  setBoardsList(state, payload) {
     state.boardsList = payload;
   },
   addTaskToBoard(state, payload) {
-    console.log('set task unit to board');
+    let { boardID, taskID } = payload;
+    let boardTasksStorage = JSON.parse(localStorage.getItem('boardTasksList')) || {};
+    boardTasksStorage[boardID].push(taskID);
+    state.boardsTasksList.push(taskID);
   },
 
   updateBoardTasksList(state, payload) {
     let { boardId, tasksList } = payload;
+    let boardTasksArr = Object.values(tasksList);
     let boardTasksList = JSON.parse(localStorage.getItem('boardTasksList')) || {};
-    boardTasksList[boardId] = tasksList;
+    boardTasksList[boardId] = boardTasksArr;
 
     state.boardTasksList = tasksList;
     localStorage.setItem('boardTasksList', JSON.stringify(boardTasksList));
+  },
+  resetBoardTasksList(state, payload) {
+    let { tasksList } = payload;
+    state.boardsTaskList = tasksList;
   },
   setBoardFilterParams(state, payload) {
     let boardsList = JSON.parse(localStorage.getItem('boardsFilterParams')) || {};
