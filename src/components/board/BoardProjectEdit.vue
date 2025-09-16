@@ -1,7 +1,7 @@
 <template>
 	<div class="board__project-details" @click="loadProjectsList">
-		<p v-if="mode === 'untied'">choose project to bind board:</p>
-		<p v-else>change project:</p>
+		<p v-if="mode === 'untied'" class="board__details-description">choose project to bind board:</p>
+		<p v-else class="board__details-description">change project:</p>
 		<SmartBox :list="projectsList" :title="projTitle" mode="project" @update-params="updateProject"
 			:classList="['btn', 'btn--medium', 'btn--transparent', 'btn-project__controller']">
 			<template #list-items="{ list, selectItem }">
@@ -17,18 +17,12 @@
 				</li>
 			</template>
 		</SmartBox>
-			<BaseButton class="btn btn__dark btn-cancel"
-										aria-label="click to cancel changes"
-										@click="cancelChanges"			
-			>
-				Cancel
-			</BaseButton>
-			<BaseButton v-if="mode === 'untied'" class="btn btn__default btn-save"
-									aria-label="click to save changes"
-									@click="bindProject"
-			>
-				Save	
-			</BaseButton>
+		<BaseButton class="btn btn-cancel"
+									aria-label="click to cancel changes"
+									@click="cancelChanges"			
+		>
+			<SvgIcon class="icon icon--small" name="close" />
+		</BaseButton>
 	
 	</div>
 </template>
@@ -36,9 +30,13 @@
 <script>
 import SmartBox from '@/components/UI/base-components/SmartBox.vue';
 import BaseSpinner from '@/components/UI/base-components/BaseSpinner.vue';
+import SvgIcon from '../UI/base-components/SvgIcon.vue';
 export default {
 		components: {
-		SmartBox
+		SmartBox,
+		BaseSpinner,
+		SvgIcon
+		
 	},
 	props:['currentProj', 'mode'],
 	emits: ['change-project', 'bind-project', 'cancel-changes'],
@@ -96,5 +94,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.board {
+	&__project-details {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		align-items: center;
+		// flex-basis: 175px;
+	}
+	&__details-description {
+		font-style: italic;
+	}
+}
+.btn-cancel {
+	height: 25px;
+	width: 25px;
+	padding: 0;
+	border-radius: $border-radius-medium;
+	border: 2px solid $color-secondary-medium;
+	color:  $color-tetriary;
+	background-color: $color-white;
+	transform: scale(1);
+	transition: transform .35s ease;
 
+	&:hover,
+	&:focus {
+		color: $color-primary;
+		background-color: $color-primary-light;
+		border-color: $color-primary-medium;
+		transform: scale(1.2);
+		transition: transform .35s ease;
+	}
+}
 </style>
