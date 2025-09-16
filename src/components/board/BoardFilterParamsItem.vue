@@ -1,6 +1,6 @@
 <template>
   <div v-if="mode === 'columns'" class="filter-params__block columns-list">
-    <div v-for="option in options" :class="['filter-params__item filter-params__item--column', option == 'Active' ? 'active-status' : option.toLowerCase() ]" :title="option">
+    <div v-for="option in options" :key="option" :class="['filter-params__item filter-params__item--column', option == 'Active' ? 'active-status' : option.toLowerCase() ]" :title="option">
       {{ option }}
       <BaseButton class="filter-params__btn-remove btn-remove" @click="removeItem(option, mode)" :aria-label="`click to remove column ${option}`">
         <SvgIcon name="close" class="icon icon--small" />
@@ -8,7 +8,7 @@
     </div>
   </div>
   <div v-if="mode === 'persons'" class="filter-params__block people-list">
-    <div v-for="(option, index) in options" class="filter-params__item filter-params__item--people" :style="{ left: `calc(-10px * ${index})` }">
+    <div v-for="(option, index) in options" :key="option" class="filter-params__item filter-params__item--people" :style="{ left: `calc(-10px * ${index})` }">
       <UserProfileInfo :userInfo="option" theme="light" :showName="false" size="medium"/>
       <BaseButton class="filter-params__btn-remove btn-remove" @click="removeItem(option, mode)" :aria-label="`click to remove person ${option.name} ${option.lastname}`">
         <SvgIcon name="close" class="icon icon--small" />
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div v-if="mode === 'priority'" class="filter-params__block columns-priority">
-    <div v-for="option in options" class="filter-params__item filter-params__item--priority">
+    <div v-for="option in options" :key="option" class="filter-params__item filter-params__item--priority">
       <TaskPriorityElement :priority="option" :titleDisplay="true" />
       <BaseButton class="filter-params__btn-remove btn-remove" @click="removeItem(option, mode)" :aria-label="`click to remove priority item ${option}`">
         <SvgIcon name="close" class="icon icon--small" />
@@ -88,6 +88,7 @@ export default {
     border-radius: $border-radius-large;
     
     .btn-remove {
+      color: $color-white;
       &:hover  {
         background-color: rgba(#fff, .3);
       }
