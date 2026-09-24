@@ -1,22 +1,64 @@
 <template>
   <header class="header">
     <div class="header__content">
-      <router-link to="/" class="header-logo" title="Company logo and name: GlobalBoard" aria-label="Company logo and name: GlobalBoard, link to home page">
+      <router-link
+        to="/"
+        class="header-logo"
+        title="Company logo and name: GlobalBoard"
+        aria-label="Company logo and name: GlobalBoard, link to home page"
+      >
         <SvgIcon name="logo" class="icon icon--logo header-logo__icon" />
         <span class="company-name">GlobalBoard</span>
       </router-link>
       <nav>
         <ul class="header__nav">
-          <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/" title="Home" aria-label="link to: Home">Home</router-link></li>
-          <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/" title="About" aria-label="link to: About">About</router-link></li>
-          <li class="header__nav-item"><router-link class="header__link header__nav-link" to="/projects/all" title="Projects" aria-label="link to: Projects">Projects</router-link></li>
+          <li class="header__nav-item">
+            <router-link
+              class="header__link header__nav-link"
+              to="/"
+              title="Home"
+              aria-label="link to: Home"
+              >{{ $t("common.header.navigation.home_link") }}</router-link
+            >
+          </li>
+          <li class="header__nav-item">
+            <router-link
+              class="header__link header__nav-link"
+              to="/"
+              title="About"
+              aria-label="link to: About"
+              >{{ $t("common.header.navigation.about_link") }}</router-link
+            >
+          </li>
+          <li class="header__nav-item">
+            <router-link
+              class="header__link header__nav-link"
+              to="/projects/all"
+              title="Projects"
+              aria-label="link to: Projects"
+              >{{ $t("common.header.navigation.projects_link") }}</router-link
+            >
+          </li>
         </ul>
       </nav>
+      <LanguageSwitcher />
       <div v-if="!isLoggedIn" class="header__actions">
-        <router-link to="/login" class="header__link header__auth-link header__auth-link--login" title="Login" aria-label="link to: Login">Login</router-link>
-        <router-link to="/people/registration" class="header__link header__auth-link header__auth-link--registration" title="link to: SignUp" aria-label="SignUp">SignUp</router-link>
+        <router-link
+          to="/login"
+          class="header__link header__auth-link header__auth-link--login"
+          title="Login"
+          aria-label="link to: Login"
+          >{{ $t("common.header.navigation.login_link") }}</router-link
+        >
+        <router-link
+          to="/people/registration"
+          class="header__link header__auth-link header__auth-link--registration"
+          title="link to: SignUp"
+          aria-label="SignUp"
+          >{{ $t("common.header.navigation.signup_link") }}</router-link
+        >
       </div>
-      <div v-else  class="header__actions">
+      <div v-else class="header__actions">
         <UserProfile />
       </div>
     </div>
@@ -24,17 +66,17 @@
 </template>
 
 <script>
-import UserProfile from '@/components/people/UserProfileDropdown.vue';
+import UserProfile from "@/components/people/UserProfileDropdown.vue";
 export default {
   components: {
-    UserProfile
+    UserProfile,
   },
   computed: {
     isLoggedIn() {
-      return this.$store.getters['users/isAuthenticated'];
-    }
-  }
-}
+      return this.$store.getters["users/isAuthenticated"];
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -74,7 +116,6 @@ export default {
     }
   }
 
-
   &__nav {
     display: none;
     list-style: none;
@@ -108,12 +149,11 @@ export default {
   &__auth-link {
     border-radius: $border-radius-medium;
     border: 1px solid transparent;
-    &:hover{
+    &:hover {
       border: 1px solid $color-primary-light;
     }
-    &--login{
+    &--login {
       margin-right: 5px;
-      
     }
   }
 }
