@@ -1,29 +1,25 @@
 // Notis: was installed dart-sass (npm i dart-sass) to get possibility use (@use @forward etc.) of newly sass Module System
 
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from "node:url";
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import svgLoader from 'vite-svg-loader'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import svgLoader from "vite-svg-loader";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    svgLoader()
-  ],
+  plugins: [vue(), svgLoader()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
         additionalData: `@use "@/assets/styles/main.scss" as *;`,
-        api: 'modern-compiler',
-
-      }
-    }
-  }
-})
+        api: "modern-compiler",
+      },
+    },
+  },
+});
