@@ -10,12 +10,15 @@ export default {
       },
       lang_switcher: "Languages",
     },
+    sidebar: {
+      boards_link: "Boards",
+      statistic_link: "Statistic",
+      settings_link: "Settings",
+      tasks_link: "All Tasks",
+      people_link: "People",
+      create_link: "Create",
+      login_link: "SignIn",
+    },
+    footer: {},
   },
-  sidebar: {
-    boards_link: "",
-    statistic_link: "",
-    tasks_link: "",
-    signin_link: "",
-  },
-  footer: {},
 };
