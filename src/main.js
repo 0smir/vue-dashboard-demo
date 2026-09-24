@@ -12,6 +12,7 @@ import BaseSpinner from "@/components/UI/base-components/BaseSpinner.vue";
 import SvgIcon from "@/components/UI/base-components/SvgIcon.vue";
 import BaseDetails from "@/components/UI/base-components/BaseDetails.vue";
 import BaseDropdown from "@/components/UI/base-components/BaseDropdown.vue";
+import LanguageSwitcher from "@/components/UI/base-components/LanguageSwitcher.vue";
 
 import App from "./App.vue";
 
@@ -28,5 +29,6 @@ app.component("BaseSpinner", BaseSpinner);
 app.component("SvgIcon", SvgIcon);
 app.component("BaseDetails", BaseDetails);
 app.component("BaseDropdown", BaseDropdown);
+app.component("LanguageSwitcher", LanguageSwitcher);
 
 app.mount("#app");
