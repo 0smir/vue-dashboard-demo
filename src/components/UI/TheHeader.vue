@@ -93,6 +93,7 @@ export default {
   &__content {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .header-logo {
