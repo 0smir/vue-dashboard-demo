@@ -5,16 +5,12 @@
     }}</BaseButton>
     <ul class="language-switcher__nav nav-dropdown">
       <li
-        class="language-switcher__nav-item active"
-        @click="changeLanguage('en')"
+        v-for="lang of languagesList"
+        :key="lang.code"
+        :class="['language-switcher__nav-item', { active: currentLang == lang.code }]"
+        @click="changeLanguage(lang.code)"
       >
-        EN
-      </li>
-      <li class="language-switcher__nav-item" @click="changeLanguage('ua')">
-        UA
-      </li>
-      <li class="language-switcher__nav-item" @click="changeLanguage('ru')">
-        RU
+        {{ lang.label }}
       </li>
     </ul>
   </div>
@@ -23,11 +19,20 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      languagesList: [
+        { code: "en", label: "EN" },
+        { code: "ua", label: "UA" },
+        { code: "ru", label: "RU" },
+      ],
+      currentLang: localStorage.getItem("lang") || this.$i18n.locale,
+    };
   },
   methods: {
     changeLanguage(lang) {
-      this.$i18n.locale = lang;
+      this.$i18n.locale = this.currentLang = lang;
+      localStorage.setItem("lang", lang);
+      document.querySelector("html").setAttribute("lang", lang);
     },
   },
 };
@@ -36,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .language-switcher {
   position: relative;
-  padding-bottom: 5px;
+  padding-block: 5px;
   margin-right: 15px;
 
   &:hover,
