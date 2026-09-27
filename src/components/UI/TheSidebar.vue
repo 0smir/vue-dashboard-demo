@@ -13,7 +13,16 @@
     </div>
     <ul class="sidebar-nav">
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/" title="Boards" aria-label="link to: Boards">
+        <router-link
+          class="sidebar__link"
+          to="/"
+          :title="$t('common.sidebar.boards_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.sidebar.boards_link'),
+            })
+          "
+        >
           <span class="sidebar__link-icon">
             <SvgIcon name="board" class="icon" />
           </span>
@@ -23,7 +32,16 @@
         >
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/" title="Statistic" aria-label="link to: Statistic">
+        <router-link
+          class="sidebar__link"
+          to="/"
+          :title="$t('common.sidebar.statistic_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.sidebar.statistic_link'),
+            })
+          "
+        >
           <span class="sidebar__link-icon">
             <SvgIcon name="statistic" class="icon" />
           </span>
@@ -33,7 +51,16 @@
         >
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/" title="Settings" aria-label="link to: Settings">
+        <router-link
+          class="sidebar__link"
+          to="/"
+          :title="$t('common.sidebar.settings_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.sidebar.settings_link'),
+            })
+          "
+        >
           <span class="sidebar__link-icon">
             <SvgIcon name="settings" class="icon" />
           </span>
@@ -46,8 +73,12 @@
         <router-link
           class="sidebar__link"
           to="/tasks"
-          title="All Tasks"
-          aria-label="link to: All Tasks"
+          :title="$t('common.sidebar.tasks_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.sidebar.tasks_link'),
+            })
+          "
         >
           <span class="sidebar__link-icon">
             <SvgIcon name="tasks" class="icon" />
@@ -56,7 +87,16 @@
         >
       </li>
       <li class="sidebar-nav__item">
-        <router-link class="sidebar__link" to="/people" title="People" aria-label="link to: People">
+        <router-link
+          class="sidebar__link"
+          to="/people"
+          :title="$t('common.sidebar.people_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.sidebar.people_link'),
+            })
+          "
+        >
           <span class="sidebar__link-icon">
             <SvgIcon name="users" class="icon" />
           </span>
@@ -69,8 +109,12 @@
         <router-link
           class="sidebar__link"
           to="/create"
-          title="Create"
-          aria-label="link to: Create page"
+          :title="$t('common.sidebar.create_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.sidebar.create_link'),
+            })
+          "
         >
           <span class="sidebar__link-icon">
             <SvgIcon name="add" class="icon" />
@@ -82,8 +126,12 @@
         <router-link
           class="sidebar__link"
           to="/people/registration"
-          title="SignIn"
-          aria-label="link to: SignIn"
+          :title="$t('common.sidebar.login_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.sidebar.login_link'),
+            })
+          "
         >
           <span class="sidebar__link-icon">
             <SvgIcon name="addperson" class="icon" />
