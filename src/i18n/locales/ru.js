@@ -8,6 +8,8 @@ export default {
         login_link: "Вход",
         signup_link: "Регистрация",
       },
+      link_to: "ссылка на:",
+      link_label: "@:common.header.link_to {linkName}",
       lang_switcher: "Языки",
     },
     sidebar: {

@@ -16,8 +16,12 @@
             <router-link
               class="header__link header__nav-link"
               to="/"
-              title="Home"
-              aria-label="link to: Home"
+              :title="$t('common.header.navigation.home_link')"
+              :aria-label="
+                $t('common.header.link_label', {
+                  linkName: $t('common.header.navigation.home_link'),
+                })
+              "
               >{{ $t("common.header.navigation.home_link") }}</router-link
             >
           </li>
@@ -25,8 +29,12 @@
             <router-link
               class="header__link header__nav-link"
               to="/"
-              title="About"
-              aria-label="link to: About"
+              :title="$t('common.header.navigation.about_link')"
+              :aria-label="
+                $t('common.header.link_label', {
+                  linkName: $t('common.header.navigation.about_link'),
+                })
+              "
               >{{ $t("common.header.navigation.about_link") }}</router-link
             >
           </li>
@@ -34,8 +42,12 @@
             <router-link
               class="header__link header__nav-link"
               to="/projects/all"
-              title="Projects"
-              aria-label="link to: Projects"
+              :title="$t('common.header.navigation.about_link')"
+              :aria-label="
+                $t('common.header.link_label', {
+                  linkName: $t('common.header.navigation.about_link'),
+                })
+              "
               >{{ $t("common.header.navigation.projects_link") }}</router-link
             >
           </li>
@@ -46,15 +58,23 @@
         <router-link
           to="/login"
           class="header__link header__auth-link header__auth-link--login"
-          title="Login"
-          aria-label="link to: Login"
+          :title="$t('common.header.navigation.login_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.header.navigation.login_link'),
+            })
+          "
           >{{ $t("common.header.navigation.login_link") }}</router-link
         >
         <router-link
           to="/people/registration"
           class="header__link header__auth-link header__auth-link--registration"
-          title="link to: SignUp"
-          aria-label="SignUp"
+          :title="$t('common.header.navigation.signup_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.header.navigation.signup_link'),
+            })
+          "
           >{{ $t("common.header.navigation.signup_link") }}</router-link
         >
       </div>
