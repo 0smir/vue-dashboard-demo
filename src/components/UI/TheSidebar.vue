@@ -26,7 +26,7 @@
           <span class="sidebar__link-icon">
             <SvgIcon name="board" class="icon" />
           </span>
-          <span class="sidebar__link-text">{{
+          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
             $t("common.sidebar.boards_link")
           }}</span></router-link
         >
@@ -45,7 +45,7 @@
           <span class="sidebar__link-icon">
             <SvgIcon name="statistic" class="icon" />
           </span>
-          <span class="sidebar__link-text">{{
+          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
             $t("common.sidebar.statistic_link")
           }}</span></router-link
         >
@@ -64,7 +64,7 @@
           <span class="sidebar__link-icon">
             <SvgIcon name="settings" class="icon" />
           </span>
-          <span class="sidebar__link-text">{{
+          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
             $t("common.sidebar.settings_link")
           }}</span></router-link
         >
@@ -83,7 +83,9 @@
           <span class="sidebar__link-icon">
             <SvgIcon name="tasks" class="icon" />
           </span>
-          <span class="sidebar__link-text">{{ $t("common.sidebar.tasks_link") }}</span></router-link
+          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
+            $t("common.sidebar.tasks_link")
+          }}</span></router-link
         >
       </li>
       <li class="sidebar-nav__item">
@@ -100,7 +102,7 @@
           <span class="sidebar__link-icon">
             <SvgIcon name="users" class="icon" />
           </span>
-          <span class="sidebar__link-text">{{
+          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
             $t("common.sidebar.people_link")
           }}</span></router-link
         >
@@ -119,7 +121,9 @@
           <span class="sidebar__link-icon">
             <SvgIcon name="add" class="icon" />
           </span>
-          <span class="sidebar__link-text">{{ $t("common.sidebar.create_link") }}</span>
+          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
+            $t("common.sidebar.create_link")
+          }}</span>
         </router-link>
       </li>
       <li v-else class="sidebar-nav__item">
@@ -136,7 +140,9 @@
           <span class="sidebar__link-icon">
             <SvgIcon name="addperson" class="icon" />
           </span>
-          <span class="sidebar__link-text">{{ $t("common.sidebar.login_link") }}</span>
+          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
+            $t("common.sidebar.login_link")
+          }}</span>
         </router-link>
       </li>
     </ul>
@@ -197,6 +203,12 @@ export default {
 
     .sidebar__link {
       justify-content: center;
+
+      &:hover {
+        .tooltip {
+          display: block;
+        }
+      }
     }
 
     .sidebar__link-icon {
@@ -214,6 +226,37 @@ export default {
 
     .sidebar__link-text {
       display: inline;
+    }
+  }
+
+  .tooltip {
+    position: absolute;
+    display: flex;
+    padding: 3px 7px;
+    left: calc(100% - 3px);
+    background-color: $color-primary-light;
+    border: 1px solid $color-secondary-light;
+    border-radius: $border-radius-small;
+    color: $color-secondary;
+    z-index: 12;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: calc(50% - 8px);
+      border: 8px solid transparent;
+      content: "";
+    }
+
+    &::before {
+      left: -15px;
+      z-index: 2;
+      border-right: 8px solid $color-primary-light;
+    }
+
+    &::after {
+      left: -16px;
+      border-right: 8px solid $color-secondary-light;
     }
   }
 
