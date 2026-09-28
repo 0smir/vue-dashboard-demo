@@ -1,12 +1,25 @@
 <template>
-  <div v-if="isLoading" class="container container__spinner-wrapper" aria-busy="true" aria-live="polite">
+  <div
+    v-if="isLoading"
+    class="container container__spinner-wrapper"
+    aria-busy="true"
+    aria-live="polite"
+  >
     <BaseSpinner></BaseSpinner>
   </div>
   <div v-else-if="isLoading === false && hasTaskInfo" class="task-info task-info__container">
     <div class="task-info__details">
       <div class="task-info__actions-wrapper">
-        <TaskStatusDetails :taskStatusList="taskStatusList" :taskStatus="taskStatus" @choose-action="updateTaskParams"/>
-        <TaskActionsDetails :taskActionsList="taskActionsList" mode="actions" @choose-action="actionExecute"/>
+        <TaskStatusDetails
+          :taskStatusList="taskStatusList"
+          :taskStatus="taskStatus"
+          @choose-action="updateTaskParams"
+        />
+        <TaskActionsDetails
+          :taskActionsList="taskActionsList"
+          mode="actions"
+          @choose-action="actionExecute"
+        />
       </div>
       <details class="details" open>
         <summary class="summary">
@@ -14,95 +27,149 @@
           <SvgIcon class="icon icon--small details__arrow" name="chevron-down" />
         </summary>
         <div class="task-info__details-wrapper">
-        <TaskAssigneeDetails v-if="assigneeInfo" :assignee="assigneeInfo"
-                              @update-assignee="updateTaskParams"
-        />
-        <TaskPriorityDetails v-if="taskPriorityList" :taskPriorityList="taskPriorityList"
-                             :priorityTitle="taskInfo.priority"
-                             @choose-action="updateTaskParams"
-        />
-        <TaskProjectDetails v-if="taskInfo?.project" 
-                            :title="taskInfo?.project?.title"
-                            @choose-action="updateTaskParams"
-        />
-        <TaskReporterDetails v-if="taskInfo.reporter" :reporter="taskInfo.reporter" 
-                              @update-reporter="updateTaskParams"
-        />
-        <div v-if="taskInfo?.estimateTime" class="task-details task-details__time task-details--time-estimated">
-          <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
-          <span class="task-details__value task-details__value--time-estimated"> {{ taskInfo?.estimateTime + 'h' }}</span>
-        </div>
-        <TaskTreckedTimeDetails v-if="taskInfo?.loggedTime" :isLabelVisible="true" :estimated="taskInfo?.estimateTime" :trecked="taskInfo?.loggedTime"/>
+          <TaskAssigneeDetails
+            v-if="assigneeInfo"
+            :assignee="assigneeInfo"
+            @update-assignee="updateTaskParams"
+          />
+          <TaskPriorityDetails
+            v-if="taskPriorityList"
+            :taskPriorityList="taskPriorityList"
+            :priorityTitle="taskInfo.priority"
+            @choose-action="updateTaskParams"
+          />
+          <TaskProjectDetails
+            v-if="taskInfo?.project"
+            :title="taskInfo?.project?.title"
+            @choose-action="updateTaskParams"
+          />
+          <TaskReporterDetails
+            v-if="taskInfo.reporter"
+            :reporter="taskInfo.reporter"
+            @update-reporter="updateTaskParams"
+          />
+          <div
+            v-if="taskInfo?.estimateTime"
+            class="task-details task-details__time task-details--time-estimated"
+          >
+            <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
+            <span class="task-details__value task-details__value--time-estimated">
+              {{ taskInfo?.estimateTime + "h" }}</span
+            >
+          </div>
+          <TaskTreckedTimeDetails
+            v-if="taskInfo?.loggedTime"
+            :isLabelVisible="true"
+            :estimated="taskInfo?.estimateTime"
+            :trecked="taskInfo?.loggedTime"
+          />
 
-        <div v-if="taskInfo?.createdTime" class="task-details task-details__time task-details__time--created">
-          <span class="task-details__label task-details__label--time-created">Created: </span>
-          <span class="task-details__value task-details__value--time-created"> {{ createTime }}</span>
+          <div
+            v-if="taskInfo?.createdTime"
+            class="task-details task-details__time task-details__time--created"
+          >
+            <span class="task-details__label task-details__label--time-created">Created: </span>
+            <span class="task-details__value task-details__value--time-created">
+              {{ createTime }}</span
+            >
+          </div>
+          <div
+            v-if="taskInfo?.updateTime"
+            class="task-details task-details__time task-details__time--updated"
+          >
+            <span class="task-details__label task-details__label--time-updated">Updated: </span>
+            <span class="task-details__value task-details__value--time-updated">
+              {{ updateTime }}</span
+            >
+          </div>
         </div>
-        <div v-if="taskInfo?.updateTime" class="task-details task-details__time task-details__time--updated">
-          <span class="task-details__label task-details__label--time-updated">Updated: </span>
-          <span class="task-details__value task-details__value--time-updated"> {{ updateTime }}</span>
-        </div>
-      </div>
-    </details>
+      </details>
     </div>
     <div class="task-info__task-data">
       <TaskContent :taskInfo="taskInfo" />
       <div v-if="taskUpdatesHistory">
-       <TaskActivityComponent :taskID="id" :activity="taskUpdatesHistory"/>
+        <TaskActivityComponent :taskID="id" :activity="taskUpdatesHistory" />
       </div>
     </div>
   </div>
-  <div v-else-if="!isLoading && !hasTaskInfo && !error" class="task-info task-info__container task-info__notfound">
+  <div
+    v-else-if="!isLoading && !hasTaskInfo && !error"
+    class="task-info task-info__container task-info__notfound"
+  >
     <div class="container container__notfound">
-      <h3 class="title title--notfound">Uh-oh! It seems there's no task matching this ID: {{ id }}. Please double-check and try again.</h3>
+      <h3 class="title title--notfound">
+        Uh-oh! It seems there's no task matching this ID: {{ id }}. Please double-check and try
+        again.
+      </h3>
       <ul class="link__wrapper">
         <li><router-link class="link task-info__notfound-link" to="/">Back Home</router-link></li>
-        <li><router-link class="link task-info__notfound-link" to="/tasks">See All tasks list</router-link></li>
+        <li>
+          <router-link class="link task-info__notfound-link" to="/tasks"
+            >See All tasks list</router-link
+          >
+        </li>
       </ul>
     </div>
   </div>
   <BaseDialog :show="showLogTimeModal" title="Time tracking" @close="closeLogTimeDialog">
-    <TaskTreckedTimeDetails :isLabelVisible="false"
-                            :estimated="taskInfo?.estimateTime" 
-                            :trecked="taskInfo?.loggedTime"/>
+    <TaskTreckedTimeDetails
+      :isLabelVisible="false"
+      :estimated="taskInfo?.estimateTime"
+      :trecked="taskInfo?.loggedTime"
+    />
     <LogTimeForm className="trek-time" :id="id" :trecked="taskInfo?.loggedTime" />
   </BaseDialog>
   <BaseDialog :show="showDeleteConfirmationModal" @close="closeDeleteConfirmationDialog">
     <template #header>
       <h2 class="dialog__title">
-        <SvgIcon class="icon icon--large" name="attention"/>
-        <span class="dialog__title-text">Delate task {{id}} ?</span>
+        <SvgIcon class="icon icon--large" name="attention" />
+        <span class="dialog__title-text">Delate task {{ id }} ?</span>
       </h2>
     </template>
     <div class="dialog__content">
       <div class="description">
-        <p class="description-text">Are you about permanently delete this task. It's comments and all of it's data.</p>
+        <p class="description-text">
+          Are you about permanently delete this task. It's comments and all of it's data.
+        </p>
         <p class="description-text">If you are not sure, you can close this task.</p>
       </div>
 
       <div class="task-info__dialog-btn-wrapper">
-        <BaseButton class="btn btn__default btn--medium btn--delete" @click="removeTask">Delete</BaseButton>
-        <BaseButton class="btn btn__outlined btn--medium btn--cancel" @click="closeDeleteConfirmationDialog">Cancel</BaseButton>
-    </div>
+        <BaseButton class="btn btn__default btn--medium btn--delete" @click="removeTask"
+          >Delete</BaseButton
+        >
+        <BaseButton
+          class="btn btn__outlined btn--medium btn--cancel"
+          @click="closeDeleteConfirmationDialog"
+          >Cancel</BaseButton
+        >
+      </div>
     </div>
   </BaseDialog>
   <BaseDialog :show="showLoginRequirementModal" @close="closeLoginRequirementDialog">
     <template #header>
       <h2 class="dialog__title">
-        <SvgIcon class="icon icon--large" name="attention"/>
+        <SvgIcon class="icon icon--large" name="attention" />
         <span class="dialog__title-text">You're Not Logged In!</span>
       </h2>
     </template>
     <div class="dialog__content">
       <div class="description">
         <p class="description__text">
-          You need to be logged in to make changes to this task.
-          Please sign in to log time, update the priority, change the status, or modify this task.
+          You need to be logged in to make changes to this task. Please sign in to log time, update
+          the priority, change the status, or modify this task.
         </p>
       </div>
       <div class="task-info__dialog-btn-wrapper">
-        <router-link class="link btn btn__default btn--medium btn--login" to="/login">Login</router-link>
-        <router-link class="link btn btn__default btn--medium btn--signup" to="/people/registration">SignUp</router-link>
+        <router-link class="link btn btn__default btn--medium btn--login" to="/login">
+          {{ $t("common.header.navigation.login_link") }}
+        </router-link>
+        <router-link
+          class="link btn btn__default btn--medium btn--signup"
+          to="/people/registration"
+        >
+          {{ $t("common.header.navigation.signup_link") }}
+        </router-link>
       </div>
     </div>
   </BaseDialog>
@@ -110,18 +177,18 @@
 </template>
 
 <script>
-import TaskStatusDetails from '@/components/tasks/TaskStatusDetails.vue';
-import TaskActionsDetails from '@/components/tasks/TaskActionsDetails.vue';
-import TaskAssigneeDetails from '@/components/tasks/TaskAssigneeDetails.vue';
-import TaskPriorityDetails from '@/components/tasks/TaskPriorityDetails.vue';
-import TaskReporterDetails from '@/components/tasks/TaskReporterDetails.vue';
-import TaskProjectDetails from '@/components/tasks/TaskProjectDetails.vue';
-import TaskTreckedTimeDetails from '@/components/tasks/TaskTreckedTimeDetails.vue';
-import LogTimeForm from '@/components/tasks/LogTimeForm.vue';
+import TaskStatusDetails from "@/components/tasks/TaskStatusDetails.vue";
+import TaskActionsDetails from "@/components/tasks/TaskActionsDetails.vue";
+import TaskAssigneeDetails from "@/components/tasks/TaskAssigneeDetails.vue";
+import TaskPriorityDetails from "@/components/tasks/TaskPriorityDetails.vue";
+import TaskReporterDetails from "@/components/tasks/TaskReporterDetails.vue";
+import TaskProjectDetails from "@/components/tasks/TaskProjectDetails.vue";
+import TaskTreckedTimeDetails from "@/components/tasks/TaskTreckedTimeDetails.vue";
+import LogTimeForm from "@/components/tasks/LogTimeForm.vue";
 
-import TaskContent from '@/components/tasks/TaskContent.vue';
-import TaskActivityComponent from '@/components/tasks/task/TaskActivityComponent.vue';
-import SvgIcon from '@/components/UI/base-components/SvgIcon.vue';
+import TaskContent from "@/components/tasks/TaskContent.vue";
+import TaskActivityComponent from "@/components/tasks/task/TaskActivityComponent.vue";
+import SvgIcon from "@/components/UI/base-components/SvgIcon.vue";
 export default {
   components: {
     TaskStatusDetails,
@@ -133,37 +200,37 @@ export default {
     TaskTreckedTimeDetails,
     LogTimeForm,
     TaskContent,
-    TaskActivityComponent
+    TaskActivityComponent,
   },
-  props: ['id'],
+  props: ["id"],
   data() {
     return {
       isLoading: false,
       error: null,
       showLogTimeModal: false,
       showDeleteConfirmationModal: false,
-      showLoginRequirementModal: false
-    }
-  }, 
+      showLoginRequirementModal: false,
+    };
+  },
   computed: {
     isLoggedIn() {
-      return this.$store.getters['users/isAuthenticated'];
+      return this.$store.getters["users/isAuthenticated"];
     },
     taskInfo() {
-      return this.$store.getters['tasks/getTaskInfo'];
+      return this.$store.getters["tasks/getTaskInfo"];
     },
     hasTaskInfo() {
-      return !this.isLoading && (this.taskInfo !== null);
+      return !this.isLoading && this.taskInfo !== null;
     },
-  
+
     taskPriorityList() {
-      return this.$store.getters['tasks/getPriorityList'];
+      return this.$store.getters["tasks/getPriorityList"];
     },
     taskStatusList() {
-      return this.$store.getters['tasks/getStatusList'];
+      return this.$store.getters["tasks/getStatusList"];
     },
     taskActionsList() {
-      return this.$store.getters['tasks/getTaskActionsList'];
+      return this.$store.getters["tasks/getTaskActionsList"];
     },
     taskStatus() {
       return this?.taskInfo?.status;
@@ -179,30 +246,30 @@ export default {
     },
     updateTime() {
       return this.formatDate(this?.taskInfo?.updateTime);
-    }
+    },
   },
   methods: {
     async getTaskData() {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('tasks/getTaskData', { id: this.id });
+        await this.$store.dispatch("tasks/getTaskData", { id: this.id });
       } catch (error) {
-        this.error = error.message || 'Smth went wrong!';
+        this.error = error.message || "Smth went wrong!";
       } finally {
         this.isLoading = false;
       }
     },
 
     formatDate(timestamp) {
-      if (!timestamp) return '';
+      if (!timestamp) return "";
 
       let creatinDate = new Date(timestamp);
-      let year    = creatinDate.getFullYear();
-      let month   = String(creatinDate.getMonth() + 1).padStart(2, '0');
-      let day     = String(creatinDate.getDate()).padStart(2, '0');
-      let hour    = String(creatinDate.getHours()).padStart(2, '0');
-      let minute  = String(creatinDate.getMinutes()).padStart(2, '0');
-      let seconds = String(creatinDate.getSeconds()).padStart(2, '0');  
+      let year = creatinDate.getFullYear();
+      let month = String(creatinDate.getMonth() + 1).padStart(2, "0");
+      let day = String(creatinDate.getDate()).padStart(2, "0");
+      let hour = String(creatinDate.getHours()).padStart(2, "0");
+      let minute = String(creatinDate.getMinutes()).padStart(2, "0");
+      let seconds = String(creatinDate.getSeconds()).padStart(2, "0");
 
       return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
     },
@@ -218,7 +285,7 @@ export default {
         this.showLoginRequirementDialog();
         return;
       } else {
-        this.$store.dispatch('tasks/updateTask', { id: this.taskInfo.id, mode: mode, ...params });
+        this.$store.dispatch("tasks/updateTask", { id: this.taskInfo.id, mode: mode, ...params });
       }
     },
     async actionExecute(newParams) {
@@ -227,13 +294,13 @@ export default {
         this.showLoginRequirementDialog();
         return;
       }
-      if (newVal === 'logtime') {
+      if (newVal === "logtime") {
         this.showLogTimeDialog();
       }
-      if (newVal === 'print') {
+      if (newVal === "print") {
         window.print();
       }
-      if (newVal === 'delete') {
+      if (newVal === "delete") {
         this.showDeleteConfirmationModal = true;
       }
     },
@@ -241,10 +308,10 @@ export default {
       this.isLoading = true;
       this.closeDeleteConfirmationDialog();
       try {
-        await this.$store.dispatch('tasks/removeTask', { id: this.id });
-        this.$router.push('/tasks');
+        await this.$store.dispatch("tasks/removeTask", { id: this.id });
+        this.$router.push("/tasks");
       } catch (error) {
-        this.error = error.message || 'Smth went wrong!';
+        this.error = error.message || "Smth went wrong!";
       } finally {
         this.isLoading = false;
       }
@@ -267,12 +334,12 @@ export default {
     },
     closeLoginRequirementDialog() {
       this.showLoginRequirementModal = false;
-    }
+    },
   },
   created() {
     this.getTaskData();
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
@@ -348,7 +415,7 @@ export default {
 
     @media (min-width: $sm) {
       flex-direction: row;
-      justify-content: flex-end;  
+      justify-content: flex-end;
     }
 
     .btn--delete {
@@ -398,7 +465,7 @@ export default {
     margin-right: 5px;
   }
 
-  &__value{
+  &__value {
     display: flex;
     flex-direction: column;
     flex-grow: 2;

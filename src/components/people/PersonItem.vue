@@ -1,43 +1,54 @@
 <template>
   <div class="person">
     <div class="person__actions-wrapper">
-      <BaseButton class="btn  btn--small person__btn-actions" aria-label="press to get additional functions">
+      <BaseButton
+        class="btn btn--small person__btn-actions"
+        :aria-label="$t('pages.people.btn_action_label')"
+      >
         <SvgIcon name="ellipsis" class="icon" />
       </BaseButton>
       <div class="person__actions-dropdown">
-        <BaseButton class="btn btn__default btn--medium person__btn-delete" aria-label="Press to remove person">
+        <BaseButton
+          class="btn btn__default btn--medium person__btn-delete"
+          :aria-label="$t('pages.people.btn_action_label')"
+        >
           <SvgIcon name="delete" class="icon" />
-          Remove
+          {{ $t("pages.people.remove_person") }}
         </BaseButton>
-        <BaseButton class="btn btn__default btn--medium person__btn-edit" aria-label="Press to edit person">
+        <BaseButton
+          class="btn btn__default btn--medium person__btn-edit"
+          :aria-label="$t('pages.people.btn_edit_label')"
+        >
           <SvgIcon name="edit" class="icon" />
-          Edit
+          {{ $t("pages.people.edit_person") }}
         </BaseButton>
       </div>
     </div>
     <div class="person__image-wrapper rounded">
       <SvgIcon v-if="!person.img" name="person" class="icon person__svg" />
-      <img v-else src="" alt="" class="person__img">
+      <img v-else src="" alt="" class="person__img" />
     </div>
     <h3 class="person__name">{{ fullName }}</h3>
     <span class="person__position">{{ person.position }}</span>
-    <router-link class="link person__link" :to="profileLink">View Prifile</router-link>
+    <router-link class="link person__link" :to="profileLink">
+      {{ $t("pages.people.view_profile") }}
+    </router-link>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['person'],
+  props: ["person"],
 
   computed: {
     fullName() {
-      return this.person.name + ' ' + this.person.lastName;
+      return this.person.name + " " + this.person.lastName;
     },
     profileLink() {
-      return '/profile/' + this.person.id;
-    }
-  }
-}
+      return "/profile/" + this.person.id;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -50,11 +61,11 @@ export default {
   background-color: $color-white;
   border: 2px solid $color-secondary-light;
   border-radius: 12px;
-  transition: all .35s ease;
+  transition: all 0.35s ease;
 
   &:hover {
     border-color: $color-primary;
-    transition: all .35s ease;
+    transition: all 0.35s ease;
 
     .person__image-wrapper {
       border-color: $color-primary;
@@ -154,12 +165,12 @@ export default {
     border-bottom-left-radius: $border-radius-large;
     border-bottom-right-radius: $border-radius-large;
     text-decoration: none;
-    transition: all .35s ease;
+    transition: all 0.35s ease;
 
     &:hover {
       background-color: $color-primary;
       color: $color-white;
-      transition: all .35s ease;
+      transition: all 0.35s ease;
     }
   }
 }

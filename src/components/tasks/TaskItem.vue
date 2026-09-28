@@ -12,78 +12,89 @@
     <div class="task__description">
       {{ task.description }}
     </div>
-    <BaseButton v-if="isLoggedIn && (type === 'board-item')" class="btn btn__outlined btn--small task__btn-edit"
-      title="edit" aria-label="edit task">
+    <BaseButton
+      v-if="isLoggedIn && type === 'board-item'"
+      class="btn btn__outlined btn--small task__btn-edit"
+      :title="$t('pages.tasks.edit_task')"
+      :aria-label="$t('pages.tasks.btn_edit_label')"
+    >
       <SvgIcon name="edit" class="icon" />
     </BaseButton>
     <div v-if="type !== 'board-item'" class="task__actions-wrapper">
-      <BaseButton v-if="isLoggedIn" class="btn btn__outlined btn--small" 
-                :aria-label="`Remove task id:${task.id}`"
-                title="Remove task"
-                @click="toggleRemoveDialog"
+      <BaseButton
+        v-if="isLoggedIn"
+        class="btn btn__outlined btn--small"
+        :aria-label="$t('pages.tasks.btn_remove_label', { task_id: task.id })"
+        :title="$t('pages.tasks.remove_task')"
+        @click="toggleRemoveDialog"
       >
         <SvgIcon class="icon" name="remove" />
       </BaseButton>
-      <RouterLink :to="TaskLink" class="btn btn__outlined btn--small task__link" aria-label="Link to task details">Task
-        details
+      <RouterLink
+        :to="TaskLink"
+        class="btn btn__outlined btn--small task__link"
+        :aria-label="$t('pages.tasks.link_see_details_label')"
+      >
+        {{ $t("pages.tasks.link_see_details") }}
       </RouterLink>
     </div>
   </div>
   <Teleport to="body">
-    <DialogRemoveTask :show="showDeleteTaskModal" 
-                      :id="task.id" 
-                      @close-dialog="toggleRemoveDialog"
-                      @confirm-task-removement="removeTaskItem"/>
+    <DialogRemoveTask
+      :show="showDeleteTaskModal"
+      :id="task.id"
+      @close-dialog="toggleRemoveDialog"
+      @confirm-task-removement="removeTaskItem"
+    />
   </Teleport>
- 
 </template>
 
 <script>
-import TaskPriorityElement from '@/components/tasks/TaskPriorityElement.vue';
-import UserProfileImg from '@/components/auth/UserProfileInfo.vue';
-import DialogRemoveTask from '@/components/tasks/DialogRemoveTask.vue';
+import TaskPriorityElement from "@/components/tasks/TaskPriorityElement.vue";
+import UserProfileImg from "@/components/auth/UserProfileInfo.vue";
+import DialogRemoveTask from "@/components/tasks/DialogRemoveTask.vue";
 export default {
   components: {
     TaskPriorityElement,
     UserProfileImg,
-    DialogRemoveTask
+    DialogRemoveTask,
   },
-  props: ['task', 'type'],
-  data(){
-    return{
-      showDeleteTaskModal: false
-    }
+  props: ["task", "type"],
+  data() {
+    return {
+      showDeleteTaskModal: false,
+    };
   },
   computed: {
     TaskLink() {
-      return this.$route.path + '/' + this.task.id;
+      return this.$route.path + "/" + this.task.id;
     },
     isLoggedIn() {
-      return this.$store.getters['users/isAuthenticated'];
+      return this.$store.getters["users/isAuthenticated"];
     },
     userInfo() {
       return this.task.assignee;
-    }
+    },
   },
   methods: {
     getNameInitials() {
       return this.task.assignee.name.charAt(0) + this.task.assignee.lastName.charAt(0);
     },
-    toggleRemoveDialog(){
+    toggleRemoveDialog() {
       this.showDeleteTaskModal = !this.showDeleteTaskModal;
     },
-    async removeTaskItem(payload){
-    console.log(payload);
-    let {id}=payload;
+    async removeTaskItem(payload) {
+      console.log(payload);
+      let { id } = payload;
       this.toggleRemoveDialog();
       try {
-        await this.$store.dispatch('tasks/removeTask', { id: id })
+        await this.$store.dispatch("tasks/removeTask", { id: id });
       } catch (error) {
-        this.error = error.message || 'Smth went wrong!';
+        this.error = error.message || "Smth went wrong!";
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -92,7 +103,6 @@ export default {
   // --task-border-secondary: $color-primary;
   // --task-text-color: $color-secondary;
   // --task-text-description: $color-tetriary;
-
 
   position: relative;
   display: flex;
@@ -109,7 +119,6 @@ export default {
   &:last-of-type {
     margin-bottom: 0;
   }
-
 
   &__info {
     display: flex;
@@ -142,7 +151,7 @@ export default {
     max-width: 35px;
     margin-left: auto;
 
-    &>.icon {
+    & > .icon {
       width: 20px;
       height: 20px;
     }
@@ -177,7 +186,6 @@ export default {
   }
 
   &__status {
-
     &--todo {
       border-left-color: $color-todo;
     }

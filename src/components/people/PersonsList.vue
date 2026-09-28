@@ -1,6 +1,6 @@
 <template>
   <div v-if="!peopleList">
-    <p>Users list is empty.</p>
+    <p>{{ $t("pages.people.user_list_empty") }}</p>
   </div>
   <div v-else class="userslist__wrapper">
     <PersonItem v-for="person in peopleList" :key="person.id" :person="person" />
@@ -8,37 +8,37 @@
 </template>
 
 <script>
-import PersonItem from '@/components/people/PersonItem.vue';
+import PersonItem from "@/components/people/PersonItem.vue";
 
 export default {
   components: {
-    PersonItem
+    PersonItem,
   },
   data() {
     return {
-      error: null
-    }
+      error: null,
+    };
   },
   computed: {
     peopleList() {
-      return this.$store.getters['people/getEmployeesList'];
-    }
+      return this.$store.getters["people/getEmployeesList"];
+    },
   },
 
   methods: {
     async loadUsersList() {
       try {
-        await this.$store.dispatch('people/loadEmployeesList');
+        await this.$store.dispatch("people/loadEmployeesList");
       } catch (error) {
-        this.error = error.message || 'Smth went wrong!';
+        this.error = error.message || "Smth went wrong!";
       }
     },
   },
 
   created() {
     this.loadUsersList();
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>

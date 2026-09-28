@@ -1,8 +1,13 @@
 <template>
   <div class="tabs container">
-    <RouterLink to="/people/registration" :class="['tabs__btn', { active: activeTab === 'registration' }]">Registration
+    <RouterLink
+      to="/people/registration"
+      :class="['tabs__btn', { active: activeTab === 'registration' }]"
+      >{{ $t("common.registration") }}
     </RouterLink>
-    <RouterLink to="/people/all" :class="['tabs__btn', { active: activeTab === 'all' }]">See all</RouterLink>
+    <RouterLink to="/people/all" :class="['tabs__btn', { active: activeTab === 'all' }]">{{
+      $t("common.see_all")
+    }}</RouterLink>
     <div class="tabs__content-wrapper">
       <router-view></router-view>
     </div>
@@ -17,9 +22,9 @@ export default {
   computed: {
     activeTab() {
       return this.$route.name;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
