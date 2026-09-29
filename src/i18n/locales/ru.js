@@ -1,5 +1,11 @@
 export default {
   common: {
+    registration: "Регистрация",
+    see_all: "Все",
+    btn_cancel: "Отмена",
+    date: "дата",
+    activity_text: "Активности",
+    show_text: "Показать: ",
     header: {
       navigation: {
         home_link: "Главная",
@@ -34,6 +40,7 @@ export default {
       btn_edit_label: "@:pages.people.action_label отредактировать пользователя",
     },
     tasks: {
+      task_text: "Задача",
       remove_task: "Удалить",
       edit_task: "Редактировать",
       btn_edit_label: "@:pages.tasks.edit_task задачу",
@@ -49,8 +56,48 @@ export default {
           description_text_3:
             "Если вы не уверены, что хотите удалить задачу навсегда, рассмотрите возможность её закрытия вместо удаления.",
           btn_delete: "Удалить",
-          btn_cansel: "Отмена",
-          btn_cansel_label: "Отменить и закрыть диалоговое окно",
+          btn_cancel: "Отмена",
+          btn_cancel_label: "Отменить и закрыть диалоговое окно",
+        },
+      },
+      task_description: "Описание:",
+      all_tasks_link: "Смотреть список всех задач",
+      not_found_task_message:
+        "Упс! Похоже, задачи с ID {task_id} не существует. Пожалуйста, проверьте идентификатор и попробуйте снова.",
+      actions: {
+        actions_text: "Действия",
+        action_delete: "Удалить",
+        action_print: "Печать",
+        action_log_time: "Учёт времени",
+      },
+      activity_text: "Активность",
+      show_text: "Показать",
+      tabs: {
+        all_tab_text: "Все",
+        comments_tab_text: "Комментарии",
+        history_tab_text: "История",
+        work_log_tab_text: "Учёт времени",
+        comments: {
+          no_comments_text: "Комментариев пока нет.",
+          add_comment_btn: "Добавить комментарий",
+          add_comment_placeholder: "Добавьте комментарий",
+          error_msg: "Комментарий не может быть пустым!",
+          posted_at: "<span class='poste-time'>Опубликовано:</span> {post_time}",
+        },
+        work_log: {
+          time_spent: "Затраченное время:",
+          log_date: "@.capitalize:common.date",
+          comment_msg: "Комментарий: ",
+          no_logged_time: "Учёт времени отсутствует",
+          no_log_comment: "<Комментария нет>",
+          posted_at:
+            "Опубликовано: <span class='date-time'>{year}-{month}-{day}</span> в <span class='date-time'>{hour}:{minute}:{seconds}</span>",
+          posted_at_short: "<span class='date-time'>{year}-{month}-{day}</span>",
+        },
+        history: {
+          task_changed: "{mode} изменен на ",
+          change_task_at:
+            "был изменен <strong>{mode}</strong> в: <span class='poste-time'>{time}</span>",
         },
       },
     },

@@ -1,35 +1,54 @@
 <template>
   <div class="comment-form__wrapper">
     <form class="form form--add-comment" @submit.prevent="submitForm">
-      <div :class="['form-control', 'form-control--comment', {error: !comment.isValid}]">
-        <textarea id="comment" name="comment" class="form-control__textarea" placeholder="Add your comment" rows="15" v-model="comment.value"></textarea>
-        <p class="error-text" v-if="!comment.isValid">{{ comment.errorMessage }}</p>
+      <div :class="['form-control', 'form-control--comment', { error: !comment.isValid }]">
+        <textarea
+          id="comment"
+          name="comment"
+          class="form-control__textarea"
+          :placeholder="$t('pages.tasks.tabs.comments.add_comment_placeholder')"
+          rows="15"
+          v-model="comment.value"
+        ></textarea>
+        <p class="error-text" v-if="!comment.isValid">
+          {{ $t("pages.tasks.tabs.comments.error_msg") }}
+        </p>
       </div>
       <div class="form-control form-control--btn-wrapper btn-wrapper">
-        <BaseButton class="btn btn__outlined btn--medium comment__btn comment__btn--cancel"  type="button" @click="clearForm">Cancel</BaseButton>
-        <BaseButton class="btn btn__default btn--medium comment__btn comment__btn--add" type="submit">Add comment</BaseButton> 
-    </div>
+        <BaseButton
+          class="btn btn__outlined btn--medium comment__btn comment__btn--cancel"
+          type="button"
+          :aria-label="$t('common.btn_cancel')"
+          @click="clearForm"
+          >{{ $t("common.btn_cancel") }}</BaseButton
+        >
+        <BaseButton
+          class="btn btn__default btn--medium comment__btn comment__btn--add"
+          type="submit"
+          :aria-label="$t('pages.tasks.tabs.comments.add_comment_btn')"
+          >{{ $t("pages.tasks.tabs.comments.add_comment_btn") }}</BaseButton
+        >
+      </div>
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  props:["taskID"],
+  props: ["taskID"],
   data() {
     return {
       isFormValid: true,
       error: null,
       comment: {
-        value: '',
-        errorMessage: 'Comment can\'t be empty!',
-        isValid: true
-      }
-    }
+        value: "",
+        isValid: true,
+      },
+    };
   },
   methods: {
     submitForm() {
-      console.log('submit!'); 
+      console.log("submit!");
       this.validateForm();
       if (!this.isFormValid) return;
       this.addComment();
@@ -46,25 +65,24 @@ export default {
 
     async addComment() {
       let payload = {
-          id: this.taskID,
-          mode: 'comment',
-          authorID: this.$store.userID,
-          commentText: this.comment.value
-        };  
+        id: this.taskID,
+        mode: "comment",
+        authorID: this.$store.userID,
+        commentText: this.comment.value,
+      };
       try {
-        await this.$store.dispatch('tasks/AddComment', payload);
-      }
-      catch (error) {
-        this.error = error.message || 'Smth goes wrong!';
+        await this.$store.dispatch("tasks/AddComment", payload);
+      } catch (error) {
+        this.error = error.message || "Smth goes wrong!";
       }
 
       this.clearForm();
     },
     clearForm() {
-      this.comment.value = '';
-    }
-  }
-}
+      this.comment.value = "";
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -90,5 +108,4 @@ export default {
     }
   }
 }
-
 </style>

@@ -27,9 +27,9 @@
         <BaseButton
           class="btn btn__outlined btn--medium btn--cancel"
           @click="closeDeleteConfirmationDialog"
-          :aria-label="$t('pages.tasks.modal.delete_task.btn_cansel_label')"
+          :aria-label="$t('pages.tasks.modal.delete_task.btn_cancel_label')"
         >
-          {{ $t("pages.tasks.modal.delete_task.btn_cansel") }}
+          {{ $t("pages.tasks.modal.delete_task.btn_cancel") }}
         </BaseButton>
       </div>
     </div>

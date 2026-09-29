@@ -1,42 +1,42 @@
 <template>
   <div v-if="isLoggedIn" class="comments__form-wrapper">
-    <UserProfileImg :userInfo="userInfo" theme="light"/>
-    <AddCommentForm :taskID="taskID"/>
+    <UserProfileImg :userInfo="userInfo" theme="light" />
+    <AddCommentForm :taskID="taskID" />
   </div>
-  <div  class="comments__list-wrapper">
+  <div class="comments__list-wrapper">
     <ul v-if="activity.length" class="comments__list">
       <li class="comments__list-item" v-for="comment in activity">
-        <CommentItem :comment="comment" :key="comment.id"/>
+        <CommentItem :comment="comment" :key="comment.id" />
       </li>
     </ul>
-    <p v-else>No comments</p>
+    <p v-else>{{ $t("pages.tasks.tabs.comments.no_comments_text") }}</p>
   </div>
 </template>
 
 <script>
-import UserProfileImg from '@/components/auth/UserProfileInfo.vue';
-import AddCommentForm from '@/components/tasks/task/AddCommentForm.vue';
-import CommentItem from '@/components/tasks/task/CommentItem.vue';
+import UserProfileImg from "@/components/auth/UserProfileInfo.vue";
+import AddCommentForm from "@/components/tasks/task/AddCommentForm.vue";
+import CommentItem from "@/components/tasks/task/CommentItem.vue";
 
 export default {
-  props: ['taskID', 'activity'],
-  
+  props: ["taskID", "activity"],
+
   components: {
     UserProfileImg,
     AddCommentForm,
-    CommentItem
+    CommentItem,
   },
   data() {
     return {
-      userInfo: this.$store.getters['users/getUserInfo']
-    }
+      userInfo: this.$store.getters["users/getUserInfo"],
+    };
   },
   computed: {
     isLoggedIn() {
-      return this.$store.getters['users/isAuthenticated'];
-    }
-  } 
-}
+      return this.$store.getters["users/isAuthenticated"];
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -49,7 +49,7 @@ export default {
   &__list-wrapper {
     margin-top: 15px;
     @media (min-width: $sm) {
-      padding-left: 10px; 
+      padding-left: 10px;
     }
     @media (min-width: $md) {
       padding-left: 20px;
