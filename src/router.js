@@ -22,7 +22,7 @@ const AddPersonForm = () => import("@/components/people/AddPersonForm.vue");
 const PersonsList = () => import("@/components/people/PersonsList.vue");
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory("/global-board/"),
   routes: [
     {
       path: "/",
