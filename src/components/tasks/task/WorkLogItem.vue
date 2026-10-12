@@ -132,7 +132,7 @@ export default {
 .author {
   display: inline-flex;
   padding: 7px 5px 5px 5px;
-  margin-right: 7px;
+  margin-inline: 7px;
   border-radius: $border-radius-large;
   background-color: $color-primary-light;
   font-size: 12px;
