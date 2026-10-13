@@ -1,6 +1,8 @@
 <template>
   <div class="task-details task-details--project">
-    <span class="task-details__label task-details__label--project">Project: </span>
+    <span class="task-details__label task-details__label--project">
+      {{ $t("pages.tasks.tasks_details.details_project_label") }} 
+    </span>
     <div class="task-details__value task-details__value--project" @click="loadProjectsList">
       <SmartBox :list="projectsList" :title="title" mode="project" @update-params="updateTaskParams"
         :classList="['btn', 'btn--medium', 'btn--transparent', 'btn-project__controller']">

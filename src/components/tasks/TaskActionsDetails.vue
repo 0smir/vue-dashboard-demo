@@ -3,7 +3,7 @@
     <template #active-item>
       <BaseButton class="btn btn--medium btn--transparent btn-actions__controller">
         <SvgIcon class="icon icon--medium" name="flash"/>
-        <span class="btn-actions__title">Actions</span>
+        <span class="btn-actions__title">{{ $t("pages.tasks.task_actions") }}</span>
         <SvgIcon class="icon icon--small icon-chevron" name="chevron-down"/>
       </BaseButton>
     </template>

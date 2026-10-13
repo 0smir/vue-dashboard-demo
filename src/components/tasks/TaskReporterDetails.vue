@@ -1,6 +1,8 @@
 <template>
   <div class="task-details task-details--reporter" v-if="reporterFullName">
-    <span class="task-details__label task-details__label--reporter">Reporter: </span>
+    <span class="task-details__label task-details__label--reporter">
+      {{ $t("pages.tasks.tasks_details.details_reporter_label") }}
+    </span>
 
     <div class="task-details__value task-details__value--reporter" @click="loadUsersList">
       <SmartBox :list="personsList"  mode="reporter" @update-params="changeReporterName">

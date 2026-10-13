@@ -1,15 +1,17 @@
 <template>
   <div class="task-details task-details__time task-details--time-trecked">
-    <span v-if="isLabelVisible" class="task-details__label task-details__label--time-trecked">Time tracked: </span>
+    <span v-if="isLabelVisible" class="task-details__label task-details__label--time-trecked">
+      {{ $t("pages.tasks.tasks_details.task_timetracked_label") }}
+    </span>
     <div :class="classNamesList"> 
       <div :class="['time-line__treck', {overdue: isTaskOverdue}]">
         <span class="time-line__time-indicator" :style="{'width': loggedTimeIndicatorWidth + '%'}"></span>
       </div>
       <div class="time-line__details">
-          <span v-if="!trecked" class="text-left">0h logged</span>
-          <span v-else class="text-left">{{ trecked + 'h' }} logged</span>
-          <span v-if="!isTaskOverdue && estimated > 0" class="text-right">{{ remaining }}h remaining</span>
-          <span v-else class="text-right">{{ estimated + 'h' }} original estimation</span>
+          <span v-if="!trecked" class="text-left">0h {{ $t("pages.tasks.tasks_details.task_time_tracked")}} </span>
+          <span v-else class="text-left">{{ trecked + 'h' }} {{ $t("pages.tasks.tasks_details.task_time_tracked")}}</span>
+          <span v-if="!isTaskOverdue && estimated > 0" class="text-right">{{ remaining }}h {{ $t("pages.tasks.tasks_details.task_time_remained")}}</span>
+          <span v-else class="text-right">{{ estimated + 'h' }} {{ $t("pages.tasks.tasks_details.task_time_tracked_original") }}</span>
         </div>
     </div>
   </div>

@@ -23,7 +23,7 @@
       </div>
       <details class="details" open>
         <summary class="summary">
-          <span class="details__title">Task Details</span>
+          <span class="details__title">{{ $t("pages.tasks.tasks_details.details_title") }}</span>
           <SvgIcon class="icon icon--small details__arrow" name="chevron-down" />
         </summary>
         <div class="task-info__details-wrapper">
@@ -52,7 +52,9 @@
             v-if="taskInfo?.estimateTime"
             class="task-details task-details__time task-details--time-estimated"
           >
-            <span class="task-details__label task-details__label--time-estimated">Estimated: </span>
+            <span class="task-details__label task-details__label--time-estimated">
+              {{ $t("pages.tasks.tasks_details.task_estimation_label") }}
+            </span>
             <span class="task-details__value task-details__value--time-estimated">
               {{ taskInfo?.estimateTime + "h" }}</span
             >
@@ -68,7 +70,9 @@
             v-if="taskInfo?.createdTime"
             class="task-details task-details__time task-details__time--created"
           >
-            <span class="task-details__label task-details__label--time-created">Created: </span>
+            <span class="task-details__label task-details__label--time-created">
+             {{ $t("pages.tasks.tasks_details.task_creation_label") }}
+            </span>
             <span class="task-details__value task-details__value--time-created">
               {{ createTime }}</span
             >
@@ -77,7 +81,9 @@
             v-if="taskInfo?.updateTime"
             class="task-details task-details__time task-details__time--updated"
           >
-            <span class="task-details__label task-details__label--time-updated">Updated: </span>
+            <span class="task-details__label task-details__label--time-updated">
+              {{ $t("pages.tasks.tasks_details.task_updations_label") }}
+            </span>
             <span class="task-details__value task-details__value--time-updated">
               {{ updateTime }}</span
             >
@@ -98,15 +104,14 @@
   >
     <div class="container container__notfound">
       <h3 class="title title--notfound">
-        Uh-oh! It seems there's no task matching this ID: {{ id }}. Please double-check and try
-        again.
+        {{ $t("pages.tasks.tasks_details.no_task_description", {id: id}) }}
       </h3>
       <ul class="link__wrapper">
-        <li><router-link class="link task-info__notfound-link" to="/">Back Home</router-link></li>
+        <li><router-link class="link task-info__notfound-link" to="/"> {{ $t("common.back_home") }}</router-link></li>
         <li>
-          <router-link class="link task-info__notfound-link" to="/tasks"
-            >See All tasks list</router-link
-          >
+          <router-link class="link task-info__notfound-link" to="/tasks">
+            {{ $t("pages.tasks.all_tasks_link") }}
+          </router-link>
         </li>
       </ul>
     </div>
@@ -123,25 +128,24 @@
     <template #header>
       <h2 class="dialog__title">
         <SvgIcon class="icon icon--large" name="attention" />
-        <span class="dialog__title-text">Delate task {{ id }} ?</span>
+        <span class="dialog__title-text"> {{ $t("dialogs.delete_task.title", {id: id}) }} </span>
       </h2>
     </template>
     <div class="dialog__content">
       <div class="description">
         <p class="description-text">
-          Are you about permanently delete this task. It's comments and all of it's data.
+          {{ $t("dialogs.delete_task.description_text_1") }}
         </p>
-        <p class="description-text">If you are not sure, you can close this task.</p>
+        <p class="description-text"> {{ $t("dialogs.delete_task.description_text_2") }}</p>
       </div>
 
       <div class="task-info__dialog-btn-wrapper">
-        <BaseButton class="btn btn__default btn--medium btn--delete" @click="removeTask"
-          >Delete</BaseButton
-        >
+        <BaseButton class="btn btn__default btn--medium btn--delete" @click="removeTask">
+           {{ $t("common.btn_delete") }} </BaseButton>
         <BaseButton
           class="btn btn__outlined btn--medium btn--cancel"
           @click="closeDeleteConfirmationDialog"
-          >Cancel</BaseButton
+          >{{ $t("common.btn_cancel") }}</BaseButton
         >
       </div>
     </div>
@@ -150,15 +154,12 @@
     <template #header>
       <h2 class="dialog__title">
         <SvgIcon class="icon icon--large" name="attention" />
-        <span class="dialog__title-text">You're Not Logged In!</span>
+        <span class="dialog__title-text">{{ $t("dialogs.delete_task_notlogged.title") }}</span>
       </h2>
     </template>
     <div class="dialog__content">
       <div class="description">
-        <p class="description__text">
-          You need to be logged in to make changes to this task. Please sign in to log time, update
-          the priority, change the status, or modify this task.
-        </p>
+        <p class="description__text"> {{ $t("dialogs.delete_task_notlogged.description_text") }}</p>
       </div>
       <div class="task-info__dialog-btn-wrapper">
         <router-link class="link btn btn__default btn--medium btn--login" to="/login">
@@ -173,7 +174,7 @@
       </div>
     </div>
   </BaseDialog>
-  <p v-if="!isLoading && error">Error</p>
+  <p v-if="!isLoading && error">{{ $t("common.error") }}</p>
 </template>
 
 <script>

@@ -1,8 +1,11 @@
 export default {
   common: {
+    back_home: "На головну",
     registration: "Реєстрація",
     see_all: "Усі",
     btn_cancel: "Скасувати",
+    btn_delete: "Видалити",
+    error: "Помилка",
     date: "дата",
     activity_text: "Активності",
     show_text: "Показати: ",
@@ -40,6 +43,7 @@ export default {
       btn_edit_label: "@:pages.people.action_label відредагувати користувача",
     },
     tasks: {
+      task_actions:"Дії",
       task_text: "Завдання",
       remove_task: "Видалити",
       edit_task: "Редагувати",
@@ -100,7 +104,35 @@ export default {
             "було змінено <strong>{mode}</strong>: <span class='poste-time'>{time}</span>",
         },
       },
+      tasks_details: {
+        details_title: "Деталі завдання",
+        details_assignee_label: "Виконавець:",
+        details_priority_label: "Пріоритет:",
+        details_reporter_label: "Автор:",
+        details_project_label: "Проєкт:",
+        details_status_label: "Статус:",
+        task_estimation_label: "Оцінка: ",
+        task_timetracked_label: "Витрачено часу: ",
+        task_time_tracked_original: "початковий розрахунок",
+        task_time_tracked: "зафіксовано",
+        task_time_remained: "залишилось",
+        task_creation_label: "Створено:",
+        task_updations_label: "Оновлено: ",
+        no_task_description: "Ой! Схоже, завдання з ID {id} не існує. Будь ласка, перевірте та спробуйте ще раз.",
+        see_all_tasks: "Переглянути список усіх завдань"
+      }
     },
     boards: {},
+    dialogs: {
+      delete_task: {
+        title: "Видалити завдання {id}",
+        description_text_1: "Ви збираєтеся остаточно видалити це завдання, його коментарі та всі пов'язані з ним дані.",
+        description_text_2: "Якщо ви не впевнені, можете просто закрити це завдання."
+      },
+      delete_task_notlogged: {
+        title: "Ви не увійшли в систему!",
+        description_text: "Щоб вносити зміни до цього завдання, потрібно увійти в систему. Будь ласка, увійдіть, щоб обліковувати час, змінювати пріоритет, статус або редагувати це завдання."
+      },  
+    },
   },
 };

@@ -1,6 +1,8 @@
 <template>
   <div class="task-details task-details--priority">
-    <span class="task-details__label task-details__label--priority">Priority:</span>
+    <span class="task-details__label task-details__label--priority">
+      {{ $t("pages.tasks.tasks_details.details_priority_label") }}
+    </span>
     <div class="task-details__value task-details__value--priority">
       <SmartBox :list="taskPriorityList" :title="priorityTitle" mode="priority" @update-params="updateTaskParams">
         <template #active-item>

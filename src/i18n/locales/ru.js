@@ -1,8 +1,11 @@
 export default {
   common: {
+    back_home: "На главную",
     registration: "Регистрация",
     see_all: "Все",
     btn_cancel: "Отмена",
+    btn_delete: "Удалить",
+    error: "Ошибка",
     date: "дата",
     activity_text: "Активности",
     show_text: "Показать: ",
@@ -40,6 +43,7 @@ export default {
       btn_edit_label: "@:pages.people.action_label отредактировать пользователя",
     },
     tasks: {
+      task_actions:"Действия",
       task_text: "Задача",
       remove_task: "Удалить",
       edit_task: "Редактировать",
@@ -100,7 +104,35 @@ export default {
             "был изменен <strong>{mode}</strong> в: <span class='poste-time'>{time}</span>",
         },
       },
+      tasks_details: {
+        details_title: "Детали задачи",
+        details_assignee_label: "Исполнитель:",
+        details_priority_label: "Приоритет:",
+        details_reporter_label: "Автор:",
+        details_project_label: "Проект:",
+        details_status_label: "Статус:",
+        task_estimation_label: "Оценка: ",
+        task_timetracked_label: "Затрачено времени: ",
+        task_time_tracked_original: "изначальная оценка",
+        task_time_tracked: "зафиксированно",
+        task_time_remained: "осталось",
+        task_creation_label: "Создано:",
+        task_updations_label: "Обновлено: ",
+        no_task_description: "Ой! Похоже, задачи с ID {id} не существует. Пожалуйста, проверьте и попробуйте снова.",
+        see_all_tasks: "Посмотреть список всех задач"
+      }
     },
     boards: {},
+    dialogs: {
+      delete_task: {
+        title: "Удалить задачу {id}",
+        description_text_1: "Вы собираетесь безвозвратно удалить эту задачу, её комментарии и все связанные с ней данные.",
+        description_text_2: "Если вы не уверены, вы можете просто закрыть эту задачу."
+      },
+      delete_task_notlogged: {
+        title: "Вы не вошли в систему!",
+        description_text: "Чтобы вносить изменения в эту задачу, необходимо войти в систему. Пожалуйста, войдите, чтобы учитывать время, менять приоритет, статус или редактировать эту задачу."
+      },  
+    },
   },
 };

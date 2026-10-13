@@ -2,9 +2,12 @@ import tasks from "@/store/tasks";
 
 export default {
   common: {
+    back_home: "Back Home",
     registration: "Registration",
     see_all: "See all",
     btn_cancel: "Cancel",
+    btn_delete: "Delete",
+    error: "Error",
     date: "date",
     activity_text: "Activity",
     show_text: "Show: ",
@@ -44,6 +47,7 @@ export default {
       btn_edit_label: "@:pages.people.action_label edit person",
     },
     tasks: {
+      task_actions:"Actions",
       task_text: "task",
       remove_task: "Remove",
       edit_task: "Edit",
@@ -104,7 +108,36 @@ export default {
             "change task <strong>{mode}</strong> at: <span class='poste-time'>{time}</span>",
         },
       },
+      tasks_details: {
+        details_title: "Task Details",
+        details_assignee_label: "Assignee:",
+        details_priority_label: "Priority:",
+        details_reporter_label: "Reporter:",
+        details_project_label: "Project:",
+        details_status_label: "Status:",
+        task_estimation_label: "Estimated: ",
+        task_timetracked_label: "Time tracked: ",
+        task_time_tracked_original: "original estimation",
+        task_time_tracked: "logged",
+        task_time_remained: "remaining",
+        task_creation_label: "Created:",
+        task_updations_label: "Updated: ",
+        no_task_description: "Uh-oh! It seems there's no task matching this ID: {id}. Please double-check and try again.",
+        see_all_tasks: "See All tasks list"
+      }
     },
     boards: {},
+  },
+  dialogs: {
+    delete_task: {
+      title: "Delate task {id}",
+      description_text_1: "Are you about permanently delete this task. It's comments and all of it's data.",
+      description_text_2: "If you are not sure, you can close this task."
+    },
+    delete_task_notlogged: {
+      title: "You're Not Logged In!",
+      description_text: "You need to be logged in to make changes to this task. Please sign in to log time, update the priority, change the status, or modify this task."
+    },
+      
   },
 };
