@@ -17,7 +17,8 @@ $-btn-dark-bg: $color-secondary;
 $-btn-dark-bg-hover: $color-tetriary;
 $-btn-dark-text: $color-white;
 
-.btn {
+.btn,
+.btn__link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
