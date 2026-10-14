@@ -104,7 +104,7 @@ export default {
   padding: 15px;
   width: 100%;
   min-height: 75px;
-  background-color: $color-primary;
+  background: $main-gradient;
 
   @media print {
     display: none;
