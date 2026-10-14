@@ -16,8 +16,11 @@
   $color-white: #FFFFFF;
   //===============================
 
+  $main-gradient: linear-gradient(90deg, #015C98 0%, #8A3A68 55%, #FF3750 100%);
+
   $color-text: $color-white;
   $color-text-dark: $color-secondary;
+  $color-text-acсent: $color-primary;
 
   $color-todo: #04c7e5;
   $color-inprogress: #ffc405;
