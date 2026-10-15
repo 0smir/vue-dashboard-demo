@@ -1,8 +1,9 @@
 <template>
   <div class="language-switcher">
-    <BaseButton class="btn btn__default btn--medium">{{
-      $t("common.header.lang_switcher")
-    }}</BaseButton>
+    <BaseButton class="btn btn__outlined btn--medium language-switcher__btn">
+      <span class="language-switcher__btn-text">{{ currentLangLabel }}</span>
+      <SvgIcon name="chevron-down" class="icon icon--medium" />
+    </BaseButton>
     <ul class="language-switcher__nav nav-dropdown">
       <li
         v-for="lang of languagesList"
@@ -25,8 +26,14 @@ export default {
         { code: "ua", label: "UA" },
         { code: "ru", label: "RU" },
       ],
-      currentLang: localStorage.getItem("lang") || this.$i18n.locale,
+      currentLang:  localStorage.getItem("lang") || this.$i18n.locale,
+    
     };
+  },
+  computed: {
+    currentLangLabel() {
+     return this.languagesList.find(item => item.code === this.currentLang).label;
+    }
   },
   methods: {
     changeLanguage(lang) {
@@ -68,6 +75,7 @@ export default {
     font-weight: 500;
     text-align: center;
   }
+
   &__nav-item {
     position: relative;
     color: $color-tetriary;
@@ -95,6 +103,15 @@ export default {
         content: "➤";
       }
     }
+  }
+
+  &__btn {
+    background-color: rgba($color-white, 0.15);
+    color: $color-white;
+  }
+
+  &__btn-text {
+    margin-right: 5px;
   }
 }
 </style>
