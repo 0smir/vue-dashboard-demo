@@ -1,6 +1,6 @@
 <template>
   <div class="language-switcher">
-    <BaseButton class="btn btn__outlined btn--medium language-switcher__btn">
+    <BaseButton class="btn btn__outlined btn--small language-switcher__btn">
       <span class="language-switcher__btn-text">{{ currentLangLabel }}</span>
       <SvgIcon name="chevron-down" class="icon icon--medium" />
     </BaseButton>
@@ -41,6 +41,10 @@ export default {
       localStorage.setItem("lang", lang);
       document.querySelector("html").setAttribute("lang", lang);
     },
+
+    toggleLangDropdown() {
+      
+    }
   },
 };
 </script>
@@ -50,6 +54,7 @@ export default {
   position: relative;
   padding-block: 5px;
   margin-right: 15px;
+  width: 85px;
 
   &:hover,
   &:focus,
@@ -82,24 +87,14 @@ export default {
     padding: 10px;
     border-radius: $border-radius-medium;
 
-    &:hover {
-      background-color: $color-primary-light;
-      color: $color-primary;
-
-      &::before {
-        position: absolute;
-        left: 15px;
-        content: "➤";
-      }
-    }
-
+    &:hover,
     &.active {
       background-color: $color-primary-light;
       color: $color-primary;
 
       &::before {
         position: absolute;
-        left: 15px;
+        left: 8px;
         content: "➤";
       }
     }
@@ -108,6 +103,7 @@ export default {
   &__btn {
     background-color: rgba($color-white, 0.15);
     color: $color-white;
+    width: 100%;
   }
 
   &__btn-text {
