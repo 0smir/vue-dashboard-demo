@@ -14,9 +14,13 @@
   $color-tetriary-light: #EBEBEB;
 
   $color-white: #FFFFFF;
+
+  $color-accent: #FF3750;
+  $color-accent-light: #8A3A68;
   //===============================
 
-  $main-gradient: linear-gradient(90deg, #015C98 0%, #8A3A68 55%, #FF3750 100%);
+  $main-gradient: linear-gradient(90deg, $color-primary 0%, $color-accent-light 55%, $color-accent 100%);
+  $primary-gradient: linear-gradient(180deg, $color-primary 0%, $color-dark-bg 100%);
 
   $color-text: $color-white;
   $color-text-dark: $color-secondary;

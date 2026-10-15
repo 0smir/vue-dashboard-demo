@@ -11,11 +11,13 @@
         <SvgIcon v-else name="chevronRight" class="icon sidebar__controls-icon" />
       </BaseButton>
     </div>
+    <h4 class="sidebar__space-name">WORKSPACE</h4>
     <ul class="sidebar-nav">
-      <li class="sidebar-nav__item">
+      <li class="sidebar__nav-item">
         <router-link
           class="sidebar__link"
           to="/"
+          exact
           :title="$t('common.sidebar.boards_link')"
           :aria-label="
             $t('common.header.link_label', {
@@ -31,10 +33,11 @@
           }}</span></router-link
         >
       </li>
-      <li class="sidebar-nav__item">
+      <li class="sidebar__nav-item">
         <router-link
           class="sidebar__link"
           to="/"
+          exact
           :title="$t('common.sidebar.statistic_link')"
           :aria-label="
             $t('common.header.link_label', {
@@ -50,29 +53,11 @@
           }}</span></router-link
         >
       </li>
-      <li class="sidebar-nav__item">
-        <router-link
-          class="sidebar__link"
-          to="/"
-          :title="$t('common.sidebar.settings_link')"
-          :aria-label="
-            $t('common.header.link_label', {
-              linkName: $t('common.sidebar.settings_link'),
-            })
-          "
-        >
-          <span class="sidebar__link-icon">
-            <SvgIcon name="settings" class="icon" />
-          </span>
-          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
-            $t("common.sidebar.settings_link")
-          }}</span></router-link
-        >
-      </li>
-      <li class="sidebar-nav__item">
+      <li class="sidebar__nav-item">
         <router-link
           class="sidebar__link"
           to="/tasks"
+          exact 
           :title="$t('common.sidebar.tasks_link')"
           :aria-label="
             $t('common.header.link_label', {
@@ -88,10 +73,11 @@
           }}</span></router-link
         >
       </li>
-      <li class="sidebar-nav__item">
+      <li class="sidebar__nav-item">
         <router-link
           class="sidebar__link"
           to="/people"
+          exact
           :title="$t('common.sidebar.people_link')"
           :aria-label="
             $t('common.header.link_label', {
@@ -107,10 +93,35 @@
           }}</span></router-link
         >
       </li>
-      <li v-if="isLoggedIn" class="sidebar-nav__item">
+      
+    </ul>
+    <h4 class="sidebar__space-name">System</h4>
+    <ul class="sidebar-nav">
+      <li class="sidebar__nav-item">
+        <router-link
+          class="sidebar__link"
+          to="/"
+          exact
+          :title="$t('common.sidebar.settings_link')"
+          :aria-label="
+            $t('common.header.link_label', {
+              linkName: $t('common.sidebar.settings_link'),
+            })
+          "
+        >
+          <span class="sidebar__link-icon">
+            <SvgIcon name="settings" class="icon" />
+          </span>
+          <span :class="['sidebar__link-text', { tooltip: !isExpanded }]">{{
+            $t("common.sidebar.settings_link")
+          }}</span></router-link
+        >
+      </li>
+      <li v-if="isLoggedIn" class="sidebar__nav-item">
         <router-link
           class="sidebar__link"
           to="/create"
+          exact
           :title="$t('common.sidebar.create_link')"
           :aria-label="
             $t('common.header.link_label', {
@@ -126,10 +137,11 @@
           }}</span>
         </router-link>
       </li>
-      <li v-else class="sidebar-nav__item">
+      <li v-else class="sidebar__nav-item">
         <router-link
           class="sidebar__link"
           to="/people/registration"
+          exact
           :title="$t('common.sidebar.login_link')"
           :aria-label="
             $t('common.header.link_label', {
@@ -179,7 +191,8 @@ export default {
 .sidebar {
   height: 100%;
   color: $color-text;
-  background-color: $color-primary;
+  border-top: 1px solid $color-primary-medium;
+  background: $primary-gradient;
   padding: 10px 15px;
 
   @media (min-width: $md) {
@@ -218,6 +231,10 @@ export default {
     .sidebar__link-text {
       display: none;
     }
+
+    .sidebar__space-name {
+      display: none;
+    }
   }
 
   &.open {
@@ -226,6 +243,10 @@ export default {
 
     .sidebar__link-text {
       display: inline;
+    }
+
+    .sidebar__space-name {
+      display: block;
     }
   }
 
@@ -260,6 +281,10 @@ export default {
     }
   }
 
+  &__nav-item {
+    margin-bottom: 10px;
+  }
+
   &__controls-wrapper {
     display: flex;
     justify-content: flex-end;
@@ -274,7 +299,7 @@ export default {
 
   &__link {
     display: flex;
-    padding: 10px 5px;
+    padding: 10px 15px;
     align-items: center;
     font-size: 16px;
     overflow: hidden;
@@ -282,12 +307,17 @@ export default {
     border-radius: 3px;
 
     &:hover {
-      background-color: $color-primary-medium;
+      background-color: rgba($color-white, 0.14);
       text-decoration: none;
 
       .sidebar__link-icon {
         transform: scale(1.25);
       }
+    }
+
+    &.router-link-active {
+      background-color: rgba($color-white, 0.14);
+      box-shadow: inset 3px 0 0 $color-accent;
     }
   }
 
@@ -304,15 +334,29 @@ export default {
       display: flex;
     }
   }
+
+  &__space-name {
+    padding: 8px 12px 15px 12px;
+    color: $color-tetriary-light;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
 }
 
 .sidebar-nav {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 15px 0 0;
+  margin: 0 0 15px;
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+  border-top: 1px solid rgba($color-white, 0.15);
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
   @media (min-width: $sm) {
     flex-direction: column;
