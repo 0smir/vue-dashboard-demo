@@ -2,10 +2,12 @@
   <div class="layout">
     <TheHeader></TheHeader>
     <div class="layout__content">
-          <TheSidebar :isExpanded="isExpanded" @toggle-sidebar="toggleSidebar"></TheSidebar>
-    <main class="main">
-      <router-view></router-view>
-    </main>
+        <TheSidebar :isExpanded="isExpanded" @toggle-sidebar="toggleSidebar"></TheSidebar>
+        
+      <main class="main">
+        <BaseBreadcrumb v-if="!withoutBreadcrumbs"></BaseBreadcrumb>
+        <router-view></router-view>
+      </main>
     </div>
 
     <TheFooter></TheFooter>
