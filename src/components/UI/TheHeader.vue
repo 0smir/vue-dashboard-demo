@@ -67,7 +67,7 @@
           >{{ $t("common.header.navigation.login_link") }}</router-link
         >
         <router-link
-          to="/people/registration"
+          to="/registration"
           class="header__link header__auth-link header__auth-link--registration"
           :title="$t('common.header.navigation.signup_link')"
           :aria-label="
