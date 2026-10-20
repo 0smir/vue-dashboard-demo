@@ -1,5 +1,6 @@
 <template>
   <div v-if="isLoading === false" class="container">
+    <h2 class="title">{{ $t("pages.tasks.all_tasks_title") }}</h2>
     <TasksFilter :filterItemsList="filterItemsList" :activeItem="activeFilter" @on-filter-change="filterNameChange" />
     <ul class="tasks-list__wrapper" v-if="tasks.length">
       <li class="tasks-list__item" v-for="task in tasks">
