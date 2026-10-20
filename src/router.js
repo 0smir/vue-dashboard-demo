@@ -25,7 +25,7 @@ const router = createRouter({
   history: createWebHistory("/global-board/"),
   routes: [
     {
-      path: "/",
+      path: "/:lang?",
       redirect: "/boards/all",
       // component: Home,
       component: BoardPage,
@@ -36,25 +36,56 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
+      path: "/registration",
+      name: "registration",
+      component: AddPersonForm,
+      meta: {
+        breadcrumb: {
+          label: "common.registration"
+        }
+      },
+    },
+    {
       path: "/login",
       component: LoginPage,
+      meta: {
+        breadcrumb: {
+          label: "common.header.navigation.login_link"
+        }
+      },
     },
     {
       path: "/tasks",
-      component: TasksList,
-    },
-    {
-      path: "/tasks",
+      meta: {
+        breadcrumb: {
+          label: "common.sidebar.tasks_link"
+        }
+      },
       children: [
+        {
+          path: "",        
+          name: "tasks",
+          component: TasksList,
+        },
         {
           path: ":id",
           props: true,
           component: TaskDetail,
+          meta: {
+            breadcrumb: {
+              label: (route) => route.params.id
+            }
+          },
         },
         {
           path: "new",
           name: "newTask",
           component: NewTask,
+          meta: {
+            breadcrumb: {
+              label: "pages.tasks.create.page_title"
+            }
+          },
         },
       ],
     },
@@ -62,12 +93,12 @@ const router = createRouter({
       path: "/people",
       component: Employees,
       redirect: "/people/all", // Redirect to the default tab
+      meta: {
+        breadcrumb: {
+          label: "pages.people.all_people"
+        }
+      },
       children: [
-        {
-          path: "registration",
-          name: "registration",
-          component: AddPersonForm,
-        },
         {
           path: "all",
           name: "all",
@@ -83,44 +114,80 @@ const router = createRouter({
 
     {
       path: "/projects",
+      meta: {
+        breadcrumb: {
+          label: "pages.projects.page_title"
+        }
+      },
       children: [
         {
           path: "all",
           name: "all-projects",
           component: AllProjectsPage,
+          meta: {
+            breadcrumb: {
+              label: "all"
+            }
+          }
         },
         {
           path: "new",
           component: CreateProjectPage,
+          meta: {
+            breadcrumb: {
+              label: "new"
+            }
+          }
         },
         {
           path: ":id",
           props: true,
           component: ProjectPage,
+          meta: {
+            breadcrumb: {
+              label: (route) => route.params.id
+            }
+          }
         },
       ],
     },
     {
       path: "/boards",
       name: "boards",
+      redirect: "/boards/all",
+      meta: {
+        breadcrumb: {
+          label: "pages.boards.page_title"
+        }
+      },
       children: [
+        {
+          path: "all",
+          name: "allBoards",
+          component: BoardsPage,
+        },
         {
           path: "new",
           name: "newBoard",
           props: true,
           component: NewBoardPage,
+          meta: {
+            breadcrumb: {
+              label: "new"
+            }
+          }
         },
         {
           path: ":id",
           name: "boardDetails",
           props: true,
           component: BoardPage,
-        },
-        {
-          path: "all",
-          name: "allBoards",
-          component: BoardsPage,
-        },
+          meta: {
+            breadcrumb: {
+              label: (route) => route.params.id
+            }
+          }
+        }
       ],
     },
 
