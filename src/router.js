@@ -17,6 +17,7 @@ const CreateProjectPage = () => import("@/pages/CreateProjectPage.vue");
 const ProjectPage = () => import("@/pages/ProjectPage.vue");
 const BoardPage = () => import("@/pages/BoardPage.vue");
 const BoardsPage = () => import("@/pages/BoardsPage.vue");
+const StatisticsPage = () => import("@/pages/StatisticsPage.vue");
 
 const AddPersonForm = () => import("@/components/people/AddPersonForm.vue");
 const PersonsList = () => import("@/components/people/PersonsList.vue");
@@ -189,6 +190,16 @@ const router = createRouter({
           }
         }
       ],
+    },
+    {
+      path: "/statistic",
+      name: "statistic",
+      component: StatisticsPage,
+      meta: {
+        breadcrumb: {
+          label: "common.sidebar.statistic_link"
+        }
+      },
     },
 
     {

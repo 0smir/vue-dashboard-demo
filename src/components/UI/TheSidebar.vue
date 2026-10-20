@@ -36,7 +36,7 @@
       <li class="sidebar__nav-item">
         <router-link
           class="sidebar__link"
-          to="/"
+          to="/statistic"
           exact
           :title="$t('common.sidebar.statistic_link')"
           :aria-label="
