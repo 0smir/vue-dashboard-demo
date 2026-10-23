@@ -2,21 +2,25 @@
 
 $-colorTabsBg: $color-white;
 $-colorTabsText: $color-secondary;
+$-colorTabsBorder: $color-secondary-medium;
+
 $-colorTabsTextHovered: $color-primary;
-$-colorTabsBgHovered: $color-secondary-light;
+
+$-colorTabsBgHovered:  $color-secondary-light;
+$-colorTabsHoveredBorder: $color-secondary-medium;
+
 $-colorTabsBgActive: $color-primary-light;
 
-$-colorTabsBorder: $color-primary;
+$-colorTabsBorderActive: $color-primary;
 $-colorTabsBorderRadius: $border-radius-medium;
 
 .tabs {
   &__btn {
     padding: 12px 15px;
     margin-right: 8px;
-    border: none;
-    border-bottom: 2px solid transparent;
-    border-top-right-radius: $-colorTabsBorderRadius;
-    border-top-left-radius: $-colorTabsBorderRadius;
+    border: 2px solid $-colorTabsBorder;
+    border-radius: $-colorTabsBorderRadius;
+    background-color: $-colorTabsBg;
     color: $-colorTabsText;
     font-weight: 500;
     text-transform: uppercase;
@@ -28,16 +32,17 @@ $-colorTabsBorderRadius: $border-radius-medium;
     &:hover {
       background-color: $-colorTabsBgHovered;
       text-decoration: none;
+      border-color: $-colorTabsHoveredBorder;
     }
 
     &.active {
       color: $-colorTabsTextHovered;
       background-color: $-colorTabsBgActive;
-      border-bottom-color: $-colorTabsBorder;
+      border-color: $-colorTabsBorderActive;
     }
   }
 
   &__content-wrapper {
-    padding: 35px 10px;
+    padding: 35px 0;
   }
 }

@@ -89,6 +89,14 @@ a:hover {
   }
 }
 
+.title {
+  margin-bottom: 20px;
+
+  @media (max-width: $sm) {
+    margin-bottom: 15px;
+  }
+}
+
 .relative {
   position: relative;
 }
