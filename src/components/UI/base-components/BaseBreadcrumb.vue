@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumbs">
+  <div class="container breadcrumbs">
     <ul class="breadcrumbs__list">
       <li class="breadcrumbs__item"> 
         <router-link to="/" class="breadcrumbs__item-link">
@@ -59,12 +59,30 @@ export default {
 
 <style lang="scss" scoped>
 .breadcrumbs {
+  margin-top: 20px;
+
   &__list {
     display: flex;
   }
-  &__item-link {
-    color: #000;
+
+  &__item{
+    font-size: 16px;
+    font-weight: 400;
   }
+
+  &__item-link {
+    color: $color-tetriary;
+
+    &:hover,
+    &:focus {
+      color: $color-primary;
+      text-decoration: underline;
+    }
+  }
+}
+
+.current-breadcrumb {
+  color: $color-text-dark;
 }
 
 </style>
