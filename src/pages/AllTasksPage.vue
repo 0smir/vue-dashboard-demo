@@ -1,6 +1,11 @@
 <template>
   <div v-if="isLoading === false" class="container">
-    <h2 class="title">{{ $t("pages.tasks.all_tasks_title") }}</h2>
+    <div class="page__header flex">
+       <h2 class="title">{{ $t("pages.tasks.all_tasks_title") }}</h2>
+       <router-link to="/tasks/new" class="btn__link btn__default btn--medium btn__add-new-task">
+        <SvgIcon name="add" class="icon icon--mediu" />
+        {{ $t("common.new_task") }}</router-link>
+    </div>
     <TasksFilter :filterItemsList="filterItemsList" :activeItem="activeFilter" @on-filter-change="filterNameChange" />
     <ul class="tasks-list__wrapper" v-if="tasks.length">
       <li class="tasks-list__item" v-for="task in tasks">
@@ -66,7 +71,27 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.page__header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .title {
+    margin-bottom: 0;
+  }
+}
+
+.btn__add-new-task {
+  padding: 7px 15px;
+  box-shadow: $main-shadow;
+  text-transform: uppercase;
+
+  .icon {
+    margin-right: 5px;
+  }
+}
+
 .tasks-list {
   &__wrapper {
     display: flex;

@@ -6,6 +6,8 @@ $-font-main: 'Roboto', 'Arial', 'Helvetica', sans-serif;
 $-color-link-text: $color-text;
 $-color-main-text: $color-text-dark;
 
+$-container-padding: $container-padding;
+
 *,
 *::before,
 *::after {
@@ -74,7 +76,7 @@ a:hover {
 .container {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 15px;
+  padding: $-container-padding;
 
   &__spinner-wrapper {
     display: flex;

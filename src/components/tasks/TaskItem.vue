@@ -1,6 +1,6 @@
 <template>
-  <div :class="['task', 'task__status--' + task.status.toLowerCase(), type]">
-    <div class="task__info">
+  <div :class="['task flex', 'task__status--' + task.status.toLowerCase(), type]">
+    <div class="task__info flex">
       <span class="task__info-id">
         <TaskPriorityElement :priority="task.priority" />
         <span class="task-id">{{ task.id }}</span>
@@ -21,6 +21,10 @@
       <SvgIcon name="edit" class="icon" />
     </BaseButton>
     <div v-if="type !== 'board-item'" class="task__actions-wrapper">
+      <div class="task__status-info">
+        <span :class="['task__status-indicator', 'task__status--' + task.status.toLowerCase()]"></span> 
+        {{ task.status }}
+      </div>
       <BaseButton
         v-if="isLoggedIn"
         class="btn btn__outlined btn--small"
@@ -32,7 +36,7 @@
       </BaseButton>
       <RouterLink
         :to="TaskLink"
-        class="btn btn__outlined btn--small task__link"
+        class="btn btn__default btn--small task__link"
         :aria-label="$t('pages.tasks.link_see_details_label')"
       >
         {{ $t("pages.tasks.link_see_details") }}
@@ -99,29 +103,22 @@ export default {
 
 <style lang="scss" scoped>
 .task {
-  // --task-border: $color-secondary-medium;
-  // --task-border-secondary: $color-primary;
-  // --task-text-color: $color-secondary;
-  // --task-text-description: $color-tetriary;
-
   position: relative;
-  display: flex;
   flex-direction: column;
   margin-bottom: 10px;
   padding: 12px;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-radius: 6px;
   border: 2px solid $color-secondary-medium;
-  border-left: 4px solid;
+  border-top: 4px solid;
   color: $color-secondary;
-  background-color: #fff;
+  background-color: $color-white;
+  box-shadow: $task-panel-shadow;
 
   &:last-of-type {
     margin-bottom: 0;
   }
 
   &__info {
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
@@ -186,44 +183,99 @@ export default {
   }
 
   &__status {
+    &--active {
+      border-top-color: $color-active;
+    }
+
     &--todo {
-      border-left-color: $color-todo;
+      border-top-color: $color-todo;
     }
 
     &--inprogress {
-      border-left-color: $color-inprogress;
+      border-top-color: $color-inprogress;
     }
 
     &--inreview {
-      border-left-color: $color-inreview;
+      border-top-color: $color-inreview;
     }
 
     &--testing {
-      border-left-color: $color-testing;
+      border-top-color: $color-testing;
     }
 
     &--done {
-      border-left-color: $color-done;
+      border-top-color: $color-done;
     }
 
     &--blocked {
-      border-left-color: $color-blocked;
+      border-top-color: $color-blocked;
     }
   }
 
   &__actions-wrapper {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__status-info {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    margin-right: auto;
+    min-width: 40px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #1B2430;
+    background: #F2F4F7;
+    border: 1px solid $color-secondary-medium;
+    border-radius: $border-radius-rounded;
+  }
+  
+  &__status-indicator {
+    height: 10px;
+    width: 10px;
+    margin-right: 5px;
+    border-radius: $round;
+
+    &.task__status {
+      &--active {
+        background-color: $color-active;
+      }
+
+      &--todo {
+        background-color: $color-todo;
+      }
+
+      &--inprogress {
+        background-color: $color-inprogress;
+      }
+
+      &--inreview {
+        background-color: $color-inreview;
+      }
+
+      &--testing {
+        background-color: $color-testing;
+      }
+
+      &--done {
+        background-color: $color-done;
+      }
+
+      &--blocked {
+        background-color: $color-blocked;
+      }
+    }
   }
 
   &__link {
-    margin-left: auto;
+    margin-left: 10px;
     text-decoration: none;
   }
 }
 
-// .task.board-item {}
-
-.task.grid-item {
+.task.board-item {
   .task__title {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -238,4 +290,5 @@ export default {
     font-size: 15px;
   }
 }
+
 </style>
