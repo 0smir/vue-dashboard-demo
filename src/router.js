@@ -93,23 +93,16 @@ const router = createRouter({
     {
       path: "/people",
       component: Employees,
-      redirect: "/people/all", // Redirect to the default tab
+      name: "people",
       meta: {
         breadcrumb: {
           label: "pages.people.all_people"
         }
-      },
-      children: [
-        {
-          path: "all",
-          name: "all",
-          component: PersonsList,
-        },
-      ],
+      }
     },
     {
       path: "/profile/:id",
-      name: "pages.profile.page_title",
+      name: "profile",
       props: true,
       component: Person,
       meta: {
