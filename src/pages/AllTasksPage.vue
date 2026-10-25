@@ -13,7 +13,7 @@
       </li>
     </ul>
     <p v-else>
-      No items with task status {{ activeFilter }}
+      {{ $t("pages.tasks.no_items_with_status", {status: activeFilter}) }}
     </p>
   </div>
   <div v-else class="container container__spinner-wrapper">
