@@ -107,6 +107,7 @@ export default {
   flex-direction: column;
   margin-bottom: 10px;
   padding: 12px;
+  height: 100%;
   border-radius: 6px;
   border: 2px solid $color-secondary-medium;
   border-top: 4px solid;
@@ -128,6 +129,10 @@ export default {
   }
 
   &__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     margin-bottom: 12px;
     font-size: 18px;
     font-weight: 500;
@@ -215,7 +220,7 @@ export default {
   &__actions-wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin-top: auto;
   }
 
   &__status-info {
