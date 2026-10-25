@@ -11,6 +11,13 @@ export default {
     date: "date",
     activity_text: "Activity",
     show_text: "Show: ",
+    new_task: "New task",
+    back_to_prev_link: "Back",
+    back_to_prev_link_label: "@:common.link_to @:common.back_to_prev_link",
+    link_to: "link to:",
+    link_label: "@:common.link_to {linkName}",
+    back_home_link: "Back Home",
+    back_home_link_label: "@:common.link_to @:common.back_home_link",
     header: {
       navigation: {
         home_link: "Home",
@@ -19,11 +26,6 @@ export default {
         login_link: "Login",
         signup_link: "SignUp",
       },
-      link_to: "link to:",
-      link_label: "@:common.header.link_to {linkName}",
-      lang_switcher: "Languages",
-      back_home_link: "Back Home",
-      back_home_link_label: "@:common.header.link_to @:common.header.back_home_link",
     },
     sidebar: {
       boards_link: "Boards",
@@ -34,19 +36,67 @@ export default {
       create_link: "Create",
       login_link: "SignIn",
     },
-    footer: {},
+    positions: {
+      front_end: "Front-End",
+      back_end: "Back-End",
+      qa: "QA",
+      manager: "Manager",
+      product_owner: "Product Owner",
+      seo: "SEO",
+      designer: "Designer",
+      hr: "HR",
+    },
+    footer: {
+      rights_text: "\&COPY Copyright {year}, <span class='footer__rights-text'>All Rights Reserved</span>"
+    },
   },
   pages: {
+    auth: {
+      login: {
+        page_title: "Login",
+        email_label: "Email:",
+        password_label: "Password:",
+        email_error: "Please, enter a valid email address",
+        password_error: "Password is required and must be at least 6 characters long.",
+        btn_login: "Login",
+        registration_link: "Registration",
+        registration_link_label: "Link to registration page",
+        forgot_password: "Forgot password?",
+        forgot_password_label: "Link to password recovery page",
+        invalid_credentials: "Incorrect email or password.",
+      },
+    },
+    not_found: {
+      subtitle: "Page not found",
+      error_name: "error 404",
+      description_text: "The page may have been deleted, renamed, or you entered the address incorrectly. Return to the home page or use the search."
+    },
+    create: {
+      project: "Project",
+      board: "Create Board",
+      task: "Create Task",
+      person: "Add Person",
+    },
     people: {
-      user_list_empty: "Users list is empty.",
+      all_people: "Employees list",
+      user_list_empty: "Employees list is empty.",
       remove_person: "Remove",
       edit_person: "Edit",
       view_profile: "View Profile",
       action_label: "Press to ",
       btn_action_label: "@:pages.people.action_label get additional functions",
       btn_edit_label: "@:pages.people.action_label edit person",
+      person_title: "Person: {name}",
+      user_menu: {
+        open_label: "Click to open user navigation",
+        my_profile: "My Profile",
+        my_boards: "My boards",
+        my_projects: "My Projects",
+        logout: "Logout",
+      },
     },
     tasks: {
+      all_tasks_title: "All tasks",
       task_actions:"Actions",
       task_text: "task",
       remove_task: "Remove",
@@ -54,7 +104,7 @@ export default {
       btn_edit_label: "@:pages.tasks.edit_task @:pages.tasks.task_text",
       btn_remove_label: "Remove task ID: {task_id}",
       link_see_details: "Task details",
-      link_see_details_label: "@:common.header.link_to @.lower:pages.tasks.link_see_details",
+      link_see_details_label: "@:common.link_to @.lower:pages.tasks.link_see_details",
       modal: {
         delete_task: {
           title: "Delate task ID: {task_id} ?",
@@ -72,6 +122,7 @@ export default {
       all_tasks_link: "See All tasks list",
       not_found_task_message:
         "Uh-oh! It seems there's no task matching this ID: { task_id }. Please double-check and try again.",
+      no_items_with_status: "No items with task status {status}",
       actions: {
         actions_text: "Actions",
         action_delete: "Delete",
@@ -126,7 +177,22 @@ export default {
         see_all_tasks: "See All tasks list"
       }
     },
-    boards: {},
+    boards: {
+      page_title: "Boards"
+    },
+    projects: {
+      page_title: "Projects"
+    },
+    profile: {
+      user_menu: {
+        open_label: "Click to open user navigation",
+        logout_label: "Click to logout",
+        my_profile: "My Profile",
+        my_boards: "My boards",
+        my_projects: "My Projects",
+        logout: "Logout",
+      },
+    }
   },
   dialogs: {
     delete_task: {

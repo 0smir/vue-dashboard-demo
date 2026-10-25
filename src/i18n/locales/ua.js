@@ -9,6 +9,12 @@ export default {
     date: "дата",
     activity_text: "Активності",
     show_text: "Показати: ",
+
+    back_to_prev_link: "Back",
+    back_to_prev_link_label: "@:common.link_to @:common.back_to_prev_link",
+
+    link_to: "посилання на:",
+    link_label: "@:common.link_to {linkName}",
     header: {
       navigation: {
         home_link: "Головна",
@@ -17,9 +23,6 @@ export default {
         login_link: "Вхід",
         signup_link: "Реєстрація",
       },
-      link_to: "посилання на:",
-      link_label: "@:common.header.link_to {linkName}",
-      lang_switcher: "Мови",
     },
     sidebar: {
       boards_link: "Дошки",
@@ -30,17 +33,57 @@ export default {
       create_link: "Створити",
       login_link: "Вхід",
     },
-    footer: {},
+    back_to_prev_link: "Повернутись",
+    back_to_prev_link_label: "@:common.link_to @:common.back_to_prev_link",
+   
+    footer: {
+      rights_text: "\&COPY Copyright {year}, <span class='footer__rights-text'>All Rights Reserved</span>"
+    },
   },
   pages: {
+    auth: {
+      login: {
+        page_title: "Вхід",
+        email_label: "Email:",
+        password_label: "Пароль:",
+        email_error: "Будь ласка, введіть коректну email-адресу",
+        password_error: "Пароль обов'язковий і має містити щонайменше 6 символів.",
+        btn_login: "Увійти",
+        registration_link: "Реєстрація",
+        registration_link_label: "Посилання на сторінку реєстрації",
+        forgot_password: "Забули пароль?",
+        forgot_password_label: "Посилання на сторінку відновлення пароля",
+        invalid_credentials: "Невірний email або пароль.",
+      },
+    },
+    not_found: {
+      subtitle: "Сторінку не знайдено",
+      error_name: "помилка 404",
+      description_text:"Можливо, сторінку було видалено, перейменовано або ви помилилися в адресі. Поверніться на головну або скористайтеся пошуком."
+    },
+    create: {
+      project: "Проєкт",
+      board: "Створити дошку",
+      task: "Створити завдання",
+      person: "Додати учасника",
+    },
     people: {
-      user_list_empty: "Список користувачів порожній.",
+      all_people: "Перелік робітників",
+      user_list_empty: "Перелік користувачів порожній.",
       remove_person: "Видалити",
       edit_person: "Редагувати",
       view_profile: "Переглянути профіль",
       action_label: "Натисніть, щоб ",
       btn_action_label: "@:pages.people.action_label отримати додаткові функції",
       btn_edit_label: "@:pages.people.action_label відредагувати користувача",
+      person_title: "Учасник: {name}",
+      user_menu: {
+        open_label: "Натисніть, щоб відкрити меню користувача",
+        my_profile: "Мій профіль",
+        my_boards: "Мої дошки",
+        my_projects: "Мої проєкти",
+        logout: "Вийти",
+      },
     },
     tasks: {
       task_actions:"Дії",
@@ -49,8 +92,8 @@ export default {
       edit_task: "Редагувати",
       btn_edit_label: "@:pages.tasks.edit_task @.lower:pages.tasks.task_text",
       btn_remove_label: "Видалити завдання з ID: {task_id}",
-      link_see_details: "Деталі завдання",
-      link_see_details_label: "@:common.header.link_to @.lower:pages.tasks.link_see_details",
+      link_see_details: "Детальніше",
+      link_see_details_label: "@:common.link_to @.lower:pages.tasks.link_see_details",
       modal: {
         delete_task: {
           title: "Видалити завдання з ID: {task_id}?",
@@ -67,7 +110,8 @@ export default {
       task_description: "Опис:",
       all_tasks_link: "Переглянути список усіх завдань",
       not_found_task_message:
-        "От халепа! Схоже, завдання з ID {task_id} не існує. Будь ласка, перевірте ідентифікатор та спробуйте ще раз.",
+        "Упс! Схоже, завдання з ID {task_id} не існує. Будь ласка, перевірте ідентифікатор та спробуйте ще раз.",
+        no_items_with_status: "Немає завдань зі статусом {status}",
       actions: {
         actions_text: "Дії",
         action_delete: "Видалити",
@@ -122,7 +166,18 @@ export default {
         see_all_tasks: "Переглянути список усіх завдань"
       }
     },
-    boards: {}
+    boards: {},
+    profile: {
+      user_menu: {
+        open_label: "Натисніть, щоб відкрити меню користувача",
+        logout_label: "Натисніть, щоб вийти",
+        my_profile: "Мій профіль",
+        my_boards: "Мої дошки",
+        my_projects: "Мої проєкти",
+        logout: "Вийти",
+      },
+    }
+
   },
   dialogs: {
     delete_task: {

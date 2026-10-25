@@ -9,6 +9,13 @@ export default {
     date: "дата",
     activity_text: "Активности",
     show_text: "Показать: ",
+
+    back_to_prev_link: "Back",
+    back_to_prev_link_label: "@:common.link_to @:common.back_to_prev_link",
+
+    link_to: "ссылка на:",
+    link_label: "@:common.link_to {linkName}",
+  },
     header: {
       navigation: {
         home_link: "Главная",
@@ -16,10 +23,7 @@ export default {
         projects_link: "Проекты",
         login_link: "Вход",
         signup_link: "Регистрация",
-      },
-      link_to: "ссылка на:",
-      link_label: "@:common.header.link_to {linkName}",
-      lang_switcher: "Языки",
+
     },
     sidebar: {
       boards_link: "Доски",
@@ -30,17 +34,56 @@ export default {
       create_link: "Создать",
       login_link: "Вход",
     },
-    footer: {},
+    back_to_prev_link: "Назад",
+    back_to_prev_link_label: "@:common.link_to @:common.back_to_prev_link",
+    footer: {
+      rights_text: "\&COPY Copyright {year}, <span class='footer__rights-text'>All Rights Reserved</span>"
+    },
   },
   pages: {
+    auth: {
+      login: {
+        page_title: "Вход",
+        email_label: "Email:",
+        password_label: "Пароль:",
+        email_error: "Пожалуйста, введите корректный email",
+        password_error: "Пароль обязателен и должен содержать не менее 6 символов.",
+        btn_login: "Войти",
+        registration_link: "Регистрация",
+        registration_link_label: "Ссылка на страницу регистрации",
+        forgot_password: "Забыли пароль?",
+        forgot_password_label: "Ссылка на страницу восстановления пароля",
+        invalid_credentials: "Неверный email или пароль.",
+      },
+    },
+    not_found: {
+      subtitle: "Страница не найдена",
+      error_name: "error 404",
+      description_text: "Возможно, страница была удалена, переименована или вы ошиблись в адресе. Вернитесь на главную или воспользуйтесь поиском."
+    },
+    create: {
+      project: "Проект",
+      board: "Создать доску",
+      task: "Создать задачу",
+      person: "Добавить сотрудника",
+    },
     people: {
-      user_list_empty: "Список пользователей пуст.",
+      all_people: "Список сотрудников",
+      user_list_empty: "Список сотрудников пуст.",
       remove_person: "Удалить",
       edit_person: "Изменить",
       view_profile: "Просмотреть профиль",
       action_label: "Нажмите, чтобы ",
       btn_action_label: "@:pages.people.action_label получить дополнительные функции",
       btn_edit_label: "@:pages.people.action_label отредактировать пользователя",
+      person_title: "Сотрудник: {name}",
+      user_menu: {
+        open_label: "Нажмите, чтобы открыть меню пользователя",
+        my_profile: "Мой профиль",
+        my_boards: "Мои доски",
+        my_projects: "Мои проекты",
+        logout: "Выйти",
+      },
     },
     tasks: {
       task_actions:"Действия",
@@ -49,8 +92,9 @@ export default {
       edit_task: "Редактировать",
       btn_edit_label: "@:pages.tasks.edit_task задачу",
       btn_remove_label: "Удалить задачу с ID: {task_id}",
-      link_see_details: "Подробности задачи",
-      link_see_details_label: "@:common.header.link_to @.lower:pages.tasks.link_see_details",
+      link_see_details: "Подробнее",
+      link_see_details_label: "@:common.link_to @.lower:pages.tasks.link_see_details",
+      no_items_with_status: "Нет задач со статусом {status}",
       modal: {
         delete_task: {
           title: "Удалить задачу с ID: {task_id}?",
@@ -122,7 +166,17 @@ export default {
         see_all_tasks: "Посмотреть список всех задач"
       }
     },
-    boards: {}
+    boards: {},
+    profile: {
+      user_menu: {
+        open_label: "Нажмите, чтобы открыть меню пользователя",
+        logout_label: "Нажмите, чтобы выйти",
+        my_profile: "Мой профиль",
+        my_boards: "Мои доски",
+        my_projects: "Мои проекты",
+        logout: "Выйти",
+      },
+    }
   },
   dialogs: {
     delete_task: {
