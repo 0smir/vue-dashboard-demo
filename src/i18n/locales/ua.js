@@ -168,6 +168,7 @@ export default {
     },
     boards: {},
     profile: {
+      page_title: "Профіль користувача",
       user_menu: {
         open_label: "Натисніть, щоб відкрити меню користувача",
         logout_label: "Натисніть, щоб вийти",

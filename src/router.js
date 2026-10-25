@@ -109,8 +109,14 @@ const router = createRouter({
     },
     {
       path: "/profile/:id",
+      name: "pages.profile.page_title",
       props: true,
       component: Person,
+      meta: {
+        breadcrumb: {
+          label: "pages.profile.page_title"
+        }
+      },
     },
 
     {

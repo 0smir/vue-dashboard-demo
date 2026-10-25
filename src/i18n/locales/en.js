@@ -184,6 +184,7 @@ export default {
       page_title: "Projects"
     },
     profile: {
+      page_title: "User profile",
       user_menu: {
         open_label: "Click to open user navigation",
         logout_label: "Click to logout",
