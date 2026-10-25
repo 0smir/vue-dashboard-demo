@@ -18,7 +18,7 @@
               to="/"
               :title="$t('common.header.navigation.home_link')"
               :aria-label="
-                $t('common.header.link_label', {
+                $t('common.link_label', {
                   linkName: $t('common.header.navigation.home_link'),
                 })
               "
@@ -31,7 +31,7 @@
               to="/"
               :title="$t('common.header.navigation.about_link')"
               :aria-label="
-                $t('common.header.link_label', {
+                $t('common.link_label', {
                   linkName: $t('common.header.navigation.about_link'),
                 })
               "
@@ -44,7 +44,7 @@
               to="/projects/all"
               :title="$t('common.header.navigation.about_link')"
               :aria-label="
-                $t('common.header.link_label', {
+                $t('common.link_label', {
                   linkName: $t('common.header.navigation.about_link'),
                 })
               "
@@ -60,7 +60,7 @@
           class="header__link header__auth-link header__auth-link--login"
           :title="$t('common.header.navigation.login_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.header.navigation.login_link'),
             })
           "
@@ -71,7 +71,7 @@
           class="header__link header__auth-link header__auth-link--registration"
           :title="$t('common.header.navigation.signup_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.header.navigation.signup_link'),
             })
           "

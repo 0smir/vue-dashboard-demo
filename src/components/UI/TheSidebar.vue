@@ -20,7 +20,7 @@
           exact
           :title="$t('common.sidebar.boards_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.sidebar.boards_link'),
             })
           "
@@ -40,7 +40,7 @@
           exact
           :title="$t('common.sidebar.statistic_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.sidebar.statistic_link'),
             })
           "
@@ -60,7 +60,7 @@
           exact 
           :title="$t('common.sidebar.tasks_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.sidebar.tasks_link'),
             })
           "
@@ -80,7 +80,7 @@
           exact
           :title="$t('common.sidebar.people_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.sidebar.people_link'),
             })
           "
@@ -104,7 +104,7 @@
           exact
           :title="$t('common.sidebar.settings_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.sidebar.settings_link'),
             })
           "
@@ -124,7 +124,7 @@
           exact
           :title="$t('common.sidebar.create_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.sidebar.create_link'),
             })
           "
@@ -144,7 +144,7 @@
           exact
           :title="$t('common.sidebar.login_link')"
           :aria-label="
-            $t('common.header.link_label', {
+            $t('common.link_label', {
               linkName: $t('common.sidebar.login_link'),
             })
           "

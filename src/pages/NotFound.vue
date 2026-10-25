@@ -10,7 +10,7 @@
       <router-link href="/" 
       class="link btn__link btn__default btn--medium not-found__btn"
               :title="$t('common.header.navigation.home_link')"
-              :aria-label=" $t('common.header.link_label', { linkName: $t('common.header.navigation.home_link') })"
+              :aria-label=" $t('common.link_label', { linkName: $t('common.header.navigation.home_link') })"
       >
       <SvgIcon name="home" class="icon icon--medium" />
         {{ $t("common.back_home") }}
