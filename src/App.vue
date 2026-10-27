@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <TheHeader></TheHeader>
+    <TheHeader :isSidebarExpanded="isExpanded" @toggle-sidebar="toggleSidebar"></TheHeader>
     <div class="layout__content">
         <TheSidebar :isExpanded="isExpanded" @toggle-sidebar="toggleSidebar"></TheSidebar>
         
@@ -42,6 +42,9 @@ export default {
   methods: {
     toggleSidebar() {
       this.isExpanded = !this.isExpanded;
+    },
+    closeSidebar() {
+      this.isExpanded = false;
     }
   },
 
@@ -54,6 +57,10 @@ export default {
       if (value && value !== oldValue) {
         this.$router.replace('/login');
       }
+    },
+
+    $route (to, from){
+      this.closeSidebar();
     }
   }
 }
