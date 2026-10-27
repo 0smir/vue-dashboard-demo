@@ -20,7 +20,6 @@ const BoardsPage = () => import("@/pages/BoardsPage.vue");
 const StatisticsPage = () => import("@/pages/StatisticsPage.vue");
 
 const AddPersonForm = () => import("@/components/people/AddPersonForm.vue");
-const PersonsList = () => import("@/components/people/PersonsList.vue");
 
 const router = createRouter({
   history: createWebHistory("/global-board/"),
