@@ -72,6 +72,7 @@ export default {
       description_text: "The page may have been deleted, renamed, or you entered the address incorrectly. Return to the home page or use the search."
     },
     create: {
+      page_title: "Create",
       project: "Project",
       board: "Create Board",
       task: "Create Task",
@@ -175,7 +176,7 @@ export default {
         task_updations_label: "Updated: ",
         no_task_description: "Uh-oh! It seems there's no task matching this ID: {id}. Please double-check and try again.",
         see_all_tasks: "See All tasks list"
-      }
+      },
     },
     boards: {
       page_title: "Boards"

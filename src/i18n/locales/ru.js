@@ -10,20 +10,19 @@ export default {
     activity_text: "Активности",
     show_text: "Показать: ",
 
-    back_to_prev_link: "Back",
+    back_to_prev_link: "Назад",
     back_to_prev_link_label: "@:common.link_to @:common.back_to_prev_link",
-
+    
     link_to: "ссылка на:",
     link_label: "@:common.link_to {linkName}",
-  },
     header: {
       navigation: {
         home_link: "Главная",
         about_link: "О нас",
         projects_link: "Проекты",
         login_link: "Вход",
-        signup_link: "Регистрация",
-
+        signup_link: "Регистрация"
+      }
     },
     sidebar: {
       boards_link: "Доски",
@@ -34,8 +33,6 @@ export default {
       create_link: "Создать",
       login_link: "Вход",
     },
-    back_to_prev_link: "Назад",
-    back_to_prev_link_label: "@:common.link_to @:common.back_to_prev_link",
     footer: {
       rights_text: "\&COPY Copyright {year}, <span class='footer__rights-text'>All Rights Reserved</span>"
     },
@@ -62,6 +59,7 @@ export default {
       description_text: "Возможно, страница была удалена, переименована или вы ошиблись в адресе. Вернитесь на главную или воспользуйтесь поиском."
     },
     create: {
+      page_title: "Создать",
       project: "Проект",
       board: "Создать доску",
       task: "Создать задачу",
@@ -164,7 +162,8 @@ export default {
         task_updations_label: "Обновлено: ",
         no_task_description: "Ой! Похоже, задачи с ID {id} не существует. Пожалуйста, проверьте и попробуйте снова.",
         see_all_tasks: "Посмотреть список всех задач"
-      }
+      },
+      create_page_title: "Создать новую задачу"
     },
     boards: {},
     profile: {

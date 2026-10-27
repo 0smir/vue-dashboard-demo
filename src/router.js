@@ -33,7 +33,13 @@ const router = createRouter({
     {
       path: "/create",
       component: CreatePage,
-      meta: { requiresAuth: true },
+      meta: {
+        requiresAuth: true,
+        breadcrumb: {
+          label: "pages.create.page_title"
+        }
+      },
+     
     },
     {
       path: "/registration",
@@ -83,7 +89,7 @@ const router = createRouter({
           component: NewTask,
           meta: {
             breadcrumb: {
-              label: "pages.tasks.create.page_title"
+              label: "pages.tasks.create_page_title"
             }
           },
         },
