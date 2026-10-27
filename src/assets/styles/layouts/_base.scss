@@ -43,10 +43,12 @@ body {
   &:has(dialog[open]) {
     overflow: hidden;
   }
-}
 
-body nav {
-  margin: 0 auto;
+  @media(max-width: $sm) {
+    &:has(aside.open){
+      overflow: hidden;
+    }
+  }
 }
 
 ul {

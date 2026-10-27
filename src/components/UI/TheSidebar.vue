@@ -1,5 +1,5 @@
 <template>
-  <aside :class="['sidebar', { open: isExpanded, close: !isExpanded }]">
+  <aside :class="['sidebar', { open: isExpanded, close: !isExpanded }]" >
     <div class="sidebar__controls-wrapper">
       <BaseButton
         class="btn btn__default btn--small sidebar__controls-btn"
@@ -10,6 +10,7 @@
         <SvgIcon v-if="isExpanded" name="chevronLeft" class="icon sidebar__controls-icon" />
         <SvgIcon v-else name="chevronRight" class="icon sidebar__controls-icon" />
       </BaseButton>
+
     </div>
     <h4 class="sidebar__space-name">WORKSPACE</h4>
     <ul class="sidebar-nav">
@@ -158,7 +159,9 @@
         </router-link>
       </li>
     </ul>
+    <LanguageSwitcher placement="sidebar"/>
   </aside>
+  <div class="backdrop sidebar__backdrop" @click.self="toggleSidebar"></div>
 </template>
 
 <script>
@@ -194,22 +197,30 @@ export default {
   border-top: 1px solid $color-primary-medium;
   background: $primary-gradient;
   padding: 10px 15px;
+  position: absolute;
+  z-index: 10;
 
   @media (min-width: $md) {
-    position: absolute;
-    z-index: 10;
+    left: auto;
+
+    .language-switcher--sidebar {
+      display: none;
+    }
   }
 
   @media print {
     display: none;
   }
+ 
 
   &.close {
     width: 100%;
     transition: all 0.35s ease;
-    @media (min-width: $sm) {
+
+    @media (min-width: $md) {
       width: 75px;
     }
+
     .sidebar__controls-wrapper {
       justify-content: center;
     }
@@ -217,9 +228,11 @@ export default {
     .sidebar__link {
       justify-content: center;
 
-      &:hover {
-        .tooltip {
-          display: block;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          .tooltip {
+            display: block;
+          }
         }
       }
     }
@@ -233,7 +246,7 @@ export default {
     }
 
     .sidebar__space-name {
-      display: none;
+      visibility: hidden;
     }
   }
 
@@ -246,8 +259,46 @@ export default {
     }
 
     .sidebar__space-name {
-      display: block;
+      visibility: visible;
     }
+  }
+
+  @media (max-width: $sm) { 
+    
+    &.open {
+      & + .sidebar__backdrop {
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: $md) {
+    &.open,
+    &.close {
+      width: 200px;
+      transition: left 0.35s ease;
+    }
+
+    &.close {
+      left: -200px; 
+      transition: left 0.35s ease;
+    }
+  }
+
+  @media (max-width: $sm) {
+    &.open,
+    &.close {
+      width: 280px;
+    }
+
+    &.close {
+      left: -280px; 
+    }
+  }
+  
+  &__backdrop {
+    display: contents;
+    z-index: 9;
   }
 
   .tooltip {
@@ -326,15 +377,16 @@ export default {
     align-self: center;
     justify-content: center;
     margin-right: 7px;
+    position: relative;
+  }
+  &__controls-wrapper {
+    position: relative;
   }
   &__controls-btn {
-    display: none;
-
     @media (min-width: $md) {
-      display: flex;
+      display: inline-flex;
     }
   }
-
   &__space-name {
     padding: 8px 12px 15px 12px;
     color: $color-tetriary-light;
@@ -346,20 +398,17 @@ export default {
 }
 
 .sidebar-nav {
-  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   padding: 15px 0 0;
   margin: 0 0 15px;
-  display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  list-style: none;
   border-top: 1px solid rgba($color-white, 0.15);
 
   &:last-of-type {
     margin-bottom: 0;
-  }
-
-  @media (min-width: $sm) {
-    flex-direction: column;
   }
 }
 </style>

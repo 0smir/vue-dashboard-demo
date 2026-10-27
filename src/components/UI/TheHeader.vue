@@ -1,6 +1,9 @@
 <template>
   <header class="header">
     <div class="header__content">
+      <BaseButton class="btn btn__default btn--small header__mobile-nav" @click="toggleSidebar">
+        <SvgIcon name="bars-4" class="icon" />
+      </BaseButton>
       <router-link
         to="/"
         class="header-logo"
@@ -10,7 +13,7 @@
         <SvgIcon name="logo" class="icon icon--logo header-logo__icon" />
         <span class="company-name">GlobalBoard</span>
       </router-link>
-      <nav>
+      <nav class="header__nav-wrapper">
         <ul class="header__nav">
           <li class="header__nav-item">
             <router-link
@@ -53,7 +56,7 @@
           </li>
         </ul>
       </nav>
-      <LanguageSwitcher />
+      <LanguageSwitcher placement="header"/>
       <div v-if="!isLoggedIn" class="header__actions">
         <router-link
           to="/login"
@@ -88,6 +91,10 @@
 <script>
 import UserProfile from "@/components/people/UserProfileDropdown.vue";
 export default {
+  props: {
+    isSidebarExpanded: { type: Boolean, default: false },
+  },
+  emits: ["toggle-sidebar"],
   components: {
     UserProfile,
   },
@@ -96,6 +103,11 @@ export default {
       return this.$store.getters["users/isAuthenticated"];
     },
   },
+  methods: {
+    toggleSidebar() {
+      this.$emit("toggle-sidebar");
+    }
+  }
 };
 </script>
 
@@ -116,6 +128,21 @@ export default {
     align-items: center;
   }
 
+  &__mobile-sidebar-control {
+    display: block;
+    color: $color-text;
+
+    @media(min-width: $md) {
+      display: none;
+    }
+  }
+
+  &__mobile-nav {
+    @media(min-width: $md) {
+      display: none;
+    }
+  }
+
   .header-logo {
     display: flex;
     align-items: center;
@@ -123,12 +150,26 @@ export default {
     font-size: 26px;
     text-decoration: none;
 
+    @media(max-width: $md) {
+      margin: 0 auto 0 15px;
+    }
+
+    @media(max-width: $sm) {
+      margin: 0 auto;
+    }
+
     &:hover {
       color: $color-primary-light;
     }
 
     .company-name {
+      display: none;
       margin-left: 7px;
+
+      @media(min-width: $sm) {
+        display: inline-block;
+      }
+
     }
 
     &__icon {
@@ -141,12 +182,18 @@ export default {
     display: none;
     list-style: none;
 
-    @media (min-width: 769px) {
+    @media (min-width: $md) {
       display: flex;
     }
 
     &-item {
       margin-right: 10px;
+    }
+  }
+
+  &__nav-wrapper {
+    @media (min-width: $md) {
+      margin: 0 auto;
     }
   }
 
@@ -175,6 +222,13 @@ export default {
     }
     &--login {
       margin-right: 5px;
+    }
+  }
+
+  .language-switcher--header {
+    display: none;
+    @media(min-width: $md) {
+      display: inline-flex;
     }
   }
 }
