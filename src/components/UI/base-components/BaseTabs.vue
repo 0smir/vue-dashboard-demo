@@ -70,6 +70,9 @@ export default {
       margin-right: 0;
     }
   }
+  &__btn {
+    text-wrap: nowrap;
+  }
   &__controls-btn {
     position: absolute;
     top: 50%; 
