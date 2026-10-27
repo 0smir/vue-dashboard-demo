@@ -141,7 +141,7 @@
       <li v-else class="sidebar__nav-item">
         <router-link
           class="sidebar__link"
-          to="/people/registration"
+          to="/registration"
           exact
           :title="$t('common.sidebar.login_link')"
           :aria-label="
