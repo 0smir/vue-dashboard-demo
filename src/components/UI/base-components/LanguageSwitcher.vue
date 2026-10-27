@@ -1,5 +1,5 @@
 <template>
-  <div class="language-switcher">
+  <div :class="['language-switcher', 'language-switcher--' + placement]">
     <BaseButton class="btn btn__outlined btn--small language-switcher__btn">
       <span class="language-switcher__btn-text">{{ currentLangLabel }}</span>
       <SvgIcon name="chevron-down" class="icon icon--medium" />
@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  props: ["placement"],
   data() {
     return {
       languagesList: [
